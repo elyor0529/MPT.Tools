@@ -1,0 +1,16 @@
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\bin\Debug\MPT.DLL.exe.config
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\obj\Debug\MPT.DLL.exe
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\obj\Debug\MPT.DLL.xml
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\obj\Debug\MPT.DLL.pdb
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\bin\Debug\MPT.DLL.exe
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\bin\Debug\MPT.DLL.pdb
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\bin\Debug\MPT.DLL.xml
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\obj\Debug\MPT.DLL.Resources.resources
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\obj\Debug\MPT.DLLTests.vbproj.GenerateResource.Cache
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\obj\Debug\MPT.DLLTests.vbprojResolveAssemblyReference.cache
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\bin\Debug\MPT.Reflections.dll
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\bin\Debug\MPT.Reporting.dll
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\bin\Debug\MPT.Reflections.pdb
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\bin\Debug\MPT.Reflections.xml
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\bin\Debug\MPT.Reporting.pdb
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLLTests\MPT.DLLTests\bin\Debug\MPT.Reporting.xml

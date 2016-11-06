@@ -1,0 +1,10 @@
+C:\Users\Mark\AppData\Local\Temporary Projects\MPT.DLL\bin\Debug\MPT.DLL.exe.config
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLL\MPT.DLL\bin\Debug\MPT.DLL.exe.config
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLL\MPT.DLL\bin\Debug\MPT.DLL.exe
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLL\MPT.DLL\bin\Debug\MPT.DLL.pdb
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLL\MPT.DLL\bin\Debug\MPT.DLL.xml
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLL\MPT.DLL\obj\Debug\MPT.DLL.Resources.resources
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLL\MPT.DLL\obj\Debug\MPT.DLL.vbproj.GenerateResource.Cache
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLL\MPT.DLL\obj\Debug\MPT.DLL.exe
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLL\MPT.DLL\obj\Debug\MPT.DLL.xml
+C:\TFS-Connected\Main\DLLs\MPT.Tools\MPT.DLL\MPT.DLL\obj\Debug\MPT.DLL.pdb
