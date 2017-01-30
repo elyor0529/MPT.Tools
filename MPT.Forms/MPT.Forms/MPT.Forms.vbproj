@@ -47,11 +47,29 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MPT.FileSystem">
-      <HintPath>..\..\MPT.FileSystem\MPT.FileSystem\bin\Debug\MPT.FileSystem.dll</HintPath>
+    <Reference Include="MPT.Cursors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Cursors.dll</HintPath>
     </Reference>
-    <Reference Include="MPT.Verification">
-      <HintPath>..\..\MPT.Verification\MPT.Verification\bin\Debug\MPT.Verification.dll</HintPath>
+    <Reference Include="MPT.FileSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.PropertyChanger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.PropertyChanger.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.Reflections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Reflections.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Reporting.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.Verification, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Verification.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -79,6 +97,13 @@
   <ItemGroup>
     <Compile Include="DataGridLibrary.vb" />
     <Compile Include="FormsLibrary.vb" />
+    <Compile Include="Specialized Forms\frmDeleteFilesFolders.xaml.vb">
+      <DependentUpon>frmDeleteFilesFolders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Specialized Forms\MessageBoxLong.vb" />
+    <Compile Include="Specialized Forms\frmLongListPrompt.xaml.vb">
+      <DependentUpon>frmLongListPrompt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinFormsLibrary.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -119,14 +144,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MPT.Reflections\MPT.Reflections\MPT.Reflections.vbproj">
-      <Project>{83531b3b-3af1-478f-a29a-f6fcf3217d78}</Project>
-      <Name>MPT.Reflections</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MPT.Reporting\MPT.Reporting\MPT.Reporting.vbproj">
-      <Project>{fb3e2e93-e159-4843-a45b-3f11fb684481}</Project>
-      <Name>MPT.Reporting</Name>
-    </ProjectReference>
+    <Page Include="Specialized Forms\frmDeleteFilesFolders.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Specialized Forms\frmLongListPrompt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

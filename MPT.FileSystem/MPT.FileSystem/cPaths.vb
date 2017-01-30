@@ -1,10 +1,8 @@
 ﻿Option Explicit On
 Option Strict On
 
-Imports System.ComponentModel
-Imports System.Collections.ObjectModel
-
 Imports MPT.FileSystem.PathLibrary
+Imports MPT.FileSystem.StringLibrary
 
 ''' <summary>
 ''' Class that gathers paths from a folder and records them in list properties, including lists filtered by criteria.

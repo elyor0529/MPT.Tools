@@ -1,0 +1,86 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MPT.Verification
+</name>
+</assembly>
+<members>
+<member name="T:MPT.Verification.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:MPT.Verification.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:MPT.Verification.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:MPT.Verification.StructVerify">
+ <summary>
+ Verifies aspects of various Structs.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Verification.StructVerify.PointIsEmpty(System.Windows.Point)">
+ <summary>
+ Determines whether the coordinate struct is empty.
+ </summary>
+ <param name="pointVerified"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Verification.StructVerify.IntPtrIsEmpty(System.IntPtr)">
+ <summary>
+ Determines if struct IntPtr is empty.
+ </summary>
+ <param name="intPtrVerified"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Verification.ObjectVerify">
+ <summary>
+ Verifies various aspects of objects.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Verification.ObjectVerify.IsValidObject(System.Object)">
+ <summary>
+ Returns 'True' if object is not nothing.
+ </summary>
+ <param name="p_object">Any object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Verification.ObjectVerify.IsValidObjectDB(System.Object)">
+ <summary>
+ Returns 'True' if object is not empty or DB Null.
+ </summary>
+ <param name="p_object">Any object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Verification.ObjectVerify.IsValidObjectDBStringFilled(System.Object)">
+ <summary>
+ Returns 'True' if object is not empty or DB Null, and the value is not blank.
+ </summary>
+ <param name="p_object">Any object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Verification.ObjectVerify.IsValidObjectDBStringEmpty(System.Object)">
+ <summary>
+ Returns 'True' if object is not empty or DB Null, and the value is blank.
+ </summary>
+ <param name="p_object">Any object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+</members>
+</doc>

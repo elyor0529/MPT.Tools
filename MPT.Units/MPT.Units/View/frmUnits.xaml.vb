@@ -1,12 +1,8 @@
 ﻿Option Strict On
 Option Explicit On
 
-Imports System.Collections.ObjectModel
-
 Imports MPT.Enums.EnumLibrary
 Imports MPT.Forms.cLibForms
-
-Imports MPT.Units.eUnitType
 
 Class frmUnits
 

@@ -1,0 +1,6 @@
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Math\MPT.Math\bin\Debug\MPT.Math.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Math\MPT.Math\bin\Debug\MPT.Math.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Math\MPT.Math\obj\Debug\MPT.Math.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Math\MPT.Math\obj\Debug\MPT.Math.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Math\MPT.Math\bin\Debug\MPT.Math.XML
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Math\MPT.Math\obj\Debug\MPT.Math.csprojResolveAssemblyReference.cache

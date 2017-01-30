@@ -1,0 +1,254 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MPT.Lists
+</name>
+</assembly>
+<members>
+<member name="M:MPT.Lists.cLibLists.ParseQueryToDictionary(System.String)">
+	<summary>
+ Parses Query into a dictionary list of header-value pairs, with a new entry for each 'AND'.
+ </summary>
+	<param name="p_query">String containting the Query, with only the 'LIKE' 'AND' components.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ParseStringToList(System.String,System.String)">
+	<summary>
+ Returns a list of string items that are broken up from the provided string based on the character provided.
+ </summary>
+	<param name="p_string">String to parse.</param>
+	<param name="p_demarcator">Indication of the ending of a list entry.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ParseListString(System.Collections.Generic.IList{System.String}@,System.String@,System.Boolean,System.Boolean)">
+	<summary>
+ Takes a list of string numbers as a single string and separates them as entries in a list, or takes a list of string numbers and appends them into a single string.
+ </summary>
+	<param name="p_listOfStrings">List of the string items.</param>
+	<param name="p_stringOfLists">Single string containing the list of items.</param>
+	<param name="p_readList">True: A single string of appended list items is generated from the list. False: A list of string items is extracted from a list within a stingle string.</param>
+	<param name="p_sortList">True: List will be sorted. False: List will be kept in the order provided.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ParseRangeToString(System.String,System.Collections.Generic.List{System.Double}@,System.Int32)">
+	<summary>
+ Takes a specified range and parses it to a string list.
+ </summary>
+	<param name="p_rangeString">String containing the range specification, e.g. '5-10'.</param>
+	<param name="p_rangeCollection">Collection to add the range numbers to.</param>
+	<param name="p_numIntegerSpaces">Optional: Number of integer spaces expected, e.g. 3 for 123. Adds leading zeros if greater than result, e.g. 001. 
+ No leading zeros will be added if not specified.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.CreateQueryLists(System.Collections.Generic.List{System.String})">
+	<summary>
+ Creates a list of queries, written in a syntax understood by the tableset class, for filtering rows.
+ </summary>
+	<param name="p_list">List of queries.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.CreateDictionaryLists(System.Collections.Generic.List{System.String})">
+	<summary>
+ Creates a list of dictionary lists of 'Header'-'Value' pairings for each query.
+ </summary>
+	<param name="p_list">List of queries.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ExistsInList(System.String,System.Collections.Generic.List{System.String},System.Boolean)">
+	<summary>
+ Returns 'true' if the provided item exists in the provided list.
+ </summary>
+	<param name="p_item">Item to search for in the list.</param>
+	<param name="p_list">List to search.</param>
+	<param name="p_caseSensitive">If true, then the differences in capitalization will void a potential match. 
+ If false, then a match is made disregarding capitalization.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ExistsInListString(System.String,System.Collections.ObjectModel.ObservableCollection{System.String},System.Boolean)">
+	<summary>
+ Returns true/false depending on whether the entry provided exists in the list provided.
+ </summary>
+	<param name="p_entry">Value to search for in the list.</param>
+	<param name="p_list">List to search within for the value.</param>
+	<param name="p_caseSensitive">If true, then the differences in capitalization will void a potential match. 
+ If false, then a match is made disregarding capitalization.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ExistsInListInteger(System.Int32,System.Collections.ObjectModel.ObservableCollection{System.Int32})">
+	<summary>
+ Returns true/false depending on whether the entry provided exists in the list provided.
+ </summary>
+	<param name="p_entry">Value to search for in the list.</param>
+	<param name="p_list">List to search within for the value.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ListsAreDifferent(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Boolean)">
+	<summary>
+ Returns true if the lists are not identical. Ordering and capitalization are not considered.
+ </summary>
+	<param name="p_innerList">One list to compare.</param>
+	<param name="p_outerList">Another list to compare.</param>
+	<param name="p_considerOrder">True: The order will be considered. False: The order will not be considered.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ListsAreDifferent(System.Collections.ObjectModel.ObservableCollection{System.String},System.Collections.ObjectModel.ObservableCollection{System.String},System.Boolean)">
+	<summary>
+ Returns true if the lists are not identical. Ordering is not considered.
+ </summary>
+	<param name="p_innerList">One list to compare.</param>
+	<param name="p_outerList">Another list to compare.</param>
+	<param name="p_considerOrder">True: The order will be considered. False: The order will not be considered.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ListsAreDifferent(System.Collections.Generic.List{System.Double},System.Collections.Generic.List{System.Double},System.Boolean)">
+	<summary>
+ Returns true if the lists are not identical.
+ </summary>
+	<param name="p_innerList">One list to compare.</param>
+	<param name="p_outerList">Another list to compare.</param>
+	<param name="p_considerOrder">True: The order will be considered. False: The order will not be considered.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ListsAreDifferent(System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Boolean)">
+	<summary>
+ Returns true if the lists are not identical.
+ </summary>
+	<param name="p_innerList">One list to compare.</param>
+	<param name="p_outerList">Another list to compare.</param>
+	<param name="p_considerOrder">True: The order will be considered. False: The order will not be considered.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.CreateUniqueListString(System.Collections.ObjectModel.ObservableCollection{System.String},System.Collections.ObjectModel.ObservableCollection{System.String}@,System.Boolean)">
+	<summary>
+ Given a new list and base list, if the new list has unique entries, they are added to the base list. The base list can start out empty to create a new unique list from an existing list.
+ </summary>
+	<param name="p_newList">New list to check.</param>
+	<param name="p_baseList">Unique list to check against.</param>
+	<param name="p_caseSensitive">If true, then the differences in capitalization will void a potential match. 
+ If false, then a match is made disregarding capitalization.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ConvertToUniqueList(System.Collections.Generic.List{System.String},System.Boolean)">
+	<summary>
+ Checks the list provided and creates a new list where any duplicate entries are removed.
+ </summary>
+	<param name="p_originalList">Original list to check for redundancies.</param>
+	<param name="p_caseSensitive">If true, then the differences in capitalization will void a potential match. 
+ If false, then a match is made disregarding capitalization.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ConvertToUniqueList(System.Collections.Generic.List{System.Int32},System.Boolean)">
+	<summary>
+ Checks the list provided and creates a new list where any duplicate entries are removed.
+ </summary>
+	<param name="p_originalList">Original list to check for redundancies.</param>
+	<param name="p_sortList">If true, then the new unique list will be sorted lowest to highest.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ConvertToUniqueList(System.Collections.ObjectModel.ObservableCollection{System.String},System.Boolean)">
+	<summary>
+ Checks the observable collection provided and creates a new list where any duplicate entries are removed.
+ </summary>
+	<param name="p_originalList">Original list to check for redundancies.</param>
+	<param name="p_caseSensitive">If true, then the differences in capitalization will void a potential match. 
+ If false, then a match is made disregarding capitalization.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.AddToListStringIfNew(System.Collections.Generic.List{System.String}@,System.String,System.Boolean,System.Boolean)">
+	<summary>
+ Checks if a particular string exists in a provided list of strings. If it does not, it is added in the specified first/last entry of the list.
+ </summary>
+	<param name="p_list">List of string elements to check and,if necessary, modify.</param>
+	<param name="p_listItem">List item to check against the list of string elements.</param>
+	<param name="p_placeFirst">If true, and the list item is added, it will be added as the first item in the new list. If false, the list item will be added as the last item in the list.</param>
+	<param name="p_caseSensitive">If true, then the differences in capitalization will void a potential match. 
+ If false, then a match is made disregarding capitalization.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.AddToObsColStringIfNew(System.Collections.ObjectModel.ObservableCollection{System.String}@,System.String,System.Boolean,System.Boolean)">
+	<summary>
+ Checks if a particular string exists in a provided list of strings. If it does not, it is added in the specified first/last entry of the list.
+ </summary>
+	<param name="p_list">List of string elements to check and,if necessary, modify.</param>
+	<param name="p_listItem">List item to check against the list of string elements.</param>
+	<param name="p_placeFirst">If true, and the list item is added, it will be added as the first item in the new list. If false, the list item will be added as the last item in the list.</param>
+	<param name="p_caseSensitive">If true, then the differences in capitalization will void a potential match. 
+ If false, then a match is made disregarding capitalization.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ConvertListToObservableCollection``1(System.Collections.Generic.List{``0}@)">
+	<summary>
+ Converts list of string to an observable collection of string, or the reverse.
+ </summary>
+	<param name="p_list">List of items to either convert, or fill.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.Convert``2(System.Collections.Generic.List{``0})">
+	<summary>
+ Converts any list of one type to another type if the types are inheritable.
+ </summary>
+	<typeparam name="T"></typeparam>
+	<typeparam name="U"></typeparam>
+	<param name="p_list"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.TrimListOfEmptyItems(System.Collections.Generic.ICollection{System.String})">
+	<summary>
+ Removes any blank entries in the list.
+ </summary>
+	<param name="p_list">List to trim.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.ClearBlankEntries(System.Collections.ObjectModel.ObservableCollection{System.String}@)">
+	<summary>
+ Clears all blank entries from an observable collection of strings.
+ </summary>
+	<param name="p_list">List of string entries.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.RemoveFromList(System.Collections.ObjectModel.ObservableCollection{System.String},System.Collections.ObjectModel.ObservableCollection{System.String}@,System.Boolean)">
+	<summary>
+ Removes a list of string items from another list of string items.
+ </summary>
+	<param name="p_removeList">List of string items to be removed from the base list.</param>
+	<param name="p_baseList">Base list from which to remove the provided items.</param>
+	<param name="p_caseSensitive">If true, then the differences in capitalization will void a potential match. 
+ If false, then a match is made disregarding capitalization.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.SortCorrelatedLists(System.Collections.ObjectModel.ObservableCollection{System.String}@,System.Collections.ObjectModel.ObservableCollection{System.Collections.ObjectModel.ObservableCollection{System.String}}@,System.Boolean)">
+	<summary>
+ Sorts a list, and takes any collection of lists correlated with the sorted list and sorts then such that they remain in sync.
+ </summary>
+	<param name="p_sortList">List to be sorted.</param>
+	<param name="p_correlatedLists">Lists to be sorted based on the originally sorted list.</param>
+	<param name="p_sortAscending">True: List will be sorted in ascending order. False: List will be sorted in descending order.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.AppendList(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+	<summary>
+ Appends one list to another.
+ </summary>
+	<param name="p_listOriginal"></param>
+	<param name="p_listAppend"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.CombineLists(System.Collections.ObjectModel.ObservableCollection{System.String},System.Collections.ObjectModel.ObservableCollection{System.String})">
+	<summary>
+ Returns a new list that is a combination of the supplied lists.
+ </summary>
+	<param name="p_listNew">The list to be added from.</param>
+	<param name="p_listBase">The list to be added to.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Lists.cLibLists.CombineListsUnique(System.Collections.ObjectModel.ObservableCollection{System.String},System.Collections.ObjectModel.ObservableCollection{System.String})">
+	<summary>
+ Returns a new list that is a combination of the supplied lists, with only unique entries.
+ </summary>
+	<param name="p_listNew">The list to be added from.</param>
+	<param name="p_listBase">The list to be added to.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.Lists.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:MPT.Lists.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:MPT.Lists.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

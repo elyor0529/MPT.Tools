@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MPT.Math</name>
+    </assembly>
+    <members>
+        <member name="T:MPT.Math.Algebra">
+            <summary>
+            Contains static methods for common algebraic operations.
+            </summary>
+        </member>
+        <member name="M:MPT.Math.Algebra.SRSS(System.Double[])">
+            <summary>
+            Performs the square root of the sum of the squares of the provided values.
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MPT.Math.Numbers">
+            <summary>
+            Contains static methods dealing generically with numbers. 
+            Many methods are extensions to the numerical classes, so they can be used directly on a number.
+            </summary>
+        </member>
+        <member name="F:MPT.Math.Numbers.ZeroTolerance">
+            <summary>
+            Default zero tolerance for operations.
+            </summary>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsPositive(System.Int32)">
+            <summary>
+            Value is greater than 0.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsPositive(System.Double,System.Double)">
+            <summary>
+            Value is greater than the zero-tolerance.
+            </summary>
+            <param name="value"></param>
+            <param name="tolerance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsNegative(System.Int32)">
+            <summary>
+            Value is less than zero.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsNegative(System.Double,System.Double)">
+            <summary>
+            Value is less than the zero-tolerance.
+            </summary>
+            <param name="value"></param>
+            <param name="tolerance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsZero(System.Double,System.Double)">
+            <summary>
+            Value is within the absolute value of the zero-tolerance.
+            </summary>
+            <param name="value"></param>
+            <param name="tolerance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsEqualTo(System.Double,System.Double,System.Double)">
+            <summary>
+            Value is equal to the provided value within the absolute value of the zero-tolerance.
+            </summary>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <param name="tolerance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsGreaterThan(System.Double,System.Double,System.Double)">
+            <summary>
+            Value is greater than the provided value, within the absolute value of the zero-tolerance.
+            </summary>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <param name="tolerance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsLessThan(System.Double,System.Double,System.Double)">
+            <summary>
+            Value is less than the provided value, within the absolute value of the zero-tolerance.
+            </summary>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <param name="tolerance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.AreEqual(System.Double,System.Double,System.Double)">
+            <summary>
+            Values are equal within the absolute value of the zero-tolerance.
+            </summary>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <param name="tolerance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsOdd(System.Int32)">
+            <summary>
+            Value is an odd number.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsEven(System.Int32)">
+            <summary>
+            Value is an even number.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsPrime(System.Int32)">
+            <summary>
+            A whole number greater than 1, whose only two whole-number factors are 1 and itself. 
+            Uses the 'Sieve of Eratosthenes', which is very efficient for solving small primes (i.e. &lt; 10,000,000,000).
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.IsComposite(System.Int32)">
+            <summary>
+            A whole number that can be divided evenly by numbers other than 1 or itself.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.LastDigit(System.Int32)">
+            <summary>
+            Returns the last digit without sign of the value provided.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.Factorial(System.Int32)">
+            <summary>
+            The product of an integer and all the integers below it; e.g., factorial four ( 4! ) is equal to 24.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.Squared(System.Int32)">
+            <summary>
+            Returns the value squared..
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.Squared(System.Double)">
+            <summary>
+            Returns the value squared.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.Cubed(System.Int32)">
+            <summary>
+            Returns the value cubed.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.Cubed(System.Double)">
+            <summary>
+            Returns the value cubed.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.Pow(System.Int32,System.Int32)">
+            <summary>
+            Returns the value raised to the power provided.
+            </summary>
+            <param name="value"></param>
+            <param name="power"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Numbers.Pow(System.Double,System.Double)">
+            <summary>
+            Returns the value raised to the power provided.
+            </summary>
+            <param name="value"></param>
+            <param name="power"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MPT.Math.Vector">
+            <summary>
+            Library of methods related to vectors.
+            </summary>
+        </member>
+        <member name="M:MPT.Math.Vector.IsColinearSameDirection(System.Windows.Vector,System.Windows.Vector,System.Double)">
+            <summary>
+            True: Segments are parallel, on the same line, oriented in the same direction.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.IsConcave(System.Windows.Vector,System.Windows.Vector,System.Double)">
+            <summary>
+            Vectors form a concave angle.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.IsOrthogonal(System.Windows.Vector,System.Windows.Vector,System.Double)">
+            <summary>
+            Vectors form a 90 degree angle.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.IsConvex(System.Windows.Vector,System.Windows.Vector,System.Double)">
+            <summary>
+            Vectors form a convex angle.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.IsColinearOppositeDirection(System.Windows.Vector,System.Windows.Vector,System.Double)">
+            <summary>
+             True: Segments are parallel, on the same line, oriented in the opposite direction.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.ConcaveInside(System.Windows.Vector,System.Windows.Vector,System.Double)">
+            <summary>
+            True: The concave side of the vector is inside the shape.
+            This is determined by the direction of the vector.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.ConvexInside(System.Windows.Vector,System.Windows.Vector,System.Double)">
+            <summary>
+            True: The convex side of the vector is inside the shape.
+            This is determined by the direction of the vector.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.ConcavityColinearity(System.Windows.Vector,System.Windows.Vector)">
+            <summary>
+            Returns a value indicating the concavity of the vectors. 
+            1 = Pointing the same way. 
+            &gt; 0 = Concave. 
+            0 = Orthogonal. 
+            &lt; 0 = Convex. 
+            -1 = Pointing the exact opposite way.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.Dot(System.Windows.Vector,System.Windows.Vector)">
+            <summary>
+            Dot product of two vectors.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.Cross(System.Windows.Vector,System.Windows.Vector)">
+            <summary>
+            Cross-product of two vectors.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.Angle(System.Windows.Vector,System.Windows.Vector)">
+            <summary>
+            Returns the angle [radians] between the two vectors.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.Area(System.Windows.Vector,System.Windows.Vector)">
+            <summary>
+            Returns the area between two vectors.
+            </summary>
+            <param name="vector1"></param>
+            <param name="vector2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.IntersectionX(System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            X-coordinate of a horizontal line intersecting the line described by the points provided.
+            </summary>
+            <param name="y">Y-coordinate of the horizontal line.</param>
+            <param name="x1">X-coordinate of first point.</param>
+            <param name="y1">Y-coordinate of first point.</param>
+            <param name="x2">X-coordinate of second point.</param>
+            <param name="y2">Y-coordinate of second point.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.IntersectionX(System.Double,System.Windows.Point,System.Windows.Point)">
+            <summary>
+            X-coordinate of a horizontal line intersecting the line described by the points provided.
+            </summary>
+            <param name="y">Y-coordinate of the horizontal line.</param>
+            <param name="I">First point.</param>
+            <param name="J">Second point.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

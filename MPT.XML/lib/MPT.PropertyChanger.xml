@@ -1,0 +1,187 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MPT.PropertyChanger
+</name>
+</assembly>
+<members>
+<member name="M:MPT.PropertyChanger.PropertyChanger.RaisePropertyChanging``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+	<summary>
+ Raises the property changing event using the actual property to determine the property name.
+ Call this by: NameOfProp(NameOfParam(Function() Me.{property})
+ </summary>
+	<typeparam name="T"></typeparam>
+	<param name="p_propertyName">NameOfParam(Function() Me.{property}</param>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.PropertyChanger.RaisePropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+	<summary>
+ Raises the property changed event using the actual property to determine the property name.
+ Call this by: NameOfProp(NameOfParam(Function() Me.{property})
+ </summary>
+	<typeparam name="T"></typeparam>
+	<param name="p_propertyName">NameOfParam(Function() Me.{property}</param>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.PropertyChanger.NameOfProp``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+	<summary>
+ Returns the name of the property supplied.
+ If there are a chain of properties, only the last one is returned.
+ </summary>
+	<typeparam name="T"></typeparam>
+	<param name="p_propertyName">NameOfParam(Function() {object}.{property}</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="F:MPT.PropertyChanger.PropertyChanger.Field`1.propertyName">
+	<summary>
+ Stores the property name of as a string.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:MPT.PropertyChanger.PropertyChanger.Field`1.value">
+	<summary>
+ Value of the property.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.PropertyChanger.Field`1.#ctor(System.String)">
+	<summary>
+ Initializes the field object by sending it the property name to store.
+ </summary>
+	<param name="p_propertyName">Property name as a string.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.PropertyChanger.Field`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0}})">
+	<summary>
+ Initializes the field object by sending it the property to store as a name. This is determined within the class.
+ </summary>
+	<param name="p_propertyName">Property name as a lambda expression.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.PropertyChanger.Field`1.op_Implicit(MPT.PropertyChanger.PropertyChanger.Field{`0})~`0">
+	<summary>
+ Implicitly converts the value.
+ </summary>
+	<param name="t"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:MPT.PropertyChanger.PropertyChanger.Field`1">
+	<summary>
+ Backing field that allows storing of the property name as a string.
+ This is done to avoid repeatedly calling the lambda expression for determining the name.
+ Using this method allows for refactoring support of property names, but avoids most of the time penalty of using the lambda expressions.
+ Performance hit seems to not really accrue until used over 10^5 times, and then it is comparable to the better straight lambda cases.
+ See implementation examples following (commented out so they are not active).
+ Obtained from: http:\\blog.amusedia.com/2013/06/inotifypropertychanged-implementation.html  
+ </summary>
+	<typeparam name="T"></typeparam>
+	<remarks></remarks>
+</member><member name="T:MPT.PropertyChanger.PropertyChanger">
+	<summary>
+ Handles property changing and changed events using INotify interfaces.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.CollectionChangedListener.Unsubscribe">
+	<summary>
+ Releases all collection item handlers and self handler
+ </summary>
+</member><member name="P:MPT.PropertyChanger.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:MPT.PropertyChanger.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:MPT.PropertyChanger.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:MPT.PropertyChanger.ChildChangedListener.ResetChildListener(System.String)">
+	<summary>
+ Resets known (must exist in children collection) child event handlers
+ </summary>
+	<param name="propertyName">Name of known child property</param>
+</member><member name="M:MPT.PropertyChanger.ChildChangedListener.Unsubscribe">
+	<summary>
+ Release all child handlers and self handler
+ </summary>
+</member><member name="M:MPT.PropertyChanger.ChildChangingListener.ResetChildListener(System.String)">
+	<summary>
+ Resets known (must exist in children collection) child event handlers
+ </summary>
+	<param name="propertyName">Name of known child property</param>
+</member><member name="M:MPT.PropertyChanger.ChildChangingListener.Unsubscribe">
+	<summary>
+ Release all child handlers and self handler
+ </summary>
+</member><member name="M:MPT.PropertyChanger.PropertyChangerCollections.RaisePropertyChanging``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+	<summary>
+ Raises the property changing event using the actual property to determine the property name.
+ Call this by: NameOfProp(NameOfParam(Function() Me.{property})
+ </summary>
+	<typeparam name="T"></typeparam>
+	<param name="p_propertyName">NameOfParam(Function() Me.{property}</param>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.PropertyChangerCollections.RaisePropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+	<summary>
+ Raises the property changed event using the actual property to determine the property name.
+ Call this by: NameOfProp(NameOfParam(Function() Me.{property})
+ </summary>
+	<typeparam name="T"></typeparam>
+	<param name="p_propertyName">NameOfParam(Function() Me.{property}</param>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.PropertyChangerCollections.NameOfProp``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+	<summary>
+ Returns the name of the property supplied.
+ If there are a chain of properties, only the last one is returned.
+ </summary>
+	<typeparam name="T"></typeparam>
+	<param name="p_propertyName">NameOfParam(Function() {object}.{property}</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="F:MPT.PropertyChanger.PropertyChangerCollections.Field`1.propertyName">
+	<summary>
+ Stores the property name of as a string.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:MPT.PropertyChanger.PropertyChangerCollections.Field`1.value">
+	<summary>
+ Value of the property.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.PropertyChangerCollections.Field`1.#ctor(System.String)">
+	<summary>
+ Initializes the field object by sending it the property name to store.
+ </summary>
+	<param name="p_propertyName">Property name as a string.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.PropertyChangerCollections.Field`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0}})">
+	<summary>
+ Initializes the field object by sending it the property to store as a name. This is determined within the class..
+ </summary>
+	<param name="p_propertyName">Property name as a lambda expression.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.PropertyChanger.PropertyChangerCollections.Field`1.op_Implicit(MPT.PropertyChanger.PropertyChangerCollections.Field{`0})~`0">
+	<summary>
+ Implicitly converts the value.
+ </summary>
+	<param name="t"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:MPT.PropertyChanger.PropertyChangerCollections.Field`1">
+	<summary>
+ Backing field that allows storing of the property name as a string.
+ This is done to avoid repeatedly calling the lambda expression for determining the name.
+ Using this method allows for refactoring support of property names, but avoids most of the time penalty of using the lambda expressions.
+ Performance hit seems to not really accrue until used over 10^5 times, and then it is comparable to the better straight lambda cases.
+ See implementation examples following (commented out so they are not active).
+ Obtained from: http:\\blog.amusedia.com/2013/06/inotifypropertychanged-implementation.html  
+ </summary>
+	<typeparam name="T"></typeparam>
+	<remarks></remarks>
+</member><member name="T:MPT.PropertyChanger.PropertyChangerCollections">
+	<summary>
+ Inherited CollectionBase class that handles property changing and changed events using INotify interfaces.
+ Currently a direct copy of 'PropertyChanger' class, but inheriting from CollectionBase.
+ </summary>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

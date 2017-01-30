@@ -52,8 +52,25 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 11.0\Visual Studio Tools for Office\PIA\Office14\Microsoft.Office.Interop.Access.dll</HintPath>
     </Reference>
-    <Reference Include="MPT.FileSystem">
-      <HintPath>..\..\MPT.FileSystem\MPT.FileSystem\bin\Debug\MPT.FileSystem.dll</HintPath>
+    <Reference Include="MPT.Cursors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Cursors.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.FileSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.PropertyChanger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.PropertyChanger.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.Reflections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Reflections.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Reporting.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -110,16 +127,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\MPT.Reflections\MPT.Reflections\MPT.Reflections.vbproj">
-      <Project>{83531b3b-3af1-478f-a29a-f6fcf3217d78}</Project>
-      <Name>MPT.Reflections</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MPT.Reporting\MPT.Reporting\MPT.Reporting.vbproj">
-      <Project>{fb3e2e93-e159-4843-a45b-3f11fb684481}</Project>
-      <Name>MPT.Reporting</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

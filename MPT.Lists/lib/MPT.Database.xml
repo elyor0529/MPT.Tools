@@ -1,0 +1,203 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MPT.Database
+</name>
+</assembly>
+<members>
+<member name="P:MPT.Database.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:MPT.Database.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:MPT.Database.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:MPT.Database.cDataTableController.DataTablesListFromFile(System.String)">
+	<summary>
+ Returns a list of DataTables from the specifed data source.
+ </summary>
+	<param name="p_dataSource">Path to the exported tables file to be read.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.DataTableListFromMDB(System.String)">
+	<summary>
+ Returns a list of DataTable objects from the specified table file.
+ </summary>
+	<param name="p_dataSource">Path to the exported tables file to be read.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.DataTableFromFile(System.String,System.String,System.String)">
+	<summary>
+ Returns a datatable object from the specified file. Handles XML &amp; Access formats.
+ </summary>
+	<param name="p_dataSource">Path to the exported tables file to be read.</param>
+	<param name="p_tableName">Name of the table to load in the datagrid from the exported tables file.</param>
+	<param name="p_query">Query to limit what data from the table to return. If not specified, everything is returned.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.DataTableFromMDB(System.String,System.String,System.String)">
+	<summary>
+ Creates a datatable filled with data from a specified *.mdb file.
+ </summary>
+	<param name="p_dataSource">Path to the exported tables file to be read.</param>
+	<param name="p_tableName">Name of the table to load in the datagrid from the exported tables file.</param>
+	<param name="p_query">Query to limit what data from the table to return. If not specified, everything is returned.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.GetAdapter(System.String,System.String,System.String,System.String)">
+	<summary>
+	</summary>
+	<param name="p_provider"></param>
+	<param name="p_dataSource"></param>
+	<param name="p_tableName"></param>
+	<param name="p_query"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.ReadConnection(System.Data.OleDb.OleDbConnection,System.String,System.String)">
+	<summary>
+	</summary>
+	<param name="p_conn"></param>
+	<param name="p_tableName"></param>
+	<param name="p_query"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.DataTableFromXML(System.String,System.String)">
+	<summary>
+ Creates a datatable filled with data from a specified *.mdb file.
+ </summary>
+	<param name="p_dataSource">Path to the exported tables file to be read.</param>
+	<param name="p_tableName">Name of the table to load in the datagrid from the exported tables file.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.DataSetFromXML(System.String)">
+	<summary>
+	</summary>
+	<param name="p_dataSource"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.GetTableValueFromFile(System.String,System.String,System.String,System.String)">
+	<summary>
+ Returns a list of values contained within the specifed column of the specified table file.
+ </summary>
+	<param name="p_dataSource">Path to the exported tables file to be read.</param>
+	<param name="p_tableName">Name of the table to load in the datagrid from the exported tables file.</param>
+	<param name="p_colName">Name of the column header from which to return values.</param>
+	<param name="p_query">Query to limit what data from the table to return. If not specified, everything is returned.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.ListAllTables(System.String)">
+	<summary>
+ Returns a list of all tables in the specified file.
+ </summary>
+	<param name="p_dataSource">Path to the exported tables file to be read.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.HeaderFromColumnIndex(System.Data.DataTable,System.Int32)">
+	<summary>
+ Returns the header string of the specified column index for a DataTable.
+ </summary>
+	<param name="p_dataTable">DataTable object to which to apply the function.</param>
+	<param name="p_colIndex">Column index for the desired column header.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.ColumnIndexFromHeader(System.String,System.Data.DataRow)">
+	<summary>
+ Returns the column index of the column header that matches the provided name. Returns -1 if no match is found.
+ </summary>
+	<param name="p_header">Header name to match.</param>
+	<param name="p_row">DataRow object to search.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDataTableController.IsValidDataTableColumnIndex(System.Data.DataTable,System.Int32)">
+	<summary>
+ For DataTable, column index should be 0 or greater, and no more than the number of columns in the DataTable. Returns true if this is the case, false otherwise.
+ </summary>
+	<param name="p_dataTable">DataTable object to which to apply the function.</param>
+	<param name="p_colIndex">Column index to check.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cLibQueries.AssembleQuery(System.Collections.Generic.Dictionary{System.String,System.String})">
+	<summary>
+ Assembles a query string based on the key-value components of an index list. 
+ </summary>
+	<param name="myQuery">Dictionary list of key (header) and value (record value) components.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cLibQueries.TranslateQuery(System.String)">
+	<summary>
+ Takes a query and replaces all 'LIKE' with '='.
+ </summary>
+	<param name="myQuery">Query to perform the replace operation on.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cLibQueries.TableSingleRowQuery(System.String,System.String,System.String)">
+	<summary>
+ Returns the value for the specified header, if the table only has a single row.
+ If the table has more than a single row, or the function throws an exception, then "Invalid Table" is returned.
+ </summary>
+	<param name="p_tableName">Name of the table to query.</param>
+	<param name="p_headerName">Name of the header corresponding with the desired value.</param>
+	<param name="p_dataSource">Path to the table file.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:MPT.Database.cLibQueries">
+	<summary>
+ Contains functions for working with queries, such as translating between styles, or assembling/dismantling queries into separate components in a dictionary list.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDatabaseAccess.ExportMDBtoXMLSchema(System.String,System.String,System.String)">
+	<summary>
+ Exports an XML file adn a schema file of the specified access file.
+ </summary>
+	<param name="pathMDB">Path to the existing Access *.mdb file.</param>
+	<param name="pathXML">Path to the XML file to be created.</param>
+	<param name="pathXSD">Path to the XSD schema file to be created.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDatabaseAccess.OpenAccessInWindow(System.String)">
+	<summary>
+ Opens the Access file to extract information.
+ </summary>
+	<param name="DBpath">Path to the Access *.mdb file.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDatabaseAccess.CloseAccessInWindow">
+	<summary>
+ Closes the Access file.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDatabaseAccess.GetTableValue(System.String,System.String,System.String,System.String)">
+	<summary>
+ Returns a list of values gathered from an Access *.mdb file, based on search parameters specified.
+ </summary>
+	<param name="DBPath">Path to the Access *.mdb file.</param>
+	<param name="tableName">Name of the table to search.</param>
+	<param name="colName">Name of the column to retrieve data from.</param>
+	<param name="query">Optional: Search query, for filtering results.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDatabaseAccess.ListAllAccessTables(System.String)">
+	<summary>
+ Generates a list of all of the tables contained within the specified Access *.mdb file.
+ </summary>
+	<param name="pathMDB">Path to the Access file to get the table list from.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Database.cDatabaseAccess.OpenAccessWoWindow(System.String)">
+	<summary>
+	</summary>
+	<param name="DBpath">Path to the Access *.mdb file.</param>
+	<remarks></remarks>
+</member><member name="T:MPT.Database.cDatabaseAccess">
+	<summary>
+ Class that performs various operations with Microsoft Access *.mdb files.
+ </summary>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

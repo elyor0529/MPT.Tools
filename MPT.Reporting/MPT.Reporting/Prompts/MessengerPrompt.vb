@@ -4,9 +4,13 @@ Option Strict On
 Public NotInheritable Class MessengerPrompt
     Shared Event Message(messenger As MessengerEventArgs)
 
+    
+    ''ncrunch: no coverage start
     Private Sub New()
-        ' Class only has shared methods
+        'Contains only shared members.
+        'Private constructor means the class cannot be instantiated.
     End Sub
+    ''ncrunch: no coverage end
 
     Public Shared Function Prompt(ByVal messageDetails As MessageDetails,
                                   ByVal message As String,

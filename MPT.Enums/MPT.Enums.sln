@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MPT.Enums", "MPT.Enums\MPT.Enums.vbproj", "{8EA032D6-8FC5-45D7-9009-C67A00FEBAEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPT.Enums.UnitTests", "MPT.Enums.UnitTests\MPT.Enums.UnitTests.csproj", "{6D453C44-762E-4832-881D-6C2E37FFC1DE}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://fs1:8080/tfs/csi_software
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = MPT.Enums\\MPT.Enums.vbproj
-		SccProjectName1 = MPT.Enums
-		SccLocalPath1 = MPT.Enums
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -22,8 +17,21 @@ Global
 		{8EA032D6-8FC5-45D7-9009-C67A00FEBAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EA032D6-8FC5-45D7-9009-C67A00FEBAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EA032D6-8FC5-45D7-9009-C67A00FEBAEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D453C44-762E-4832-881D-6C2E37FFC1DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D453C44-762E-4832-881D-6C2E37FFC1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D453C44-762E-4832-881D-6C2E37FFC1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D453C44-762E-4832-881D-6C2E37FFC1DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://fs1:8080/tfs/csi_software
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MPT.Enums\\MPT.Enums.vbproj
+		SccProjectName1 = MPT.Enums
+		SccLocalPath1 = MPT.Enums
 	EndGlobalSection
 EndGlobal

@@ -24,6 +24,7 @@ Public Class EnumLibrary
     ''' <param name="p_enumObj">Selected enumeration to convert.</param> 
     Public Shared Function GetEnumDescription(Of TEnum)(ByVal p_enumObj As TEnum) As String
         Dim fi As Reflection.FieldInfo = p_enumObj.GetType().GetField(p_enumObj.ToString())
+        If (fi Is Nothing) Then Return ""
 
         Dim attributes As DescriptionAttribute() = CType(fi.GetCustomAttributes(GetType(DescriptionAttribute), False), DescriptionAttribute())
 
@@ -43,10 +44,11 @@ Public Class EnumLibrary
     ''' <remarks></remarks>
     Public Shared Function GetEnumXMLAttribute(Of TEnum)(ByVal p_enumObj As TEnum) As String
         Dim fi As Reflection.FieldInfo = p_enumObj.GetType().GetField(p_enumObj.ToString())
+        If (fi Is Nothing) Then Return ""
 
         Dim attributes As XmlEnumAttribute() = CType(fi.GetCustomAttributes(GetType(XmlEnumAttribute), False), XmlEnumAttribute())
 
-        If attributes IsNot Nothing AndAlso attributes.Length > 0 Then
+        If (attributes IsNot Nothing AndAlso attributes.Length > 0) Then
             Return attributes(0).Name
         Else
             Return p_enumObj.ToString()
@@ -68,10 +70,9 @@ Public Class EnumLibrary
         Return Nothing
     End Function
 
-    '''' <param name="p_enumObj">Sample enum from the type. This is for convenience in calling the function rather than getting type.</param> 
-
     ''' <summary>
-    ''' Returns the enum if the string matches the enum XML attribute (or Enum.ToString() where no attribute exists). Returns Nothing if no match is found. 
+    ''' Returns the enum if the string matches the enum XML attribute (or Enum.ToString() where no attribute exists). 
+    ''' Returns Nothing if no match is found. 
     ''' </summary>
     ''' <param name="p_string">String item to match to the enum by enum description.</param>
     Public Shared Function ConvertStringToEnumByXMLAttribute(Of TEnum)(ByVal p_string As String) As TEnum

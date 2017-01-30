@@ -27,7 +27,7 @@ Public NotInheritable Class FileLibrary
 
 #Region "Querying"
     Public Shared Function GetFileDateModified(ByVal p_path As String) As String
-        Return System.IO.File.GetLastWriteTime(p_path).ToShortDateString()
+        Return File.GetLastWriteTime(p_path).ToShortDateString()
     End Function
 #End Region
 

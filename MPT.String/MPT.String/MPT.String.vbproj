@@ -47,6 +47,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MPT.Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Enums.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -101,16 +105,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\MPT.Enums\MPT.Enums\MPT.Enums.vbproj">
-      <Project>{8ea032d6-8fc5-45d7-9009-c67a00febaef}</Project>
-      <Name>MPT.Enums</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MPT.FileSystem\MPT.FileSystem\MPT.FileSystem.vbproj">
-      <Project>{c3cd3f55-ba37-4d2e-901b-fa941aa80084}</Project>
-      <Name>MPT.FileSystem</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,8 +1,6 @@
 ﻿Option Strict On
 Option Explicit On
 
-Imports System.Linq.Expressions
-
 ''' <summary>
 ''' Event argument that relays a message, error, or thrown exception from the libraries to an external assembly.
 ''' </summary>
@@ -80,7 +78,6 @@ Public Class LoggerEventArgs
     ''' <param name="arg"></param>
     ''' <remarks></remarks>
     Private Sub storeParameters(ParamArray arg() As Object)
-        Dim argList As String = ""
         Dim parameterName As String = ""
 
         If arg.Count > 0 Then

@@ -6,119 +6,130 @@ Option Explicit On
 ''' </summary>
 ''' <remarks></remarks>
 Public NotInheritable Class TimeLibrary
-
+    ''ncrunch: no coverage start
     Private Sub New()
         'Contains only shared members.
         'Private constructor means the class cannot be instantiated.
     End Sub
+    ''ncrunch: no coverage end
 
 #Region "Methods"
     ''' <summary>
     ''' Converts time from HH:MM:SS format as a string to time in seconds as a number.
     ''' </summary>
-    ''' <param name="p_timeHHMMSS">Time in HH:MM:SS format.</param>
+    ''' <param name="timeHHMMSS">Time in HH:MM:SS format.</param>
     ''' <returns>Time in seconds.</returns>
     ''' <remarks></remarks>
-    Public Shared Function ConvertTimesNumber(ByVal p_timeHHMMSS As String) As Long
-        Dim hourSeconds As Long = 0
-        Dim minuteSeconds As Long = 0
-        Dim secondSeconds As Long = 0
+    Public Shared Function ConvertHHMMSSToSeconds(ByVal timeHHMMSS As String) As Double
+        If (String.IsNullOrWhiteSpace(timeHHMMSS)) Then Return 0
 
-        'Generate numerical time in seconds
-        If Len(p_timeHHMMSS) - 6 > 0 Then hourSeconds = CLng(Left(p_timeHHMMSS, Len(p_timeHHMMSS) - 6)) * 3600
-        If Len(p_timeHHMMSS) - 4 > 0 Then minuteSeconds = CLng(Mid(p_timeHHMMSS, Len(p_timeHHMMSS) - 4, 2)) * 60
-        If Len(p_timeHHMMSS) >= 2 Then secondSeconds = CLng(Right(p_timeHHMMSS, 2))
+        Dim timesByType As String() = TimeHHMMSSAbs(timeHHMMSS).Split(CChar(":"))
+        
+        Dim secondSeconds As Double = timeComponent(timesByType, timesByType.Length-1)
+        Dim minuteSeconds As Double  = timeComponent(timesByType, timesByType.Length-2) * 60
+        Dim hourSeconds As Double = timeComponent(timesByType, timesByType.Length-3) * 3600
 
-        Return hourSeconds + minuteSeconds + secondSeconds
+        Return Sign(timeHHMMSS) * (hourSeconds + minuteSeconds + secondSeconds)
     End Function
 
     ''' <summary>
     ''' Converts time from seconds as a number to HH:MM:SS format as a string.
     ''' </summary>
-    ''' <param name="p_timeSeconds">Time in seconds.</param>
+    ''' <param name="timeSeconds">Time in seconds.</param>
     ''' <returns>Time in HH:MM:SS format.</returns>
     ''' <remarks></remarks>
-    Public Shared Function ConvertTimesString(ByVal p_timeSeconds As Double) As String
-        Dim hourHour As String
-        Dim minuteMinute As String
-        Dim secondSeconds As String
-        Dim timeNum As Double
-
+    Public Shared Function ConvertSecondsToHHMMSS(ByVal timeSeconds As Double) As String        
         'Hour Conversion
-        timeNum = Math.Floor(p_timeSeconds / 3600)
-        hourHour = CStr(timeNum)
-        If Len(hourHour) < 2 Then hourHour = "0" & hourHour 'Ensures that the hour spot has two digits
+        Dim timeNum As Double = Math.Floor(Math.Abs(timeSeconds) / 3600)
+        Dim hourHour As String = TimeAsString(timeNum)
 
         'Minute Conversion
-        timeNum = Math.Floor((p_timeSeconds - timeNum * 3600) / 60)
-        minuteMinute = CStr(timeNum)
-        If Len(minuteMinute) < 2 Then minuteMinute = "0" & minuteMinute 'Ensures that the minute spot has two digits
+        timeNum = Math.Floor((Math.Abs(timeSeconds) - timeNum * 3600) / 60)
+        Dim minuteMinute As String = TimeAsString(timeNum)
 
         'Seconds Conversion
-        secondSeconds = CStr(p_timeSeconds - CLng(hourHour) * 3600 - CLng(minuteMinute) * 60)
+        timeNum = Math.Abs(timeSeconds) - CDbl(hourHour) * 3600 - CDbl(minuteMinute) * 60 
+        Dim secondSeconds As String = TimeAsString(timeNum)
 
         'Assemble String
-        Return hourHour & ":" & minuteMinute & ":" & secondSeconds
+        Dim sign As String = ""
+        If (timeSeconds < 0) Then sign = "-"
+
+        Return sign & hourHour & ":" & minuteMinute & ":" & secondSeconds
     End Function
 
     ''' <summary>
     ''' Converts time from HH:MM:SS format as a string to time in minutes as a number.
     ''' </summary>
-    ''' <param name="p_timeHHMMSS">Time in HH:MM:SS format.</param>
+    ''' <param name="timeHHMMSS">Time in HH:MM:SS format.</param>
     ''' <returns>Time in seconds.</returns>
     ''' <remarks></remarks>
-    Public Shared Function ConvertTimesNumberMinute(ByVal p_timeHHMMSS As String) As Double
-        Dim hourSeconds As Long = 0
-        Dim minuteSeconds As Long = 0
-        Dim secondSeconds As Double = 0
+    Public Shared Function ConvertHHMMSSToMinutes(ByVal timeHHMMSS As String) As Double
+        If (String.IsNullOrWhiteSpace(timeHHMMSS)) Then Return 0
 
-        'Generate numerical time in seconds
-        If Len(p_timeHHMMSS) - 6 > 0 Then hourSeconds = CLng(Left(p_timeHHMMSS, Len(p_timeHHMMSS) - 6)) * 60
-        If Len(p_timeHHMMSS) - 4 > 0 Then minuteSeconds = CLng(Mid(p_timeHHMMSS, Len(p_timeHHMMSS) - 4, 2))
-        If Len(p_timeHHMMSS) >= 2 Then secondSeconds = CDbl(Right(p_timeHHMMSS, 2)) / 60 'Math.Floor(CDbl(Right(timeHHMMSS, 2)) / 60)
+        Dim timesByType As String() = TimeHHMMSSAbs(timeHHMMSS).Split(CChar(":"))
+        
+        Dim secondSeconds As Double = timeComponent(timesByType, timesByType.Length-1) / 60
+        Dim minuteSeconds As Double  = timeComponent(timesByType, timesByType.Length-2) 
+        Dim hourSeconds As Double = timeComponent(timesByType, timesByType.Length-3) * 60
 
-        Return hourSeconds + minuteSeconds + secondSeconds
+        Return Sign(timeHHMMSS) * (hourSeconds + minuteSeconds + secondSeconds)
     End Function
 
     ''' <summary>
     ''' Converts time from minutes as a number to HH:MM:SS format as a string.
     ''' </summary>
-    ''' <param name="p_timeMinutes">Time in minutes.</param>
+    ''' <param name="timeMinutes">Time in minutes.</param>
     ''' <returns>Time in HH:MM:SS format.</returns>
     ''' <remarks></remarks>
-    Public Shared Function ConvertTimesStringMinutes(ByVal p_timeMinutes As Double) As String
-        Dim hourHour As String
-        Dim minuteMinute As String
-        Dim secondSeconds As String
-        Dim timeNum As Double
-        Dim timeSeconds As Double
+    Public Shared Function ConvertMinutesToHHMMSS(ByVal timeMinutes As Double) As String
+        Dim timeSeconds As Double = timeMinutes * 60
+        Return ConvertSecondsToHHMMSS(timeSeconds)
+    End Function
+#End Region
 
-        timeSeconds = p_timeMinutes * 60
+#Region "Private"
+     Private Shared Function timeComponent(ByVal timesByType As String(), 
+                                           ByVal index As Integer)  As Double
+        If (index >= 0 AndAlso
+            index <= timesByType.Length - 1 AndAlso
+            IsNumeric(timesByType(index))) Then
+            Return CLng(timesByType(index))
+        Else
+            Return 0
+        End If
+    End Function
 
-        'Hour Conversion
-        timeNum = Math.Floor(timeSeconds / 3600)
-        hourHour = CStr(timeNum)
+     Private Shared Function Sign(ByVal timeHHMMSS As String) As Double
+        If IsNegative(timeHHMMSS) Then
+            Return -1
+        Else
+            Return 1
+        End If 
+    End Function
 
-        'Ensures that the hour spot has at least two digits
-        If Len(hourHour) < 2 Then hourHour = "0" & hourHour
+    Private Shared Function IsNegative(ByVal timeHHMMSS As String) As Boolean
+        Return (timeHHMMSS(0) = "-")
+    End Function
 
+    Private Shared Function TimeHHMMSSAbs(ByVal timeHHMMSS As String) As String
+        If IsNegative(timeHHMMSS) Then
+            Return Mid(timeHHMMSS, 1,timeHHMMSS.Length - 1)
+        Else
+            Return timeHHMMSS
+        End If
+    End Function
 
-        'Minute Conversion
-        timeNum = Math.Floor((timeSeconds - CLng(hourHour) * 3600) / 60)
-        minuteMinute = CStr(timeNum)
+    ''' <summary>
+    ''' Returns time as a string with at least two digits. e.g. 01, 50, etc.
+    ''' </summary>
+    ''' <param name="time"></param>
+    ''' <returns></returns>
+    Private Shared Function TimeAsString(ByVal time As Double) As String
+        Dim newTime As String = CStr(time)
+        If Len(newTime) < 2 Then newTime = "0" & newTime 
 
-        'Ensures that the minute spot has two digits
-        If Len(minuteMinute) < 2 Then minuteMinute = "0" & minuteMinute
-
-
-        'Seconds Conversion
-        secondSeconds = CStr(Math.Floor(timeSeconds - CLng(hourHour) * 3600 - CLng(minuteMinute) * 60))
-
-        'Ensures that the second spot has two digits
-        If Len(secondSeconds) < 2 Then secondSeconds = "0" & secondSeconds
-
-        'Assemble String
-        Return hourHour & ":" & minuteMinute & ":" & secondSeconds
+        Return newTime
     End Function
 #End Region
 End Class

@@ -5,10 +5,13 @@ Imports System.Windows
 
 Public Class MessengerPromptListener
     Inherits MessengerListener
-
-    Protected Sub New()
-        ' Shared methods only
+      
+    ''ncrunch: no coverage start
+    Private Sub New()
+        'Contains only shared members.
+        'Private constructor means the class cannot be instantiated.
     End Sub
+    ''ncrunch: no coverage end
 
     ''' <summary>
     ''' Subscribes the listener to the provided object and displays a standard message box.
@@ -66,7 +69,7 @@ Public Class MessengerPromptListener
     ''' <param name="value"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Protected Shared Function ToMessageBox(ByVal value As eMessageActionSets) As Windows.MessageBoxButton
+    Protected Shared Function ToMessageBox(ByVal value As eMessageActionSets) As MessageBoxButton
         Select Case value
             Case eMessageActionSets.AbortRetryIgnore
                 Return MessageBoxButton.YesNoCancel
@@ -93,7 +96,7 @@ Public Class MessengerPromptListener
     ''' <param name="value"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Protected Shared Function ToMessageBox(ByVal value As eMessageType) As Windows.MessageBoxImage
+    Protected Shared Function ToMessageBox(ByVal value As eMessageType) As MessageBoxImage
         Select Case value
             Case eMessageType.Asterisk
                 Return MessageBoxImage.Asterisk

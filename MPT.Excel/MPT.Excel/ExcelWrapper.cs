@@ -1,14 +1,10 @@
 ﻿namespace MPT.Excel
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.InteropServices;
-    using System.Text;
-    using System.Threading.Tasks;
     using Excel = Microsoft.Office.Interop.Excel;      //Microsoft Excel 14 object in references-> COM tab
 
-    using MPT.Coding;
+    using Coding;
 
     public static class ExcelWrapper
     {
@@ -23,11 +19,6 @@
         // HRESULT: 0x800A01A8
         // This can occur when closing Excel while the API is still being called.
         // See: https://social.technet.microsoft.com/Forums/office/en-US/43041fcd-2f67-43d4-913b-5681c584ab67/keep-getting-error-message-exception-from-hresult-0x800a01a8-when-opening-spreadsheets-on?forum=officeitpro
-
-        private ExcelWrapper()
-        {
-            // No initialization.
-        }
 
         public static Excel.Workbook AppWorkbooksOpen(Excel.Application application, string path, int attempts = 10000, int intervalMS = 100)
         {

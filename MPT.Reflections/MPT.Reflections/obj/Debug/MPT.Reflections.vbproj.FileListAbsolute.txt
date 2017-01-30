@@ -1,0 +1,3 @@
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Reflections\MPT.Reflections\obj\Debug\MPT.Reflections.vbprojResolveAssemblyReference.cache
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Reflections\MPT.Reflections\obj\Debug\MPT.Reflections.Resources.resources
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Reflections\MPT.Reflections\obj\Debug\MPT.Reflections.vbproj.GenerateResource.Cache

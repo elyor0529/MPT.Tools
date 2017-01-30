@@ -48,6 +48,11 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MPT.Reflections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Reflections.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -55,6 +60,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -68,7 +74,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\MessageData.vb" />
     <Compile Include="Core\MessageDetails.vb" />
+    <Compile Include="Prompts\RaiseToggleAction.vb" />
     <Compile Include="Enumerations\eMessageType.vb" />
     <Compile Include="Enumerations\eMessageActions.vb" />
     <Compile Include="Enumerations\eMessageActionSets.vb" />
@@ -78,7 +86,6 @@
     <Compile Include="Core\IMessengerEvent.vb" />
     <Compile Include="Core\LoggerEventArgs.vb" />
     <Compile Include="Core\MessengerEventArgs.vb" />
-    <Compile Include="Prompts\MessageBoxLong.vb" />
     <Compile Include="Prompts\MessengerPrompt.vb" />
     <Compile Include="Prompts\MessengerPromptListener.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -116,15 +123,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\MPT.Reflections\MPT.Reflections\MPT.Reflections.vbproj">
-      <Project>{83531b3b-3af1-478f-a29a-f6fcf3217d78}</Project>
-      <Name>MPT.Reflections</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

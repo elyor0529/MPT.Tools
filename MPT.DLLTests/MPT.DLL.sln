@@ -94,36 +94,6 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MPT.Reporting", "..\MPT.Rep
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://fs1:8080/tfs/csi_software
-		SccProjectUniqueName0 = ..\\MPT.Reporting\\MPT.Reporting\\MPT.Reporting.vbproj
-		SccProjectName0 = ../MPT.Reporting/MPT.Reporting
-		SccLocalPath0 = ..\\MPT.Reporting\\MPT.Reporting
-		SccProjectUniqueName1 = ..\\MPT.FileSystem\\MPT.FileSystem\\MPT.FileSystem.vbproj
-		SccProjectName1 = ../MPT.FileSystem/MPT.FileSystem
-		SccLocalPath1 = ..\\MPT.FileSystem\\MPT.FileSystem
-		SccProjectUniqueName2 = ..\\MPT.String\\MPT.String\\MPT.String.vbproj
-		SccProjectName2 = ../MPT.String/MPT.String
-		SccLocalPath2 = ..\\MPT.String\\MPT.String
-		SccProjectUniqueName3 = ..\\MPT.Excel\\MPT.Excel\\MPT.Excel.vbproj
-		SccProjectName3 = ../MPT.Excel/MPT.Excel
-		SccLocalPath3 = ..\\MPT.Excel\\MPT.Excel
-		SccProjectUniqueName4 = ..\\MPT.Verification\\MPT.Verification\\MPT.Verification.vbproj
-		SccProjectName4 = ../MPT.Verification/MPT.Verification
-		SccLocalPath4 = ..\\MPT.Verification\\MPT.Verification
-		SccProjectUniqueName5 = ..\\MPT.PropertyChanger\\MPT.PropertyChanger\\MPT.PropertyChanger.vbproj
-		SccProjectName5 = ../MPT.PropertyChanger/MPT.PropertyChanger
-		SccLocalPath5 = ..\\MPT.PropertyChanger\\MPT.PropertyChanger
-		SccProjectUniqueName6 = ..\\MPT.XML\\MPT.XML\\MPT.XML.vbproj
-		SccProjectName6 = ../MPT.XML/MPT.XML
-		SccLocalPath6 = ..\\MPT.XML\\MPT.XML
-		SccLocalPath7 = .
-		SccProjectUniqueName8 = MPT.DLLTests\\MPT.DLLTests.vbproj
-		SccProjectName8 = MPT.DLLTests
-		SccLocalPath8 = MPT.DLLTests
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

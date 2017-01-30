@@ -2,6 +2,7 @@
 Option Explicit On
 
 Imports MPT.FileSystem.PathLibrary
+Imports MPT.FileSystem.StringLibrary
 
 ''' <summary>
 ''' Class representing a paths to files.

@@ -4,11 +4,8 @@ Option Explicit On
 Imports System.Collections.ObjectModel
 
 Imports MPT.FileSystem.PathLibrary
-Imports MPT.Reporting
-Imports MPT.Reflections.ReflectionLibrary
 
 Public NotInheritable Class ListLibrary
-    Shared Event Log(exception As LoggerEventArgs)
 
     Private Sub New()
         'Contains only shared members.
@@ -195,18 +192,11 @@ Public NotInheritable Class ListLibrary
     Public Shared Function ExistsInListString(ByVal p_entry As String,
                                               ByVal p_list As IEnumerable(Of String),
                                               Optional ByVal p_caseSensitive As Boolean = False) As Boolean
-        Try
-            If p_list Is Nothing Then Return False
+        If p_list Is Nothing Then Return False
 
-            For Each listEntry As String In p_list
-                If StringsMatch(p_entry, listEntry, p_caseSensitive) Then Return True
-            Next
-        Catch ex As Exception
-            RaiseEvent Log(New LoggerEventArgs(ex,
-                                               NameOfParam(Function() p_entry), p_entry,
-                                               NameOfParam(Function() p_list), p_list,
-                                               NameOfParam(Function() p_caseSensitive), p_caseSensitive))
-        End Try
+        For Each listEntry As String In p_list
+            If StringsMatch(p_entry, listEntry, p_caseSensitive) Then Return True
+        Next
         Return False
     End Function
 
@@ -219,17 +209,11 @@ Public NotInheritable Class ListLibrary
     ''' <remarks></remarks>
     Public Shared Function ExistsInListInteger(ByVal p_entry As Integer,
                                                 ByVal p_list As IEnumerable(Of Integer)) As Boolean
-        Try
-            If p_list Is Nothing Then Return False
+       If p_list Is Nothing Then Return False
 
-            For Each myListEntry As Integer In p_list
-                If p_entry = myListEntry Then Return True
-            Next
-        Catch ex As Exception
-            RaiseEvent Log(New LoggerEventArgs(ex,
-                                               NameOfParam(Function() p_entry), p_entry,
-                                               NameOfParam(Function() p_list), p_list))
-        End Try
+        For Each myListEntry As Integer In p_list
+            If p_entry = myListEntry Then Return True
+        Next
         Return False
     End Function
 
@@ -368,31 +352,20 @@ Public NotInheritable Class ListLibrary
     Public Shared Function CreateUniqueListString(ByVal p_newList As IList(Of String),
                                                 ByVal p_baseList As IList(Of String),
                                                 Optional ByVal p_caseSensitive As Boolean = False) As IList(Of String)
-        Try
-            Dim entryMatch As Boolean
-
-            If (p_newList Is Nothing OrElse
+       If (p_newList Is Nothing OrElse
                 p_baseList Is Nothing) Then Return p_baseList
 
-            For Each myNewEntry As String In p_newList
-                entryMatch = False
-                If Not String.IsNullOrEmpty(myNewEntry) Then
-
-                    For Each myBaseEntry As String In p_baseList
-                        If StringsMatch(myNewEntry, myBaseEntry, p_caseSensitive) Then
-                            entryMatch = True
-                            Exit For
-                        End If
-                    Next
-                    If Not entryMatch Then p_baseList.Add(myNewEntry)
+        Dim entryMatch As Boolean
+        For Each myNewEntry As String In p_newList
+            entryMatch = False
+            For Each myBaseEntry As String In p_baseList
+                If StringsMatch(myNewEntry, myBaseEntry, p_caseSensitive) Then
+                    entryMatch = True
+                    Exit For
                 End If
             Next
-        Catch ex As Exception
-            RaiseEvent Log(New LoggerEventArgs(ex,
-                                               NameOfParam(Function() p_newList), p_newList,
-                                               NameOfParam(Function() p_baseList), p_baseList,
-                                               NameOfParam(Function() p_caseSensitive), p_caseSensitive))
-        End Try
+            If Not entryMatch Then p_baseList.Add(myNewEntry)
+        Next
         Return p_baseList
     End Function
 
@@ -406,30 +379,19 @@ Public NotInheritable Class ListLibrary
     Public Overloads Shared Function ConvertToUniqueList(ByVal p_originalList As IEnumerable(Of String),
                                                          Optional ByVal p_caseSensitive As Boolean = False) As List(Of String)
         Dim uniqueList As New List(Of String)
-        Try
-            Dim entryMatch As Boolean
+        If p_originalList Is Nothing Then Return uniqueList
 
-            If p_originalList Is Nothing Then Return uniqueList
-
-            If p_originalList.Count > 0 Then
-                For Each myOriginalEntry As String In p_originalList
-                    entryMatch = False
-                    If Not String.IsNullOrEmpty(myOriginalEntry) Then
-                        For Each myNewEntry As String In uniqueList
-                            If StringsMatch(myNewEntry, myOriginalEntry, p_caseSensitive) Then
-                                entryMatch = True
-                                Exit For
-                            End If
-                        Next
-                        If Not entryMatch Then uniqueList.Add(myOriginalEntry)
-                    End If
-                Next
-            End If
-        Catch ex As Exception
-            RaiseEvent Log(New LoggerEventArgs(ex,
-                                                NameOfParam(Function() p_originalList), p_originalList,
-                                                NameOfParam(Function() p_caseSensitive), p_caseSensitive))
-        End Try
+        Dim entryMatch As Boolean
+        For Each myOriginalEntry As String In p_originalList
+            entryMatch = False
+            For Each myNewEntry As String In uniqueList
+                If StringsMatch(myNewEntry, myOriginalEntry, p_caseSensitive) Then
+                    entryMatch = True
+                    Exit For
+                End If
+            Next
+            If Not entryMatch Then uniqueList.Add(myOriginalEntry)
+        Next
         Return uniqueList
     End Function
     ''' <summary>
@@ -441,30 +403,21 @@ Public NotInheritable Class ListLibrary
     Public Overloads Shared Function ConvertToUniqueList(ByVal p_originalList As IEnumerable(Of Integer),
                                                           Optional ByVal p_sortList As Boolean = True) As List(Of Integer)
         Dim uniqueList As New List(Of Integer)
-        Try
-            Dim entryMatch As Boolean
+        If p_originalList Is Nothing Then Return uniqueList
 
-            If p_originalList Is Nothing Then Return uniqueList
+        Dim entryMatch As Boolean
+        For Each myOriginalEntry As Integer In p_originalList
+            entryMatch = False
+            For Each myNewEntry As Integer In uniqueList
+                If myNewEntry = myOriginalEntry Then
+                    entryMatch = True
+                    Exit For
+                End If
+            Next
+            If Not entryMatch Then uniqueList.Add(myOriginalEntry)
+        Next
 
-            If p_originalList.Count > 0 Then
-                For Each myOriginalEntry As Integer In p_originalList
-                    entryMatch = False
-                    For Each myNewEntry As Integer In uniqueList
-                        If myNewEntry = myOriginalEntry Then
-                            entryMatch = True
-                            Exit For
-                        End If
-                    Next
-                    If Not entryMatch Then uniqueList.Add(myOriginalEntry)
-                Next
-            End If
-
-            If p_sortList Then uniqueList.Sort()
-        Catch ex As Exception
-            RaiseEvent Log(New LoggerEventArgs(ex,
-                                                NameOfParam(Function() p_originalList), p_originalList,
-                                                NameOfParam(Function() p_sortList), p_sortList))
-        End Try
+        If p_sortList Then uniqueList.Sort()
         Return uniqueList
     End Function
     ''' <summary>
@@ -496,9 +449,9 @@ Public NotInheritable Class ListLibrary
                                     Optional ByVal p_placeFirst As Boolean = False,
                                     Optional ByVal p_caseSensitive As Boolean = False) As IEnumerable(Of String)
         Dim tempList As New List(Of String)
-        Dim newToList As Boolean = True
         If String.IsNullOrEmpty(p_listItem) Then Return tempList
 
+        Dim newToList As Boolean = True
         'Check if item is unique
         For Each listItem As String In p_list
             If StringsMatch(listItem, p_listItem, p_caseSensitive) Then
@@ -629,49 +582,47 @@ Public NotInheritable Class ListLibrary
         Dim j As Integer
         Dim correlatedIndex As Integer
 
-        Try
-            ' Sort the sortList as ascending
-            For i = 0 To p_sortList.Count - 1
-                ' Get the maximum entry that has not been added to the temp list, and add it. 
-                ' Save the corresponding index in the order in which the entry was added.
-                currentMax = ""
-                j = 0
-                correlatedIndex = 0
-                For Each entry As String In p_sortList
-                    If entry > currentMax Then
-                        If Not ExistsInListString(entry, tempSortList) Then
-                            currentMax = entry
-                            correlatedIndex = j
-                        End If
+        ' TODO: Add checks to avoid exceptions
+
+        ' Sort the sortList as ascending
+        For i = 0 To p_sortList.Count - 1
+            ' Get the maximum entry that has not been added to the temp list, and add it. 
+            ' Save the corresponding index in the order in which the entry was added.
+            currentMax = ""
+            j = 0
+            correlatedIndex = 0
+            For Each entry As String In p_sortList
+                If entry > currentMax Then
+                    If Not ExistsInListString(entry, tempSortList) Then
+                        currentMax = entry
+                        correlatedIndex = j
                     End If
-                    j += 1
-                Next
-                tempSortList.Add(currentMax)
-                indexSortList.Add(correlatedIndex)
+                End If
+                j += 1
             Next
+            tempSortList.Add(currentMax)
+            indexSortList.Add(correlatedIndex)
+        Next
 
-            If Not p_sortAscending Then   'Reverse sorting
-                tempSortList.Reverse()
-                indexSortList.Reverse()
-            End If
+        If Not p_sortAscending Then   'Reverse sorting
+            tempSortList.Reverse()
+            indexSortList.Reverse()
+        End If
 
-            'Assign new sorted list
-            p_sortList = tempSortList
+        'Assign new sorted list
+        p_sortList = tempSortList
 
-            'Sort the correlated lists
-            For Each correlatedList As List(Of String) In p_correlatedLists
-                tempCorrelatedList = New List(Of String)
-                For Each sortIndex As Integer In indexSortList
-                    tempCorrelatedList.Add(correlatedList(sortIndex))
-                Next
-                tempCorrelatedLists.Add(tempCorrelatedList)
+        'Sort the correlated lists
+        For Each correlatedList As List(Of String) In p_correlatedLists
+            tempCorrelatedList = New List(Of String)
+            For Each sortIndex As Integer In indexSortList
+                tempCorrelatedList.Add(correlatedList(sortIndex))
             Next
+            tempCorrelatedLists.Add(tempCorrelatedList)
+        Next
 
-            'Assign new correlated lists
-            p_correlatedLists = tempCorrelatedLists
-        Catch ex As Exception
-            RaiseEvent Log(New LoggerEventArgs(ex, NameOfParam(Function() p_sortAscending), p_sortAscending))
-        End Try
+        'Assign new correlated lists
+        p_correlatedLists = tempCorrelatedLists
     End Sub
 #End Region
 
@@ -702,7 +653,7 @@ Public NotInheritable Class ListLibrary
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Shared Function CombineLists(ByVal p_listNew As ObservableCollection(Of String),
-                                 ByVal p_listBase As ObservableCollection(Of String)) As ObservableCollection(Of String)
+                                        ByVal p_listBase As ObservableCollection(Of String)) As ObservableCollection(Of String)
         For Each newItem As String In p_listNew
             p_listBase.Add(newItem)
         Next
@@ -719,9 +670,7 @@ Public NotInheritable Class ListLibrary
     ''' <remarks></remarks>
     Public Shared Function CombineListsUnique(ByVal p_listNew As ObservableCollection(Of String),
                                         ByVal p_listBase As ObservableCollection(Of String)) As ObservableCollection(Of String)
-        Dim uniqueList As New ObservableCollection(Of String)
-
-        uniqueList = CombineLists(p_listNew, p_listBase)
+        Dim uniqueList As ObservableCollection(Of String) = CombineLists(p_listNew, p_listBase)
         uniqueList = ConvertToUniqueList(uniqueList)
 
         Return uniqueList

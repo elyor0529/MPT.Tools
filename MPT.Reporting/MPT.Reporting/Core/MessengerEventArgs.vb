@@ -8,8 +8,7 @@ Option Explicit On
 Public Class MessengerEventArgs
     Inherits EventArgs
 
-
-    Private _title As String
+    Private _messageData As New MessageData()
     ''' <summary>
     ''' Title of the message associated with the event.
     ''' </summary>
@@ -18,11 +17,10 @@ Public Class MessengerEventArgs
     ''' <remarks></remarks>
     Public ReadOnly Property Title As String
         Get
-            Return _title
+            Return _messageData.Title
         End Get
     End Property
 
-    Private _message As String
     ''' <summary>
     ''' Message associated with the event.
     ''' </summary>
@@ -31,17 +29,35 @@ Public Class MessengerEventArgs
     ''' <remarks></remarks>
     Public ReadOnly Property Message As String
         Get
-            Return _message
+            Return _messageData.Message
         End Get
     End Property
 
     ''' <summary>
-    ''' True: The event has already been handled.
+    ''' 
     ''' </summary>
     ''' <value></value>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Property Handled As Boolean
+    Public ReadOnly Property Footer As String
+        Get
+            Return _messageData.Footer
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public ReadOnly Property PromptList As String
+        Get
+            Return _messageData.PromptList
+        End Get
+    End Property
+
+
 
     Private _messageDetails As New MessageDetails()
     ''' <summary>
@@ -98,6 +114,16 @@ Public Class MessengerEventArgs
 
 
     ''' <summary>
+    ''' True: The event has already been handled.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property Handled As Boolean
+
+
+
+    ''' <summary>
     ''' Initializer.
     ''' </summary>
     ''' <param name="message">Message associated with the event.</param>
@@ -105,7 +131,7 @@ Public Class MessengerEventArgs
     ''' <remarks></remarks>
     Public Sub New(ByVal message As String,
                    ParamArray arg() As Object)
-        _message = String.Format(message, arg)
+        _messageData = New MessageData(message:=String.Format(message, arg))
     End Sub
 
     ''' <summary>
@@ -117,8 +143,8 @@ Public Class MessengerEventArgs
     Public Sub New(ByVal title As String,
                    ByVal message As String,
                    ParamArray arg() As Object)
-        _title = title
-        _message = String.Format(message, arg)
+        _messageData = New MessageData(title:=title,
+                                       message:=String.Format(message, arg))
     End Sub
 
     ''' <summary>
@@ -131,21 +157,23 @@ Public Class MessengerEventArgs
                    ByVal message As String,
                    ParamArray arg() As Object)
         _messageDetails = messageDetails
-        _message = String.Format(message, arg)
+        _messageData = New MessageData(message:=String.Format(message, arg))
     End Sub
 
     ''' <summary>
     ''' Initializer.
     ''' </summary>
-    ''' <param name="message">Message associated with the event.</param>
+    ''' <param name="messageData"></param>
+    ''' <param name="messageDetails"></param>
     ''' <param name="arg">List of variables to insert into the message.</param>
     ''' <remarks></remarks>
     Public Sub New(ByVal messageDetails As MessageDetails,
-                   ByVal message As String,
-                   ByVal title As String,
+                   ByVal messageData As MessageData,
                    ParamArray arg() As Object)
         _messageDetails = messageDetails
-        _title = title
-        _message = String.Format(message, arg)
+        _messageData = New MessageData(title:=messageData.Title,
+                                       message:=String.Format(messageData.Message, arg),
+                                       footer:=messageData.Footer,
+                                       promptList:=messageData.PromptList)
     End Sub
 End Class

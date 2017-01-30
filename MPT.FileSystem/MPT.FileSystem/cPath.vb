@@ -1,13 +1,8 @@
 ﻿Option Explicit On
 Option Strict On
 
-Imports System.ComponentModel
-Imports System.Collections.ObjectModel
-
 Imports MPT.FileSystem.PathLibrary
-Imports MPT.FileSystem.FoldersLibrary
-Imports MPT.Reflections.ReflectionLibrary
-Imports MPT.Reporting
+Imports MPT.FileSystem.StringLibrary
 
 ''' <summary>
 ''' Class that takes a filepath and also stores the filename &amp; extension, and filepath directory.
@@ -290,11 +285,11 @@ Public Class cPath
         Dim value As String
 
         'Get portion of stub after the specified folder
-        value = FilterStringFromName(directory, p_sourceFolder, p_retainPrefix:=False, p_retainSuffix:=True)
+        value = FilterFromText(directory, p_sourceFolder, retainPrefix:=False, retainSuffix:=True)
         If (Not value = p_sourceFolder AndAlso
             Not String.IsNullOrEmpty(value)) Then
 
-            value = FilterStringFromName(directory, p_sourceFolder & "\", p_retainPrefix:=False, p_retainSuffix:=True)
+            value = FilterFromText(directory, p_sourceFolder & "\", retainPrefix:=False, retainSuffix:=True)
         End If
 
         If Not _pathChildStub = value Then
@@ -342,10 +337,10 @@ Public Class cPath
     End Sub
     Private Sub SetFileName(ByVal p_path As String,
                             Optional p_filenameHasExtension As Boolean = True)
-        Dim value As String = GetPathFileName(_path, p_noExtension:=False)
+        Dim value As String = PathLibrary.FileName(_path, noExtension:=False)
         If p_filenameHasExtension Then
             If StringExistInName(value, ".") Then
-                value = GetPathFileName(value, p_noExtension:=True)
+                value = PathLibrary.FileName(value, noExtension:=True)
             Else
                 Exit Sub
             End If
@@ -416,9 +411,9 @@ Public Class cPath
         ElseIf p_isFileNameOnly Then
             value = ""
         Else
-            value = GetPathDirectoryStub(p_path)
+            value = PathDirectoryStub(p_path)
         End If
-        value = TrimPathSlash(value)
+        value = TrimBackSlash(value)
 
         If Not _directory = value Then
             RaisePropertyChanging(Function() Me.directory)
@@ -490,7 +485,7 @@ Public Class cPath
     ''' <remarks></remarks>
     Protected Overridable Function GetAbsolutePath(ByVal p_path As String,
                                                     Optional ByVal p_pathRelativeReference As String = "") As String
-        AbsolutePath(p_path, p_referencePath:=p_pathRelativeReference)
+        AbsolutePath(p_path, basePath:=p_pathRelativeReference)
 
         Return p_path
     End Function
@@ -505,7 +500,7 @@ Public Class cPath
         Dim newPath As String = path
         Dim pathIsToFile As Boolean = Not isDirectoryOnly
 
-        RelativePath(newPath, p_isFile:=pathIsToFile, p_referencePath:=p_pathRelativeReference)
+        RelativePath(newPath, isFile:=pathIsToFile, basePath:=p_pathRelativeReference)
 
         Return newPath
     End Function

@@ -1,0 +1,17 @@
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Verification.UnitTests.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Verification.UnitTests.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Verification.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\nunit.framework.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Reflections.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Reporting.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Verification.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Verification.xml
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\nunit.framework.xml
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Reflections.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Reflections.xml
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Reporting.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\bin\Debug\MPT.Reporting.xml
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\obj\Debug\MPT.Verification.UnitTests.csprojResolveAssemblyReference.cache
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\obj\Debug\MPT.Verification.UnitTests.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Verification\MPT.Verification.UnitTests\obj\Debug\MPT.Verification.UnitTests.pdb

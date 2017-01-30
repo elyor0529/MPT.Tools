@@ -47,6 +47,38 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MPT.Cursors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Cursors.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Enums.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.FileSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.Lists, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Lists.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.PropertyChanger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.PropertyChanger.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.Reflections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Reflections.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.Reporting.dll</HintPath>
+    </Reference>
+    <Reference Include="MPT.String, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MPT.String.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -109,32 +141,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\MPT.Enums\MPT.Enums\MPT.Enums.vbproj">
-      <Project>{8ea032d6-8fc5-45d7-9009-c67a00febaef}</Project>
-      <Name>MPT.Enums</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MPT.FileSystem\MPT.FileSystem\MPT.FileSystem.vbproj">
-      <Project>{c3cd3f55-ba37-4d2e-901b-fa941aa80084}</Project>
-      <Name>MPT.FileSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MPT.Lists\MPT.Lists\MPT.Lists.vbproj">
-      <Project>{941d20b5-00e3-47c2-9014-bd50fa19d902}</Project>
-      <Name>MPT.Lists</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MPT.Reflections\MPT.Reflections\MPT.Reflections.vbproj">
-      <Project>{83531b3b-3af1-478f-a29a-f6fcf3217d78}</Project>
-      <Name>MPT.Reflections</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MPT.Reporting\MPT.Reporting\MPT.Reporting.vbproj">
-      <Project>{fb3e2e93-e159-4843-a45b-3f11fb684481}</Project>
-      <Name>MPT.Reporting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MPT.String\MPT.String\MPT.String.vbproj">
-      <Project>{85e859cc-f317-4b39-a1dd-ec1a791367be}</Project>
-      <Name>MPT.String</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

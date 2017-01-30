@@ -1,0 +1,1213 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MPT.FileSystem
+</name>
+</assembly>
+<members>
+<member name="M:MPT.FileSystem.FileProcessor.FileProcessor.ProcessFile(System.String)">
+	<summary>
+ Processes the file according to criteria.
+ </summary>
+	<param name="path">Path to the file to process.</param>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.FileProcessor.FileProcessor">
+	<summary>
+ Abstract class that forms the basis for processing a file based on provided criterie via the Strategy Pattern.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.path">
+	<summary>
+ File path.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.path(System.String)">
+	<summary>
+ File path as a relative path to another directory location.
+ </summary>
+	<param name="p_pathRelativeReference">The directory/file location to which the path is to be relative.</param>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.directory">
+	<summary>
+ Directory of a file contained in a path.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.fileName">
+	<summary>
+ File name included in the associated filepath.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.fileExtension">
+	<summary>
+ File extension of the associated filepath &amp; name. Does not include ".".
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.fileNameWithExtension">
+	<summary>
+ File name included in the associated filepath.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.isFileNameOnly">
+	<summary>
+ If true, the filepath is only a file name with no directories listed. If false, the filepath includes directories.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.isDirectoryOnly">
+	<summary>
+ If true, the filepath is to a directory. If false, the filepath is to a file.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.isValidPath">
+	<summary>
+ True if the path points to an existing file or directory (as applicable).
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.isSelected">
+	<summary>
+ True if the path is considered to be seleted for some further use or operation.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPath.pathChildStub">
+	<summary>
+ Relative path to the file relative to a specified parent directory.
+ For example {stripped path: parent directory}\[pathChildStub]\{stripped: fileName}.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPath.#ctor(System.String,MPT.FileSystem.ePathType)">
+	<summary>
+ Sets the class properties using the provided path. 
+ </summary>
+	<param name="p_path">Path to be used.</param>
+	<param name="p_setPathType">Limits the path validity criteria based on an expected path type.</param>
+</member><member name="M:MPT.FileSystem.cPath.CloneStatic">
+	<summary>
+ Only clones the read-only properties associated with the base path class.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPath.Equals(System.Object)">
+	<summary>
+ Returns 'True' if the object provided perfectly matches the existing object.
+ </summary>
+	<param name="p_object">External object to check for equality.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPath.SetProperties(System.String,System.String)">
+	<summary>
+ Sets the class properties using the provided path.
+ Path is converted to absolute if it is relative.
+ </summary>
+	<param name="p_path">Path to be used.</param>
+	<param name="p_pathRelativeReference">The directory/file location to which the path is relative.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPath.SetProperties(System.String,System.Boolean,System.String)">
+	<summary>
+ Sets the class properties using the provided path.
+ Path is converted to absolute if it is relative.
+ </summary>
+	<param name="p_path">Path to be used.</param>
+	<param name="p_pathRelativeReference">The directory/file location to which the path is relative.</param>
+	<param name="p_filenameHasExtension">False: Path contains a filename that has no extension.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPath.SetPathChildStub(System.String)">
+	<summary>
+ Sets a path stub of a filepath (without the file) or a directory path contained within the specified parent directory path. 
+ For example {stripped path: p_sourceFolder}\[pathChildStub]\{stripped: fileName}.
+ </summary>
+	<param name="p_sourceFolder">Path to the parent directory.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPath.PathIsOfExpectedType(System.String)">
+	<summary>
+ Determines if the path is of an expected path type based on the presence of a file extension.
+ </summary>
+	<param name="p_path">File path to check.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPath.ConstructPath">
+	<summary>
+ Creates a new path string by combining the present components of directory, file and file extension.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPath.ConstructFileNameWithExtension">
+	<summary>
+ Creates a new filename with extension string by combining the present components of file and file extension.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPath.GetAbsolutePath(System.String,System.String)">
+	<summary>
+ Returns an absolute path version of the path provided.
+ If the path is already absolute, it is returned as-is.
+ </summary>
+	<param name="p_path">File path to return as an absolute path.</param>
+	<param name="p_pathRelativeReference">The directory/file location to which the path is relative.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPath.GetRelativePath(System.String)">
+	<summary>
+ Return the file path as a relative path to another directory location.
+ </summary>
+	<param name="p_pathRelativeReference">The directory/file location to which the path is to be relative.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.cPath">
+	<summary>
+ Class that takes a filepath and also stores the filename &amp; extension, and filepath directory.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.FileValidator.NameExtensionFileValidator.Name">
+	<summary>
+ File name, with no extension.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.FileValidator.NameExtensionFileValidator.Extension">
+	<summary>
+ File extension.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.FileValidator.NameExtensionFileValidator.ExcludeFile">
+	<summary>
+ True: Matching criteria will exclude the file.
+ False: Matching criteria will include the file.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FileValidator.NameExtensionFileValidator.#ctor(System.String,System.String,System.Boolean)">
+	<summary>
+	</summary>
+	<param name="name">File name, without extension.</param>
+	<param name="extension">File extension.</param>
+	<param name="excludeFile">True: Matching criteria will exclude the file.
+ False: Matching criteria will include the file.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FileValidator.NameExtensionFileValidator.#ctor(System.String,System.Boolean)">
+	<summary>
+	</summary>
+	<param name="nameWithExtension">File name, with extension.</param>
+	<param name="excludeFile">True: Matching criteria will exclude the file.
+ False: Matching criteria will include the file.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FileValidator.NameExtensionFileValidator.IsValidFile(System.String)">
+	<summary>
+ True: File is a valid file based on the selection criteria.
+ </summary>
+	<param name="path">Path to the file to validate.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.FileValidator.NameExtensionFileValidator">
+	<summary>
+ Determines whether or not a file is valid based on matching file name and/or extension.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FileProcessor.IProcessFile.ProcessFile(System.String)">
+	<summary>
+ Processes the file according to criteria.
+ </summary>
+	<param name="path">Path to the file to process.</param>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.FileProcessor.IProcessFile">
+	<summary>
+ Processes a file based on provided criterie via the Strategy Pattern.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.ReadableWriteableDeletableDirectory(System.String)">
+	<summary>
+ Performs a variety of folder and file creation and deletion tests to see if the program has read/write access to a folder.
+ </summary>
+	<param name="p_pathDir">Path of the directory that is being checked.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.GetDirectories(System.String,System.Collections.Generic.List{System.String}@,System.Boolean)">
+	<summary>
+ Gets all sub-directory folders and adds them to a supplied list of paths.
+ </summary>
+	<param name="p_startPath">Path to the parent directory to begin the check.</param>
+	<param name="p_directoryList">List of paths to populate with directory names.</param>
+	<param name="p_listSubDirectories">True: All subdirectories will be listed. 
+ False: Only the highest level of subdirectories will be listed.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.ListFoldersInFolder(System.String,System.String)">
+	<summary>
+ Lists the paths of all of the folders and subfolders within the specified directory.
+ </summary>
+	<param name="p_path">Path to the directory to check.</param>
+	<param name="p_folderName">Only paths for the specified folder name will be returned.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.DirContainsFiles(System.String)">
+	<summary>
+ Returns 'true' if a directory contains files.
+ </summary>
+	<param name="p_pathDir">Path to the directory to check.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.DirContainsDirs(System.String)">
+	<summary>
+ True if a directory contains directories.
+ </summary>
+	<param name="p_pathDir">Path to the directory to check.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.RenameFile(System.String,System.String)">
+	<summary>
+ Renames a file.
+ </summary>
+	<param name="p_path">Path to file to renamed, including the file name and extension.</param>
+	<param name="p_newName">New file name and extension.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.RenameFolder(System.String,System.String)">
+	<summary>
+ Renames a folder.
+ </summary>
+	<param name="p_path">Path to folder to renamed, including the folder name.</param>
+	<param name="p_newName">New folder name.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.SetDirectoryFilesNotReadOnly(System.String)">
+	<summary>
+ Sets all files in a folder and subfolders to not be read only.
+ </summary>
+	<param name="p_sourceFolderName">Path to the highest level folder to apply the readable overwrite to.</param>
+	<remarks>'Modified from Leith Ross http://www.excelforum.com/excel-programming/645683-list-files-in-folder.html </remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.SetFileNotReadOnly(System.String)">
+	<summary>
+ Sets a specified file to not be read only.
+ </summary>
+	<param name="p_path">File path, including the filename</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.IsFileReadOnly(System.String)">
+	<summary>
+ Checks if a file has any of the Read Only attributes assigned.
+ </summary>
+	<param name="p_path">Path to the file to check.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.DeleteFile(System.String,System.Boolean)">
+	<summary>
+ Deletes a single file of a specified path. 
+ Returns true if this results in the file no longer existing.
+ </summary>
+	<param name="p_path">Path to the file to be deleted.</param>
+	<param name="p_includeReadOnly">True: Removes read-only protection. 
+ False: Read-only files will not be deleted. 
+ Function will return False for read-only files.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.DeleteFiles(System.String,System.Boolean,System.String,System.String,System.Boolean,System.Collections.Generic.List{System.String})">
+	<summary>
+ Deletes all files fitting the specified criteria. 
+ If no file name or extension is given, then all files will be deleted.
+ </summary>
+	<param name="p_path">Path to the parent folder containing files to be deleted.</param>
+	<param name="p_includeSubFolders">True: Files will be deleted in all subfolders. 
+ False: Files will only be deleted in the specified folder.</param>
+	<param name="p_fileName">All files of this name will be deleted. 
+ Combine with myFileExtension to limit this to files of a particular name and type.</param>
+	<param name="p_fileExtension">All files of this extension will be deleted.</param>
+	<param name="p_includeReadOnly">True: Read only files will also be deleted. 
+ False: Read only files will be skipped.</param>
+	<param name="p_fileNamesExclude">List of filenames to preserve during the delete process.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.DeleteFilesBulk(System.String,System.Boolean,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Boolean,System.Boolean,System.Boolean)">
+	<summary>
+ Deletes all files fitting the specified criteria lists. 
+ If no file name or extension is given, then all files will be deleted.
+ </summary>
+	<param name="p_path">Path to the parent folder containing files to be deleted.</param>
+	<param name="p_includeSubFolders">True: Files will be deleted in all subfolders. 
+ False: Files will only be deleted in the specified folder.</param>
+	<param name="p_fileNames">All files of the names in this list will be deleted. 
+ Combine with myFileExtensions to limit this to files of a particular name and type.</param>
+	<param name="p_fileExtensions">All files of the extensions in this list will be deleted.</param>
+	<param name="p_includeReadOnly">True: Read only files will also be deleted. 
+ False: Read only files will be skipped.</param>
+	<param name="p_partialNameMatch">True: A file will be considered a match for deletion by filename if the name is at least present in the overall filename. 
+ False: Only exact matches will be considered.</param>
+	<param name="p_waitCursor">True: Cursor changes to a wait cursor while the function runs.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.DeleteAllFilesFolders(System.String,System.Boolean,System.String,System.Boolean,System.Collections.Generic.List{System.String})">
+	<summary>
+ Deletes all files and folders.
+ Specifications allow the root folder to be preserved. 
+ </summary>
+	<param name="p_path">Path to the root folder.</param>
+	<param name="p_deleteRootFolder">True: The root folder and all files and folders within will be deleted. 
+ False: Root folder is preserved but will be empty.</param>
+	<param name="p_folderName">Name of a specific folder to delete.</param>
+	<param name="p_includeReadOnly">True: Read only files and folders will also be deleted. 
+ False: Read only files and folders will be skipped.</param>
+	<param name="p_foldersPreserve">List of folder paths to preserve during the deleting process. 
+ Only works if not deleting the root folder.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.CopyFile(System.String,System.String,System.Boolean,System.Boolean,System.String,System.Boolean,System.Boolean)">
+	<summary>
+ Copies a file from one directory to another. 
+ If directory does not exist, directory will be created. 
+ Returns true if it is confirmed that a new file exists at the destination.
+ </summary>
+	<param name="p_pathSource">File path source, including the file name.</param>
+	<param name="p_pathDestination">File path destination, including the file name. 
+ If filename is different, file will be renamed.</param>
+	<param name="p_overWriteFile">True: If file already exists at destination, file will be overwritten.</param>
+	<param name="p_includeReadOnly">True: Removes read-only protection. 
+ False: Read-only files will not be copied.</param>
+	<param name="p_promptMessage">Message to display to the user if a file exists.</param>
+	<param name="p_waitNewFileExist">True: Code will loop within this routine until the copy action has completed. 
+ Recommended if reading the copied file during same process as copying the file.</param>
+	<param name="p_noSourceExistPrompt">True: If a source file does not exist for copying, the user is notified of this and that the copy action will not take place.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.CopyFolder(System.String,System.String,System.Boolean)">
+	<summary>
+ Makes a duplicate folder,including sub-folders.
+ If the destination already exists it will overwrite existing files in this folder. 
+ If the destination does not exist, it will be made for you.
+ Returns true if all desired operations were successful.
+ </summary>
+	<param name="p_pathSource">Source directory path.</param>
+	<param name="p_pathDestination">Destination directory path.</param>
+	<param name="p_overWriteExisting">True: Destination directory and files will be overwritten if they already exist.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.MoveFile(System.String,System.String,System.Boolean)">
+	<summary>
+ Moves a file from a specified source to destination. 
+ May or may not remove the original file depending on parameter inputs.
+ Returns true if all desired operations were successful.
+ </summary>
+	<param name="p_pathSource">Path to the original file.</param>
+	<param name="p_pathDestination">Path to where the original file is to be moved.</param>
+	<param name="p_deleteOriginal">True: Original file will be deleted after copy action. 
+ False: Original file will be left as is.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.MoveFolder(System.String,System.String,System.Boolean)">
+	<summary>
+ Moves a file from a specified source to destination. 
+ May or may not remove the original file depending on parameter inputs.
+ Returns true if all desired operations were successful.
+ </summary>
+	<param name="p_pathSource">Path to the original folder.</param>
+	<param name="p_pathDestination">Path to where the original folder is to be moved.</param>
+	<param name="p_deleteOriginal">True: Original folder will be deleted after copy action. 
+ False: Original folder will be left as is.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.OpenExplorerAtFolder(System.String,System.String)">
+	<summary>
+ Opens Windows Explorer at the specified directory.
+ </summary>
+	<param name="p_folderPath">Path to the folder to be opened.</param>
+	<param name="p_errorMessage">Error message if the folder does not exist at the specified location.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.CreateTempDirectory(System.String,System.Int32)">
+	<summary>
+ Creates a temprorary directory of the specified path &amp; name. 
+ If a current directory exists, the name will either have an incremented number, or if at the max allowed, the highest numbered folder will be deleted first. 
+ The function returns the resulting path of the created folder.
+ </summary>
+	<param name="p_pathTemp">Initial path to use to create the temporary folder.</param>
+	<param name="p_numTempDirsMax">If creating a new temporary destination, more than one can exist if specified. 
+ If a current directory exists, the last directory (i.e. the highest number permitted) will be deleted and replaced by a new, blank directory.</param>
+	<returns>The resulting path of the created folder.</returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.ComponentCopyFileAction(System.String,System.String,System.Boolean,System.String)">
+	<summary>
+ Component function. Copies a file. Includes error messages.
+ </summary>
+	<param name="p_pathSource">File path source, including the file name.</param>
+	<param name="p_pathDestination">File path destination, including the file name. 
+ If filename is different, file will be renamed.</param>
+	<param name="p_overWriteFile">True: If file already exists at destination, file will be overwritten.</param>
+	<param name="p_promptMessage">Message to display to the user if a file exists.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.ComponentDeleteFileAction(System.String)">
+	<summary>
+ Component function. Deletes a file. Includes error messages.
+ </summary>
+	<param name="p_path">Path of the file to be deleted.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.ComponentDeleteDirectoryAction(System.String,System.Boolean)">
+	<summary>
+ Component function. Deletes a directory. Includes error messages.
+ </summary>
+	<param name="p_path">Path of the file to be deleted.</param>
+	<param name="p_removeOtherFilesDirectoriesInPath">If 'true', other files, directories, and subdirectories below this path will be deleted. 
+ Default is 'false'.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.ComponentSetAttributeAction(System.String,System.IO.FileAttributes)">
+	<summary>
+ Component function. Sets the attribute of a file. Includes error messages.
+ </summary>
+	<param name="p_path">Path to the file to set the attributes of.</param>
+	<param name="p_attribute">Attribute to set the file to.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.ComponentCreateDirectory(System.String)">
+	<summary>
+ Component function. Creates a new directory. Includes error messages.
+ </summary>
+	<param name="p_path">Path of the directory to be created.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FoldersLibrary.ComponentCopyDirectory(System.String,System.String)">
+	<summary>
+ Component function. Copies a direcotry, or creates a new one if it does not exist at the destination. Includes error messages.
+ </summary>
+	<param name="p_pathSource">Source directory path.</param>
+	<param name="p_pathDestination">Destination directory path.</param>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.FoldersLibrary">
+	<summary>
+ Contains routines for working with folders and file locations within folders. 
+ Used for folder/file renaming, deleting, locating, relocating, etc.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.FileValidator.IValidateFile.ExcludeFile">
+	<summary>
+ True: Matching criteria will exclude the file.
+ False: Matching criteria will include the file.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FileValidator.IValidateFile.IsValidFile(System.String)">
+	<summary>
+ True: File is valid by the specified criteria.
+ </summary>
+	<param name="path">Path to the file to assess.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.FileValidator.IValidateFile">
+	<summary>
+ Determines if a file is valid by specified criteria.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:MPT.FileSystem.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:MPT.FileSystem.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="P:MPT.FileSystem.FileProcessor.FileList.FileValidator">
+	<summary>
+ Strategy Pattern object that contains the logic for determining whether or not to add a file to the list of file paths.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.FileProcessor.FileList.Paths">
+	<summary>
+ List of file paths that have been processed for selection.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FileProcessor.FileList.#ctor(MPT.FileSystem.FileValidator.IValidateFile)">
+	<summary>
+	</summary>
+	<param name="fileValidator">Strategy Pattern object that contains the logic for determining whether or not to add a file to the list of file paths.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FileProcessor.FileList.ProcessFile(System.String)">
+	<summary>
+ Processes the file according to IValidateFile.
+ </summary>
+	<param name="path">Path to the file to process.</param>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.FileProcessor.FileList">
+	<summary>
+ Contains a list of file paths whose files have been validated according to IValidateFile.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPaths.folderSource">
+	<summary>
+ The source folder from which the file paths are generated.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPaths.pathsAll">
+	<summary>
+ File paths to all files within a specified directory and all subdirectories.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPaths.fileExtensionFilter">
+	<summary>
+ File extension used to filter the list of paths to all files within a source folder and all sub-folders.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cPaths.pathsFiltered">
+	<summary>
+ File paths to all files in the pathsAll collection that are filtered by file extension.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPaths.#ctor(System.Collections.Generic.List{System.String})">
+	<summary>
+ Autogenerates a list of file paths with the list of file paths.
+ </summary>
+	<param name="filePathsTemp">List of file paths to add to the class.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPaths.#ctor(System.String)">
+	<summary>
+ Autogenerates a list of all of the file paths contained within the directory path provided.
+ </summary>
+	<param name="myFolderSource">Directory path from which a list of file paths is to be generated.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPaths.InitializeFilePaths(System.Collections.Generic.List{System.String})">
+	<summary>
+ Autogenerates a list of file paths with the list of file paths.
+ </summary>
+	<param name="filePathsTemp">List of file paths to add to the class.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPaths.InitializeFolderSource(System.String)">
+	<summary>
+ Autogenerates a list of all of the file paths contained within the directory path provided.
+ </summary>
+	<param name="myFolderSource">Directory path from which a list of file paths is to be generated.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPaths.CreatePathObjects(System.Collections.Generic.List{System.String})">
+	<summary>
+ Creates the class objects associated with each path in a list.
+ </summary>
+	<param name="filePathsTemp"></param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPaths.SetPathsFiltered(System.String)">
+	<summary>
+ Updates the paths list with the filtered list of files. Also updates the relative paths list, for indicating files in subfolders.
+ </summary>
+	<param name="myFileExtension">File extension used to filter the file paths.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cPaths.GetSourceFolder">
+	<summary>
+ Checks all paths in the list of path objects and returns the longest path that is shared among all of the paths.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.cPaths">
+	<summary>
+ Class that gathers paths from a folder and records them in list properties, including lists filtered by criteria.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cFilePaths.folderSource">
+	<summary>
+ The source folder from which the file paths are generated.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cFilePaths.pathsAll">
+	<summary>
+ File paths to all files within a specified directory and all subdirectories.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cFilePaths.fileExtensionFilter">
+	<summary>
+ File extension used to filter the list of paths to all files within a source folder and all sub-folders.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cFilePaths.pathsFiltered">
+	<summary>
+ File paths to all files in the pathsAll collection that are filtered by file extension.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.cFilePaths.pathsSelected">
+	<summary>
+ File paths to all files in the pathsAll collection that are selected to have XML files and examples generated for them.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.#ctor(System.Collections.Generic.List{System.String})">
+	<summary>
+ Autogenerates a list of file paths with the list of file paths.
+ </summary>
+	<param name="filePathsTemp">List of file paths to add to the class.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.#ctor(System.String)">
+	<summary>
+ Autogenerates a list of all of the file paths contained within the directory path provided.
+ </summary>
+	<param name="myFolderSource">Directory path from which a list of file paths is to be generated.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.InitializeFilePaths(System.Collections.Generic.List{System.String})">
+	<summary>
+ Autogenerates a list of file paths with the list of file paths.
+ </summary>
+	<param name="filePathsTemp">List of file paths to add to the class.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.InitializeFolderSource(System.String)">
+	<summary>
+ Autogenerates a list of all of the file paths contained within the directory path provided.
+ </summary>
+	<param name="myFolderSource">Directory path from which a list of file paths is to be generated.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.RemovePathSelected(MPT.FileSystem.cPath)">
+	<summary>
+ Removes the supplied example path object from the list of selected paths.
+ </summary>
+	<param name="p_pathSelectedToRemove">Example path object to remove from the list.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.RemovePathSelectedByFileName(System.String)">
+	<summary>
+ Removes the corresponding example path object from the list of selected paths.
+ </summary>
+	<param name="p_fileNameSelectedToRemove">File name of the example path object to remove.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.RemovePathSelectedByPath(System.String)">
+	<summary>
+ Removes the corresponding example path object from the list of selected paths.
+ </summary>
+	<param name="p_pathSelectedToRemove">Path of the example path object to remove.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.SetPathsFiltered(System.String,MPT.FileSystem.IFileFilter,System.Boolean)">
+	<summary>
+ Updates the paths list with the filtered list of files. Also updates the relative paths list, for indicating files in subfolders.
+ </summary>
+	<param name="p_fileExtension">File extension used to filter the file paths.</param>
+	<param name="p_removeFilesWithMCxml">Optional: If true, paths will be searched for XMl files that have corresponding model files. Those files will be removed.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.SetPathsSelected">
+	<summary>
+ Creates a list of the path objects that are selected to be turned into examples.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.GetSourceFolder">
+	<summary>
+ Determine the shared parent directory of all filtered path objects. 
+ Checks all paths in the list of path objects and returns the longest path that is shared among all of the paths.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.GetPathsFiltered">
+	<summary>
+ Returns a list of all of the paths of the files filtered by file extension.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.GetPathStubsFiltered">
+	<summary>
+ Returns a list of all of the relative paths of the files filtered by file extension.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.GetPathsSelected">
+	<summary>
+ Returns a list of all of the paths of the files selected to be turned into examples.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.GetPathStubsSelected">
+	<summary>
+ Returns a list of all of the relative paths of the files selected.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.GetFileNamesFiltered">
+	<summary>
+ Returns a list of all of the file names of the files filtered by file extension.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.GetRelativePathsFiltered">
+	<summary>
+ Returns a list of all of the relative paths of the files filtered by file extension.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.IsValidFilePath(MPT.FileSystem.cPath)">
+	<summary>
+ Checks if the current example path object contains a valid file path.
+ </summary>
+	<param name="p_path">Example path object to check.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.cFilePaths.createPathObjects(System.Collections.Generic.List{System.String})">
+	<summary>
+ Creates the class objects associated with each path in a list.
+ </summary>
+	<param name="p_filePaths">List of file paths to create file objects from.</param>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.cFilePaths">
+	<summary>
+ Class representing a paths to files.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.ConvertPathAbsoluteToRelative(System.String,System.String,System.Boolean,System.String)">
+	<summary>
+ Converts absolute path to relative path. Format is not to end relative path a "\" for folder destinations. Returns currDir[\relativeToProgram] if fails.
+ </summary>
+	<param name="p_currDir">Path to the directory of the application.</param>
+	<param name="p_newDir">Absolute path to target directory.</param>
+	<param name="p_file">True: Path is to a file. False: Path is assumed to be to a directory.</param>
+	<param name="p_relativeToProgram">If base reference is relative to the program, specify the relative path difference with this parameter. 
+ The presence of starting and endings slashes does not matter.</param>
+	<returns></returns>
+	<remarks>Format right now is to end relative path a "\" for folder destinations.</remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.UniquePathSegment(System.Collections.Generic.List{System.String},System.Int32,System.String)">
+	<summary>
+ Returns a unique path segment for a supplied path, as compared to some other compared path, expressed by other parameters. 
+ Path segment will not have a trailing slash.
+ </summary>
+	<param name="p_directories">List of directory components of the path.</param>
+	<param name="p_numberDirectoriesEqual">Number of directory components in the path that are equal to the path compared.</param>
+	<param name="p_substituteCharacter">For each unique directory component. 
+ If blank, the directory components themselves are used. 
+ If specified, the specification will be an overridden constant.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.ListPathDirectories(System.String)">
+	<summary>
+ Collect specified path segments into a list of the component directories. 
+ This will include any file name if included in the path.
+ </summary>
+	<param name="p_dirPath">Path to use.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.ConvertPathRelativeToAbsolute(System.String,System.String,System.String,System.Boolean)">
+	<summary>
+ Converts relative path to absolute path. Returns appDir[/relativeToProgram] if fails.
+ </summary>
+	<param name="p_appDir">Path to the directory of the application.</param>
+	<param name="p_newDir">Relative path to target directory.</param>
+	<param name="p_relativeToProgram">If base reference is relative to the program, specify the relative path difference with this parameter. The presence of starting and endings slashes does not matter.</param>
+	<param name="p_ignoreFailure">Optional: If true, then even in development mode the failure warning message is suppressed, but the function returns the relative path.</param>
+	<returns></returns>
+	<remarks>Format right now is to end absolute path without a "\"</remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.CleanDoubleSlash(System.String@)">
+	<summary>
+ Removes any doubles slashes in a path and replaces them with a single slash.
+ </summary>
+	<param name="p_path">Path to clean.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.CheckPathRelative(System.String)">
+	<summary>
+ Checks whether a path is relative or absolute by the presence of the ":" symbol.
+ </summary>
+	<param name="p_path">Path to be checked for relative vs. absolute type</param>
+	<returns>True if the path is relative, false if it is absolute</returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.AbsolutePath(System.String@,System.String,System.String,System.Boolean,System.Boolean)">
+	<summary>
+ Checks if path is relative or absolute. If path is relative, path is converted to absolute. Returns true if an absolute path was created. False otherwise.
+ </summary>
+	<param name="p_path">Path to be checked and, if necessary, converted.</param>
+	<param name="p_relativeToProgram">If base reference is relative to the program, specify the relative path difference with this parameter.</param>
+	<param name="p_referencePath">Path to which the conversion is related. This is an absolute path.</param>
+	<param name="p_ignoreFailure">Optional: If true, then even in development mode the failure warning message is suppressed, but the function returns the relative path.</param>
+	<param name="p_cleanPath">True: The path will be trimmed of white space, leading and ending "\", and all "\\".</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.RelativePath(System.String@,System.Boolean,System.String,System.String,System.Boolean)">
+	<summary>
+ Checks if path is relative or absolute. If path is absolute, path is converted to relative.
+ </summary>
+	<param name="p_path">Path to be checked and, if necessary, converted.</param>
+	<param name="p_isFile">True: Path is to a file. False (default): Path is to a directory.</param>
+	<param name="p_relativeToProgram">If base reference is relative to the program, specify the relative path difference with this parameter.</param>
+	<param name="p_referencePath">Path to which the conversion is related. This is an absolute path.</param>
+	<param name="p_cleanPath">True: The path will be trimmed of white space, leading and ending "\", and all "\\".</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.ValidateRelativePathConversion(System.String,System.String,System.String)">
+	<summary>
+ Checks whether or not the relative path was successfully converted.
+ </summary>
+	<param name="p_path">Original path that was to be converted.</param>
+	<param name="p_referencePath">Path to which the conversion is related.</param>
+	<param name="p_relativeToProgram">If base reference is relative to the program, specify the relative path difference with this parameter.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.pathStartup">
+	<summary>
+ Obtains path to the CSiTester.EXE file, not including the file name.
+ </summary>
+	<returns>Path to the CSiTester.EXE file, not including the file name.</returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.SetCurrDir(System.String@,System.String)">
+	<summary>
+ Sets starting directory to a folder or file, accounting for relative vs. absolute paths, and whether the path is valid. Assigns a default if path is not valid.
+ </summary>
+	<param name="p_path">Path to be checked.</param>
+	<param name="p_defaultRelPath">Default path is to the program. Optional: For the conditional default path, add any additional path to a subdirectory of the program.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.SetDefaultPath(System.String)">
+	<summary>
+ Relative folder location is set, with a folder to be generated if absent
+ </summary>
+	<param name="p_name">Name of folder on the next level relative to the program location</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.BrowseForFile(System.String@,System.String,System.String,System.Collections.Generic.List{System.String})">
+	<summary>
+ Browses for a single file and updates the file path. Returns 'False' if canceled.
+ </summary>
+	<param name="p_path">Variable to write the file path to.</param>
+	<param name="p_dirPath">Starting directory. Do not include filename.</param>
+	<param name="p_label">Single label that describes the file type(s) provided.</param>
+	<param name="p_fileTypes">List of file types to find. Multiple file types will apply to the same single label.</param>
+	<returns>True if filename is chosen and valid. False otherwise.</returns>
+	<remarks>dirPath currently is not working with this dialog.</remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.BrowseForFiles(System.Collections.Generic.List{System.String}@,System.String,System.String,System.Collections.Generic.List{System.String})">
+	<summary>
+ Browses for multiple files and updates the file paths list provided. Returns 'False' if canceled.
+ </summary>
+	<param name="p_paths">List to populate with one or more selected file paths.</param>
+	<param name="p_dirPath">Starting directory. Do not include filename.</param>
+	<param name="p_label">Single label that describes the file type(s) provided.</param>
+	<param name="p_fileTypes">List of file types to find. Multiple file types will apply to the same single label.</param>
+	<returns>True if filename is chosen and valid. False otherwise.</returns>
+	<remarks>dirPath currently is not working with this dialog.</remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.BrowseForFilesComponent(System.Nullable{System.Boolean}@,System.String,System.String,System.Collections.Generic.List{System.String},System.Boolean)">
+	<summary>
+ Browses for a file or files.
+ </summary>
+	<param name="p_result">Returns true if one or more files is selected, and false if the form is canceled.</param>
+	<param name="p_dirPath">Starting directory. Do not include filename.</param>
+	<param name="p_label">Single label that describes the file type(s) provided.</param>
+	<param name="p_fileTypes">List of file types to find. Multiple file types will apply to the same single label.</param>
+	<param name="p_multiSelect">If true, the user can select multiple files, and multiple file paths will be returned.</param>
+	<returns>True if filename is chosen and valid. False otherwise.</returns>
+	<remarks>dirPath currently is not working with this dialog.</remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.BrowseForFolder(System.String,System.String,System.Boolean)">
+	<summary>
+ User selects a folder location. Folder location is returned as a string.
+ </summary>
+	<param name="p_description">Description to be provided in the file browser.</param>
+	<param name="p_startupDir">Default starting directory.</param>
+	<param name="p_showNewFolderButton">True, a button appears for creating new folders. False is default.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.StringsMatch(System.String,System.String,System.Boolean)">
+	<summary>
+ Determines if two strings are the same, accounting for capitalization.
+ </summary>
+	<param name="p_string1">First string to compare.</param>
+	<param name="p_string2">Second string to compare.</param>
+	<param name="p_caseSensitive">If true, then the differences in capitalization will void a potential match. 
+ If false, then a match is made disregarding capitalization.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.StringExistInName(System.String,System.String,System.Boolean)">
+	<summary>
+ Searches a string and determines if a substring exists.
+ </summary>
+	<param name="p_string">String to be searched</param>
+	<param name="p_subString">Substring segment to search for</param>
+	<param name="p_caseSensitive">If true, then the differences in capitalization will void a potential match. 
+ If false, then a match is made disregarding capitalization.</param>
+	<returns>True: Substring found within string</returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.NameIncludesFileExtension(System.String,System.Int32)">
+	<summary>
+ Checks name provided and determines if name includes file extension by checking for the existing of a "." at the specified spacing from the end.  Returns true if extension is found.
+ </summary>
+	<param name="p_name">Name to check, as a string.</param>
+	<param name="p_extensionLength">Number of characters in the file extension after the period. e.g. sdb = 3.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.FileNameExtensionMatch(System.String,System.String,System.String,System.Boolean)">
+	<summary>
+ Returns true or false if a match is found of either the file name, extension, or both to the full filename and extension.
+ If a name/extension parameter is omitted, it is assumed that any value is a match.
+ </summary>
+	<param name="p_fileNameSource">Full file name with extension.
+ Can also be full file path.</param>
+	<param name="p_fileName">File name to compare.</param>
+	<param name="p_fileExtension">File extension to compare.</param>
+	<param name="p_partialNameMatch">True: File will be matched if any part of the name provided matches the file name. 
+ False: File will only be matched if by the name criteria if there is an exact match.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.GenericExtensionMatch(System.String,System.String)">
+	<summary>
+ Checks if the generic file extension, such as *.k??? for any value after k of 3 spaces, matches. Returns true if a match is found.
+ </summary>
+	<param name="p_fileExtension">Generic file extention to search for.</param>
+	<param name="p_fileExtensionSource">File extension of the file being checked.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.FileNameWithoutExtension(System.String)">
+	<summary>
+ Returns the filename without a file extension. 
+ This works regardless of whether or not the provided filename has an extension.
+ </summary>
+	<param name="p_fileName">File name to return without an extension.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.FileHasNoExtension(System.String)">
+	<summary>
+ Determines whether or not the file path provided points to a file with no extension.
+ </summary>
+	<param name="p_path">Path to a file.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.GetPathFileName(System.String,System.Boolean)">
+	<summary>
+ Gets the file name. If no filename exists, the last folder name in the path is returned.
+ </summary>
+	<param name="p_path">Path to file or folder. Can be relative or absolute.</param>
+	<param name="p_noExtension">Optional: True: Returns only the name without any file extension. Will not work for files with no extension, but containing a "." in the filename. 
+ False(default): File extension, if present, is not removed.</param>
+	<returns>File name or folder name</returns>
+	<remarks>Currently cannot auto determine if file. This due to the two possible cases: 1. Filename w/o extension listed, 2. Directories with "." in the names</remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.GetPathDirectoryStub(System.String)">
+	<summary>
+ Gets the path to the directory of the filepath provided. If no filename exists, the path is returned minus the lowest directory.
+ </summary>
+	<param name="p_path">Path to be checked for the directory.</param>
+	<returns>Path to a directory.</returns>
+	<remarks>Currently cannot auto determine if file is in path. This due to the two possible cases: 1. Filename w/o extension listed, 2. Directories with "." in the names</remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.GetPathDirectorySubStub(System.String,System.Int32)">
+	<summary>
+ Returns the path to a directory at a number of directories specified above the lowest directory in the path supplied.
+ </summary>
+	<param name="p_path">Path to retrieve path directory component from. If this is to a file, the directory containing the file is the lowest one returned (numDir=0).</param>
+	<param name="p_numberOfDirectories">Number of directories to move up in the path supplied. For numDir=0, if the path is to a directory, the same path is returned, and if the path is to a file, the path to the directory containing the file is returned.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.GetSuffix(System.String,System.String)">
+	<summary>
+ Gets the last part of a string after the last occurrence of a designated character. 
+ Returns name if the character is not found.
+ </summary>
+	<param name="p_name">String to be truncated. Can be a single word or a sentence.</param>
+	<param name="p_character">Character to search for. Function returns what is left of string after the last occurrence of this character</param>
+	<returns>Function returns what is left of string after the last occurrence of this character</returns>
+	<remarks>TODO: Add ability to specify number of occurrences of character</remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.GetPrefix(System.String,System.String)">
+	<summary>
+ Gets the first part of a string before the first occurrence of a designated character.
+ Returns name if the character is not found.
+ </summary>
+	<param name="p_name">String to be truncated. Can be a single word or a sentence</param>
+	<param name="p_character">Character to search for. Function returns what is left of string before the first occurence of this character</param>
+	<returns>Function returns what is left of string before the first occurence of this character</returns>
+	<remarks>TODO: Add ability to specify number of occurrences of character</remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.FilterStringFromName(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+	<summary>
+ Finds a given substring within a string and returns the prefix and/or suffix of the remaining string. 
+ If the substring is not found, the original string is returned.
+ </summary>
+	<param name="p_oldString">String to be filtered.</param>
+	<param name="p_filterString">String to filter out.</param>
+	<param name="p_retainPrefix">True: Retain the portion of the string before the filter string.</param>
+	<param name="p_retainSuffix">True: Retain the portion of the string after the filter string.</param>
+	<param name="p_endDirectory">True: A match is only valid if the filtered string is the last directory in a path string. 
+ Used to prevent false positives higher up the path hierarchy.</param>
+	<param name="p_caseSensitive">True: Differences in capitalization will void a potential match. 
+ False: A match is made disregarding capitalization.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.ReplaceStringInName(System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
+	<summary>
+ Replaces a substring in a string. Returns the new string.
+ </summary>
+	<param name="p_oldString">String to be searched</param>
+	<param name="p_oldSubString">Substring segment to search for and be replaced</param>
+	<param name="p_newSubString">Substring segment to replace</param>
+	<param name="p_suppressWarnings">True: No warning is given if the old substring is not found in the old string.</param>
+	<param name="p_clearOK">True: If the old substring equals the old string, the entire string is replaced.</param>
+	<param name="p_caseSensitive">True: Differences in capitalization will void a potential match. 
+ False: A match is made disregarding capitalization.</param>
+	<returns>Returns the new string.</returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.FilterNumeric(System.String,System.Boolean)">
+	<summary>
+ Returns only the portions of the string that are numeric. 
+ All non-numeric characters are filtered out.
+ </summary>
+	<param name="p_string">String to filter.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.GetFolderSource(System.String,MPT.FileSystem.cFilePaths)">
+	<summary>
+ Get the folder source from the files selected if a folder source was not specified.
+ </summary>
+	<param name="p_folderSource">File path to the source folder containing the examples to be worked with.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.PluralizeString(System.Double,System.String)">
+	<summary>
+ Pluralizes a word, or not, based on a number, and returns the combination of the number &amp; word.
+ </summary>
+	<param name="p_number">Number to base pluralization on.</param>
+	<param name="p_word">Word to append to the number, and pluralize if necessary.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.ConcatenateListToMessage(System.Collections.Generic.List{System.String}@,System.String,System.Boolean,System.String)">
+	<summary>
+ Takes a list and concatenates it into a single string message with specified joiners.
+ </summary>
+	<param name="p_strings">List of items to concatenate.</param>
+	<param name="p_joiner">Joining word to use if there is more than one entry, such as 'and' or 'or'.</param>
+	<param name="p_useJoinerAlways">True: Rhe joiner is used in a list of two. Else, the joiner is not used in a list of two.</param>
+	<param name="p_prefix">This is appended to the beginning of each list item. Example "Mr." or "*.".</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.ReplaceFirst(System.String,System.String,System.String)">
+	<summary>
+ Replaces the first instance of the string being searched for.
+ </summary>
+	<param name="p_text">Text to search within.</param>
+	<param name="p_search">String to search for.</param>
+	<param name="p_replace">String to replace the searched string with.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.TrimPathSlash(System.String@,System.Boolean,System.Boolean)">
+	<summary>
+ Removes any trailing "\" characters from a file path. Works for multiple ending slashes.
+ </summary>
+	<param name="p_dirPath">Directory Path.</param>
+	<param name="p_trimStart">If true, any slash at the start of the path will also be trimmed.</param>
+	<param name="p_trimEnd">If false, the slash at the end of the path will not be trimmed.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.AddPathSlash(System.String@,System.Boolean,System.Boolean)">
+	<summary>
+ Adds trailing "\" character to end of a file path, if one does not exist. Ensures that only one exists
+ </summary>
+	<param name="p_dirPath">Directory Path</param>
+	<param name="p_addStart">Optional: If true, adds slash to the start of the path.</param>
+	<param name="p_addEnd">Optional: If false, slash will not be addeed to the end of the path.</param>
+	<returns>File path with a single trailing "\" character at the end</returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.TrimWhiteSpace(System.String@)">
+	<summary>
+ Takes any string and eliminates all white space before the first character and after the last character. Does nothing if string is empty.
+ </summary>
+	<param name="p_stringTrim">String to be trimmed of white spaces</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.TrimQuotesSingle(System.String@,System.Boolean,System.Boolean)">
+	<summary>
+ Trims single quotes "'" from both ends of a string.
+ </summary>
+	<param name="p_stringTrim">String to trim the quotes from.</param>
+	<param name="P_trimLeft">False: the left side of the string will not have any existing quotes trimmed.</param>
+	<param name="p_trimRight">False: the right side of the string will not have any existing quotes trimmed.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.FileExtensionCleanComplete(System.String,System.Boolean)">
+	<summary>
+ Ensures that a file extension is returned in the desired format, either with or without a period.
+ </summary>
+	<param name="p_fileExtension">File extension to check, and modify if needed.</param>
+	<param name="p_noPeriod">If true, then the returned extension will have no period. If false, then the returned extension will have a period.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.PathLibrary.ListFilePathsInDirectory(System.String,System.Boolean,System.String,System.String,System.Boolean)">
+	<summary>
+ Creates a list of paths to all files within a directory of a given file name, or type, or all files. 
+ If both file name and type are specified, only files matching both criteria will be listed. 
+ If neither file name nor type are specified, all files will be listed.
+ </summary>
+	<param name="p_path">Path to the parent directory</param>
+	<param name="p_includeSubFolders">True: Function will check within all subfolders of the parent directory. 
+ False: Function will only check directory specified.</param>
+	<param name="p_fileName">Only files matching the name specified, but of any file type, will be deleted</param>
+	<param name="p_fileExtension">Only files with the same filetype will be deleted</param>
+	<param name="p_excludeFile">List returned will exclude files of the given filename.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.PathLibrary">
+	<summary>
+ Contains functions for determining and manipulating file paths, as well as strings in general.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.RecursiveFileProcessor.ProcessPaths(System.String[],MPT.FileSystem.FileProcessor.IProcessFile,System.Boolean)">
+	<summary>
+ Process all files in each directory path passed in, recurse on any directories that are found, and process the files they contain.
+ </summary>
+	<param name="args">List of root directories within which files are to be processed.</param>
+	<param name="fileProcessor">Object containing the logic to use for file processing.</param>
+	<param name="includeSubDirectories">True: Method will include all paths in subdirectories.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.RecursiveFileProcessor.ProcessDirectory(System.String,MPT.FileSystem.FileProcessor.IProcessFile,System.Boolean)">
+	<summary>
+ Process all files in the directory passed in, recurse on any directories that are found, and process the files they contain.
+ </summary>
+	<param name="targetDirectory">Path to the root directory within which files are to be processed.</param>
+	<param name="fileProcessor">Object containing the logic to use for file processing.</param>
+	<param name="includeSubDirectories">True: Method will include all paths in subdirectories.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.RecursiveFileProcessor.ProcessFile(System.String,MPT.FileSystem.FileProcessor.IProcessFile)">
+	<summary>
+ Performs the file processing operation on the file specified with the supplied object.
+ </summary>
+	<param name="path">Path to the file to process.</param>
+	<param name="fileProcessor">Object containing the logic to use for file processing.</param>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.RecursiveFileProcessor">
+	<summary>
+ Performs file processing actions on lists of files determined recursively through file directories.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.FileValidator.PartialNameMatchValidator.Name">
+	<summary>
+ File name, with no extension.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MPT.FileSystem.FileValidator.PartialNameMatchValidator.ExcludeFile">
+	<summary>
+ True: Matching criteria will exclude the file.
+ False: Matching criteria will include the file.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FileValidator.PartialNameMatchValidator.#ctor(System.String,System.Boolean)">
+	<summary>
+	</summary>
+	<param name="name">File name, without extension.</param>
+	<param name="excludeFile">True: Matching criteria will exclude the file.
+ False: Matching criteria will include the file.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.FileSystem.FileValidator.PartialNameMatchValidator.IsValidFile(System.String)">
+	<summary>
+ True: File is a valid file based on the selection criteria.
+ </summary>
+	<param name="path">Path to the file to validate.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:MPT.FileSystem.FileValidator.PartialNameMatchValidator">
+	<summary>
+ Determines whether or not a file is valid based on partially matching file name.
+ </summary>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

@@ -1,7 +1,15 @@
 ﻿Option Strict On
 Option Explicit On
 
+''' <summary>
+''' Used for returning a list of files that are filtered based on some criteria.
+''' </summary>
 Public Interface IFileFilter
-    Function MatchingFiles(ByVal p_searchedFiles As List(Of cPath)) As List(Of cPath)
+    ''' <summary>
+    ''' Returns a list of path objects for all matching files.
+    ''' </summary>
+    ''' <param name="searchedFiles">List of files to search.</param>
+    ''' <returns></returns>
+    Function MatchingFiles(ByVal searchedFiles As List(Of cPath)) As List(Of cPath)
 
 End Interface

@@ -1,16 +1,16 @@
 ﻿Option Explicit On
 Option Strict On
 
-Imports MPT.Reporting
-
 ''' <summary>
 ''' 
 ''' </summary>
 ''' <remarks></remarks>
 Public Class MessengerListener
+    ''ncrunch: no coverage start
     Protected Sub New()
         ' This class is meant to not be initialized and only have shared methods.
     End Sub
+     ''ncrunch: no coverage end
 
     ''' <summary>
     ''' Subscribes the listener to the provided object.

@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MPT.FileSystem", "MPT.FileSystem\MPT.FileSystem.vbproj", "{C3CD3F55-BA37-4D2E-901B-FA941AA80084}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPT.FileSystem.UnitTests", "MPT.FileSystem.UnitTests\MPT.FileSystem.UnitTests.csproj", "{73A38910-EE78-4A68-BF24-A7FDDC338567}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://fs1:8080/tfs/csi_software
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = MPT.FileSystem\\MPT.FileSystem.vbproj
-		SccProjectName1 = MPT.FileSystem
-		SccLocalPath1 = MPT.FileSystem
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -22,8 +17,21 @@ Global
 		{C3CD3F55-BA37-4D2E-901B-FA941AA80084}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3CD3F55-BA37-4D2E-901B-FA941AA80084}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3CD3F55-BA37-4D2E-901B-FA941AA80084}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73A38910-EE78-4A68-BF24-A7FDDC338567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73A38910-EE78-4A68-BF24-A7FDDC338567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73A38910-EE78-4A68-BF24-A7FDDC338567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73A38910-EE78-4A68-BF24-A7FDDC338567}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://fs1:8080/tfs/csi_software
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MPT.FileSystem\\MPT.FileSystem.vbproj
+		SccProjectName1 = MPT.FileSystem
+		SccLocalPath1 = MPT.FileSystem
 	EndGlobalSection
 EndGlobal

@@ -9,7 +9,20 @@ Imports System.Windows.Input
 ''' <remarks></remarks>
 Public Class cCursorWait
 #Region "Variables"
-    Private _waitCursor As Boolean
+    Private _active As Boolean
+
+    ''' <summary>
+    ''' True: Wait cursor is active.
+    ''' </summary>
+    Public Property Active As Boolean
+        Get
+            Return _active
+        End Get
+        Private Set(value As Boolean)
+            _active = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Initialization"
@@ -19,7 +32,12 @@ Public Class cCursorWait
     ''' <param name="start">True: Wait cursor will begin upon class initialization.</param>
     ''' <remarks></remarks>
     Public Sub New(Optional ByVal start As Boolean = True)
-        If start Then StartCursor()
+        If start Then
+            Active = True
+            StartCursor()
+        Else
+            Active = False
+        End If
     End Sub
 #End Region
 
@@ -31,10 +49,8 @@ Public Class cCursorWait
     ''' <remarks></remarks>
     Public Sub StartCursor()
         If Not waitCursorIsActive() Then
-            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait
-            _waitCursor = True
-        Else
-            _waitCursor = False
+            Mouse.OverrideCursor = Windows.Input.Cursors.Wait
+            _active = True
         End If
     End Sub
 
@@ -43,7 +59,10 @@ Public Class cCursorWait
     ''' </summary>
     ''' <remarks></remarks>
     Public Sub EndCursor()
-        If _waitCursor Then Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow
+        If waitCursorIsActive() Then
+            Mouse.OverrideCursor = Windows.Input.Cursors.Arrow
+            _active = False
+        End If
     End Sub
 #End Region
 
@@ -54,8 +73,8 @@ Public Class cCursorWait
     ''' <returns></returns>
     ''' <remarks></remarks>
     Private Function waitCursorIsActive() As Boolean
-        Return (_waitCursor OrElse
-                Mouse.OverrideCursor Is System.Windows.Input.Cursors.Wait)
+        Return (_active OrElse
+                Mouse.OverrideCursor Is Windows.Input.Cursors.Wait)
     End Function
 #End Region
 

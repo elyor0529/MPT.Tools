@@ -22,7 +22,7 @@ Public Class cValue
     End Property
 
 
-    Private _units As New cUnitsController
+    Private ReadOnly _units As New cUnitsController
     ''' <summary>
     ''' Units of the value.
     ''' </summary>
@@ -43,16 +43,59 @@ Public Class cValue
     ''' <summary>
     ''' Create new value.
     ''' </summary>
-    ''' <param name="p_value">Magnitude of the value. 
+    ''' <param name="p_magnitude">Magnitude of the value.</param>
+    ''' <param name="p_units">Units of the value (e.g. kN*m/sec).</param>
+    ''' <remarks></remarks>
+    Public Sub New(ByVal p_magnitude As Double,
+                   ByVal p_units As String)
+        setMagnitude(p_magnitude.ToString())
+        If unitsCanBeParsed(p_units) Then _units.ParseStringToUnits(p_units)
+    End Sub
+
+    ''' <summary>
+    ''' Units are only set if the magnitude is numeric and units are not a list.
+    ''' </summary>
+    ''' <param name="p_units"></param>
+    ''' <returns></returns>
+    Private Function unitsCanBeParsed(ByVal p_units As String) As Boolean
+        Return ((String.IsNullOrEmpty(_magnitude) OrElse IsNumeric(_magnitude)) AndAlso
+                (Not IsNumeric(p_units) AndAlso Not _units.isConsistent(p_units)))
+    End Function
+
+
+
+    ''' <summary>
+    ''' Create new value.
+    ''' </summary>
+    ''' <param name="p_magnitude">Magnitude of the value. 
     ''' Must be numeric if unit features are to be used.</param>
     ''' <param name="p_units">Units of the value (e.g. kN*m/sec).</param>
     ''' <remarks></remarks>
-    Public Sub New(ByVal p_value As String,
+    Public Sub New(ByVal p_magnitude As String,
                    ByVal p_units As String)
-        _magnitude = p_value
+        setMagnitude(p_magnitude)
+        If unitsCanBeParsed(p_units) Then _units.ParseStringToUnits(p_units)
+    End Sub
 
-        ' Units are only set if the value is numeric and units are not a list
-        If (IsNumeric(p_value) OrElse Not _units.isConsistent(p_units)) Then _units.ParseStringToUnits(p_units)
+
+    Public Sub New(ByVal p_magnitudeOrUnits As String)
+        If _units.isConsistent(p_magnitudeOrUnits) Then Return
+        If unitsCanBeParsed(p_magnitudeOrUnits) Then _units.ParseStringToUnits(p_magnitudeOrUnits)
+
+        '' TODO: Validate that units are of valid types. If not, set them blank and make value the magnitude
+        If String.IsNullOrEmpty(Units) Then setMagnitude(p_magnitudeOrUnits)
+    End Sub
+
+    Public Sub New(ByVal p_value As Double)
+        setMagnitude(p_value.ToString())
+    End Sub
+
+    Private Sub setMagnitude(ByVal p_magnitude As String)
+        If String.IsNullOrEmpty(p_magnitude) Then
+            _magnitude = "0"
+        Else
+            _magnitude = p_magnitude
+        End If
     End Sub
 
 #End Region
@@ -66,7 +109,8 @@ Public Class cValue
     ''' 2. A list of units, if the value is to be converted to a consistent set of units for a given unit type (e.g. N, mm, hr).</param>
     ''' <remarks></remarks>
     Public Sub ConvertTo(ByVal p_units As String)
-        If Not IsNumeric(_magnitude) Then Exit Sub
+        If (Not IsNumeric(_magnitude) OrElse
+            String.IsNullOrEmpty(Units)) Then Exit Sub
 
         ' Convert the value
         Dim conversionValue As Double = _units.ConvertTo(p_units)
@@ -79,6 +123,19 @@ Public Class cValue
         Else
             _units.ParseStringToUnits(p_units)
         End If
+    End Sub
+
+
+    Public Sub ConvertFrom(ByVal p_magnitude As String,
+                           ByVal p_units As String)
+        If (Not IsNumeric(_magnitude) OrElse
+            Not IsNumeric(p_magnitude) OrElse
+            String.IsNullOrEmpty(Units)) Then Exit Sub
+
+        ' Convert the value
+        Dim conversionValue As Double = _units.ConvertFrom(p_units)
+        Dim valueNewNumeric As Double = CDbl(p_magnitude) * conversionValue
+        _magnitude = CStr(valueNewNumeric)
     End Sub
 #End Region
 

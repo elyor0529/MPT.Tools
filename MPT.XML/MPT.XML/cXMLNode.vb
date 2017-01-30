@@ -171,7 +171,4 @@ Public Class cXMLNode
     End Function
 #End Region
 
-#Region "Methods"
-
-#End Region
 End Class
