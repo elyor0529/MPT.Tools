@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using System;
 
 using NMath = System.Math;
 using NVector = System.Windows.Vector;
@@ -11,66 +11,126 @@ namespace MPT.Math
     /// <summary>
     /// Library of methods related to vectors.
     /// </summary>
-    public static class Vector
+    public class Vector : IEquatable<Vector>
     {
+        #region Properties
+        private static NVector _vector;
+
+        /// <summary>
+        /// Tolerance to use in all calculations with double types.
+        /// </summary>
+        public double Tolerance { get; set; } = Num.ZeroTolerance;
+
+        /// <summary>
+        /// Length of this vector.
+        /// </summary>
+        public double Magnitude => _vector.Length;
+
+        /// <summary>
+        /// Gets the square of the length of this vector.
+        /// </summary>
+        public double MagnitudeSquared => _vector.LengthSquared;
+
+        /// <summary>
+        /// Gets the x-component of this vector.
+        /// </summary>
+        public double Xcomponent => _vector.X;
+
+        /// <summary>
+        /// Gets the y-component of this vector.
+        /// </summary>
+        public double Ycomponent => _vector.Y;
+
+        protected Point _location;
+        /// <summary>
+        /// Gets the location of this vector in Euclidean space.
+        /// </summary>
+        public Point Location => _location;
+        #endregion
+
+        /// <summary>
+        /// Initializes the class with a vector structure.
+        /// </summary>
+        /// <param name="vector"></param>
+        public Vector(NVector vector)
+        {
+            _vector = vector;
+        }
+
+        /// <summary>
+        /// Initializes the class with a vector structure and a point coinciding with the location of the vector.
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="location"></param>
+        public Vector(NVector vector, Point location)
+        {
+            _vector = vector;
+            _location = location;
+        }
+
+        public Vector(double x, double y)
+        {
+            _vector = new NVector(x, y);
+        }
+
+        #region Inherit Methods
+        // https://msdn.microsoft.com/en-us/library/system.windows.vector(v=vs.110).aspx
+
+
+        #endregion
+
+        #region New Methods
+
+        #endregion
+
         /// <summary>
         /// True: Segments are parallel, on the same line, oriented in the same direction.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
-        /// <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static bool IsColinearSameDirection(NVector vector1, NVector vector2, double tolerance = Num.ZeroTolerance)
+        public bool IsColinearSameDirection(NVector vector)
         {
-            return (ConcavityColinearity(vector1, vector2).IsEqualTo(1, tolerance));
+            return _vector.IsCollinearSameDirection(vector, Tolerance);
         }
 
         /// <summary>
         /// Vectors form a concave angle.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
-        /// <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static bool IsConcave(NVector vector1, NVector vector2, double tolerance = Num.ZeroTolerance)
+        public bool IsConcave(NVector vector)
         {
-            return (ConcavityColinearity(vector1, vector2).IsGreaterThan(0, tolerance));
+            return _vector.IsConcave(vector);
         }
 
         /// <summary>
         /// Vectors form a 90 degree angle.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
-        /// <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static bool IsOrthogonal(NVector vector1, NVector vector2, double tolerance = Num.ZeroTolerance)
+        public bool IsOrthogonal(NVector vector)
         {
-            return (ConcavityColinearity(vector1, vector2).IsEqualTo(0, tolerance));
+            return _vector.IsOrthogonal(vector, Tolerance);
         }
 
         /// <summary>
         /// Vectors form a convex angle.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
-        /// <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static bool IsConvex(NVector vector1, NVector vector2, double tolerance = Num.ZeroTolerance)
+        public bool IsConvex(NVector vector)
         {
-            return (ConcavityColinearity(vector1, vector2).IsLessThan(0, tolerance));
+            return _vector.IsConvex(vector, Tolerance);
         }
 
         /// <summary>
         ///  True: Segments are parallel, on the same line, oriented in the opposite direction.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
-        /// <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static bool IsColinearOppositeDirection(NVector vector1, NVector vector2, double tolerance = Num.ZeroTolerance)
+        public bool IsColinearOppositeDirection(NVector vector)
         {
-            return (ConcavityColinearity(vector1, vector2).IsEqualTo(-1, tolerance));
+            return _vector.IsCollinearOppositeDirection(vector, Tolerance);
         }
 
 
@@ -79,26 +139,22 @@ namespace MPT.Math
         /// True: The concave side of the vector is inside the shape.
         /// This is determined by the direction of the vector.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
-        /// <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static bool ConcaveInside(NVector vector1, NVector vector2, double tolerance = Num.ZeroTolerance)
+        public bool ConcaveInside(NVector vector)
         {
-            return (vector1.Area(vector2).IsGreaterThan(0, tolerance));
+            return _vector.IsConcaveInside(vector, Tolerance);
         }
 
         /// <summary>
         /// True: The convex side of the vector is inside the shape.
         /// This is determined by the direction of the vector.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
-        /// <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static bool ConvexInside(NVector vector1, NVector vector2, double tolerance = Num.ZeroTolerance)
+        public bool ConvexInside(NVector vector)
         {
-            return (vector1.Area(vector2).IsLessThan(0, tolerance));
+            return _vector.IsConvexInside(vector, Tolerance);
         }
 
 
@@ -113,88 +169,115 @@ namespace MPT.Math
         /// &lt; 0 = Convex. 
         /// -1 = Pointing the exact opposite way.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static double ConcavityColinearity(NVector vector1, NVector vector2)
+        public double ConcavityColinearity(NVector vector)
         {
-            return (vector1.Dot(vector2) / (vector1.Length * vector2.Length));
+            return _vector.ConcavityCollinearity(vector);
         }
 
         /// <summary>
         /// Dot product of two vectors.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static double Dot(this NVector vector1, NVector vector2)
+        public double Dot(NVector vector)
         {
-            return NVector.Multiply(vector1, vector2);
+            return _vector.Dot(vector);
         }
 
         /// <summary>
         /// Cross-product of two vectors.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static double Cross(this NVector vector1, NVector vector2)
+        public double Cross(NVector vector)
         {
-            return NVector.CrossProduct(vector1, vector2);
+            return _vector.Cross(vector);
+        }
+
+        /// <summary>
+        /// Returns the angle [radians] of a vector from the origin axis (x, positive, +ccw).
+        /// </summary>
+        /// <returns></returns>
+        public double Angle()
+        {
+            return NMath.Atan(_vector.Y/_vector.X);
         }
 
         /// <summary>
         /// Returns the angle [radians] between the two vectors.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static double Angle(this NVector vector1, NVector vector2)
+        public double Angle(NVector vector)
         {
-            return NMath.Acos(ConcavityColinearity(vector1, vector2));
+            return _vector.Angle(vector);
         }
 
         /// <summary>
         /// Returns the area between two vectors.
         /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
+        /// <param name="vector"></param>
         /// <returns></returns>
-        public static double Area(this NVector vector1, NVector vector2)
+        public double Area(NVector vector)
         {
-            return (0.5 * (vector1.Cross(vector2)));
+            return _vector.Area(vector);
+        }
+
+        #region Operators & Equals
+
+
+        public bool Equals(Vector other)
+        {
+            return (NMath.Abs(Xcomponent - other.Xcomponent) < Tolerance) &&
+                   (NMath.Abs(Ycomponent - other.Ycomponent) < Tolerance);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Vector) { return Equals((Vector)obj); }
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Xcomponent.GetHashCode() ^ Ycomponent.GetHashCode();
         }
 
 
-
-
-
-
-
-        /// <summary>
-        /// X-coordinate of a horizontal line intersecting the line described by the points provided.
-        /// </summary>
-        /// <param name="y">Y-coordinate of the horizontal line.</param>
-        /// <param name="x1">X-coordinate of first point.</param>
-        /// <param name="y1">Y-coordinate of first point.</param>
-        /// <param name="x2">X-coordinate of second point.</param>
-        /// <param name="y2">Y-coordinate of second point.</param>
-        /// <returns></returns>
-        public static double IntersectionX(double y, double x1, double y1, double x2, double y2)
+        public static bool operator ==(Vector a, Vector b)
         {
-            return ((((y - y1)*(x2 - x1))/(y2 - y1)) + x1);
+            return a.Equals(b);
+        }
+        public static bool operator !=(Vector a, Vector b)
+        {
+            return !a.Equals(b);
+        }
+        
+
+        public static Vector operator +(Vector a, Vector b)
+        {
+            return new Vector(a.Xcomponent + b.Xcomponent, a.Ycomponent + b.Ycomponent);
+        }
+        
+        public static Vector operator -(Vector a, Vector b)
+        {
+            return new Vector(a.Xcomponent - b.Xcomponent, a.Ycomponent - b.Ycomponent);
+        }
+        
+
+        public static Vector operator *(Vector a, double b)
+        {
+            return new Vector(a.Xcomponent * b, a.Ycomponent * b);
         }
 
-        /// <summary>
-        /// X-coordinate of a horizontal line intersecting the line described by the points provided.
-        /// </summary>
-        /// <param name="y">Y-coordinate of the horizontal line.</param>
-        /// <param name="I">First point.</param>
-        /// <param name="J">Second point.</param>
-        /// <returns></returns>
-        public static double IntersectionX(double y, Point I, Point J)
+        public static Vector operator /(Vector a, double b)
         {
-            return IntersectionX(y, I.X, I.Y, J.X, J.Y);
+            return new Vector(a.Xcomponent / b, a.Ycomponent / b);
         }
+
+        
+        #endregion
     }
 }

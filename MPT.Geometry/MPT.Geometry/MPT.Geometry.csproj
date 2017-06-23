@@ -46,20 +46,43 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Area\Circle.cs" />
+    <Compile Include="Area\Ellipse.cs" />
+    <Compile Include="Area\Hexagon.cs" />
+    <Compile Include="Area\IRegularPolygon.cs" />
+    <Compile Include="Area\Parallelogram.cs" />
+    <Compile Include="Area\Quadrilateral.cs" />
+    <Compile Include="Area\RegularPolygon.cs" />
+    <Compile Include="Area\Trapezoid.cs" />
+    <Compile Include="Line\BSpline.cs" />
+    <Compile Include="Line\CatmullRomSpline.cs" />
+    <Compile Include="Line\ICurve.cs" />
+    <Compile Include="Area\IShape.cs" />
+    <Compile Include="Area\CircularSegment.cs" />
+    <Compile Include="Area\Polygon.cs" />
+    <Compile Include="Area\Rectangle.cs" />
+    <Compile Include="Area\CircularSector.cs" />
+    <Compile Include="Area\Square.cs" />
+    <Compile Include="Area\Triangle.cs" />
+    <Compile Include="Area\Wedge.cs" />
     <Compile Include="GeometryLibrary.cs" />
     <Compile Include="Line\ArcSegment.cs" />
-    <Compile Include="Line\BezierSegment.cs" />
+    <Compile Include="Line\BezierSpline.cs" />
+    <Compile Include="Line\IPathDivision.cs" />
     <Compile Include="Line\IPathSegment.cs" />
     <Compile Include="Line\IPathSegment3D.cs" />
+    <Compile Include="Line\IPathSegmentCollision.cs" />
+    <Compile Include="Line\IPolarCoordinates.cs" />
+    <Compile Include="Line\IPolyLine.cs" />
     <Compile Include="Line\LineSegment.cs" />
-    <Compile Include="Line\Vector.cs" />
-    <Compile Include="Line\Vector3D.cs" />
+    <Compile Include="Line\NURBS.cs" />
+    <Compile Include="Line\PathSegment.cs" />
+    <Compile Include="Line\PolyLine.cs" />
     <Compile Include="Point\Offset.cs" />
     <Compile Include="Point\OffSet3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Area\" />
     <Folder Include="Volume\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

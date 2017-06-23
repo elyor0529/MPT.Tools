@@ -1,7 +1,6 @@
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Enums\MPT.Enums\bin\Debug\MPT.Enums.dll
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Enums\MPT.Enums\bin\Debug\MPT.Enums.pdb
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Enums\MPT.Enums\bin\Debug\MPT.Enums.xml
-C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Enums\MPT.Enums\obj\Debug\MPT.Enums.vbprojResolveAssemblyReference.cache
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Enums\MPT.Enums\obj\Debug\MPT.Enums.Resources.resources
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Enums\MPT.Enums\obj\Debug\MPT.Enums.vbproj.GenerateResource.Cache
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Enums\MPT.Enums\obj\Debug\MPT.Enums.dll

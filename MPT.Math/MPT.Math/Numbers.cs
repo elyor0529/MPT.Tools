@@ -2,6 +2,8 @@
 
 using NMath = System.Math;
 
+// See if later implemending SIMD: https://msdn.microsoft.com/en-us/library/system.numerics(v=vs.111).aspx
+
 namespace MPT.Math
 {
     /// <summary>
@@ -15,6 +17,49 @@ namespace MPT.Math
         /// </summary>
         public const double ZeroTolerance = 1E-20;
 
+        /// <summary>
+        /// Represents the value of pi.
+        /// </summary>
+        public const double Pi = NMath.PI;
+
+        /// <summary>
+        /// Represents the value of pi times two.
+        /// </summary>
+        public const double TwoPi = 2 * NMath.PI;
+
+        /// <summary>
+        /// Represents the value of pi divided by two.
+        /// </summary>
+        public const double PiOver2 = NMath.PI / 2;
+
+        /// <summary>
+        /// Represents the value of pi divided by four.
+        /// </summary>
+        public const double PiOver4 = NMath.PI / 4;
+
+        /// <summary>
+        /// Represents the mathematical constant e.
+        /// </summary>
+        public const double E = NMath.E;
+
+        /// <summary>
+        /// Represents the log base ten of e.
+        /// </summary>
+        /// <returns>System.Double.</returns>
+        public static double Log10E() { return NMath.Log10(NMath.E); }
+
+        /// <summary>
+        /// Represents the log base two of e.
+        /// </summary>
+        /// <returns>System.Double.</returns>
+        public static double Log2E() { return NMath.Log(NMath.E, 2); }
+
+        /// <summary>
+        /// The golden ratio, also known as the divine proportion, golden mean, or golden section, is a number often encountered when taking the ratios of distances in simple geometric figures such as the pentagon, pentagram, decagon and dodecahedron. 
+        /// It is denoted phi and is approximately 1.618033988749...
+        /// </summary>
+        /// <returns></returns>
+        public static double GoldenRatio() { return 0.5 * (1 + NMath.Sqrt(5)); }
 
 
         /// <summary>
@@ -313,6 +358,55 @@ namespace MPT.Math
             }
             return NMath.Pow(value, power);
         }
+
+        /// <summary>
+        /// Returns the paired result of adding and subtracting the provided value from the base value.
+        /// </summary>
+        /// <param name="baseValue"></param>
+        /// <param name="plusMinusValue">Value to add and subtract from the base value.</param>
+        /// <returns></returns>
+        public static double[] PlusMinus(this double baseValue, double plusMinusValue)
+        {
+            return new[]
+            {
+                baseValue + plusMinusValue,
+                baseValue - plusMinusValue
+            };
+        }
+
+        /// <summary>
+        /// Returns the paired result of adding and subtracting the provided value from the base value.
+        /// </summary>
+        /// <param name="baseValue"></param>
+        /// <param name="plusMinusValue">Value to add and subtract from the base value.</param>
+        public static int[] PlusMinus(this int baseValue, int plusMinusValue)
+        {
+            return new[]
+            {
+                baseValue + plusMinusValue,
+                baseValue - plusMinusValue
+            };
+        }
+
+        /// <summary>
+        /// Restricts a value to be within a specified range.
+        /// </summary>
+        /// <param name="value">The value to clamp.</param>
+        /// <param name="min">The minimum value. 
+        /// If value is less than min, min will be returned.</param>
+        /// <param name="max">The maximum value. 
+        /// If value is greater than max, max will be returned.</param>
+        /// <returns>The clamped value.
+        /// If value &gt; max, max will be returned.
+        /// If value &lt; min, min will be returned.
+        /// If min ≤ value ≥ max, value will be returned.</returns>
+        public static double Clamp(double value, double min, double max)
+        {
+            if (value > max) { return max; }
+            if (value < min) { return min; }
+            return value;
+        }
+
     }
 }
 

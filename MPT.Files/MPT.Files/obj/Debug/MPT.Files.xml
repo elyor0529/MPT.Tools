@@ -1,0 +1,179 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MPT.Files
+</name>
+</assembly>
+<members>
+<member name="T:MPT.Files.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:MPT.Files.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:MPT.Files.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:MPT.Files.FileLibrary">
+ <summary>
+ Contains routines used for working with files, such as opening and closing files in general, and reading/writing text files.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.OpenFile(System.String,System.String,System.Boolean)">
+ <summary>
+ Opens a file of a given path.
+ </summary>
+ <param name="p_path">Path to the file to open.</param>
+ <param name="p_errorMessage">Error message to display if the file does not exist at the specified path</param>
+<param name="p_checkFileInUse">True: The file is first checked to see if it is in use. 
+ If so, the user can choose to retry or abort. 
+ False: No check is done.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.FileInUse(System.String)">
+ <summary>
+ Checks if a file is in use. Returns true/false status.
+ </summary>
+ <param name="p_path">Path to the file.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.FileInUseAction(System.String)">
+ <summary>
+ Checks if a file is in use and prompts the user if they want to check the file again. 
+ User can abort at any time, or try as long as they wish.
+ </summary>
+ <param name="p_path">Path to the file to check if it is in use.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.WaitUntilFileAvailable(System.String,System.Int32,System.Int32,System.Boolean)">
+ <summary>
+ Waits for file to become available. Optional parameters allow control over interval of time checking and number of checks.
+ </summary>
+ <param name="p_path">Path to the file.</param>
+ <param name="p_timeCheckInterval">Delay between retries, in milliseconds.</param>
+ <param name="p_attemptsLimit">Maximum number of attempts to make before failure.</param>
+ <param name="p_promptUser">True: The user will be prompted that the file is in use, and asked if access should be tried again.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.WriteTextFile(System.String,System.String,System.Boolean)">
+ <summary>
+ Writes a text file of the supplied name/path and containing the string content provided.
+ </summary>
+ <param name="p_filePath">Path, including filename, of the file to be written.</param>
+ <param name="p_content">Content to write to the file.</param>
+ <param name="p_deleteExisting">True: The any existing file at the same path will be deleted before writing a new file. 
+ False: The content will be appended to the existing file.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.ReadIniFile(System.String,System.Int32)">
+ <summary>
+ Reads the INI file to determine the text on the specified line.
+ </summary>
+ <param name="p_path">Path to the *.ini file to be read.</param>
+ <param name="p_readLine">Line to be read in the *.ini: 1 = Model destination directory.</param>
+ <returns>Text on the specified line.</returns>
+ <remarks>$ indicates new line, for parsing.</remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.WriteIniFile(System.String,System.Int32,System.String,System.Boolean@)">
+ <summary>
+ Writes a supplied value to a given line of an *.ini file of a given path. 
+ Other lines are preserved. 
+ If a line is greater than the contents of the file, no new value will be written.
+ $ in the file indicates new line, for parsing.
+ </summary>
+ <param name="p_path">Path to the directory containig the CSiTester.ini file to write to.</param>
+ <param name="p_readLine">Line to write the supplied value to: 1 = Model destination directory.</param>
+ <param name="p_writeValue">Value to write to the *.ini file.</param>
+ <param name="p_newIniCreated">Flag for the program to know if the ini file has been rewritten or changed.</param>
+ <remarks>$ indicates new line, for parsing.</remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.InitializeInstallIniFile(System.String,System.String,System.Boolean@)">
+ <summary>
+ Checks if .ini file exists, and if not, writes one with default parameters. 
+ This is needed for locating the XML files.
+ $ indicates new line, for parsing.
+ </summary>
+ <param name="p_path">Path to the initialization file. If not valid, a new file will be created in the path directory with default parameters.</param>
+ <param name="p_defaultDestination">Path to the default destination directory to be written to the file.</param>
+ <param name="p_newIniCreated">Flag for the program to know if the ini file has been rewritten or changed.</param>
+ <remarks>$ indicates new line, for parsing.</remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.ChangeInstallIniFile(System.String)">
+ <summary>
+ Changes .ini file parameter. 
+ If user creates a new regTest.xml under a different name, the .xml to be used is referenced here.
+ </summary>
+ <param name="p_regTestName"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.ProcessIsRunning(System.String)">
+ <summary>
+ Checks to see if a process is currently running.
+ </summary>
+ <param name="p_processName">Name of the process to check. It does not matter if ".exe" is included.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.ProcessIsResponding(System.String)">
+ <summary>
+ Checks to see if a process is responding.
+ </summary>
+ <param name="p_processName">Name of the process to check. It does not matter if ".exe" is included.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.FileLibrary.EndProcess(System.String)">
+ <summary>
+ Ends a process of a given name.
+ </summary>
+ <param name="p_processName">Name of the process to check. It does not matter if ".exe" is included.</param>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Files.BatchLibrary">
+ <summary>
+ Contains routines for writing, running, and removing batch files.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.BatchLibrary.DeleteFilesBatch(System.String,System.Collections.Generic.List{System.String},System.String)">
+ <summary>
+ Deletes all files relating to a supplied list of extensions using a batch file.
+ </summary>
+ <param name="p_directoryPath">Path to the directory containing the files to be deleted.</param>
+ <param name="p_fileExtensionList">List of the file extensions of which all files will be deleted.</param>
+ <param name="p_batchPath">Path to the batch file to write and run.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.BatchLibrary.WriteBatch(System.String,System.String,System.Boolean)">
+ <summary>
+ Appends the specified command line to a batch file. If no lines exist, this begins a new batch file.
+ </summary>
+ <param name="p_commandLine">Line to write to the batch file.</param>
+ <param name="p_batchPath">Path to the batch file.</param>
+ <param name="p_deleteExisting">True: If a filename already exists at the path specified, it will be deleted so that a new one is created.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Files.BatchLibrary.RunBatch(System.String,System.Boolean,System.Boolean,System.Boolean)">
+ <summary>
+ Runs batch file then deletes batch file if specified.
+ </summary>
+ <param name="p_pathBatch">Path to the batch file, including the file name</param>
+ <param name="p_deleteBatchFile">Specify whether to delete the batch file after run</param>
+ <param name="p_waitForExit">Wait until batch process has exit before deleting the batch file. (Currently does not seem to work).</param>
+ <param name="p_consoleIsNotVisible">True: Batch run will not be visible from a command console window.</param>
+ <remarks>Note: DO NOT use relative paths in batch files with this procedure. Use absolute paths.??? Maybe not necessary with this method</remarks>
+</member>
+</members>
+</doc>

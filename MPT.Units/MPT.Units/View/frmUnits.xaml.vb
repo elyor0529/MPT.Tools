@@ -4,6 +4,8 @@ Option Explicit On
 Imports MPT.Enums.EnumLibrary
 Imports MPT.Forms.cLibForms
 
+Imports MPT.Units.Core
+
 Class frmUnits
 
 #Region "Properties: Private"

@@ -6,145 +6,167 @@ MPT.String
 </name>
 </assembly>
 <members>
+<member name="T:MPT.String.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
 <member name="P:MPT.String.My.Resources.Resources.ResourceManager">
-	<summary>
+<summary>
   Returns the cached ResourceManager instance used by this class.
 </summary>
-</member><member name="P:MPT.String.My.Resources.Resources.Culture">
-	<summary>
+</member>
+<member name="P:MPT.String.My.Resources.Resources.Culture">
+<summary>
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
-</member><member name="T:MPT.String.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member><member name="F:MPT.String.eCapitalization.ALLCAPS">
-	<summary>
- Every character is capitalized.
- </summary>
-	<remarks></remarks>
-</member><member name="F:MPT.String.eCapitalization.AllLower">
-	<summary>
- Every character is lower-case.
- </summary>
-	<remarks></remarks>
-</member><member name="F:MPT.String.eCapitalization.Firstupper">
-	<summary>
- The first character of every word is capitalized, with all other characters as lower-case.
- </summary>
-	<remarks></remarks>
-</member><member name="T:MPT.String.eCapitalization">
-	<summary>
- Enumeration of how to return the capitalization sense of a string.
- </summary>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.ConvertYesNoUnknownEnum(System.String@)">
-	<summary>
- Takes the string value of a yes/no/unknown classification and converts it to an enumeration, or converts from an enumeration to a string.
- </summary>
-	<param name="yesNoUnknownString">Calculation operation as a string.</param>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.ConvertTrueYesNoUnknownString(System.Boolean)">
-	<summary>
- Converts a boolean to a descritpion of a YesNoUnknown enumeration.
- </summary>
-	<param name="p_value"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.ConvertTrueYesNoUnknownEnum(System.Boolean)">
-	<summary>
- Converts a boolean to a YesNoUnknown enumeration.
- </summary>
-	<param name="p_value"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.ConvertYesNoUnknownStringBoolean(System.String)">
-	<summary>
- Converts a YesNoUnkonwn enumeration description to the closes representation of a boolean. 'Unknown' = false.
- </summary>
-	<param name="p_value"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.ConvertYesNoUnknownBoolean(MPT.Enums.eYesNoUnknown)">
-	<summary>
- Converts a YesNoUnkonwn enumeration to the closes representation of a boolean. 'Unknown' = false.
- </summary>
-	<param name="p_value"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.ConvertYesTrueBoolean(System.String)">
-	<summary>
- Converts a yes/no string into a true/false boolean value. If input is not yes/no, function will return false.
- </summary>
-	<param name="p_yesNo">Parameter to convert. Capitalization does not matter.</param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.ConvertYesTrueString(System.Boolean,MPT.String.eCapitalization)">
-	<summary>
- Converts a true/false boolean into a yes/no string.
- </summary>
-	<param name="p_trueFalse">True/false boolean to convert.</param>
-	<param name="p_capitalization">Capitalization effect desired for returned string.</param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.CapitalizationSingleWord(System.String,MPT.String.eCapitalization)">
-	<summary>
- Converts a single word to the specified capitalization format.
- </summary>
-	<param name="p_word">Word to alter.</param>
-	<param name="p_capitalization">Capitalization pattern to use.</param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.ConvertTrueTrueBoolean(System.String)">
-	<summary>
- Converts a true/false string into a true/false boolean value. If input is not true/false, function will return false.
- </summary>
-	<param name="p_trueFalse">Parameter to convert. Capitalization does not matter.</param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.ConvertTrueTrueString(System.Boolean,MPT.String.eCapitalization)">
-	<summary>
- Converts a true/false boolean into a true/false string.
- </summary>
-	<param name="p_trueFalse">True/false boolean to convert.</param>
-	<param name="p_capitalization">Capitalization effect desired for returned string.</param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.myCInt(System.String)">
-	<summary>
- Converts a string to an integer if the string is numeric. Otherwise, returns 0.
- </summary>
-	<param name="p_stringConvert">String to convert.</param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.myCDbl(System.String)">
-	<summary>
- Converts a string to a double if the string is numeric. Otherwise, returns 0.
- </summary>
-	<param name="p_stringConvert">String to convert.</param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.myCDec(System.String)">
-	<summary>
- Converts a string to an decimal if the string is numeric. Otherwise, returns 0.
- </summary>
-	<param name="p_stringConvert">String to convert.</param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.String.ConversionLibrary.ParseTableName(System.String,System.Boolean)">
-	<summary>
- Returns the table name with or without brackets, depending on what is specified.
- </summary>
-	<param name="p_tableName">Table name to check.</param>
-	<param name="p_removeBrackets">If 'True', then any existing brackets will be removed. Otherwise, brackets will be added if they aren't already present.</param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="T:MPT.String.ConversionLibrary">
-	<summary>
+</member>
+<member name="T:MPT.String.ConversionLibrary">
+ <summary>
  Converts between a string value and another value, such as a boolean or enumeration.
  </summary>
-	<remarks></remarks>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.ConvertYesNoUnknownEnum(System.String)">
+ <summary>
+ Takes the string value of a yes/no/unknown classification and converts it to an enumeration, or converts from an enumeration to a string.
+ </summary>
+ <param name="yesNoUnknownString">Calculation operation as a string.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.ConvertTrueYesNoUnknownString(System.Boolean,MPT.String.eCapitalization)">
+ <summary>
+ Converts a boolean to a descritpion of a YesNoUnknown enumeration.
+ </summary>
+ <param name="value"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.ConvertTrueYesNoUnknownEnum(System.Boolean)">
+ <summary>
+ Converts a boolean to a YesNoUnknown enumeration.
+ </summary>
+ <param name="value"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.ConvertYesNoUnknownStringBoolean(System.String)">
+ <summary>
+ Converts a YesNoUnknown enumeration description to the closest representation of a boolean. 'Unknown' = false.
+ </summary>
+ <param name="value"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.ConvertYesNoUnknownBoolean(MPT.Enums.eYesNoUnknown)">
+ <summary>
+ Converts a YesNoUnkonwn enumeration to the closes representation of a boolean. 'Unknown' = false.
+ </summary>
+ <param name="value"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.ConvertYesTrueBoolean(System.String)">
+ <summary>
+ Converts a yes/no string into a true/false boolean value. If input is not yes/no, function will return false.
+ </summary>
+ <param name="yesNo">Parameter to convert. Capitalization does not matter.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.ConvertYesTrueString(System.Boolean,MPT.String.eCapitalization)">
+ <summary>
+ Converts a true/false boolean into a yes/no string.
+ </summary>
+ <param name="trueFalse">True/false boolean to convert.</param>
+ <param name="capitalization">Capitalization effect desired for returned string.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.CapitalizationSingleWord(System.String,MPT.String.eCapitalization)">
+ <summary>
+ Converts a single word to the specified capitalization format.
+ </summary>
+ <param name="word">Word to alter.</param>
+ <param name="capitalization">Capitalization pattern to use.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.ConvertTrueTrueBoolean(System.String)">
+ <summary>
+ Converts a true/false string into a true/false boolean value. If input is not true/false, function will return false.
+ </summary>
+ <param name="trueFalse">Parameter to convert. Capitalization does not matter.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.ConvertTrueTrueString(System.Boolean,MPT.String.eCapitalization)">
+ <summary>
+ Converts a true/false boolean into a true/false string.
+ </summary>
+ <param name="trueFalse">True/false boolean to convert.</param>
+ <param name="capitalization">Capitalization effect desired for returned string.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.myCInt(System.String)">
+ <summary>
+ Converts a string to an integer if the string is numeric. Otherwise, returns 0.
+ </summary>
+ <param name="stringConvert">String to convert.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.myCDbl(System.String)">
+ <summary>
+ Converts a string to a double if the string is numeric. Otherwise, returns 0.
+ </summary>
+ <param name="stringConvert">String to convert.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.myCDec(System.String)">
+ <summary>
+ Converts a string to an decimal if the string is numeric. Otherwise, returns 0.
+ </summary>
+ <param name="stringConvert">String to convert.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.String.ConversionLibrary.ParseTableName(System.String,System.Boolean)">
+ <summary>
+ Returns the table name with or without brackets, depending on what is specified.
+ </summary>
+ <param name="tableName">Table name to check.</param>
+ <param name="removeBrackets">True: Any existing brackets will be removed. 
+ False: Brackets will be added if they aren't already present.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.String.eCapitalization">
+ <summary>
+ Enumeration of how to return the capitalization sense of a string.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.String.eCapitalization.ALLCAPS">
+ <summary>
+ Every character is capitalized.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.String.eCapitalization.AllLower">
+ <summary>
+ Every character is lower-case.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.String.eCapitalization.Firstupper">
+ <summary>
+ The first character of every word is capitalized, with all other characters as lower-case.
+ </summary>
+ <remarks></remarks>
 </member>
 </members>
 </doc>

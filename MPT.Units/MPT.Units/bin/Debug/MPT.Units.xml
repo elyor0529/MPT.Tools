@@ -1,0 +1,293 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MPT.Units
+</name>
+</assembly>
+<members>
+<member name="T:MPT.Units.My.MyWpfExtension">
+ <summary>
+ Module used to define the properties that are available in the My Namespace for WPF
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.My.MyWpfExtension.Application">
+ <summary>
+ Returns the application object for the running application
+ </summary>
+</member>
+<member name="P:MPT.Units.My.MyWpfExtension.Computer">
+ <summary>
+ Returns information about the host computer.
+ </summary>
+</member>
+<member name="P:MPT.Units.My.MyWpfExtension.User">
+ <summary>
+ Returns information for the current user.  If you wish to run the application with the current 
+ Windows user credentials, call My.User.InitializeWithWindowsUser().
+ </summary>
+</member>
+<member name="P:MPT.Units.My.MyWpfExtension.Log">
+ <summary>
+ Returns the application log. The listeners can be configured by the application's configuration file.
+ </summary>
+</member>
+<member name="P:MPT.Units.My.MyWpfExtension.Windows">
+ <summary>
+ Returns the collection of Windows defined in the project.
+ </summary>
+</member>
+<member name="T:MPT.Units.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:MPT.Units.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:MPT.Units.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:MPT.Units.Application">
+<summary>
+Application
+</summary>
+</member>
+<member name="M:MPT.Units.Application.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="M:MPT.Units.Application.Main">
+<summary>
+Application Entry Point.
+</summary>
+</member>
+<member name="T:MPT.Units.frmUnits">
+<summary>
+frmUnits
+</summary>
+</member>
+<member name="F:MPT.Units.frmUnits._schemaListFull">
+ <summary>
+ List of all base units available for selection in the schema combo boxes.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.frmUnits._quickUnitTypes">
+ <summary>
+ A subset list of the most commonly used items from '_allUnitTypes', for which a predefined schema is available.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.frmUnits._allUnitTypes">
+ <summary>
+ List of all of the unit types for which a predefined schema is available.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.frmUnits._defaultUnitNames">
+ <summary>
+ Contains a list of units controller objects that each contain a single unit with the name to be used for its corresponding type.
+ This is typically filled from the [Program Control] table exported by a CSi program.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.frmUnits.unitsConvert">
+ <summary>
+ Dummy units object to use for testing units conversion.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.frmUnits.unitsController">
+ <summary>
+ Main units object that is manipulated by the form and whos results are displayed in the form.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.frmUnits.unitsControllerSave">
+ <summary>
+ Units controll that is passed in to the form
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.frmUnits.formCancel">
+ <summary>
+ Property that specifies whether or not the form was canceled out, or if new values were potentially saved.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.gridUnitsSchema_SizeChanged(System.Object,System.Windows.SizeChangedEventArgs)">
+ <summary>
+ Adjusts the length of the divisor elements as the width of the form changes.
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.btnSwapNumeratorDenominatorInPreview_Click(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ Tests the 'SwapNumeratorsDenominators' cUnits method. 
+ Note that this does not affect the assignments in the controls. 
+ Effects are only shown in the previews!
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.btnConvert_Click(System.Object,System.Windows.RoutedEventArgs)">
+ <summary>
+ Tests the 'Convert' cUnits method. 
+ Only works if a units object has been saved, which then appears in the 'Saved Preview' group box.
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.UpdateControls(System.Windows.Controls.ComboBox)">
+ <summary>
+ Updates the units object and properly resets controls to display the new object state.
+ </summary>
+ <param name="p_comboBox"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.UpdateUnitsLabelPreview">
+ <summary>
+ Updates the value displayed in the units label preview on the form.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.UpdateComboBoxLists(System.Boolean)">
+ <summary>
+ Updates the list of available schema items for selection in a given combo box within a given set of combo boxes. 
+ This is dependent on current selections within the set.
+ </summary>
+ <param name="p_isNumerator">If true, then the new lists to be generated based on state are for the numerator controls. Else, it is for the denominator controls.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.ClearComboBoxSelections">
+ <summary>
+ Clears the combo box selections of all schema combo boxes to ensure a fresh starting state.
+ Note that this also clears the units object.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.cmbBoxSchemaSelectionChanged(System.Windows.Controls.ComboBox@,System.Windows.Controls.TextBox@,System.Windows.Controls.ComboBox@,System.Int32,System.Boolean)">
+ <summary>
+ Operations to be done whenever a combo box for selection is changed for unit schema items.
+ </summary>
+ <param name="p_cmbBox">The combo box containing the unit schema selection.</param>
+ <param name="p_txtBxPower">The power text box corresponding to the schema combo box.</param>
+ <param name="p_cmbBoxValue">The combo box containing the unit value corresponding to the schema combo box.</param>
+ <param name="p_unitIndex">The index of the unit corresponding to the value selection.</param>
+ <param name="p_isNumerator">If true, the index is for the unit object in the numerator position.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.GetDefaultName(MPT.Units.Core.cUnit)">
+ <summary>
+ Return default unit name corresponding to the unit type of the unit provided.
+ </summary>
+ <param name="p_unit"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.txtBxPowerTextChanged(System.Windows.Controls.TextBox@,System.Windows.Controls.Label@,System.Int32,System.Boolean)">
+ <summary>
+ Operations to be done whenever the text is changed in a 'power' text box control within the schema controls.
+ </summary>
+ <param name="p_txtBxPower">The power text box that has been changed.</param>
+ <param name="p_label">Label control displaying the power in the values controls, which corresponds with the text box control.</param>
+ <param name="p_unitIndex">The index of the unit corresponding to the power change.</param>
+ <param name="p_isNumerator">>If true, the index is for the unit object in the numerator position.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.ValidatePowerText(System.String)">
+ <summary>
+ Validates that the string is only positive numeric, possibly with one a divisor.
+ </summary>
+ <param name="p_powerText">Text to check and modify. Invalid characters are removed.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.cmbBoxValueSelectionChanged(System.Windows.Controls.ComboBox@,System.Int32,System.Boolean)">
+ <summary>
+ Operations to be done whenever a combo box for selection is changed for unit values.
+ </summary>
+ <param name="p_cmbBox">The combo box containing the unit value selection.</param>
+ <param name="p_unitIndex">The index of the unit corresponding to the value selection.</param>
+ <param name="p_isNumerator">If true, the index is for the unit object in the numerator position.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.SetShorthandUnitsAvailable">
+ <summary>
+ Determines if there are shorthand units available to be selected and performs relevant form actions.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.LoadSchemaAndValues">
+ <summary>
+ Updates the controls for setting and displaying the schema and values of the units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.LoadSchemaAndValues(System.Int32,System.Boolean,System.Windows.Controls.ComboBox,System.Windows.Controls.TextBox,System.Windows.Controls.ComboBox,System.Windows.Controls.StackPanel,System.Windows.Controls.StackPanel,System.Boolean)">
+ <summary>
+ Loads the class properties relating to the schema and values into the appropriate control.
+ </summary>
+ <param name="p_unitIndex">Index of the unit object in the collection of unit objects in either the numerator or denominator groups.</param>
+ <param name="p_unitNumerator">If true, the unit is in the numerator group.</param>
+ <param name="p_comboBoxSchema">Combo box for the schema 'type' property.</param>
+ <param name="p_txtBxPower">Text box for the power of the unit 'type' or 'value'.</param>
+ <param name="p_comboBoxValue">Combo box for the schema 'value' property.</param>
+ <param name="p_stackPanelSchema">Stack panel containing the controls for setting the units schema.</param>
+ <param name="p_stackPanelValue">Stack panel containing the controls for setting the units values.</param>
+ <param name="p_collapseStackPanels">For if there is no corresponding object to load values from. 
+ If true, the stack panels containing the corresponding controls will be collapsed.
+ If false, the corresponding controls will remain visible but will be cleared.
+ </param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.GetUnitsCollection(System.Boolean)">
+ <summary>
+ Returns a collection of units objects based on the numerator designation.
+ </summary>
+ <param name="p_isNumerator">IF true, returns the numerator units. Else, returns the denominator units.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.ParseSchemaListToString">
+ <summary>
+ Returns the list of schema entries as a single single that is comma delimited.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.ParseValuesListToString">
+ <summary>
+ Returns the list of unit value entries as a single single that is comma delimited.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.frmUnits.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+</members>
+</doc>

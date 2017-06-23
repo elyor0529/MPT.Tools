@@ -1,0 +1,12 @@
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\bin\Debug\MPT.String.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\bin\Debug\MPT.String.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\bin\Debug\MPT.String.xml
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\bin\Debug\MPT.Enums.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\bin\Debug\MPT.Enums.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\bin\Debug\MPT.Enums.xml
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\obj\Debug\MPT.String.vbprojResolveAssemblyReference.cache
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\obj\Debug\MPT.String.Resources.resources
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\obj\Debug\MPT.String.vbproj.GenerateResource.Cache
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\obj\Debug\MPT.String.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\obj\Debug\MPT.String.xml
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.String\MPT.String\obj\Debug\MPT.String.pdb

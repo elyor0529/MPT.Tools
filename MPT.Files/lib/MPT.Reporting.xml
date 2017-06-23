@@ -6,371 +6,441 @@ MPT.Reporting
 </name>
 </assembly>
 <members>
-<member name="T:MPT.Reporting.eMessageType">
-	<summary>
- Type of message.
- </summary>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessageDetails.Action">
-	<summary>
- If a console or message box prompt is used to display the message data, the choice can be recorded here.
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessageDetails.ActionSet">
-	<summary>
- Decision combination types to display with the message.
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessageDetails.MessageType">
-	<summary>
- Type of message.
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessageDetails.ActionDefault">
-	<summary>
- Default action to take.
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="T:MPT.Reporting.eMessageActions">
-	<summary>
- Enumerations for common prompt actions. To be used for custom forms in the program.
- </summary>
-	<remarks></remarks>
-</member><member name="E:MPT.Reporting.IMessengerEvent.Messenger">
-	<summary>
- To be used for sending informative messages to the user.
- </summary>
-	<param name="messenger"></param>
-	<remarks></remarks>
-</member><member name="T:MPT.Reporting.IMessengerEvent">
-	<summary>
- Interface for objects that throw messenger events.
- </summary>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.LoggerEventArgs.Exception">
-	<summary>
- Exception object thrown.
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.LoggerEventArgs.Parameters">
-	<summary>
- Parameter name-value pairs associated with the calling method or operation within the method.
- </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.LoggerEventArgs.#ctor(System.String,System.Object[])">
-	<summary>
- Initializer or a message-type of log.
- </summary>
-	<param name="message">Message associated with the event.</param>
-	<param name="arg">List of variables to insert into the message.</param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.LoggerEventArgs.#ctor(System.Exception,System.Object[])">
-	<summary>
- Initializer for an exception/error type of log.
- </summary>
-	<param name="exception">Exception object thrown.</param>
-	<param name="arg">Parameter name-value pairs associated with the calling method or operation within the method.</param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.LoggerEventArgs.#ctor(System.Exception)">
-	<summary>
- Initializer for an exception/error type of log.
- </summary>
-	<param name="exception">Exception object thrown.</param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.LoggerEventArgs.storeParameters(System.Object[])">
-	<summary>
- Parses the arguments into parameter name/value pairs, accounting for the initial format of a local parameter object vs. property.
- </summary>
-	<param name="arg"></param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.LoggerEventArgs.storeParameter(System.String,System.Object)">
-	<summary>
- Stores the name/value of the parameter, considering whether or not the value is a list of values.
- </summary>
-	<param name="p_parameterName">Name of the parameter to store.</param>
-	<param name="p_parameterValue">Value object corresponding to the parameter name.</param>
-	<remarks></remarks>
-</member><member name="T:MPT.Reporting.LoggerEventArgs">
-	<summary>
- Event argument that relays a message, error, or thrown exception from the libraries to an external assembly.
- </summary>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.My.Resources.Resources.ResourceManager">
-	<summary>
+<member name="T:MPT.Reporting.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:MPT.Reporting.My.Resources.Resources.ResourceManager">
+<summary>
   Returns the cached ResourceManager instance used by this class.
 </summary>
-</member><member name="P:MPT.Reporting.My.Resources.Resources.Culture">
-	<summary>
+</member>
+<member name="P:MPT.Reporting.My.Resources.Resources.Culture">
+<summary>
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
-</member><member name="T:MPT.Reporting.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member><member name="T:MPT.Reporting.eMessageActionSets">
-	<summary>
- Sets of actions for common prompts. To be used for custom forms in the program.
- </summary>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerListener.SubscribeListener(MPT.Reporting.IMessengerEvent)">
-	<summary>
- Subscribes the listener to the provided object.
- </summary>
-	<param name="subscriberEvent"></param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerListener.UnsubscribeListener(MPT.Reporting.IMessengerEvent)">
-	<summary>
- Unsubscribes the listener from the provided object.
- </summary>
-	<param name="subscriberEvent"></param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerListener.ReportMessageToConsole(MPT.Reporting.MessengerEventArgs)">
-	<summary>
- Writes the messenger title and message to the console.
- </summary>
-	<param name="e"></param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerListener.GetTitle(MPT.Reporting.MessengerEventArgs)">
-	<summary>
- Assembles a title from the messenger object.
- </summary>
-	<param name="e"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerListener.GetMessage(MPT.Reporting.MessengerEventArgs)">
-	<summary>
- Assembles a message from the messenger object.
- </summary>
-	<param name="e"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="T:MPT.Reporting.MessengerListener">
-	<summary>
-	</summary>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerPromptListener.SubscribeListenerToMessageBox(MPT.Reporting.IMessengerEvent)">
-	<summary>
- Subscribes the listener to the provided object and displays a standard message box.
- </summary>
-	<param name="subscriberEvent"></param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerPromptListener.UnsubscribeListenerToMessageBox(MPT.Reporting.IMessengerEvent)">
-	<summary>
- Unsubscribes the listener from the provided object.
- </summary>
-	<param name="subscriberEvent"></param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerPromptListener.SubscribeLibraryListenerToMessageBox">
-	<summary>
- Subscribes shared classes to the listener and displays a standard message box.
- </summary>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerPromptListener.ReportMessageToMessageBox(MPT.Reporting.MessengerEventArgs)">
-	<summary>
- Writes the messenger title and message to the console.
- </summary>
-	<param name="e"></param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerPromptListener.ToMessageBox(MPT.Reporting.eMessageActionSets)">
-	<summary>
- Converts the message enum to the corresponding MessageBox enum.
- </summary>
-	<param name="value"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerPromptListener.ToMessageBox(MPT.Reporting.eMessageType)">
-	<summary>
- Converts the message enum to the corresponding MessageBox enum.
- </summary>
-	<param name="value"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.LoggerListener.SubscribeListener(MPT.Reporting.ILoggerEvent)">
-	<summary>
- Subscribes the listener to the provided object.
- </summary>
-	<param name="subscriberEvent"></param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.LoggerListener.UnsubscribeListener(MPT.Reporting.ILoggerEvent)">
-	<summary>
- Unsubscribes the listener from the provided object.
- </summary>
-	<param name="subscriberEvent"></param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.LoggerListener.ReportLogToConsole(MPT.Reporting.LoggerEventArgs)">
-	<summary>
- Writes the log title and message to the console.
- </summary>
-	<param name="e"></param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.LoggerListener.GetTitle(MPT.Reporting.LoggerEventArgs)">
-	<summary>
- Assembles a title from the logger object.
- </summary>
-	<param name="e"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.LoggerListener.GetMessage(MPT.Reporting.LoggerEventArgs)">
-	<summary>
- Assembles a message from the logger object.
- </summary>
-	<param name="e"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="T:MPT.Reporting.LoggerListener">
-	<summary>
- Sample base class for a listener object for the logger events.
- </summary>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessageData.Title">
-	<summary>
+</member>
+<member name="P:MPT.Reporting.MessageData.Title">
+ <summary>
  Title of the message.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessageData.Message">
-	<summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessageData.Message">
+ <summary>
  Message.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessageData.Footer">
-	<summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessageData.Footer">
+ <summary>
  Footer to the message.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessageData.PromptList">
-	<summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessageData.PromptList">
+ <summary>
  List content of the message.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="E:MPT.Reporting.ILoggerEvent.Log">
-	<summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessageDetails.Action">
+ <summary>
+ If a console or message box prompt is used to display the message data, the choice can be recorded here.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessageDetails.ActionSet">
+ <summary>
+ Decision combination types to display with the message.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessageDetails.MessageType">
+ <summary>
+ Type of message.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessageDetails.ActionDefault">
+ <summary>
+ Default action to take.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.RaiseToggleAction.StartAction(System.String)">
+ <summary>
+ Raises a messenger event indicating the start of a function.
+ </summary>
+</member>
+<member name="M:MPT.Reporting.RaiseToggleAction.EndAction(System.String)">
+ <summary>
+ Raises a messenger event indicating the end of a function
+ </summary>
+</member>
+<member name="T:MPT.Reporting.eMessageType">
+ <summary>
+ Type of message.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Reporting.eMessageActions">
+ <summary>
+ Enumerations for common prompt actions. To be used for custom forms in the program.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Reporting.eMessageActionSets">
+ <summary>
+ Sets of actions for common prompts. To be used for custom forms in the program.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Reporting.LoggerListener">
+ <summary>
+ Sample base class for a listener object for the logger events.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.LoggerListener.SubscribeListener(MPT.Reporting.ILoggerEvent)">
+ <summary>
+ Subscribes the listener to the provided object.
+ </summary>
+ <param name="subscriberEvent"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.LoggerListener.UnsubscribeListener(MPT.Reporting.ILoggerEvent)">
+ <summary>
+ Unsubscribes the listener from the provided object.
+ </summary>
+ <param name="subscriberEvent"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.LoggerListener.ReportLogToConsole(MPT.Reporting.LoggerEventArgs)">
+ <summary>
+ Writes the log title and message to the console.
+ </summary>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.LoggerListener.GetTitle(MPT.Reporting.LoggerEventArgs)">
+ <summary>
+ Assembles a title from the logger object.
+ </summary>
+ <param name="e"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.LoggerListener.GetMessage(MPT.Reporting.LoggerEventArgs)">
+ <summary>
+ Assembles a message from the logger object.
+ </summary>
+ <param name="e"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Reporting.MessengerListener">
+ <summary>
+ 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerListener.SubscribeListener(MPT.Reporting.IMessengerEvent)">
+ <summary>
+ Subscribes the listener to the provided object.
+ </summary>
+ <param name="subscriberEvent"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerListener.UnsubscribeListener(MPT.Reporting.IMessengerEvent)">
+ <summary>
+ Unsubscribes the listener from the provided object.
+ </summary>
+ <param name="subscriberEvent"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerListener.ReportMessageToConsole(MPT.Reporting.MessengerEventArgs)">
+ <summary>
+ Writes the messenger title and message to the console.
+ </summary>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerListener.GetTitle(MPT.Reporting.MessengerEventArgs)">
+ <summary>
+ Assembles a title from the messenger object.
+ </summary>
+ <param name="e"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerListener.GetMessage(MPT.Reporting.MessengerEventArgs)">
+ <summary>
+ Assembles a message from the messenger object.
+ </summary>
+ <param name="e"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Reporting.ILoggerEvent">
+ <summary>
+ Interface for objects that throw log events.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="E:MPT.Reporting.ILoggerEvent.Log">
+ <summary>
  To be used for sending error messages that are not meant for the user. 
  Captured events are likely to be sent to the console, log file, or only displayed to the user when debugging.
  A common case is when an exception is caught where no action is taken, or where an exception would normally be thrown to short-cicruit a method.
  </summary>
-	<param name="exception"></param>
-	<remarks></remarks>
-</member><member name="T:MPT.Reporting.ILoggerEvent">
-	<summary>
- Interface for objects that throw log events.
+ <param name="exception"></param>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Reporting.IMessengerEvent">
+ <summary>
+ Interface for objects that throw messenger events.
  </summary>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessengerEventArgs.Title">
-	<summary>
- Title of the message associated with the event.
+ <remarks></remarks>
+</member>
+<member name="E:MPT.Reporting.IMessengerEvent.Messenger">
+ <summary>
+ To be used for sending informative messages to the user.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessengerEventArgs.Message">
-	<summary>
- Message associated with the event.
+ <param name="messenger"></param>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Reporting.LoggerEventArgs">
+ <summary>
+ Event argument that relays a message, error, or thrown exception from the libraries to an external assembly.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessengerEventArgs.Footer">
-	<summary>
-	</summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessengerEventArgs.PromptList">
-	<summary>
-	</summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessengerEventArgs.Action">
-	<summary>
- If a console or message box prompt is used to display the message data, the choice can be recorded here.
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.LoggerEventArgs.Exception">
+ <summary>
+ Exception object thrown.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessengerEventArgs.ActionSet">
-	<summary>
- Decision combination types to display with the message.
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.LoggerEventArgs.Parameters">
+ <summary>
+ Parameter name-value pairs associated with the calling method or operation within the method.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessengerEventArgs.MessageType">
-	<summary>
- Type of message.
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.LoggerEventArgs.#ctor(System.String,System.Object[])">
+ <summary>
+ Initializer or a message-type of log.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessengerEventArgs.ActionDefault">
-	<summary>
- Default action to take.
+ <param name="message">Message associated with the event.</param>
+ <param name="arg">List of variables to insert into the message.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.LoggerEventArgs.#ctor(System.Exception,System.Object[])">
+ <summary>
+ Initializer for an exception/error type of log.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:MPT.Reporting.MessengerEventArgs.Handled">
-	<summary>
- True: The event has already been handled.
+ <param name="exception">Exception object thrown.</param>
+ <param name="arg">Parameter name-value pairs associated with the calling method or operation within the method.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.LoggerEventArgs.#ctor(System.Exception)">
+ <summary>
+ Initializer for an exception/error type of log.
  </summary>
-	<value></value>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerEventArgs.#ctor(System.String,System.Object[])">
-	<summary>
- Initializer.
+ <param name="exception">Exception object thrown.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.LoggerEventArgs.storeParameters(System.Object[])">
+ <summary>
+ Parses the arguments into parameter name/value pairs, accounting for the initial format of a local parameter object vs. property.
  </summary>
-	<param name="message">Message associated with the event.</param>
-	<param name="arg">List of variables to insert into the message.</param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerEventArgs.#ctor(System.String,System.String,System.Object[])">
-	<summary>
- Initializer.
+ <param name="arg"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.LoggerEventArgs.storeParameter(System.String,System.Object)">
+ <summary>
+ Stores the name/value of the parameter, considering whether or not the value is a list of values.
  </summary>
-	<param name="message">Message associated with the event.</param>
-	<param name="arg">List of variables to insert into the message.</param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerEventArgs.#ctor(MPT.Reporting.MessageDetails,System.String,System.Object[])">
-	<summary>
- Initializer.
- </summary>
-	<param name="message">Message associated with the event.</param>
-	<param name="arg">List of variables to insert into the message.</param>
-	<remarks></remarks>
-</member><member name="M:MPT.Reporting.MessengerEventArgs.#ctor(MPT.Reporting.MessageDetails,MPT.Reporting.MessageData,System.Object[])">
-	<summary>
- Initializer.
- </summary>
-	<param name="messageData"></param>
-	<param name="messageDetails"></param>
-	<param name="arg">List of variables to insert into the message.</param>
-	<remarks></remarks>
-</member><member name="T:MPT.Reporting.MessengerEventArgs">
-	<summary>
+ <param name="p_parameterName">Name of the parameter to store.</param>
+ <param name="p_parameterValue">Value object corresponding to the parameter name.</param>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Reporting.MessengerEventArgs">
+ <summary>
  Event argument that relays a message from the libraries to an external assembly.
  </summary>
-	<remarks></remarks>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessengerEventArgs.Title">
+ <summary>
+ Title of the message associated with the event.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessengerEventArgs.Message">
+ <summary>
+ Message associated with the event.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessengerEventArgs.Footer">
+ <summary>
+ 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessengerEventArgs.PromptList">
+ <summary>
+ 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessengerEventArgs.Action">
+ <summary>
+ If a console or message box prompt is used to display the message data, the choice can be recorded here.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessengerEventArgs.ActionSet">
+ <summary>
+ Decision combination types to display with the message.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessengerEventArgs.MessageType">
+ <summary>
+ Type of message.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessengerEventArgs.ActionDefault">
+ <summary>
+ Default action to take.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Reporting.MessengerEventArgs.Handled">
+ <summary>
+ True: The event has already been handled.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerEventArgs.#ctor(System.String,System.Object[])">
+ <summary>
+ Initializer.
+ </summary>
+ <param name="message">Message associated with the event.</param>
+ <param name="arg">List of variables to insert into the message.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerEventArgs.#ctor(System.String,System.String,System.Object[])">
+ <summary>
+ Initializer.
+ </summary>
+ <param name="message">Message associated with the event.</param>
+ <param name="arg">List of variables to insert into the message.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerEventArgs.#ctor(MPT.Reporting.MessageDetails,System.String,System.Object[])">
+ <summary>
+ Initializer.
+ </summary>
+ <param name="message">Message associated with the event.</param>
+ <param name="arg">List of variables to insert into the message.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerEventArgs.#ctor(MPT.Reporting.MessageDetails,MPT.Reporting.MessageData,System.Object[])">
+ <summary>
+ Initializer.
+ </summary>
+ <param name="messageData"></param>
+ <param name="messageDetails"></param>
+ <param name="arg">List of variables to insert into the message.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerPromptListener.SubscribeListenerToMessageBox(MPT.Reporting.IMessengerEvent)">
+ <summary>
+ Subscribes the listener to the provided object and displays a standard message box.
+ </summary>
+ <param name="subscriberEvent"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerPromptListener.UnsubscribeListenerToMessageBox(MPT.Reporting.IMessengerEvent)">
+ <summary>
+ Unsubscribes the listener from the provided object.
+ </summary>
+ <param name="subscriberEvent"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerPromptListener.SubscribeLibraryListenerToMessageBox">
+ <summary>
+ Subscribes shared classes to the listener and displays a standard message box.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerPromptListener.ReportMessageToMessageBox(MPT.Reporting.MessengerEventArgs)">
+ <summary>
+ Writes the messenger title and message to the console.
+ </summary>
+ <param name="e"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerPromptListener.ToMessageBox(MPT.Reporting.eMessageActionSets)">
+ <summary>
+ Converts the message enum to the corresponding MessageBox enum.
+ </summary>
+ <param name="value"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Reporting.MessengerPromptListener.ToMessageBox(MPT.Reporting.eMessageType)">
+ <summary>
+ Converts the message enum to the corresponding MessageBox enum.
+ </summary>
+ <param name="value"></param>
+ <returns></returns>
+ <remarks></remarks>
 </member>
 </members>
 </doc>

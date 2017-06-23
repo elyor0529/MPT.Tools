@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MPT.CSI.API</name>
+    </assembly>
+    <members>
+        <member name="T:MPT.CSI.API.Core.Support.CSiApiBase">
+            <summary>
+            Stores references to the basic, fundamental objects of the program for implementing a listener pattern.
+            </summary>
+        </member>
+    </members>
+</doc>

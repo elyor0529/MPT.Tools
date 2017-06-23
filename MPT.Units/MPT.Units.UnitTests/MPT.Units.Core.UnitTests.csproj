@@ -76,12 +76,11 @@
     <Compile Include="Components\UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MPT.Units\MPT.Units.vbproj">
-      <Project>{f333eb53-d5b8-400c-9686-25e07e7e1f96}</Project>
-      <Name>MPT.Units</Name>
+    <ProjectReference Include="..\MPT.Units.Core\MPT.Units.Core.vbproj">
+      <Project>{b80d29b6-6d35-4dd6-a811-712e613cd02f}</Project>
+      <Name>MPT.Units.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

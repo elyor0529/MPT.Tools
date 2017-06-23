@@ -112,26 +112,6 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\cValue.vb" />
-    <Compile Include="Model\eUnitType.vb" />
-    <Compile Include="Model\SymbolicParser\cSymbolicBlock.vb" />
-    <Compile Include="Model\SymbolicParser\cSymbolicBlockPower.vb" />
-    <Compile Include="Model\SymbolicParser\cSymbolicParser.vb" />
-    <Compile Include="Model\Components\Base\cUnitLength.vb" />
-    <Compile Include="Model\Components\Base\cUnitMass.vb" />
-    <Compile Include="Model\Components\Base\cUnitRotation.vb" />
-    <Compile Include="Model\Components\Base\cUnitTemperature.vb" />
-    <Compile Include="Model\Components\Base\cUnitTime.vb" />
-    <Compile Include="Model\Components\cUnit.vb" />
-    <Compile Include="Model\Components\cUnits.vb" />
-    <Compile Include="Model\Components\cUnitsController.vb" />
-    <Compile Include="Model\Components\Derived\cUnitForce.vb" />
-    <Compile Include="Model\Components\Shorthand\cUnitForceLineDistribution.vb" />
-    <Compile Include="Model\Components\Shorthand\cUnitPower.vb" />
-    <Compile Include="Model\Components\Shorthand\cUnitPressureStress.vb" />
-    <Compile Include="Model\Components\Shorthand\cUnitSpeed.vb" />
-    <Compile Include="Model\Components\Shorthand\cUnitSpeedAngular.vb" />
-    <Compile Include="Model\Components\Shorthand\cUnitWork.vb" />
     <Compile Include="View\frmUnits.xaml.vb">
       <DependentUpon>frmUnits.xaml</DependentUpon>
     </Compile>
@@ -185,6 +165,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MPT.Units.Core\MPT.Units.Core.vbproj">
+      <Project>{b80d29b6-6d35-4dd6-a811-712e613cd02f}</Project>
+      <Name>MPT.Units.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

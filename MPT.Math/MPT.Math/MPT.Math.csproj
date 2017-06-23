@@ -44,9 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algebra.cs" />
+    <Compile Include="Coordinates\Angle.cs" />
+    <Compile Include="Coordinates\BarycentricCoordinate.cs" />
+    <Compile Include="Coordinates\CartesianCoordinate.cs" />
+    <Compile Include="Coordinates\PolarCoordinate.cs" />
+    <Compile Include="Coordinates\TrilinearCoordinate.cs" />
+    <Compile Include="Matrix.cs" />
     <Compile Include="Numbers.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vector.cs" />
+    <Compile Include="Vector3D.cs" />
+    <Compile Include="VectorLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algebra\" />

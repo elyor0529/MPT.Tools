@@ -1,0 +1,2091 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MPT.Units.Core
+</name>
+</assembly>
+<members>
+<member name="T:MPT.Units.Core.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:MPT.Units.Core.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:MPT.Units.Core.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:MPT.Units.Core.cUnitLength">
+ <summary>
+ Base unit of the type 'length'. 
+ Provides a list of unit names allowed and performs unit conversions.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitLength.eUnit">
+ <summary>
+ List of the unit names available for this unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitLength.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitLength.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitLength.unitsList">
+ <summary>
+  List of mass units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitLength.SetToDefault">
+ <summary>
+ Sets the unit type back to the default unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitLength.Convert(System.Double,MPT.Units.Core.cUnitLength.eUnit,MPT.Units.Core.cUnitLength.eUnit)">
+ <summary>
+ Converts from one unit to another and returns the conversion factor.
+ </summary>
+ <param name="p_value">Original value associated with the unit. 
+ Use '1' if solely obtaining the conversion factor between units. 
+ The result is what to multiply the 'value' by to perform the conversion.</param>
+ <param name="p_unit">Unit type to convert from.</param>
+ <param name="p_unitResult">Unit type to convert to.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitLength.ConvertToBase(System.Double,MPT.Units.Core.cUnitLength.eUnit)">
+ <summary>
+ Converts the provided unit to the default unit type and returns the value for the conversion, which is multiplied by the supplied value.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as '1'.</param>
+ <param name="p_unit">Unit to convert to the default unit type.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitLength.ConvertFromBase(System.Double,MPT.Units.Core.cUnitLength.eUnit)">
+ <summary>
+ Converts the provided unit from the default unit type to the specified unit type and returns the value for the conversion, which supplied value is divided by.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as "1" if it is not passed along from a prior conversion method.</param>
+ <param name="p_unitTarget">Unit object to which the conversion is to take place.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitMass">
+ <summary>
+ Base unit of the type 'mass'.
+ Provides a list of unit names allowed and performs unit conversions.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitMass.eUnit">
+ <summary>
+ List of the unit names available for this unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitMass.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitMass.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitMass.unitsList">
+ <summary>
+  List of mass units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitMass.SetToDefault">
+ <summary>
+ Sets the unit type back to the default unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitMass.Convert(System.Double,MPT.Units.Core.cUnitMass.eUnit,MPT.Units.Core.cUnitMass.eUnit)">
+ <summary>
+ Converts from one unit to another and returns the conversion factor.
+ </summary>
+ <param name="p_value">Original value associated with the unit. 
+ Use '1' if solely obtaining the conversion factor between units. 
+ The result is what to multiply the 'value' by to perform the conversion.</param>
+ <param name="p_unit">Unit type to convert from.</param>
+ <param name="p_unitResult">Unit type to convert to.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitMass.ConvertToBase(System.Double,MPT.Units.Core.cUnitMass.eUnit)">
+ <summary>
+ Converts the provided unit to the default unit type and returns the value for the conversion, which is multiplied by the supplied value.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as '1'.</param>
+ <param name="p_unit">Unit to convert to the default unit type.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitMass.ConvertFromBase(System.Double,MPT.Units.Core.cUnitMass.eUnit)">
+ <summary>
+ Converts the provided unit from the default unit type to the specified unit type and returns the value for the conversion, which supplied value is divided by.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as "1" if it is not passed along from a prior conversion method.</param>
+ <param name="p_unitTarget">Unit object to which the conversion is to take place.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitRotation">
+ <summary>
+ Base unit of the type 'rotation'.
+ Provides a list of unit names allowed and performs unit conversions.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitRotation.eUnit">
+ <summary>
+ List of the unit names available for this unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitRotation.eUnit.kiloCycle">
+ <summary>
+ Used for kHZ derived unit.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitRotation.eUnit.megaCycle">
+ <summary>
+ Used for MHZ derived unit.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitRotation.eUnit.gigaCycle">
+ <summary>
+ Used for GHZ derived unit.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitRotation.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitRotation.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitRotation.unitsList">
+ <summary>
+  List of rotation units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitRotation.SetToDefault">
+ <summary>
+ Sets the unit type back to the default unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitRotation.Convert(System.Double,MPT.Units.Core.cUnitRotation.eUnit,MPT.Units.Core.cUnitRotation.eUnit)">
+ <summary>
+ Converts from one unit to another and returns the conversion factor.
+ </summary>
+ <param name="p_value">Original value associated with the unit. 
+ Use '1' if solely obtaining the conversion factor between units. 
+ The result is what to multiply the 'value' by to perform the conversion.</param>
+ <param name="p_unit">Unit type to convert from.</param>
+ <param name="p_unitResult">Unit type to convert to.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitRotation.ConvertToBase(System.Double,MPT.Units.Core.cUnitRotation.eUnit)">
+ <summary>
+ Converts the provided unit to the default unit type and returns the value for the conversion, which is multiplied by the supplied value.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as '1'.</param>
+ <param name="p_unit">Unit to convert to the default unit type.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitRotation.ConvertFromBase(System.Double,MPT.Units.Core.cUnitRotation.eUnit)">
+ <summary>
+ Converts the provided unit from the default unit type to the specified unit type and returns the value for the conversion, which supplied value is divided by.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as "1" if it is not passed along from a prior conversion method.</param>
+ <param name="p_unitTarget">Unit object to which the conversion is to take place.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitTemperature">
+ <summary>
+ Base unit of the type 'temperature'.
+ Provides a list of unit names allowed and performs unit conversions.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitTemperature.eUnit">
+ <summary>
+ List of the unit names available for this unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitTemperature.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitTemperature.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitTemperature.unitsList">
+ <summary>
+  List of temperature units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitTemperature.SetToDefault">
+ <summary>
+ Sets the unit type back to the default unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitTemperature.Convert(System.Double,MPT.Units.Core.cUnitTemperature.eUnit,MPT.Units.Core.cUnitTemperature.eUnit)">
+ <summary>
+ Converts from one unit to another and returns the conversion factor.
+ </summary>
+ <param name="p_value">Original value associated with the unit. 
+ Use '1' if solely obtaining the conversion factor between units. 
+ The result is what to multiply the 'value' by to perform the conversion.</param>
+ <param name="p_unit">Unit type to convert from.</param>
+ <param name="p_unitResult">Unit type to convert to.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitTemperature.ConvertToBase(System.Double,MPT.Units.Core.cUnitTemperature.eUnit)">
+ <summary>
+ Converts the provided unit to the default unit type and returns the value for the conversion, which is multiplied by the supplied value.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as '1'.</param>
+ <param name="p_unit">Unit to convert to the default unit type.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitTemperature.ConvertFromBase(System.Double,MPT.Units.Core.cUnitTemperature.eUnit)">
+ <summary>
+ Converts the provided unit from the default unit type to the specified unit type and returns the value for the conversion, which supplied value is divided by.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as "1" if it is not passed along from a prior conversion method.</param>
+ <param name="p_unitTarget">Unit object to which the conversion is to take place.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitTime">
+ <summary>
+ Base unit of the type 'time'.
+ Provides a list of unit names allowed and performs unit conversions.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitTime.eUnit">
+ <summary>
+ List of the unit names available for this unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitTime._DAY_TO_SEC">
+ <summary>
+ Day is taken as 24 hours.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitTime._WEEK_TO_SEC">
+ <summary>
+ Week is taken as 7 days of 24 hours.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitTime._MONTH_TO_SEC">
+ <summary>
+ The month is a unit of time, used with calendars, which is approximately as long as some natural period related to the motion of the Moon (i.e. "Moonth"). 
+ The mean month length of the Gregorian calendar is 30.436875 days.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitTime._YEAR_TO_SEC">
+ <summary>
+ Gregorian calendar year for one revolution of the earth around the sun.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitTime.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitTime.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitTime.unitsList">
+ <summary>
+  List of time units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitTime.SetToDefault">
+ <summary>
+ Sets the unit type back to the default unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitTime.Convert(System.Double,MPT.Units.Core.cUnitTime.eUnit,MPT.Units.Core.cUnitTime.eUnit)">
+ <summary>
+ Converts from one unit to another and returns the conversion factor.
+ </summary>
+ <param name="p_value">Original value associated with the unit. 
+ Use '1' if solely obtaining the conversion factor between units. 
+ The result is what to multiply the 'value' by to perform the conversion.</param>
+ <param name="p_unit">Unit type to convert from.</param>
+ <param name="p_unitResult">Unit type to convert to.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitTime.ConvertToBase(System.Double,MPT.Units.Core.cUnitTime.eUnit)">
+ <summary>
+ Converts the provided unit to the default unit type and returns the value for the conversion, which is multiplied by the supplied value.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as '1'.</param>
+ <param name="p_unit">Unit to convert to the default unit type.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitTime.ConvertFromBase(System.Double,MPT.Units.Core.cUnitTime.eUnit)">
+ <summary>
+ Converts the provided unit from the default unit type to the specified unit type and returns the value for the conversion, which supplied value is divided by.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as "1" if it is not passed along from a prior conversion method.</param>
+ <param name="p_unitTarget">Unit object to which the conversion is to take place.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnit">
+ <summary>
+ Basic unit class that includes the type, name, power, and numerator/denominator position.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnit.type">
+ <summary>
+ Type of unit based on the allowed enumerations. 
+ This limits what 'unit' can be, as well as other class behavior.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnit.numerator">
+ <summary>
+ If true, then the unit is in the numerator position. If false, the unit is in the denominator position.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnit.name">
+ <summary>
+ Specified unit name, such as 'in', 'ft', or 'm' for the 'length' type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnit.power">
+ <summary>
+ The power that a unit is multiplied by, so long as it is greater than 0. e.g. 1/2, 2, etc.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnit.unitsList">
+ <summary>
+List of units available for selection based on the unit type selected.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.Equals(System.Object)">
+ <summary>
+ Returns 'True' if the object provided perfectly matches the existing object.
+ </summary>
+ <param name="p_object">External object to check for equality.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.GetUnitsList(MPT.Units.Core.eUnitType)">
+ <summary>
+ Returns the list of units allowed based on the specified unit type.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+ <param name="p_type">Unit type for which a list is returned.</param>
+</member>
+<member name="M:MPT.Units.Core.cUnit.GetUnitLabel(System.Boolean,System.Boolean,System.Boolean)">
+ <summary>
+ Returns the unit cast as a label string (e.g. 1/length^2).
+ </summary>
+ <param name="p_parseSchema">If true, then the schema form is returned (e.g. length). Else, the name is returned (e.g. in) (default).</param>
+ <param name="p_withPowers">If true (default), then the unit names also have the power listed. 
+ Otherwise, only the list of units is returned.</param>
+ <param name="p_asList">If true, the label is listing out each component separately, so denominators are each written as '1/b'.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.SetUnitName(System.String)">
+ <summary>
+ Sets the name of the unit.
+ If the name is a common variation of the name that should be used, the name is converted.
+ </summary>
+ <param name="p_name">Unit name to assign.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.SetUnitType">
+ <summary>
+ If the unit type is not already set for the class, an attempt is made to set the unit type based on the current unit string.
+ The resulting value is also returned.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.MultiplyUnitPowers(System.String,System.String)">
+ <summary>
+ Returns a string of the combined powers when their bases are multiplied. 
+ If "/" is used for non-integers in both powers, this format is preserved if both the numerator &amp; denominator are integers. 
+ Otherwise, the returned value will either be an integer or decimal.
+ </summary>
+ <param name="p_existingPower">Power of the current unit. If not specified then it is taken as the class' current power.</param>
+ <param name="p_multipliedPower">Power of the unit to combine with the current unit through multiplication.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.DivideUnitPowers(System.String,System.String)">
+ <summary>
+ Returns a string of the combined powers when their bases are divided. 
+ If "/" is used for non-integers in both powers, this format is preserved if both the numerator &amp; denominator are integers. 
+ Otherwise, the returned value will either be an integer or decimal.
+ </summary>
+ <param name="p_numeratorPower">Power of the current unit. If not specified then it is taken as the class' current power.</param>
+ <param name="p_denominatorPower">Power of the unit to combine with the current unit through division.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.Convert(MPT.Units.Core.cUnit,MPT.Units.Core.cUnit)">
+ <summary>
+ Returns the conversion factor of changing from one unit to another.
+ </summary>
+ <param name="p_unitToConvertFrom">Unit object to convert from.</param>
+ <param name="p_unitToConvertTo">Unit object to convert to.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.Convert(System.String,MPT.Units.Core.cUnit)">
+ <summary>
+ Returns the conversion factor of changing from one unit to another.
+ </summary>
+ <param name="p_unitToConvertFrom">Name of the unit to convert from. Must be present in the class list of allowed units.</param>
+ <param name="p_unitToConvertTo">Unit object to convert to.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.Convert(System.String,System.String)">
+ <summary>
+ Returns the conversion factor of changing from one unit to another.
+ </summary>
+ <param name="p_unitToConvertFrom">Name of the unit to convert from. Must be present in the class list of allowed units.</param>
+ <param name="p_unitToConvertTo">Name of the unit to convert to. Must be present in the class list of allowed units.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.SetUnitsList">
+ <summary>
+ Sets the list of available units to set for 'unit' based on the type selected.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.SetUnitsListAll">
+ <summary>
+ Returns a list of all allowed units for all unit types.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.UnitMatch(System.String)">
+ <summary>
+ Unit shorthand name matches the currently recorded name, and considering special cases.
+ </summary>
+ <param name="p_unitName">Shorthand unit name to check.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.UnitMatchIsSIWithM(System.String,System.String)">
+ <summary>
+ Unit shorthand name matches the currently recorded name considering the following:
+ Cap sensitivity is important for SI units of milli vs. mega, e.g. mN vs. MN.
+ Otherwise, cap-insensitive comparison is intentional, as programs are not consistent on capitalization of units.
+ </summary>
+ <param name="p_unitName">Shorthand unit name to check.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.UnitMatchIsInch(System.String,System.String)">
+ <summary>
+ Unit shorthand name matches the currently recorded name considering the following:
+ Since "in" is often a reserved word, this may often come in the form of "inches".
+ </summary>
+ <param name="p_unitName">Shorthand unit name to check.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnit.UnitMatchDefault(System.String,System.String)">
+ <summary>
+ Unit shorthand name matches the currently recorded name.
+ </summary>
+ <param name="p_unitName">Shorthand unit name to check.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnits">
+ <summary>
+ Aggregate object of unit objects, which defines the schema of composite units and possibly contains the values used in the schema.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnits._schemaComponents">
+ <summary>
+ List of all of the schema components in the units object.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnits.unitsNumerator">
+ <summary>
+ List of unit objects that are to be placed in the numerator position.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnits.unitsDenominator">
+ <summary>
+ List of unit objects that are to be placed in the denominator position.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnits.unitsAll">
+ <summary>
+ List of all unit objects, both numerators and deniminators.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnits.shorthandLabel">
+ <summary>
+ Optional property. Label for the shorthand term to refer to for the unit schema &amp; value combination. 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.Equals(System.Object)">
+ <summary>
+ Returns 'True' if the object provided perfectly matches the existing object.
+ </summary>
+ <param name="p_object">External object to check for equality.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.AddUnit(MPT.Units.Core.cUnit,System.Int32)">
+ <summary>
+ Adds the unit object provided to the units object.
+ </summary>
+ <param name="p_unit">Unit object to add.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.ReplaceUnitByType(MPT.Units.Core.cUnit)">
+ <summary>
+ Updates each unit of a matching type to have the same unit name as the provided unit object.
+ </summary>
+ <param name="p_unitNew">New unit name to replace all matching types by.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.RemoveUnit(MPT.Units.Core.cUnit)">
+ <summary>
+ Removes the specified unit object from the units object.
+ </summary>
+ <param name="p_unit">Unit object to remove.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.RemoveUnit(System.Int32,System.Boolean)">
+ <summary>
+ Removes the unit object specified by position from the units object.
+ </summary>
+ <param name="p_index">The index within the numerator or denominator set from which to remove a unit.</param>
+ <param name="p_isNumerator">If true, then the unit will be removed from the numerator set, if it exists.
+ Else, the unit will be removed from the denominator set if it exists.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.CombineUnits(MPT.Units.Core.cUnits,System.Boolean,System.Boolean,System.Collections.Generic.List{System.String})">
+ <summary>
+ Combines two units objects into one units object as if they have been multiplied/divided together.
+ A resulting conversion factor is returned.
+ </summary>
+ <param name="p_units">Units object to combine with the current units object.</param>
+ <param name="p_divideUnits">If true, then the provided set of units will be inverted before being multiplied by the current units.
+ Else, the two sets of units will be assumed multiplied together.</param>
+ <param name="p_simplifyUnits">If true, the resulting combined units will be simplified between numerator/denominator, and also between different units of the same type if a base list is provided.</param>
+ <param name="p_simplifiedUnitsList">If provided, the list allows simplification of different units of the same type.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.ParseStringToUnits(System.String,System.Boolean)">
+ <summary>
+ Parses a string into a units object composed of unit objects.
+ </summary>
+ <param name="p_unitsString">String to parse into a composite units object.</param>
+ <param name="p_addToExisting">If 'true', then the parsed string objects will be added to the existing class state. 
+ The default 'false' means that the class state will be overwritten.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.GetSchemaLabel">
+ <summary>
+ Returns a string of the units schema with the unit types used.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.GetSchemaList">
+ <summary>
+ Returns a list of all schema elements used, including powers.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.SchemasMatch(MPT.Units.Core.cUnits)">
+ <summary>
+ Determines if a set of units matches the schema of the current object.
+ </summary>
+ <param name="p_unitsCompare">Units object to compare to the current object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.GetUnitsLabel">
+ <summary>
+ Returns a string of the composite units label with the unit names used.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.GetUnitsList(System.Boolean)">
+ <summary>
+ Returns the list of all base units used in the composite unit.
+ </summary>
+ <returns></returns>
+ <param name="p_withPowers">If true, then the unit names also have the power listed. 
+ Otherwise, only the list of units is returned.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.SwapNumeratorsDenominators">
+ <summary>
+ Swaps the numerator and denominator unit sets.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.Convert(MPT.Units.Core.cUnits)">
+ <summary>
+ Returns the conversion factor to convert the supplied units object to the current units object.
+ </summary>
+ <param name="p_unitsConvert">Units object that is to be converted to the current units object.
+ It is assumed that the schemas of the two units objects match. If they don't, 0 is returned.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.AreUnitsSet">
+ <summary>
+ Returns true if all units have a unit name set.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.IsSchemaSet">
+ <summary>
+ Returns true if all units have a type set for the schema.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.AddUnitsNumerator(MPT.Units.Core.cUnit,System.Int32)">
+ <summary>
+ Adds a unit to the collection of numerator unit objects.
+ </summary>
+ <param name="p_unit">Unit object to add.</param>
+ <param name="p_index">If specified, the unit is inserted at this index in the list if it is a valid index.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.RemoveUnitsNumerator(MPT.Units.Core.cUnit)">
+ <summary>
+ Removes the specified unit object from the units numerator collection.
+ </summary>
+ <param name="p_unit">Unit object to remove.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.RemoveUnitsNumerator(MPT.Units.Core.eUnitType)">
+ <summary>
+ Removes a unit object from the numerator collection based on the provided unit type.
+ </summary>
+ <param name="p_unitType">Type of unit to remove from the list.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.RemoveUnitsNumerator(System.Int32)">
+ <summary>
+ Removes a unit object from the numerator collection based on the provided index, if valid.
+ </summary>
+ <param name="p_index"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.AddUnitsDenominator(MPT.Units.Core.cUnit,System.Int32)">
+ <summary>
+ Adds a unit to the collection of denominator unit objects.
+ </summary>
+ <param name="p_unit">Unit object to add.</param>
+ <param name="p_index">If specified, the unit is inserted at this index in the list if it is a valid index.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.RemoveUnitsDenominator(MPT.Units.Core.cUnit)">
+ <summary>
+ Removes the specified unit object from the units denominator collection.
+ </summary>
+ <param name="p_unit">Unit object to remove.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.RemoveUnitsDenominator(MPT.Units.Core.eUnitType)">
+ <summary>
+ Removes a unit object from the denominator collection based on the provided unit type.
+ </summary>
+ <param name="p_unitType">Type of unit to remove from the list.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.RemoveUnitsDenominator(System.Int32)">
+ <summary>
+ Removes a unit object from the denominator collection based on the provided index, if valid.
+ </summary>
+ <param name="p_index"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.IsMatchingUnit(MPT.Units.Core.cUnit,MPT.Units.Core.cUnit)">
+ <summary>
+ Determines if the two unit objects describe the same unit in terms of overall placement &amp; quality.
+ </summary>
+ <param name="p_unitBase">First unit to compare.</param>
+ <param name="p_unitCompare">Second unit to compare.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.ParseUnitsString(System.Collections.Generic.List{MPT.Units.Core.cUnit},System.Boolean)">
+ <summary>
+ Returns a string representing the units object, showing either the schema structure or the units as written with unit names.
+ </summary>
+ <param name="p_unitsList">List of </param>
+ <param name="p_parseSchema">If true, then the parsing will be only be done based on the schema of the provided unit objects. 
+ If false, the parsing will be on the unit names of the provided unit objects.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.CombineNumeratorAndDenominator(System.String,System.String)">
+ <summary>
+ Takes the provided numerator &amp; denominator strings and depending on content, combines them as 'a', 'a/b', or '1/b'.
+ </summary>
+ <param name="p_numeratorString">String representing the numerator components of the units object.</param>
+ <param name="p_denominatorString">String representing the denominator components of the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.CombineUnitsSet(System.Collections.Generic.List{MPT.Units.Core.cUnit},System.Collections.Generic.List{MPT.Units.Core.cUnit}@,System.Collections.Generic.List{System.String})">
+ <summary>
+ For units in the same set (e.g. numerator, or denominator), combines the units by either adding the unit (if new) or adjusting the exponents (if the unit already exists).
+ </summary>
+ <param name="p_unitsAdded">Set of units to add.</param>
+ <param name="p_unitsExisting">Existing set of units to add to.</param>
+ <param name="p_unitsBase">If specified, these are the units to simplify any mismatched units of matching types to.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.SimplifyUnitMultiply(MPT.Units.Core.cUnit@,MPT.Units.Core.cUnit@)">
+ <summary>
+ Simplifies the two matching units by combining powers.
+ </summary>
+ <param name="p_existingUnit">Current unit.</param>
+ <param name="p_addedUnit">Unit being added.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.SimplifyNumeratorsDenominators(System.Collections.Generic.List{System.String})">
+ <summary>
+ Checks the units in the numerator and denominator sets. 
+ If the unit exists in both, it is simplified based on powers such that it only exists in one set.
+ Unless the specific unit is specified, if the units are of the same type but different unit, no simplification will be perfomed for a given unit.
+ </summary>
+ <param name="p_unitsBase">If specified, these are the units to simplify any mismatched units of matching types to.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.SimplifyUnitNumeratorDenominator(MPT.Units.Core.cUnit@,MPT.Units.Core.cUnit@)">
+ <summary>
+ Simplifies the two matching units by combining powers and swapping numerator/denominator classification if necessary.
+ </summary>
+ <param name="p_numeratorUnit">Unit in the numerator position.</param>
+ <param name="p_denominatorUnit">Unit in the denominator position.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.NumeratorMatch(MPT.Units.Core.cUnit)">
+ <summary>
+ Determines if the provided unit matches any of the numerator entities of the schema.
+ </summary>
+ <param name="p_unitCompare">Unit object to compare to the current schema.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.DenominatorMatch(MPT.Units.Core.cUnit)">
+ <summary>
+ Determines if the provided unit matches any of the denominator entities of the schema.
+ </summary>
+ <param name="p_unitCompare">Unit object to compare to the current schema.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.GetUnitByMatchingTypeNumerator(MPT.Units.Core.cUnit)">
+ <summary>
+ Returns the unit object within the current collection that has the same type as the provided unit in the numerator position.
+ Returns Nothing if no match is found.
+ </summary>
+ <param name="p_unit">Unit object to use for finding a matching unit object by type.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnits.GetUnitByMatchingTypeDenominator(MPT.Units.Core.cUnit)">
+ <summary>
+ Returns the unit object within the current collection that has the same type as the provided unit in the denominator position.
+ Returns Nothing if no match is found.
+ </summary>
+ <param name="p_unit">Unit object to use for finding a matching unit object by type.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitsController">
+ <summary>
+ Handles the highest level controlling of units including:
+ Sets up schema based on selections from pre-defined lists, such as stress.
+ Sets up lists of available pre-defined shorthand labels (such as MPa) for the current units schema.
+ Translates between the base or derived units and other representations of the units, such as psi instead lb/in^2, or MPa instead of N/mm^2.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitsController.eUnitTypeStandard">
+ <summary>
+ List of standard unit types available for selection where the schema is already defined in the classes.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitsController.eUnitTypeStandard.custom">
+ <summary>
+ Not included in any type lists, as it indicates that a custom type of cUnits object is to be created.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitsController.eUnitTypeShorthand">
+ <summary>
+ List of schema types that contain shorthand labels.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitsController.quickUnitTypes">
+ <summary>
+ List of a subset of 'all unit types' for the most commonly defined units. 
+ Used for autogenerating pre-defined unit schemas.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitsController.allUnitTypes">
+ <summary>
+ List of all unit types that have pre-defined schemas available.
+ Used for autogenerating pre-defined unit schemas.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitsController.shorthandUnitsAvailable">
+ <summary>
+ List of all of the shorthand units currently available for selection.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitsController.units">
+ <summary>
+ Units object that contains a collection of unit objects that defines a complete unit, such as stress, speed, etc.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitsController.type">
+ <summary>
+ The pre-edfined unit type from which the units object is set up.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitsController.typeShorthand">
+ <summary>
+ The pre-defined shorthand schema type from which the units object is set up.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.Equals(System.Object)">
+ <summary>
+ Returns 'True' if the object provided perfectly matches the existing object.
+ </summary>
+ <param name="p_object">External object to check for equality.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.ConvertFrom(System.String)">
+ <summary>
+ Returns the conversion factor to convert the supplied units object to the current units object.
+ </summary>
+ <param name="p_unitsConvert">Units to be converted from to the current units object.
+ This can either be a list of consistent units, or a literal string of the unit (e.g. kN-m/sec).
+ Any numbers that are not in a powers position will be ignored, and any number in a list of consistent units will be ignored.
+ For consistent units, only the first unit is used if units of the same type are repeated.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.ConvertTo(System.String)">
+ <summary>
+ Returns the conversion factor to convert the current units object to the supplied units object.
+ </summary>
+ <param name="p_unitsConvert">Units to be converted to by the current units object.
+ This can either be a list of consistent units, or a literal string of the unit (e.g. kN-m/sec).
+ Any numbers that are not in a powers position will be ignored, and any number in a list of consistent units will be ignored.
+ For consistent units, only the first unit is used if units of the same type are repeated.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.SetTypeByDescription(System.String)">
+ <summary>
+ Sets the schema type based on the string name of the schema. 
+ If no match is found between the enum descriptions and the supplied string, the type is unchanged.
+ </summary>
+ <param name="p_schemaType">Name of the schema type to set the class to.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.SetTypeByShorthand(MPT.Units.Core.cUnitsController.eUnitTypeShorthand,System.String)">
+ <summary>
+ Sets the schema type based on the shorthand type provided.
+ For shorthands used for multiple types, a default is chosen unless a schema type string name is provided.
+ If no match is found, or the shorthand type is 'none' the type is unchanged.
+ </summary>
+ <param name="p_shorthandType">Shorthand type that the class is to be using.</param>
+ <param name="p_schemaType">Name of the schema type to set the class to.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.ParseStringToShorthandUnits(System.String)">
+ <summary>
+ Sets the type, units object, and other related properties to match the specified shorthand name that is provided as a string.
+ If no match is found for unit values, they will be left empty.
+ If no match is found for the unit type, the units object will be empty.
+ </summary>
+ <param name="p_shorthandName">Name of the shorthand unit to set.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.ParseStringToUnits(System.String)">
+ <summary>
+ Sets the type, units object, and other related properties to match the specified unit string that is provided, including shorthand units.
+ If no match is found for unit values, they will be left empty.
+ If no match is found for the unit type, the units object will be empty.
+ </summary>
+ <param name="p_units"></param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.AssignShorthandUnits(System.String,System.String)">
+ <summary>
+ Sets the type, units object, and other related properties to match the specified shorthand type and name.
+ A schema type name should be provided for ambiguous cases where multiple types might apply to the same shorthand type.
+ </summary>
+ <param name="p_shorthandName">Name of the shorthand unit to set.</param>
+ <param name="p_schemaType">Name of the schema type, in cases where multiple types might apply to the same shorthand type.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.AssignShorthandUnits(MPT.Units.Core.cUnitsController.eUnitTypeShorthand,System.String,System.String)">
+ <summary>
+ Sets the type, units object, and other related properties to match the specified shorthand type and name.
+ A schema type name should be provided for ambiguous cases where multiple types might apply to the same shorthand type.
+ </summary>
+ <param name="p_shorthandType">Type of the shorthand unit to set.</param>
+ <param name="p_shorthandName">Name of the shorthand unit to set.</param>
+ <param name="p_schemaType">Name of the schema type, in cases where multiple types might apply to the same shorthand type.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.RemoveShorthandUnits">
+ <summary>
+ Removes the shorthand-specific properties of the units object, while leaving the rest of the properties intact.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.GetShorthandNamesList">
+ <summary>
+ Returns the list of possible shorthand names based on the current shorthand type assigned to the class.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.GetShorthandNamesList(MPT.Units.Core.cUnitsController.eUnitTypeShorthand)">
+ <summary>
+ Returns the list of possible shorthand names based on the provided shorthand type enumeration.
+ </summary>
+ <param name="p_shorthandType"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.GetShorthandTypeByName(System.String)">
+ <summary>
+ Returns the shorthand enumeration based on the string name provided.
+ </summary>
+ <param name="p_shorthandName">Name of the shorthand unit to match to an enumeration.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.GetShorthandTypeByUnitsType">
+ <summary>
+  Returns the shorthand enumeration based on the unit type enumeration of the class.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.GetShorthandTypeByUnitsType(MPT.Units.Core.cUnitsController.eUnitTypeStandard)">
+ <summary>
+ Returns the shorthand enumeration based on the unit type enumeration provided. 
+ </summary>
+ <param name="p_unitType">Unit type enumeration to be used to determine the shorthand enumeration type.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.GetShorthandTypeByUnits">
+ <summary>
+ Returns the shorthand enumeration based on which one, if any, the current schema matches.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.GetShorthandTypeByUnits(MPT.Units.Core.cUnits)">
+ <summary>
+ Returns the shorthand enumeration based on which one, if any, the schema of the provided units object matches.
+ </summary>
+ <param name="p_units">Units object to use for determining the shorthand enumeration.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.IsShorthandTypesAvailable">
+ <summary>
+ Returns 'true' if shorthand units are available for a given schema. The list of available shorthand units is also updated in the process.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.MakeUnitsConsistent(System.String)">
+ <summary>
+ For each matching unit type, changes the current unit to the one provided in the list.
+ </summary>
+ <param name="p_units">String of units that are to be applied to every type occurrence in the composite units object. 
+ Units should be demarcated by commas.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.MakeUnitsConsistent(System.Collections.Generic.List{System.String})">
+ <summary>
+ For each matching unit type, changes the current unit to the one provided in the list.
+ </summary>
+ <param name="p_unitsList">List of units that are to be applied to every type occurrence in the composite units object.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.isConsistent(System.String)">
+ <summary>
+ Determines if the units string provided is for consistent units.
+ This is determined by the presence of a ',' demarcator indicating a list of units.
+ </summary>
+ <param name="p_units">Any string containing units.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.GetShorthandUnits(MPT.Units.Core.cUnitsController.eUnitTypeShorthand,System.String)">
+ <summary>
+ Returns the units object corresponding to the shorthand type and shorthand name. 
+ Schema and values are filled where matches are found. 
+ Unit values are returned as empty where no matches are found.
+ Units is returned as 'Nothing' if no shorthand type match is found.
+ </summary>
+ <param name="p_shorthandType">Type of shorthand label that is being used (pressure, speed, etc.)</param>
+ <param name="p_shorthandName">Name of the shorthand label used.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.SetUnitsSchemaByType">
+ <summary>
+ Sets the schema of the units object according to a preset arrangement based on specified type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.SetUnitsForce(System.String,System.Boolean)">
+ <summary>
+ Adds a force unit object to the units object.
+ </summary>
+ <param name="p_power">Power to which the unit is multiplied. Values must be greater than 0, but may be fractions.</param>
+ <param name="p_isNumerator">If true, the unit is in the numerator position. If false, the unit is in the denominator position.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.SetUnitsLength(System.String,System.Boolean)">
+ <summary>
+ Adds a length unit object to the units object.
+ </summary>
+ <param name="p_power">Power to which the unit is multiplied. Values must be greater than 0, but may be fractions.</param>
+ <param name="p_isNumerator">If true, the unit is in the numerator position. If false, the unit is in the denominator position.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.SetUnitsMass(System.String,System.Boolean)">
+ <summary>
+ Adds a mass unit object to the units object.
+ </summary>
+ <param name="p_power">Power to which the unit is multiplied. Values must be greater than 0, but may be fractions.</param>
+ <param name="p_isNumerator">If true, the unit is in the numerator position. If false, the unit is in the denominator position.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.SetUnitsRotation(System.String,System.Boolean)">
+ <summary>
+ Adds a rotation unit object to the units object.
+ </summary>
+ <param name="p_power">Power to which the unit is multiplied. Values must be greater than 0, but may be fractions.</param>
+ <param name="p_isNumerator">If true, the unit is in the numerator position. If false, the unit is in the denominator position.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.SetUnitsTemperature(System.String,System.Boolean)">
+ <summary>
+ Adds a temperature unit object to the units object.
+ </summary>
+ <param name="p_power">Power to which the unit is multiplied. Values must be greater than 0, but may be fractions.</param>
+ <param name="p_isNumerator">If true, the unit is in the numerator position. If false, the unit is in the denominator position.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.SetUnitsTime(System.String,System.Boolean)">
+ <summary>
+ Adds a time unit object to the units object.
+ </summary>
+ <param name="p_power">Power to which the unit is multiplied. Values must be greater than 0, but may be fractions.</param>
+ <param name="p_isNumerator">If true, the unit is in the numerator position. If false, the unit is in the denominator position.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitsController.SetUnitsUnitless(System.String,System.Boolean)">
+ <summary>
+ Adds a unitless unit object to the units object.
+ </summary>
+ <param name="p_power">Power to which the unit is multiplied. Values must be greater than 0, but may be fractions.</param>
+ <param name="p_isNumerator">If true, the unit is in the numerator position. If false, the unit is in the denominator position.</param>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitForce">
+ <summary>
+ Derived unit of the type 'force', which is being used as if it were a base unit.
+ Provides a list of unit names allowed and performs unit conversions.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitForce.eUnit">
+ <summary>
+ List of the unit names available for this unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitForce._mass">
+ <summary>
+ Mass unit that is a component of the derived unit.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitForce._length">
+ <summary>
+ Length unit that is a component of the derived unit.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitForce._NEWTON_TO_POUNDFORCE">
+ <summary>
+ Conversion factor from newtons to pound-force.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.cUnitForce._KILOGRAMFORCE_TO_POUNDFORCE">
+ <summary>
+ Conversion factor from kilogram-force to pound-force.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitForce.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitForce.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitForce.unitsList">
+ <summary>
+  List of force units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitForce.SetToDefault">
+ <summary>
+ Sets the unit type back to the default unit type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitForce.Convert(System.Double,MPT.Units.Core.cUnitForce.eUnit,MPT.Units.Core.cUnitForce.eUnit)">
+ <summary>
+ Converts from one unit to another and returns the conversion factor.
+ </summary>
+ <param name="p_value">Original value associated with the unit. 
+ Use '1' if solely obtaining the conversion factor between units. 
+ The result is what to multiply the 'value' by to perform the conversion.</param>
+ <param name="p_unit">Unit type to convert from.</param>
+ <param name="p_unitResult">Unit type to convert to.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitForce.ConvertToBase(System.Double,MPT.Units.Core.cUnitForce.eUnit)">
+ <summary>
+ Converts the provided unit to the default unit type and returns the value for the conversion, which is multiplied by the supplied value.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as '1'.</param>
+ <param name="p_unit">Unit to convert to the default unit type.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitForce.ConvertFromBase(System.Double,MPT.Units.Core.cUnitForce.eUnit)">
+ <summary>
+ Converts the provided unit from the default unit type to the specified unit type and returns the value for the conversion, which supplied value is divided by.
+ </summary>
+ <param name="p_value">Conversion value. Typically starts as "1" if it is not passed along from a prior conversion method.</param>
+ <param name="p_unitTarget">Unit object to which the conversion is to take place.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitForceLineDistribution">
+ <summary>
+ A schema type that has various shorthand labels that correspond with particular unit names filled into the schema.
+ Provides a list of shorthand labels allowed and returns a units object with a schema and unit names appropriate to a chosen shorthand label.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitForceLineDistribution.eUnit">
+ <summary>
+ List of the unit shorthand names available for this schema type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitForceLineDistribution.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitForceLineDistribution.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitForceLineDistribution.unitsList">
+ <summary>
+  List of force units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitForceLineDistribution.SetToDefault">
+ <summary>
+ Sets the shorthand label back to the default type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitForceLineDistribution.GetUnits(System.String)">
+ <summary>
+ Returns the units object derived from the provided shorthand units name.
+ If the name does not match a valid shorthand unit, Nothing is returned.
+ </summary>
+ <param name="p_name">Name of the shorthand unit to use for the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitForceLineDistribution.GetUnits(MPT.Units.Core.cUnitForceLineDistribution.eUnit)">
+ <summary>
+ Returns the units object derived from the provided shorthand units enumeration.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit to use in generating the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitForceLineDistribution.SetUnitByName(System.String)">
+ <summary>
+ Sets the specific shorthand unit by the provided string name.
+ </summary>
+ <param name="p_shorthandName">Name of the shorthand unit to use.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitForceLineDistribution.AssembleUnits(MPT.Units.Core.cUnitForceLineDistribution.eUnit,System.Collections.Generic.List{MPT.Units.Core.cUnit})">
+ <summary>
+ Assembles the provided list of unit objects into a single units object, and records the correspdonding shorthand label with the units object.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit that the operation is based on.</param>
+ <param name="p_units">List of unit objects to assemble into one units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitPower">
+ <summary>
+ A schema type that has various shorthand labels that correspond with particular unit names filled into the schema.
+ Provides a list of shorthand labels allowed and returns a units object with a schema and unit names appropriate to a chosen shorthand label.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitPower.eUnit">
+ <summary>
+ List of the unit shorthand names available for this schema type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitPower.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitPower.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitPower.unitsList">
+ <summary>
+  List of force units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitPower.SetToDefault">
+ <summary>
+ Sets the shorthand label back to the default type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitPower.GetUnits(System.String)">
+ <summary>
+ Returns the units object derived from the provided shorthand units name.
+ If the name does not match a valid shorthand unit, Nothing is returned.
+ </summary>
+ <param name="p_name">Name of the shorthand unit to use for the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitPower.GetUnits(MPT.Units.Core.cUnitPower.eUnit)">
+ <summary>
+ Returns the units object derived from the provided shorthand units enumeration.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit to use in generating the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitPower.SetUnitByName(System.String)">
+ <summary>
+ Sets the specific shorthand unit by the provided string name.
+ </summary>
+ <param name="p_shorthandName">Name of the shorthand unit to use.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitPower.AssembleUnits(MPT.Units.Core.cUnitPower.eUnit,System.Collections.Generic.List{MPT.Units.Core.cUnit})">
+ <summary>
+ Assembles the provided list of unit objects into a single units object, and records the correspdonding shorthand label with the units object.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit that the operation is based on.</param>
+ <param name="p_units">List of unit objects to assemble into one units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitPressureStress">
+ <summary>
+ A schema type that has various shorthand labels that correspond with particular unit names filled into the schema.
+ Provides a list of shorthand labels allowed and returns a units object with a schema and unit names appropriate to a chosen shorthand label.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitPressureStress.eUnit">
+ <summary>
+ List of the unit shorthand names available for this schema type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitPressureStress.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitPressureStress.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitPressureStress.unitsList">
+ <summary>
+  List of pressure units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitPressureStress.SetToDefault">
+ <summary>
+ Sets the shorthand label back to the default type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitPressureStress.GetUnits(System.String)">
+ <summary>
+ Returns the units object derived from the provided shorthand units name.
+ If the name does not match a valid shorthand unit, Nothing is returned.
+ </summary>
+ <param name="p_name">Name of the shorthand unit to use for the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitPressureStress.GetUnits(MPT.Units.Core.cUnitPressureStress.eUnit)">
+ <summary>
+ Returns the units object derived from the provided shorthand units enumeration.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit to use in generating the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitPressureStress.SetUnitByName(System.String)">
+ <summary>
+ Sets the specific shorthand unit by the provided string name.
+ </summary>
+ <param name="p_shorthandName">Name of the shorthand unit to use.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitPressureStress.AssembleUnits(MPT.Units.Core.cUnitPressureStress.eUnit,System.Collections.Generic.List{MPT.Units.Core.cUnit})">
+ <summary>
+ Assembles the provided list of unit objects into a single units object, and records the correspdonding shorthand label with the units object.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit that the operation is based on.</param>
+ <param name="p_units">List of unit objects to assemble into one units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitSpeed">
+ <summary>
+ A schema type that has various shorthand labels that correspond with particular unit names filled into the schema.
+ Provides a list of shorthand labels allowed and returns a units object with a schema and unit names appropriate to a chosen shorthand label.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitSpeed.eUnit">
+ <summary>
+ List of the unit shorthand names available for this schema type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitSpeed.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitSpeed.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitSpeed.unitsList">
+ <summary>
+  List of pressure units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitSpeed.SetToDefault">
+ <summary>
+ Sets the shorthand label back to the default type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitSpeed.GetUnits(System.String)">
+ <summary>
+ Returns the units object derived from the provided shorthand units name.
+ If the name does not match a valid shorthand unit, Nothing is returned.
+ </summary>
+ <param name="p_name">Name of the shorthand unit to use for the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitSpeed.GetUnits(MPT.Units.Core.cUnitSpeed.eUnit)">
+ <summary>
+ Returns the units object derived from the provided shorthand units enumeration.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit to use in generating the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitSpeed.SetUnitByName(System.String)">
+ <summary>
+ Sets the specific shorthand unit by the provided string name.
+ </summary>
+ <param name="p_shorthandName">Name of the shorthand unit to use.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitSpeed.AssembleUnits(MPT.Units.Core.cUnitSpeed.eUnit,System.Collections.Generic.List{MPT.Units.Core.cUnit})">
+ <summary>
+ Assembles the provided list of unit objects into a single units object, and records the correspdonding shorthand label with the units object.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit that the operation is based on.</param>
+ <param name="p_units">List of unit objects to assemble into one units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitSpeedAngular">
+ <summary>
+ A schema type that has various shorthand labels that correspond with particular unit names filled into the schema.
+ Provides a list of shorthand labels allowed and returns a units object with a schema and unit names appropriate to a chosen shorthand label.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitSpeedAngular.eUnit">
+ <summary>
+ List of the unit shorthand names available for this schema type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitSpeedAngular.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitSpeedAngular.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitSpeedAngular.unitsList">
+ <summary>
+  List of pressure units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitSpeedAngular.SetToDefault">
+ <summary>
+ Sets the shorthand label back to the default type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitSpeedAngular.GetUnits(System.String)">
+ <summary>
+ Returns the units object derived from the provided shorthand units name.
+ If the name does not match a valid shorthand unit, Nothing is returned.
+ </summary>
+ <param name="p_name">Name of the shorthand unit to use for the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitSpeedAngular.GetUnits(MPT.Units.Core.cUnitSpeedAngular.eUnit)">
+ <summary>
+ Returns the units object derived from the provided shorthand units enumeration.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit to use in generating the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitSpeedAngular.SetUnitByName(System.String)">
+ <summary>
+ Sets the specific shorthand unit by the provided string name.
+ </summary>
+ <param name="p_shorthandName">Name of the shorthand unit to use.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitSpeedAngular.AssembleUnits(MPT.Units.Core.cUnitSpeedAngular.eUnit,System.Collections.Generic.List{MPT.Units.Core.cUnit})">
+ <summary>
+ Assembles the provided list of unit objects into a single units object, and records the correspdonding shorthand label with the units object.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit that the operation is based on.</param>
+ <param name="p_units">List of unit objects to assemble into one units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitWork">
+ <summary>
+ A schema type that has various shorthand labels that correspond with particular unit names filled into the schema.
+ Provides a list of shorthand labels allowed and returns a units object with a schema and unit names appropriate to a chosen shorthand label.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cUnitWork.eUnit">
+ <summary>
+ List of the unit shorthand names available for this schema type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitWork.unit">
+ <summary>
+ Specified unit.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitWork.unitDefault">
+ <summary>
+ Default unit set for this unit type.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cUnitWork.unitsList">
+ <summary>
+  List of force units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitWork.SetToDefault">
+ <summary>
+ Sets the shorthand label back to the default type.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitWork.GetUnits(System.String)">
+ <summary>
+ Returns the units object derived from the provided shorthand units name.
+ If the name does not match a valid shorthand unit, Nothing is returned.
+ </summary>
+ <param name="p_name">Name of the shorthand unit to use for the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitWork.GetUnits(MPT.Units.Core.cUnitWork.eUnit)">
+ <summary>
+ Returns the units object derived from the provided shorthand units enumeration.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit to use in generating the units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitWork.SetUnitByName(System.String)">
+ <summary>
+ Sets the specific shorthand unit by the provided string name.
+ </summary>
+ <param name="p_shorthandName">Name of the shorthand unit to use.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cUnitWork.AssembleUnits(MPT.Units.Core.cUnitWork.eUnit,System.Collections.Generic.List{MPT.Units.Core.cUnit})">
+ <summary>
+ Assembles the provided list of unit objects into a single units object, and records the correspdonding shorthand label with the units object.
+ </summary>
+ <param name="p_shorthandUnit">Shorthand unit that the operation is based on.</param>
+ <param name="p_units">List of unit objects to assemble into one units object.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cValue">
+ <summary>
+ Value object that contains a magnitude and associated units. 
+ This value can convert the value and units to a new set of units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cValue.Magnitude">
+ <summary>
+ Magnitude of the value.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cValue.Units">
+ <summary>
+ Units of the value.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cValue.#ctor(System.Double,System.String)">
+ <summary>
+ Create new value.
+ </summary>
+ <param name="p_magnitude">Magnitude of the value.</param>
+ <param name="p_units">Units of the value (e.g. kN*m/sec).</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cValue.unitsCanBeParsed(System.String)">
+ <summary>
+ Units are only set if the magnitude is numeric and units are not a list.
+ </summary>
+ <param name="p_units"></param>
+ <returns></returns>
+</member>
+<member name="M:MPT.Units.Core.cValue.#ctor(System.String,System.String)">
+ <summary>
+ Create new value.
+ </summary>
+ <param name="p_magnitude">Magnitude of the value. 
+ Must be numeric if unit features are to be used.</param>
+ <param name="p_units">Units of the value (e.g. kN*m/sec).</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cValue.ConvertTo(System.String)">
+ <summary>
+ Converts the value according to the provided set of units.
+ </summary>
+ <param name="p_units">Units to convert the value to. These can be provided in two formats: 
+ 1. A new set of units. Must be in the same schema as the existing units (e.g. kN*m/sec).
+ 2. A list of units, if the value is to be converted to a consistent set of units for a given unit type (e.g. N, mm, hr).</param>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.eUnitType">
+ <summary>
+ The basic unit types from which all other units are derived.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:MPT.Units.Core.eUnitType.force">
+ <summary>
+ Derived unit, but commonly used instead of breaking units down into mass*length/time^2.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cSymbolicBlock">
+ <summary>
+ Basic generic symbolic element that may compose a set of units, a symbolic equation, etc.
+ Such elements are assumed to be defined by either opening/closing parentheses, and/or multipliers, and/or divisors.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cSymbolicBlock.blockName">
+ <summary>
+ String composing the base type of the block object.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cSymbolicBlock.blockSuperscript">
+ <summary>
+ String composing the superscript associated with the block object.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cSymbolicBlock.isNumerator">
+ <summary>
+ If true, then the block object is to be considered in the numerator position. 
+ If false, then the block object is to be considered in the denominator position. 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cSymbolicBlockPower">
+ <summary>
+ Class representing the exponent power of a number or variable, including both the characteristics of the power, and operations of combination.
+ Currently this class' combination methods only work with numbers. Symbolic combinations are not supported.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cSymbolicBlockPower.fractionFormat">
+ <summary>
+ If true, then the powers are assumed to have a format of ^(n/m).
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cSymbolicBlockPower.decimalFormat">
+ <summary>
+ If true, then the powers are assumed to have a format of ^n.mmm
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cSymbolicBlockPower.numeratorInt">
+ <summary>
+ The numerator value that is an integer. This is not included in the decimal component.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cSymbolicBlockPower.numeratorDbl">
+ <summary>
+ The numerator value that is an decimal. This is not included in the integer component.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cSymbolicBlockPower.denominatorInt">
+ <summary>
+ The denominator value that is an integer. This is not included in the decimal component.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cSymbolicBlockPower.denominatorDbl">
+ <summary>
+ The denominator value that is an decimal. This is not included in the integer component.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:MPT.Units.Core.cSymbolicBlockPower.powerString">
+ <summary>
+ The string representation of the combined result of the class properties.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicBlockPower.ParsePowerNumeratorDenominator(System.String)">
+ <summary>
+ Populates the class properties based on the power provided.
+ </summary>
+ <param name="p_power">The power to be used to populate the class properties.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicBlockPower.UpdatePowerString">
+ <summary>
+ Updates the power string property based on the current numerical properties. 
+ Returns the result that has been set in the class.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicBlockPower.CombinePowersBaseMultiply(MPT.Units.Core.cSymbolicBlockPower,MPT.Units.Core.cSymbolicBlockPower)">
+ <summary>
+ Combines the power numerator &amp; denominator components as if the bases were being multiplied.
+ </summary>
+ <param name="p_power1">First power to multiply.</param>
+ <param name="p_power2">Second power to multiply.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicBlockPower.CombinePowersBaseDivide(MPT.Units.Core.cSymbolicBlockPower,MPT.Units.Core.cSymbolicBlockPower)">
+ <summary>
+ Combines the power numerator &amp; denominator components as if the bases were being divided.
+ </summary>
+ <param name="p_powerDenominator">Power that is part of a base in the denominator position.</param>
+ <param name="p_powerNumerator">Power that is part of a base in the numerator position.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicBlockPower.IsPowerDenominator(System.String)">
+ <summary>
+ Checks the power property of the block and returns true if it is negative, indicating a denominator position.
+ Else, returns False.
+ </summary>
+ <param name="p_blockPower">The power string to be checked for the status. 
+ If not specified, then the value of the class is used.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:MPT.Units.Core.cSymbolicParser">
+ <summary>
+ Takes a string and parses it into the mathematical symbolic object specified, such as units.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicParser.ParseStringToUnits(System.String)">
+ <summary>
+ Returns a list of unit objects created from the provided string.
+ </summary>
+ <param name="p_string">String to transform into a list of unit objects.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicParser.ParseBlockList(System.String)">
+ <summary>
+ Returns a list of symbolic block objects created from the provided string.
+ </summary>
+ <param name="p_string">String to transform into a list of symbolic block objects.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicParser.ParseBlockListAll(System.Collections.Generic.List{MPT.Units.Core.cSymbolicBlock})">
+ <summary>
+ Parses all symbolic blocks into additional symbolic blocks until no additional parsing can be done. 
+ Returns a list of every symbolic block in the smalles/simplest form possible.
+ </summary>
+ <param name="p_blocksList">List of symbolic block items to further parse.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicParser.ParseBlockListItem(System.String,System.Boolean)">
+ <summary>
+ Parses the individual string into a symbolic block list of 1-level deep.
+ </summary>
+ <param name="p_string">String to parse into a symbolic block list.</param>
+ <param name="p_isGlobalNumerator">Designation of whether or not the string as a whole is considered to be in the numerator position (true) or denominator position (false).</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicParser.AggregateBlockString(System.String,System.String@,System.String@,System.Boolean)">
+ <summary>
+ Adds the character to the appropriate string provided.
+ </summary>
+ <param name="p_character">Character to add to a string.</param>
+ <param name="p_blockName">The string that is used for the base/name of the symbolic block.</param>
+ <param name="p_blockPower">The string that is used for the power/exponent of the symbolic block.</param>
+ <param name="p_useCharForPower">If true, then character will be added to the block power parameter. 
+ Else, the character will be added to the block base parameter.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicParser.UpdateBlocksList(System.Collections.Generic.List{MPT.Units.Core.cSymbolicBlock},System.Boolean,System.String,System.String)">
+ <summary>
+ Returns a list of symbolic block objects with the new symbolic block object added, if valid.
+ Purpose of the function is to include validation checks of data.
+ If the symbolic block object is not valid, the original list provided is returned unaltered.
+ </summary>
+ <param name="p_blocksList">List to which the symbolic block is to be added.</param>
+ <param name="p_isNumerator">Specifies if the symbolic block is to be treated as a numerator (true), else denominator (false).</param>
+ <param name="p_blockName">String to be used as the base name of the symbolic object.</param>
+ <param name="p_blockPower">String to be used as the exponent of the symbolic object. May be blank.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicParser.RecordBlock(System.Boolean,System.String,System.String)">
+ <summary>
+ Returns the symbolic block object of the paramters provided if the parameters provided are valid.
+ Otherwise returns an empty object.
+ </summary>
+ <param name="p_isNumerator">Specifies if the symbolic block is to be treated as a numerator (true), else denominator (false).</param>
+ <param name="p_blockName">String to be used as the base name of the symbolic object. 
+ If blank, an empty object is returned.</param>
+ <param name="p_blockPower">String to be used as the exponent of the symbolic object. May be blank.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.Units.Core.cSymbolicParser.IsResultNumerator(System.Boolean,System.Boolean)">
+ <summary>
+ Determines if the current block is in the numerator or denominator position based on the superposition of the original positiona and the locally determined position.
+ </summary>
+ <param name="p_isLocalNumerator">Position at the current block level as numerator (true) or denominator (false).</param>
+ <param name="p_isGlobalNumerator">Position above the current block level as numerator (true) or denominator (false).</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+</members>
+</doc>

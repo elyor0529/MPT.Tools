@@ -2,10 +2,10 @@
 Option Explicit On
 
 Imports System.IO
-Imports System.Windows
 
-Imports MPT.FileSystem.FoldersLibrary
 Imports MPT.FileSystem.PathLibrary
+Imports MPT.FileSystem.FileLibrary
+
 Imports MPT.Reporting
 Imports MPT.Reflections.ReflectionLibrary
 
@@ -244,7 +244,7 @@ Public NotInheritable Class FileLibrary
         Dim endWrite As Boolean = False
         Dim readValue As String = ""
         Dim i As Integer = 1
-        Dim iniPathTemp As String = GetPathDirectoryStub(p_path) & "\CSiTesterTemp.ini"
+        Dim iniPathTemp As String = PathDirectoryStub(p_path) & "\CSiTesterTemp.ini"
 
         Using objWriter As New StreamWriter(iniPathTemp)
             While Not endWrite
@@ -316,7 +316,7 @@ Public NotInheritable Class FileLibrary
     ''' <param name="p_regTestName"></param>
     ''' <remarks></remarks>
     Public Shared Sub ChangeInstallIniFile(ByVal p_regTestName As String)
-        Dim path As String = pathStartup() & "\csiTest.ini"
+        Dim path As String = PathStartupApp() & "\csiTest.ini"
         Using objWriter As New StreamWriter(path)
             objWriter.WriteLine(p_regTestName) ' Append file string
         End Using

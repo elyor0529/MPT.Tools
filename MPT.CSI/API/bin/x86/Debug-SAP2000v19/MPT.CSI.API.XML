@@ -1,0 +1,3023 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MPT.CSI.API</name>
+    </assembly>
+    <members>
+        <member name="T:MPT.CSI.API.Core.BatchFile">
+            <summary>
+            Contains routines for writing, running, and removing batch files.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.BatchFile.Path">
+            <summary>
+            Path to the batch file.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.BatchFile.DeleteExistingBatch">
+            <summary>
+            True: If a filename already exists at the path specified, it will be deleted so that a new one is created or no batch file is left after a run.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.BatchFile.WaitForExit">
+            <summary>
+            Wait until batch process has exited before deleting the batch file. (Currently does not seem to work).
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.BatchFile.ConsoleIsVisible">
+            <summary>
+            True: Batch run will not be visible from a command console window.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.BatchFile.CloseAfterRun">
+            <summary>
+            True: Console window will close after the batch run.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.BatchFile.WorkingDirectory">
+            <summary>
+            The initial directory for the process to be started.
+            If not specified, the assembly location will be used.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.BatchFile.DeleteFiles(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Deletes all files relating to a supplied list of extensions using a batch file.
+            </summary>
+            <param name="directoryPath">Path to the directory containing the files to be deleted.</param>
+            <param name="fileExtensionList">List of the file extensions of which all files will be deleted.</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:MPT.CSI.API.Core.BatchFile.Write(System.String)">
+            <summary>
+            Writes the specified command string to a new batch file. 
+            If no lines exist, this begins a new batch file.
+            </summary>
+            <param name="value">String to write to the batch file.</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:MPT.CSI.API.Core.BatchFile.Append(System.String)">
+            <summary>
+            ppends the specified command line to a batch file. 
+            If no lines exist, this begins a new batch file.
+            </summary>
+            <param name="value">String to write to append to the batch file.</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:MPT.CSI.API.Core.BatchFile.Run">
+            <summary>
+            Runs batch file then deletes batch file if specified.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.eSource">
+            <summary>
+            List source to use for auto load method or values.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.eSource.PerCode">
+            <summary>
+            Per code.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.eSource.UserDefined">
+            <summary>
+            User defined.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eApplicationPointType">
+            <summary>
+            Application point type for the user load.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eApplicationPointType.UserSpecifiedApplicationPoint">
+            <summary>
+            User specified application point.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eApplicationPointType.CenterOfMassWithEccentricity">
+            <summary>
+            At center of mass with optional additional eccentricity.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eC1Type">
+            <summary>
+            Values of C1 used based on the time period option.
+            Used by NTC code.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eC1Type.C1_85">
+            <summary>
+            C1 = 0.085 (m).
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eC1Type.C1_75">
+            <summary>
+            C1 = 0.075 (m).
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eC1Type.C1_50">
+            <summary>
+            C1 = 0.050 (m).
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eCountry">
+            <summary>
+            Country for which the Nationally Determined Parameters (NDPs) are specified. 
+            Used by Eurocode.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eCountry.Other">
+            <summary>
+            Other (NDPs are user specified).
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eCountry.CENDefault">
+            <summary>
+            CEN Default.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eCountry.Norway">
+            <summary>
+            Norway.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eCountry.Portugal">
+            <summary>
+            Portugal.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eIsland">
+            <summary>
+            Italian island used for NTC2008 seismic load patterns.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eLimitState">
+            <summary>
+            Limit state used in NTC2008.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eLimitState.SLO">
+            <summary>
+            SLC.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eLimitState.SLD">
+            <summary>
+            SLC.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eLimitState.SLV">
+            <summary>
+            SLV.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eLimitState.SLC">
+            <summary>
+            SLC.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eParameterOptions">
+            <summary>
+            Option for defining parameters in the NTC2008 seismic load pattern.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eParameterOptions.LatLong">
+            <summary>
+            By latitude and longitude.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eParameterOptions.Island">
+            <summary>
+            By island.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eParameterOptions.UserSpecified">
+            <summary>
+            User specified.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSeismicIntensity">
+            <summary>
+            Seismic intensity.
+            Used in Chinese code.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSeismicIntensity.I6_05g">
+            <summary>
+            6  (0.05g).
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSeismicIntensity.I7_10g">
+            <summary>
+            7  (0.10g).
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSeismicIntensity.I7_15g">
+            <summary>
+            7  (0.15g).
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSeismicIntensity.I8_20g">
+            <summary>
+            8  (0.20g).
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSeismicIntensity.I8_30g">
+            <summary>
+            8  (0.30g).
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSeismicIntensity.I9_40g">
+            <summary>
+            9  (0.40g).
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSoilProfileType">
+            <summary>
+            Soil profile type.
+            Used by UBC97.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSoilProfileType.SA">
+            <summary>
+            SA.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSoilProfileType.SB">
+            <summary>
+            SB.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSoilProfileType.SC">
+            <summary>
+            SC.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSoilProfileType.SD">
+            <summary>
+            SD.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSoilProfileType.SE">
+            <summary>
+            SE.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSpectrumType">
+            <summary>
+            Spectrum type to use in NTC2008.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSpectrumType.ElasticHorizontal">
+            <summary>
+            Elastic horizontal.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSpectrumType.ElasticVertical">
+            <summary>
+            Elastic vertical.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSpectrumType.DesignHorizontal">
+            <summary>
+            Design horizontal.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSpectrumType.DesignVertical">
+            <summary>
+            Design vertical.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSpectrumTypeSimple">
+            <summary>
+            Spectrum type.
+            Used by Eurocode.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSpectrumTypeSimple.Type1">
+            <summary>
+            Type 1.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eSpectrumTypeSimple.Type2">
+            <summary>
+            Type 2.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eStructureType">
+            <summary>
+            Structure type.
+            Used by NBCC codes.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eStructureType.SteelMomentFrame">
+            <summary>
+            Steel moment frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eStructureType.ConcreteMomentFrame">
+            <summary>
+            Concrete moment frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eStructureType.OtherMomentFrame">
+            <summary>
+            Other moment frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eStructureType.BracedFrame">
+            <summary>
+            Braced frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eStructureType.ShearWall">
+            <summary>
+            Shear wall.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eStructureTypeSimple">
+            <summary>
+            Structure type.
+            Used by NBCC95 code.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eStructureTypeSimple.MomentFrame">
+            <summary>
+            Moment frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eStructureTypeSimple.Other">
+            <summary>
+            Other.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eTopographyType">
+            <summary>
+            Spectrum to consider for NTC2008.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eTopographyType.T1">
+            <summary>
+            T1.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eTopographyType.T2">
+            <summary>
+            T2.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eTopographyType.T3">
+            <summary>
+            T3.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eTopographyType.T4">
+            <summary>
+            T4.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eLoadDirection">
+            <summary>
+            Directions for which the seismic load can be applied.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eLoadDirection.GlobalX">
+            <summary>
+            Global X.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eLoadDirection.GlobalY">
+            <summary>
+            Global Y.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eLoadDirection.GlobalZ">
+            <summary>
+            Global Z.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eTimePeriodOption">
+            <summary>
+            Indicates the time period option used in auto seismic loads.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eTimePeriodOption.Approximate">
+            <summary>
+            Approximate.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eTimePeriodOption.ProgramCalculated">
+            <summary>
+            Program calculated.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Seismic.eTimePeriodOption.UserDefined">
+            <summary>
+            User defined.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.ePhiZSource">
+            <summary>
+            Phi Z source for Chinese code.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.ePhiZSource.ModalAnalysis">
+            <summary>
+            Modal analysis.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.ePhiZSource.ZHRatio">
+            <summary>
+            Z/H ratio.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.eT1Source">
+            <summary>
+            T1 source for Chinese code.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.eT1Source.ModalAnalysis">
+            <summary>
+            Modal analysis.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.eT1Source.UserDefined">
+            <summary>
+            User defined.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.eTerrainType">
+            <summary>
+            Terrain type used in wind loads.
+            NBCC2010
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.eWindExposure">
+            <summary>
+            Indicates sources of the wind exposure.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.eWindExposure.ExtentsOfRigidDiaphragms">
+            <summary>
+            From extents of rigid diaphragms.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.eWindExposure.AreaObjects">
+            <summary>
+            From area objects.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.eWindExposure.FrameObjects">
+            <summary>
+            From frame objects (open structure).
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wind.eWindExposure.AreaAndFrameObjects">
+            <summary>
+            From area objects and frame objects (open structure).
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wave.eLoadMethod">
+            <summary>
+            Auto load method types.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wave.eLoadMethod.RotationsTranslationsVerticalInput">
+            <summary>
+            Rotations / Translations Vertical Input.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wave.eLoadMethod.RotationsTranslationsFullInput">
+            <summary>
+            Rotations / Translations Full Input.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CodesAutoLoad.Wave.eLoadMethod.AccelerationsVelocitiesInput">
+            <summary>
+            Accelerations / Velocities Input.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CoordinateSystems.ChangeName(System.String,System.String)">
+            <summary>
+            The function returns zero if the new name is successfully applied, otherwise it returns a nonzero value.
+            Changing the name of the Global coordinate system will fail and return an error.
+            </summary>
+            <param name="name">The existing name of a defined coordinate system.</param>
+            <param name="newName">The new name for the coordinate system.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CoordinateSystems.Count">
+            <summary>
+            The function returns the number of defined coordinate systems.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CoordinateSystems.Delete(System.String)">
+            <summary>
+            The function deletes the specified coordinate system. 
+            Attempting to delete the Global coordinate system will fail and return an error.
+            </summary>
+            <param name="nameCoordinateSystem">The name of an existing coordinate system.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CoordinateSystems.GetNameList(System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of all defined coordinate systems.
+            </summary>
+            <param name="numberOfNames">The number of coordinate system names retrieved by the program.</param>
+            <param name="coordinateSystemNames">The coordinate system names retrieved by the program.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CoordinateSystems.GetTransformationMatrix(System.String,System.Double[]@)">
+            <summary>
+            Returns the 3x3 direction cosines to transform local coordinates to global coordinates by the equation [directionCosines]*[localCoordinates] = [globalCoordinates].
+            Direction cosines returned are ordered by row, and then by column.
+            </summary>
+            <param name="nameCoordinateSystem">The name of an existing coordinate system.</param>
+            <param name="directionCosines">Value is an array of nine direction cosines that define the transformation matrix from the specified global coordinate system to the global coordinate system.
+            </param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CoordinateSystems.GetCoordSys(System.String,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            Retrieves the translation and rotation of the specified coordinate system origin and axes in relation to the global coordinate system.
+            </summary>
+            <param name="nameCoordinateSystem">The name of an existing coordinate system.</param>
+            <param name="xCoordinateOrigin">The global X coordinate of the origin of the coordinate system. [L]</param>
+            <param name="yCoordinateOrigin">The global Y coordinate of the origin of the coordinate system. [L]</param>
+            <param name="zCoordinateOrigin">The global Z coordinate of the origin of the coordinate system. [L]</param>
+            <param name="rzCoordinateOrigin">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: 
+            (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. 
+            (2) Rotate the coordinate system about the positive global Y-axis as defined by the RY item. 
+            (3) Rotate the coordinate system about the positive global X-axis as defined by the RX item.  
+            Note that the order in which these rotations are performed is important.  
+            RX, RY and RZ are angles in degrees [deg].</param>
+            <param name="ryCoordinateOrigin">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: 
+            (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. 
+            (2) Rotate the coordinate system about the positive global Y-axis as defined by the RY item. 
+            (3) Rotate the coordinate system about the positive global X-axis as defined by the RX item.  
+            Note that the order in which these rotations are performed is important.  
+            RX, RY and RZ are angles in degrees [deg].</param>
+            <param name="rxCoordinateOrigin">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: 
+            (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. 
+            (2) Rotate the coordinate system about the positive global Y-axis as defined by the RY item. 
+            (3) Rotate the coordinate system about the positive global X-axis as defined by the RX item.  
+            Note that the order in which these rotations are performed is important.  
+            RX, RY and RZ are angles in degrees [deg].</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.CoordinateSystems.SetCoordSys(System.String,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Sets the translation and rotation of the specified coordinate system origin and axes in relation to the global coordinate system.
+            Modifying the Global coordinate system will fail and return an error.
+            </summary>
+            <param name="nameCoordinateSystem">The name of an existing coordinate system.</param>
+            <param name="xCoordinateOrigin">The global X coordinate of the origin of the coordinate system. [L]</param>
+            <param name="yCoordinateOrigin">The global Y coordinate of the origin of the coordinate system. [L]</param>
+            <param name="zCoordinateOrigin">The global Z coordinate of the origin of the coordinate system. [L]</param>
+            <param name="rzCoordinateOrigin">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: 
+            (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. 
+            (2) Rotate the coordinate system about the positive global Y-axis as defined by the RY item. 
+            (3) Rotate the coordinate system about the positive global X-axis as defined by the RX item.  
+            Note that the order in which these rotations are performed is important.  
+            RX, RY and RZ are angles in degrees [deg].</param>
+            <param name="ryCoordinateOrigin">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: 
+            (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. 
+            (2) Rotate the coordinate system about the positive global Y-axis as defined by the RY item. 
+            (3) Rotate the coordinate system about the positive global X-axis as defined by the RX item.  
+            Note that the order in which these rotations are performed is important.  
+            RX, RY and RZ are angles in degrees [deg].</param>
+            <param name="rxCoordinateOrigin">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: 
+            (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. 
+            (2) Rotate the coordinate system about the positive global Y-axis as defined by the RY item. 
+            (3) Rotate the coordinate system about the positive global X-axis as defined by the RX item.  
+            Note that the order in which these rotations are performed is important.  
+            RX, RY and RZ are angles in degrees [deg].</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.IAutoLoad">
+            <summary>
+            Implements a design interface for all auto load types.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.IAutoLoad.GetAutoCode(System.String,System.String@)">
+            <summary>
+            This function retrieves the code name used for auto parameters in auto load patterns.
+            An error is returned if the specified load pattern is not an auto load pattern.
+            </summary>
+            <param name="name">The name of an existing auto load pattern.</param>
+            <param name="codeName">This is either blank or the name code used for the auto parameters. 
+            Blank means no auto load is specified for the auto load pattern.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.IAutoLoad.SetNone(System.String)">
+            <summary>
+            This function sets the auto loading type for the specified load pattern to None.
+            </summary>
+            <param name="name">The name of an existing auto load pattern.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoSeismic">
+            <summary>
+            Represents an auto seismic load pattern in the application.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoSeismic.GetAutoCode(System.String,System.String@)">
+            <summary>
+            This function retrieves the code name used for auto seismic parameters in Quake-type load patterns.
+            An error is returned if the specified load pattern is not a Quake-type load pattern.
+            </summary>
+            <param name="name">The name of an existing Quake-type load pattern.</param>
+            <param name="codeName">This is either blank or the name code used for the auto seismic parameters. 
+            Blank means no auto seismic load is specified for the Quake-type load pattern.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoSeismic.SetNone(System.String)">
+            <summary>
+            This function sets the auto seismic loading type for the specified load pattern to None.
+            </summary>
+            <param name="name">The name of an existing Quake-type load pattern.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoSeismic.GetDiaphragmEccentricityOverride(System.String,System.Int32@,System.String[]@,System.Double[]@)">
+            <summary>
+            This function retrieves diaphragm eccentricity overrides for auto seismic loads. 
+            This function does not apply for User Load type auto seismic loads.
+            </summary>
+            <param name="patternName">The name of an existing Quake-type load pattern that has an auto seismic load assigned.</param>
+            <param name="numberOfOverrides">The number of diaphragm eccentricity overrides for the specified load pattern.</param>
+            <param name="diaphragmNames">This is an array that includes the names of the diaphragms which have eccentricity overrides.</param>
+            <param name="eccentricities">This is an array that includes the eccentricity applied to each diaphragm. [L]</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoSeismic.SetDiaphragmEccentricityOverride(System.String,System.String,System.Double,System.Boolean)">
+            <summary>
+            This function assigns diaphragm eccentricity overrides for auto seismic loads. 
+            This function does not apply for User Load type auto seismic loads.
+            </summary>
+            <param name="patternName">The name of an existing Quake-type load pattern that has an auto seismic load assigned.</param>
+            <param name="diaphragmName">The name of an existing special rigid diaphragm constraint, that is, a diaphragm constraint with the following features:
+            1. The constraint type is CONSTRAINT_DIAPHRAGM = 2.
+            2. The constraint coordinate system is Global.
+            3. The constraint axis is Z.</param>
+            <param name="eccentricity">The eccentricity applied to the specified diaphragm. [L</param>
+            <param name="delete">True: Eccentricity override for the specified diaphragm is deleted.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoWave">
+            <summary>
+            Represents an auto wave load pattern in the application.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoWave.GetAutoCode(System.String,System.String@)">
+            <summary>
+            This function retrieves the code name used for auto wave parameters in Wave-type load patterns.
+            An error is returned if the specified load pattern is not a Wave-type load pattern.
+            </summary>
+            <param name="name">The name of an existing Wave-type load pattern.</param>
+            <param name="codeName">This is either blank or the name code used for the auto wave parameters. 
+            Blank means no auto wave load is specified for the Wave-type load pattern.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoWave.SetNone(System.String)">
+            <summary>
+            This function sets the auto seastate loading type for the specified load pattern to None.
+            </summary>
+            <param name="name">The name of an existing seastate-type load pattern.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoWave.GetAuto(System.String,System.Int32@,System.String@,System.Boolean@,System.Double@,System.Boolean@,System.Double@,System.Double[]@,System.Double[]@,System.Boolean@)">
+            <summary>
+            This function retrieves auto seastate loading parameters.
+            </summary>
+            <param name="name">The name of an existing seastate-type load pattern.</param>
+            <param name="loadMethod">This is one of the following three options defining what parameters are being specified.</param>
+            <param name="coordinateSystem">The coordinate system used as a reference for specifying the center of rotation location and the inertia load parameters.</param>
+            <param name="adjustGravityLateral">This item only applies when using LoadMethod 1 or 2. 
+            It is True if generated lateral loads should include the effects of the rotated structure, otherwise it is False.</param>
+            <param name="adjustGravityLateralFactor">This item only applies when using LoadMethod 1 or 2. 
+            This is a scale factor on the lateral effects generated as a result of the rotated structure.</param>
+            <param name="adjustGravityVertical">This item only applies when using LoadMethod 1 or 2. 
+            It is True if generated vetical loads should include the effects of the rotated structure, otherwise it is False.</param>
+            <param name="adjustGravityVerticalFactor">This item only applies when using LoadMethod 1 or 2. 
+            This is a scale factor on the vertical effects generated as a result of the rotated structure.</param>
+            <param name="centerRotation">This is an array dimensioned to 2 (3 doubles) that defines the coordinates of the center of rotation, with respect to the selected coordinate system.</param>
+            <param name="parameters">This is an array of the inertia load parameters, based on the specified LoadMethod, as described below. For all cases, the array contains the amplitude, period, &amp; phase for each DOF: 
+            Load Method = 1: UZ, RX, RY, Load Method = 2: UX, UY, UZ, RX, RY, RZ, Load Method = 3: UX, UY, UZ, RX, RY, RZ</param>
+            <param name="ignorePhase">This item only applies when using LoadMethod 1 or 2. 
+            It is True if the input phases should be ignored, otherwise it is False.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoWave.SetAuto(System.String,System.Int32,System.String,System.Boolean,System.Double,System.Boolean,System.Double,System.Double[],System.Double[],System.Boolean)">
+            <summary>
+            This function retrieves auto seastate loading parameters.
+            </summary>
+            <param name="name">The name of an existing seastate-type load pattern.</param>
+            <param name="loadMethod">This is one of the following three options defining what parameters are being specified.</param>
+            <param name="coordinateSystem">The coordinate system used as a reference for specifying the center of rotation location and the inertia load parameters.</param>
+            <param name="adjustGravityLateral">This item only applies when using LoadMethod 1 or 2. 
+            It is True if generated lateral loads should include the effects of the rotated structure, otherwise it is False.</param>
+            <param name="adjustGravityLateralFactor">This item only applies when using LoadMethod 1 or 2. 
+            This is a scale factor on the lateral effects generated as a result of the rotated structure.</param>
+            <param name="adjustGravityVertical">This item only applies when using LoadMethod 1 or 2. 
+            It is True if generated vetical loads should include the effects of the rotated structure, otherwise it is False.</param>
+            <param name="adjustGravityVerticalFactor">This item only applies when using LoadMethod 1 or 2. 
+            This is a scale factor on the vertical effects generated as a result of the rotated structure.</param>
+            <param name="centerRotation">This is an array dimensioned to 2 (3 doubles) that defines the coordinates of the center of rotation, with respect to the selected coordinate system.</param>
+            <param name="parameters">This is an array of the inertia load parameters, based on the specified LoadMethod, as described below. For all cases, the array contains the amplitude, period, &amp; phase for each DOF: 
+            Load Method = 1: UZ, RX, RY, Load Method = 2: UX, UY, UZ, RX, RY, RZ, Load Method = 3: UX, UY, UZ, RX, RY, RZ</param>
+            <param name="ignorePhase">This item only applies when using LoadMethod 1 or 2. 
+            It is True if the input phases should be ignored, otherwise it is False.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoWind">
+            <summary>
+            Represents an auto wind load pattern in the application.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoWind.GetAutoCode(System.String,System.String@)">
+            <summary>
+            This function retrieves the code name used for auto seismic parameters in Wind-type load patterns.
+            An error is returned if the specified load pattern is not a Wind-type load pattern.
+            </summary>
+            <param name="name">The name of an existing Wind-type load pattern.</param>
+            <param name="codeName">This is either blank or the name code used for the auto wind parameters. 
+            Blank means no auto wind load is specified for the Wind-type load pattern.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoWind.SetNone(System.String)">
+            <summary>
+            This function set the auto wind loading type for the specified load pattern to None.
+            </summary>
+            <param name="name">The name of an existing Wind-type load pattern.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoWind.GetExposure(System.String,System.Int32@,System.String[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@,System.Double[]@)">
+            <summary>
+            This function retrieves exposure parameters for auto wind loads determined from extents of rigid diaphragms. 
+            This function does not apply for User-type auto wind loads.
+            </summary>
+            <param name="patternName">The name of an existing Wind-type load pattern that has an auto wind load assigned.</param>
+            <param name="numberOfDiaphragms">The number of diaphragms at which exposure data is reported.</param>
+            <param name="diaphragmNames">This is an array that includes the names of the diaphragms that have eccentricity overrides.</param>
+            <param name="xCoordinates">This is an array that includes the global X-coordinate of the point where the wind force load is applied to the diaphragm. [L]</param>
+            <param name="yCoordinates">This is an array that includes the global Y-coordinate of the point where the wind force load is applied to the diaphragm. [L]</param>
+            <param name="diaphragmWidth">This is an array that includes the exposure width for the wind load applied to the specified diaphragm. [L]</param>
+            <param name="diaphragmDepth">This is an array that includes the exposure depth for the wind load applied to the specified diaphragm. [L]</param>
+            <param name="diaphragmHeight">This is an array that includes the exposure height for the wind load applied to the specified diaphragm. [L]</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatternAutoWind.SetExposure(System.String,System.String,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            This function assigns exposure parameters for auto wind loads determined from extents of rigid diaphragms. 
+            This function does not apply for User-type auto wind loads.
+            </summary>
+            <param name="patternName">The name of an existing Wind-type load pattern that has an auto wind load assigned.</param>
+            <param name="diaphragmName">The name of an existing special rigid diaphragm constraint, that is, a diaphragm constraint with the following features:
+            1. The constraint type is CONSTRAINT_DIAPHRAGM = 2.
+            2. The constraint coordinate system is Global.
+            3. The constraint axis is Z. </param>
+            <param name="xCoordinate">The global X-coordinate of the point where the wind force is applied. [L]</param>
+            <param name="yCoordinate">The global Y-coordinate of the point where the wind force is applied. [L]</param>
+            <param name="diaphragmWidth">The exposure width for the wind load applied to the specified diaphragm. [L]</param>
+            <param name="diaphragmDepth">The exposure depth for the wind load applied to the specified diaphragm. [L]</param>
+            <param name="diaphragmHeight">The exposure height for the wind load applied to the specified diaphragm. [L]</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.Group">
+            <summary>
+            Represents a group in the application.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.Program.ModelBehavior.Definition.Group.Assignment">
+            <summary>
+            Assignments to a group, such as the name, and contained objects.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.Program.ModelBehavior.Definition.Group.Properties">
+            <summary>
+            Properties of the group, such as color and specified uses.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.GroupAssignments">
+            <summary>
+            Assignments to a group, such as the name, and contained objects.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.GroupAssignments.ChangeName(System.String,System.String)">
+            <summary>
+            Changes the name of the group. 
+            "ALL" is a reserved group name and cannot be changed.
+            </summary>
+            <param name="nameExisting">Existing name of a defined group.</param>
+            <param name="nameNew">New name for the group. Cannot be "ALL".</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.GroupAssignments.Clear(System.String)">
+            <summary>
+            Function clears (removes) all assignments from the specified group.
+            </summary>
+            <param name="nameGroup">Name of an existing group.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.GroupAssignments.GetAssignments(System.String,System.Int32@,System.Int32[]@,System.String[]@)">
+            <summary>
+            Retrieves the assignments to a specified group.
+            </summary>
+            <param name="nameGroup">Name of an existing group to get the assignments for.</param>
+            <param name="numberOfAssignmentsToGroup">Number of assignments made to the specified group.</param>
+            <param name="objectType">Object type of each item in the group correpsonding to an integer code.</param>
+            <param name="objectNames">Name of each item in the group.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.GroupProperties">
+            <summary>
+            Properties of the group, such as color and specified uses.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.GroupProperties.GetGroup(System.String,System.Int32@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@)">
+            <summary>
+            Gets the group properties, such as display color and usages.
+            </summary>
+            <param name="name">Name of an existing group to get the properties for.</param>
+            <param name="color">Display color for the group specified.</param>
+            <param name="specifiedForSelection">True: The group is specified to be used for selection.</param>
+            <param name="specifiedForSectionCutDefinition">True: The group is specified to be used for defining section cuts.</param>
+            <param name="specifiedForSteelDesign">True: The group is specified to be used for defining steel frame design groups.</param>
+            <param name="specifiedForConcreteDesign">True: The group is specified to be used for defining concrete frame design groups.</param>
+            <param name="specifiedForAluminumDesign">True: The group is specified to be used for defining alumnimum frame design groups.</param>
+            <param name="specifiedForColdFormedDesign">True: The group is specified to be used for defining colf formed frame design groups.</param>
+            <param name="specifiedForStaticNLActiveStage">True: The group is specified to be used for defining stages for nonlinear static analysis.</param>
+            <param name="specifiedForBridgeResponseOutput">True: The group is specified to be used for reporting bridge response output.</param>
+            <param name="specifiedForAutoSeismicOutput">True: The group is specified to be used for reporting auto seismic loads.</param>
+            <param name="specifiedForAutoWindOutput">True: The group is specified to be used for reporting auto wind loads.</param>
+            <param name="specifiedForMassAndWeight">True: The group is specified to be used for reporting group masses and weight.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.GroupProperties.SetGroup(System.String,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Sets group properties, such as display color and usages.
+            </summary>
+            <param name="name">Group name to assign the properties to.</param>
+            <param name="color">Display color for the group specified.
+            If this value is input as –1, the program automatically selects a display color for the group.</param>
+            <param name="specifiedForSelection">True: The group is specified to be used for selection.</param>
+            <param name="specifiedForSectionCutDefinition">True: The group is specified to be used for defining section cuts.</param>
+            <param name="specifiedForSteelDesign">True: The group is specified to be used for defining steel frame design groups.</param>
+            <param name="specifiedForConcreteDesign">True: The group is specified to be used for defining concrete frame design groups.</param>
+            <param name="specifiedForAluminumDesign">True: The group is specified to be used for defining alumnimum frame design groups.</param>
+            <param name="specifiedForColdFormedDesign">True: The group is specified to be used for defining colf formed frame design groups.</param>
+            <param name="specifiedForStaticNLActiveStage">True: The group is specified to be used for defining stages for nonlinear static analysis.</param>
+            <param name="specifiedForBridgeResponseOutput">True: The group is specified to be used for reporting bridge response output.</param>
+            <param name="specifiedForAutoSeismicOutput">True: The group is specified to be used for reporting auto seismic loads.</param>
+            <param name="specifiedForAutoWindOutput">True: The group is specified to be used for reporting auto wind loads.</param>
+            <param name="specifiedForMassAndWeight">True: The group is specified to be used for reporting group masses and weight.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.Groups">
+            <summary>
+            Represents groups in the application.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.Program.ModelBehavior.Definition.Groups.Group">
+            <summary>
+            Represents a group in the application.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.Groups.Count">
+            <summary>
+            Return the number of defined groups.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.Groups.GetNameList(System.Int32@,System.String[]@)">
+            <summary>
+            Retrieves the names of all defined groups.
+            </summary>
+            <param name="numberGroupNames">Number of group names retrieved by the program.</param>
+            <param name="groupNames">Names of all defined groups.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.Groups.Delete(System.String)">
+            <summary>
+            Deletes the specified group.
+            "ALL" is a reserved group name and cannot be deleted.
+            </summary>
+            <param name="nameGroup">Name of an existing group. Cannot be "ALL".</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern">
+            <summary>
+            Represents a load pattern in the application.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.ChangeName(System.String,System.String)">
+            <summary>
+            This function applies a new name to a load pattern.
+            </summary>
+            <param name="name">The name of a defined load pattern.</param>
+            <param name="newName">The new name for the load pattern.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.GetLoadType(System.String,MPT.CSI.API.Core.eLoadPatternType@)">
+            <summary>
+            This function retrieves the load type for a specified load pattern.
+            </summary>
+            <param name="name">The name of an existing load pattern.</param>
+            <param name="loadPatternType">This is one of the items in the eLoadPatternType enumeration.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.SetLoadType(System.String,MPT.CSI.API.Core.eLoadPatternType)">
+            <summary>
+            This function assigns a load type to a load pattern.
+            </summary>
+            <param name="name">The name of an existing load pattern.</param>
+            <param name="loadPatternType">This is one of the items in the eLoadPatternType enumeration.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.GetSelfWtMultiplier(System.String,System.Double@)">
+            <summary>
+            This function retrieves the self weight multiplier for a specified load pattern.
+            </summary>
+            <param name="name">The name of an existing load pattern.</param>
+            <param name="selfWeightMultiplier">The self weight multiplier for the specified load pattern.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.SetSelfWtMultiplier(System.String,System.Double)">
+            <summary>
+            This function assigns a self weight multiplier to a load case.
+            </summary>
+            <param name="name">The name of an existing load pattern.</param>
+            <param name="selfWeightMultiplier">The self weight multiplier for the specified load pattern.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatterns">
+            <summary>
+            Represents load patterns in the application.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatterns.LoadPattern">
+            <summary>
+            Represents a load pattern in the application.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatterns.AutoSeismicPattern">
+            <summary>
+            Represents an auto seismic load pattern in the application.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatterns.AutoWavePattern">
+            <summary>
+            Represents an auto wave load pattern in the application.
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatterns.AutoWindPattern">
+            <summary>
+            Represents an auto wind load pattern in the application.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatterns.Add(System.String,MPT.CSI.API.Core.eLoadPatternType,System.Double,System.Boolean)">
+            <summary>
+            Adds a new load pattern.
+            An error is returned if the Name item is already used for an existing load pattern.
+            </summary>
+            <param name="name">Name for the new load pattern.</param>
+            <param name="loadPatternType">Load pattern type.</param>
+            <param name="selfWeightMultiplier">Self weight multiplier for the new load pattern.</param>
+            <param name="addLoadCase">True: A linear static load case corresponding to the new load pattern is added.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatterns.Count">
+            <summary>
+            The number of defined load patterns.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatterns.Delete(System.String)">
+            <summary>
+            The function deletes the specified load pattern.
+            The load pattern is not deleted and the function returns an error if the load pattern is assigned to an load case or if it is the only defined load pattern.
+            </summary>
+            <param name="name">The name of an existing load pattern.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPatterns.GetNameList(System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of all defined load cases.
+            </summary>
+            <param name="numberOfNames">The number of load pattern names retrieved by the program.</param>
+            <param name="loadPatternNames">This is a one-dimensional array of load pattern names.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal">
+            <summary>
+            Implements a design interface for all metal-based frame elements.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal.GetSummaryResults(System.String,System.Int32@,System.String[]@,System.Double[]@,System.Int32[]@,System.Double[]@,System.String[]@,System.String[]@,System.String[]@,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Retrieves summary results for frame design.
+            </summary>
+            <param name="name">The name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="numberResults">The number of frame objects for which results are obtained.</param>
+            <param name="frameNames">This is an array that includes each frame object name for which results are obtained.</param>
+            <param name="ratios">This is an array that includes the controlling stress or capacity ratio for each frame object.</param>
+            <param name="ratioTypes">This is an array that includes the controlling stress or capacity ratio for each frame object.</param>
+            <param name="locations">This is an array that includes the distance from the I-end of the frame object to the location where the controlling stress or capacity ratio occurs. [L]</param>
+            <param name="comboNames">This is an array that includes the name of the design combination for which the controlling stress or capacity ratio occurs.</param>
+            <param name="errorSummaries">This is an array that includes the design error messages for the frame object, if any.</param>
+            <param name="warningSummaries">This is an array that includes the design warning messages for the frame object, if any.</param>
+            <param name="itemType">This is one of the following items in the eItemType enumeration: Object = 0, Group = 1, SelectedObjects = 2
+            If this item is Object, the design results are retrieved for the frame object specified by the Name item.
+            If this item is Group, the design results are retrieved for all frame objects in the group specified by the Name item.
+            If this item is SelectedObjects, the design results are retrieved for all selected frame objects, and the Name item is ignored.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal.GetDesignSection(System.String,System.String@)">
+            <summary>
+            Retrieves the design section for a specified frame object.
+            </summary>
+            <param name="name">Name of a frame object with a frame design procedure.</param>
+            <param name="propName">The name of the design section for the specified frame object.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal.SetComboDeflection(System.String,System.Boolean)">
+            <summary>
+            Selects or deselects a load combination for deflection design.
+            </summary>
+            <param name="nameLoadCombination">Name of an existing load combination.</param>
+            <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for deflection design. 
+            False: The combination is not selected for deflection design.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal.SetDesignSection(System.String,System.String,System.Boolean,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Modifies the design section for all specified frame objects that have a frame design procedure.
+            </summary>
+            <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="nameFrame">Name of an existing frame section property to be used as the design section for the specified frame objects. 
+            This item applies only when resetToLastAnalysisSection = False.</param>
+            <param name="resetToLastAnalysisSection">True: The design section for the specified frame objects is reset to the last analysis section for the frame object. 
+            False: The design section is set to that specified by nameFrame.</param>
+            <param name="itemType">Selection type to use for applying the method.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal.SetGroup(System.String,System.Boolean)">
+            <summary>
+            Selects or deselects a group for frame design.
+            </summary>
+            <param name="nameGroup">Name of an existing group.</param>
+            <param name="selectForDesign">True: The specified group is selected as a design group for steel design. 
+            False: The group is not selected for steel design.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal.SetAutoSelectNull(System.String,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Removes the auto select section assignments from all specified frame objects that have a steel frame design procedure.
+            </summary>
+            <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="itemType">Selection type to use for applying the method.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignCode">
+            <summary>
+            Implements a design interface for all frame elements.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignCode.DeleteResults">
+            <summary>
+            Deletes all frame design results.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignCode.ResetOverwrites">
+            <summary>
+            Resets all frame design overwrites to default values.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignCode.StartDesign">
+            <summary>
+            Starts the frame design.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignCode.VerifyPassed(System.Int32@,System.Int32@,System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that did not pass the design check or have not yet been checked, if any.
+            </summary>
+            <param name="numberNotPassedOrChecked">The number of concrete frame objects that did not pass the design check or have not yet been checked.</param>
+            <param name="numberDidNotPass">The number of concrete frame objects that did not pass the design check.</param>
+            <param name="numberNotChecked">The number of concrete frame objects that have not yet been checked.</param>
+            <param name="namesNotPassedOrChecked">This is an array that includes the name of each frame object that did not pass the design check or has not yet been checked.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignCode.VerifySections(System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that have different analysis and design sections, if any.
+            </summary>
+            <param name="numberDifferentSections">The number of frame objects that have different analysis and design sections.</param>
+            <param name="namesDifferentSections">This is an array that includes the name of each frame object that has different analysis and design sections.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignCode.SetComboStrength(System.String,System.Boolean)">
+            <summary>
+            Selects or deselects a load combination for strength design.
+            </summary>
+            <param name="nameLoadCombination">Name of an existing load combination.</param>
+            <param name="setLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
+            False: The combination is not selected for strength design.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrame">
+            <summary>
+            Abstract class for all frame design results.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrame.DeleteResults">
+            <summary>
+            Deletes all frame design results.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrame.ResetOverwrites">
+            <summary>
+            Resets all frame design overwrites to default values.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrame.SetComboStrength(System.String,System.Boolean)">
+            <summary>
+            Selects or deselects a load combination for strength design.
+            </summary>
+            <param name="nameLoadCombination">Name of an existing load combination.</param>
+            <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
+            False: The combination is not selected for strength design.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrame.StartDesign">
+            <summary>
+            Starts the frame design.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrame.VerifyPassed(System.Int32@,System.Int32@,System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that did not pass the design check or have not yet been checked, if any.
+            </summary>
+            <param name="numberNotPassedOrChecked">The number of concrete frame objects that did not pass the design check or have not yet been checked.</param>
+            <param name="numberDidNotPass">The number of concrete frame objects that did not pass the design check.</param>
+            <param name="numberNotChecked">The number of concrete frame objects that have not yet been checked.</param>
+            <param name="namesNotPassedOrChecked">This is an array that includes the name of each frame object that did not pass the design check or has not yet been checked.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrame.VerifySections(System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that have different analysis and design sections, if any.
+            </summary>
+            <param name="numberDifferentSections">The number of frame objects that have different analysis and design sections.</param>
+            <param name="namesDifferentSections">This is an array that includes the name of each frame object that has different analysis and design sections.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrameMetal">
+            <summary>
+            Abstract class for all steel frame design results.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrameMetal.GetDesignSection(System.String,System.String@)">
+            <summary>
+            Retrieves the design section for a specified frame object.
+            </summary>
+            <param name="nameFrame">Name of a frame object with a frame design procedure.</param>
+            <param name="nameSection">The name of the design section for the specified frame object.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrameMetal.GetSummaryResults(System.String,System.Int32@,System.String[]@,System.Double[]@,System.Int32[]@,System.Double[]@,System.String[]@,System.String[]@,System.String[]@,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Retrieves summary results for frame design.
+            </summary>
+            <param name="name">The name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="numberResults">The number of frame objects for which results are obtained.</param>
+            <param name="frameNames">This is an array that includes each frame object name for which results are obtained.</param>
+            <param name="ratios">This is an array that includes the controlling stress or capacity ratio for each frame object.</param>
+            <param name="ratioTypes">This is an array that includes the controlling stress or capacity ratio for each frame object.</param>
+            <param name="locations">This is an array that includes the distance from the I-end of the frame object to the location where the controlling stress or capacity ratio occurs. [L]</param>
+            <param name="comboNames">This is an array that includes the name of the design combination for which the controlling stress or capacity ratio occurs.</param>
+            <param name="errorSummaries">This is an array that includes the design error messages for the frame object, if any.</param>
+            <param name="warningSummaries">This is an array that includes the design warning messages for the frame object, if any.</param>
+            <param name="itemType">This is one of the following items in the eItemType enumeration: Object = 0, Group = 1, SelectedObjects = 2
+            If this item is Object, the design results are retrieved for the frame object specified by the Name item.
+            If this item is Group, the design results are retrieved for all frame objects in the group specified by the Name item.
+            If this item is SelectedObjects, the design results are retrieved for all selected frame objects, and the Name item is ignored.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrameMetal.SetAutoSelectNull(System.String,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Removes the auto select section assignments from all specified frame objects that have a steel frame design procedure.
+            </summary>
+            <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="itemType">Selection type to use for applying the method.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrameMetal.SetComboDeflection(System.String,System.Boolean)">
+            <summary>
+            Selects or deselects a load combination for deflection design.
+            </summary>
+            <param name="nameLoadCombination">Name of an existing load combination.</param>
+            <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for deflection design. 
+            False: The combination is not selected for deflection design.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrameMetal.SetDesignSection(System.String,System.String,System.Boolean,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Modifies the design section for all specified frame objects that have a frame design procedure.
+            </summary>
+            <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="nameSection">Name of an existing frame section property to be used as the design section for the specified frame objects. 
+            This item applies only when resetToLastAnalysisSection = False.</param>
+            <param name="resetToLastAnalysisSection">True: The design section for the specified frame objects is reset to the last analysis section for the frame object. 
+            False: The design section is set to that specified by nameFrame.</param>
+            <param name="itemType">Selection type to use for applying the method.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignFrameMetal.SetGroup(System.String,System.Boolean)">
+            <summary>
+            Selects or deselects a group for frame design.
+            </summary>
+            <param name="nameGroup">Name of an existing group.</param>
+            <param name="selectForDesign">True: The specified group is selected as a design group for steel design. 
+            False: The group is not selected for steel design.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignAluminum">
+            <summary>
+            Represents Aluminum design in the application.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignAluminum.DeleteResults">
+            <summary>
+            Deletes all frame design results.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignAluminum.ResetOverwrites">
+            <summary>
+            Resets all frame design overwrites to default values.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignAluminum.StartDesign">
+            <summary>
+            Starts the frame design.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignAluminum.VerifyPassed(System.Int32@,System.Int32@,System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that did not pass the design check or have not yet been checked, if any.
+            </summary>
+            <param name="numberNotPassedOrChecked">The number of concrete frame objects that did not pass the design check or have not yet been checked.</param>
+            <param name="numberDidNotPass">The number of concrete frame objects that did not pass the design check.</param>
+            <param name="numberNotChecked">The number of concrete frame objects that have not yet been checked.</param>
+            <param name="namesNotPassedOrChecked">This is an array that includes the name of each frame object that did not pass the design check or has not yet been checked.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignAluminum.VerifySections(System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that have different analysis and design sections, if any.
+            </summary>
+            <param name="numberDifferentSections">The number of frame objects that have different analysis and design sections.</param>
+            <param name="namesDifferentSections">This is an array that includes the name of each frame object that has different analysis and design sections.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignAluminum.GetDesignSection(System.String,System.String@)">
+            <summary>
+            Retrieves the design section for a specified frame object.
+            </summary>
+            <param name="nameFrame">Name of a frame object with a frame design procedure.</param>
+            <param name="nameSection">The name of the design section for the specified frame object.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignAluminum.GetSummaryResults(System.String,System.Int32@,System.String[]@,System.Double[]@,System.Int32[]@,System.Double[]@,System.String[]@,System.String[]@,System.String[]@,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Retrieves summary results for frame design.
+            </summary>
+            <param name="name">The name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="numberResults">The number of frame objects for which results are obtained.</param>
+            <param name="frameNames">This is an array that includes each frame object name for which results are obtained.</param>
+            <param name="ratios">This is an array that includes the controlling stress or capacity ratio for each frame object.</param>
+            <param name="ratioTypes">This is an array that includes the controlling stress or capacity ratio for each frame object.</param>
+            <param name="locations">This is an array that includes the distance from the I-end of the frame object to the location where the controlling stress or capacity ratio occurs. [L]</param>
+            <param name="comboNames">This is an array that includes the name of the design combination for which the controlling stress or capacity ratio occurs.</param>
+            <param name="errorSummaries">This is an array that includes the design error messages for the frame object, if any.</param>
+            <param name="warningSummaries">This is an array that includes the design warning messages for the frame object, if any.</param>
+            <param name="itemType">This is one of the following items in the eItemType enumeration: Object = 0, Group = 1, SelectedObjects = 2
+            If this item is Object, the design results are retrieved for the frame object specified by the Name item.
+            If this item is Group, the design results are retrieved for all frame objects in the group specified by the Name item.
+            If this item is SelectedObjects, the design results are retrieved for all selected frame objects, and the Name item is ignored.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignAluminum.SetComboStrength(System.String,System.Boolean)">
+            <summary>
+            Selects or deselects a load combination for strength design.
+            </summary>
+            <param name="nameLoadCombination">Name of an existing load combination.</param>
+            <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
+            False: The combination is not selected for strength design.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignColdFormed">
+            <summary>
+            Represents Cold-Formed Steel design in the application.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignColdFormed.DeleteResults">
+            <summary>
+            Deletes all frame design results.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignColdFormed.ResetOverwrites">
+            <summary>
+            Resets all frame design overwrites to default values.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignColdFormed.StartDesign">
+            <summary>
+            Starts the frame design.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignColdFormed.VerifyPassed(System.Int32@,System.Int32@,System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that did not pass the design check or have not yet been checked, if any.
+            </summary>
+            <param name="numberNotPassedOrChecked">The number of concrete frame objects that did not pass the design check or have not yet been checked.</param>
+            <param name="numberDidNotPass">The number of concrete frame objects that did not pass the design check.</param>
+            <param name="numberNotChecked">The number of concrete frame objects that have not yet been checked.</param>
+            <param name="namesNotPassedOrChecked">This is an array that includes the name of each frame object that did not pass the design check or has not yet been checked.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignColdFormed.VerifySections(System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that have different analysis and design sections, if any.
+            </summary>
+            <param name="numberDifferentSections">The number of frame objects that have different analysis and design sections.</param>
+            <param name="namesDifferentSections">This is an array that includes the name of each frame object that has different analysis and design sections.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignColdFormed.GetDesignSection(System.String,System.String@)">
+            <summary>
+            Retrieves the design section for a specified frame object.
+            </summary>
+            <param name="nameFrame">Name of a frame object with a frame design procedure.</param>
+            <param name="nameSection">The name of the design section for the specified frame object.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignColdFormed.GetSummaryResults(System.String,System.Int32@,System.String[]@,System.Double[]@,System.Int32[]@,System.Double[]@,System.String[]@,System.String[]@,System.String[]@,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Retrieves summary results for frame design.
+            </summary>
+            <param name="name">The name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="numberResults">The number of frame objects for which results are obtained.</param>
+            <param name="frameNames">This is an array that includes each frame object name for which results are obtained.</param>
+            <param name="ratios">This is an array that includes the controlling stress or capacity ratio for each frame object.</param>
+            <param name="ratioTypes">This is an array that includes the controlling stress or capacity ratio for each frame object.</param>
+            <param name="locations">This is an array that includes the distance from the I-end of the frame object to the location where the controlling stress or capacity ratio occurs. [L]</param>
+            <param name="comboNames">This is an array that includes the name of the design combination for which the controlling stress or capacity ratio occurs.</param>
+            <param name="errorSummaries">This is an array that includes the design error messages for the frame object, if any.</param>
+            <param name="warningSummaries">This is an array that includes the design warning messages for the frame object, if any.</param>
+            <param name="itemType">This is one of the following items in the eItemType enumeration: Object = 0, Group = 1, SelectedObjects = 2
+            If this item is Object, the design results are retrieved for the frame object specified by the Name item.
+            If this item is Group, the design results are retrieved for all frame objects in the group specified by the Name item.
+            If this item is SelectedObjects, the design results are retrieved for all selected frame objects, and the Name item is ignored.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignColdFormed.SetComboStrength(System.String,System.Boolean)">
+            <summary>
+            Selects or deselects a load combination for strength design.
+            </summary>
+            <param name="nameLoadCombination">Name of an existing load combination.</param>
+            <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
+            False: The combination is not selected for strength design.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignConcrete">
+            <summary>
+            Represents Concrete design in the application.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignConcrete.DeleteResults">
+            <summary>
+            Deletes all frame design results.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignConcrete.ResetOverwrites">
+            <summary>
+            Resets all frame design overwrites to default values.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignConcrete.StartDesign">
+            <summary>
+            Starts the frame design.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignConcrete.VerifyPassed(System.Int32@,System.Int32@,System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that did not pass the design check or have not yet been checked, if any.
+            </summary>
+            <param name="numberNotPassedOrChecked">The number of concrete frame objects that did not pass the design check or have not yet been checked.</param>
+            <param name="numberDidNotPass">The number of concrete frame objects that did not pass the design check.</param>
+            <param name="numberNotChecked">The number of concrete frame objects that have not yet been checked.</param>
+            <param name="namesNotPassedOrChecked">This is an array that includes the name of each frame object that did not pass the design check or has not yet been checked.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignConcrete.VerifySections(System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that have different analysis and design sections, if any.
+            </summary>
+            <param name="numberDifferentSections">The number of frame objects that have different analysis and design sections.</param>
+            <param name="namesDifferentSections">This is an array that includes the name of each frame object that has different analysis and design sections.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignConcrete.SetComboStrength(System.String,System.Boolean)">
+            <summary>
+            Selects or deselects a load combination for strength design.
+            </summary>
+            <param name="nameLoadCombination">Name of an existing load combination.</param>
+            <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
+            False: The combination is not selected for strength design.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignConcrete.GetSummaryResultsBeam(System.String,System.Int32@,System.String[]@,System.Double[]@,System.String[]@,System.Double[]@,System.String[]@,System.Double[]@,System.String[]@,System.Double[]@,System.String[]@,System.Double[]@,System.String[]@,System.Double[]@,System.String[]@,System.String[]@,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Retrieves summary results for concrete design of beams.
+            Torsion results are not included for all codes.
+            </summary>
+            <param name="name">The name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="numberItems">The number of frame objects for which results are obtained</param>
+            <param name="frameName">This is an array that includes each frame object name for which results are obtained.</param>
+            <param name="location">This is an array that includes the distance from the I-end of the frame object to the location where the results are reported. [L]</param>
+            <param name="topCombo">This is an array that includes the name of the design combination for which the controlling top longitudinal rebar area for flexure occurs. 
+            A combination name followed by (Sp) indicates that the design loads were obtained by applying special, code-specific multipliers to all or part of the specified design load combination, or that the design was based on the capacity of other objects (or other design locations for the same object).</param>
+            <param name="topArea">This is an array that includes the total top longitudinal rebar area required for the flexure at the specified location. 
+            It does not include the area of steel required for torsion. [L^2]</param>
+            <param name="botCombo">This is an array that includes the name of the design combination for which the controlling bottom longitudinal rebar area for flexure occurs. 
+            A combination name followed by (Sp) indicates that the design loads were obtained by applying special, code-specific, multipliers to all or part of the specified design load combination, or that the design was based on the capacity of other objects (or other design locations for the same object).</param>
+            <param name="botArea">This is an array that includes the total bottom longitudinal rebar area required for the flexure at the specified location. 
+            It does not include the area of steel required for torsion. [L^2]</param>
+            <param name="VMajorCombo">This is an array that includes the name of the design combination for which the controlling shear occurs. 
+            A combination name followed by (Sp) indicates that the design loads were obtained by applying special, code-specific, multipliers to all or part of the specified design load combination, or that the design was based on the capacity of other objects (or other design locations for the same object).</param>
+            <param name="VMajorArea">This is an array that includes the required area of transverse shear reinforcing per unit length along the frame object for shear at the specified location. [L^2/L]</param>
+            <param name="TLCombo">This is an array that includes the name of the design combination for which the controlling longitudinal rebar area for torsion occurs. 
+            A combination name followed by (Sp) indicates that the design loads were obtained by applying special, code-specific, multipliers to all or part of the specified design load combination, or that the design was based on the capacity of other objects (or other design locations for the same object).</param>
+            <param name="TLArea">This is an array that includes the total longitudinal rebar area required for torsion. [L^2]</param>
+            <param name="TTCombo">This is an array that includes the name of the design combination for which the controlling transverse reinforcing for torsion occurs. 
+            A combination name followed by (Sp) indicates that the design loads were obtained by applying special, code-specific, multipliers to all or part of the specified design load combination, or that the design was based on the capacity of other objects (or other design locations for the same object).</param>
+            <param name="TTArea">This is an array that includes the required area of transverse torsional shear reinforcing per unit length along the frame object for torsion at the specified location. [L^2/L]</param>
+            <param name="errorSummary">This is an array that includes the design error messages for the frame object, if any.</param>
+            <param name="warningSummary">This is an array that includes the design warning messages for the frame object, if any.</param>
+            <param name="itemType">This is one of the following items in the eItemType enumeration.
+            If this item is Object, the design results are retrieved for the frame object specified by the Name item.
+            If this item is Group, the design results are retrieved for all frame objects in the group specified by the Name item.
+            If this item is SelectedObjects, the design results are retrieved for all selected frame objects, and the Name item is ignored.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignConcrete.GetSummaryResultsColumn(System.String,System.Int32@,System.String[]@,System.Int32[]@,System.Double[]@,System.String[]@,System.Double[]@,System.Double[]@,System.String[]@,System.Double[]@,System.String[]@,System.Double[]@,System.String[]@,System.String[]@,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Retrieves summary results for concrete design of columns.
+            </summary>
+            <param name="name">The name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="numberItems">The number of frame objects for which results are obtained</param>
+            <param name="frameName">This is an array that includes each frame object name for which results are obtained.</param>
+            <param name="myOption">This is an array that includes 1 or 2, indicating the design option for each frame object: 1 = Check, 2 = Design </param>
+            <param name="location">This is an array that includes the distance from the I-end of the frame object to the location where the results are reported. [L]</param>
+            <param name="PMMCombo">This is an array that includes the name of the design combination for which the controlling PMM ratio or rebar area occurs. 
+            A combination name followed by (Sp) indicates that the design loads were obtained by applying special, code-specific multipliers to all or part of the specified design load combination, or that the design was based on the capacity of other objects (or other design locations for the same object).</param>
+            <param name="PMMArea">This is an array that includes the total longitudinal rebar area required for the axial force plus biaxial moment (PMM) design at the specified location. [L^2]</param>
+            <param name="PMMRatio">This is an array that includes the axial force plus biaxial moment (PMM) stress ratio at the specified location.
+            Item applies only when MyOption = 1 (check).</param>
+            <param name="VMajorCombo">This is an array that includes the name of the design combination for which the controlling major shear occurs.</param>
+            <param name="AVMajor">This is an array that includes the required area of transverse shear reinforcing per unit length along the frame object for major shear at the specified location. [L^2/L]</param>
+            <param name="VMinorCombo">This is an array that includes the name of the design combination for which the controlling minor shear occurs.</param>
+            <param name="AVMinor">This is an array that includes the required area of transverse shear reinforcing per unit length along the frame object for minor shear at the specified location. [L^2/L]</param>
+            <param name="errorSummary">This is an array that includes the design error messages for the frame object, if any.</param>
+            <param name="warningSummary">This is an array that includes the design warning messages for the frame object, if any.</param>
+            <param name="itemType">This is one of the following items in the eItemType enumeration.
+            If this item is Object, the design results are retrieved for the frame object specified by the Name item.
+            If this item is Group, the design results are retrieved for all frame objects in the group specified by the Name item.
+            If this item is SelectedObjects, the design results are retrieved for all selected frame objects, and the Name item is ignored.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignConcrete.GetSummaryResultsJoint(System.String,System.Int32@,System.String[]@,System.String[]@,System.Double[]@,System.String[]@,System.Double[]@,System.String[]@,System.Double[]@,System.String[]@,System.Double[]@,System.String[]@,System.String[]@,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Retrieves summary results for concrete design of joints.
+            </summary>
+            <param name="name">The name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="numberItems">The number of frame objects for which results are obtained</param>
+            <param name="frameName">This is an array that includes each frame object name for which results are obtained.</param>
+            <param name="LCJSRatioMajor">This is an array that includes the name of the design combination for which the controlling joint shear ratio associated with the column major axis occurs. 
+            A combination name followed by (Sp) indicates that the design loads were obtained by applying special, code-specific multipliers to all or part of the specified design load combination, or that the design was based on the capacity of other objects (or other design locations for the same object).</param>
+            <param name="JSRatioMajor">This is an array that includes the joint shear ratio associated with the column major axis. 
+            This is the joint shear divided by the joint shear capacity.</param>
+            <param name="LCJSRatioMinor">This is an array that includes the name of the design combination for which the controlling joint shear ratio associated with the column minor axis occurs. 
+            A combination name followed by (Sp) indicates that the design loads were obtained by applying special, code-specific multipliers to all or part of the specified design load combination, or that the design was based on the capacity of other objects (or other design locations for the same object).</param>
+            <param name="JSRatioMinor">This is an array that includes the joint shear ratio associated with the column minor axis. 
+            This is the joint shear divided by the joint shear capacity.</param>
+            <param name="LCBCCRatioMajor">This is an array that includes the name of the design combination for which the controlling beam/column capacity ratio associated with the column major axis occurs. 
+            A combination name followed by (Sp) indicates that the design loads were obtained by applying special, code-specific multipliers to all or part of the specified design load combination, or that the design was based on the capacity of other objects (or other design locations for the same object).</param>
+            <param name="BCCRatioMajor">This is an array that includes the beam/column capacity ratio associated with the column major axis. 
+            This is the sum of the column capacities divided by the sum of the beam capacities at the top of the specified column.</param>
+            <param name="LCBCCRatioMinor">This is an array that includes the name of the design combination for which the controlling beam/column capacity ratio associated with the column minor axis occurs. 
+            A combination name followed by (Sp) indicates that the design loads were obtained by applying special, code-specific multipliers to all or part of the specified design load combination, or that the design was based on the capacity of other objects (or other design locations for the same object).</param>
+            <param name="BCCRatioMinor">This is an array that includes the beam/column capacity ratio associated with the column minor axis. This is the sum of the column capacities divided by the sum of the beam capacities at the top of the specified column.</param>
+            <param name="errorSummary">This is an array that includes the design error messages for the frame object, if any.</param>
+            <param name="warningSummary">This is an array that includes the design warning messages for the frame object, if any.</param>
+            <param name="itemType">This is one of the following items in the eItemType enumeration.
+            If this item is Object, the design results are retrieved for the frame object specified by the Name item.
+            If this item is Group, the design results are retrieved for all frame objects in the group specified by the Name item.
+            If this item is SelectedObjects, the design results are retrieved for all selected frame objects, and the Name item is ignored.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel">
+            <summary>
+            Represents Steel design in the application.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.DeleteResults">
+            <summary>
+            Deletes all frame design results.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.ResetOverwrites">
+            <summary>
+            Resets all frame design overwrites to default values.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.StartDesign">
+            <summary>
+            Starts the frame design.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.VerifyPassed(System.Int32@,System.Int32@,System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that did not pass the design check or have not yet been checked, if any.
+            </summary>
+            <param name="numberNotPassedOrChecked">The number of concrete frame objects that did not pass the design check or have not yet been checked.</param>
+            <param name="numberDidNotPass">The number of concrete frame objects that did not pass the design check.</param>
+            <param name="numberNotChecked">The number of concrete frame objects that have not yet been checked.</param>
+            <param name="namesNotPassedOrChecked">This is an array that includes the name of each frame object that did not pass the design check or has not yet been checked.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.VerifySections(System.Int32@,System.String[]@)">
+            <summary>
+            This function retrieves the names of the frame objects that have different analysis and design sections, if any.
+            </summary>
+            <param name="numberDifferentSections">The number of frame objects that have different analysis and design sections.</param>
+            <param name="namesDifferentSections">This is an array that includes the name of each frame object that has different analysis and design sections.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.GetDesignSection(System.String,System.String@)">
+            <summary>
+            Retrieves the design section for a specified frame object.
+            </summary>
+            <param name="nameFrame">Name of a frame object with a frame design procedure.</param>
+            <param name="nameSection">The name of the design section for the specified frame object.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.GetSummaryResults(System.String,System.Int32@,System.String[]@,System.Double[]@,System.Int32[]@,System.Double[]@,System.String[]@,System.String[]@,System.String[]@,MPT.CSI.API.Core.eItemType)">
+            <summary>
+            Retrieves summary results for frame design.
+            </summary>
+            <param name="name">The name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="numberResults">The number of frame objects for which results are obtained.</param>
+            <param name="frameNames">This is an array that includes each frame object name for which results are obtained.</param>
+            <param name="ratios">This is an array that includes the controlling stress or capacity ratio for each frame object.</param>
+            <param name="ratioTypes">This is an array that includes the controlling stress or capacity ratio for each frame object.</param>
+            <param name="locations">This is an array that includes the distance from the I-end of the frame object to the location where the controlling stress or capacity ratio occurs. [L]</param>
+            <param name="comboNames">This is an array that includes the name of the design combination for which the controlling stress or capacity ratio occurs.</param>
+            <param name="errorSummaries">This is an array that includes the design error messages for the frame object, if any.</param>
+            <param name="warningSummaries">This is an array that includes the design warning messages for the frame object, if any.</param>
+            <param name="itemType">This is one of the following items in the eItemType enumeration: Object = 0, Group = 1, SelectedObjects = 2
+            If this item is Object, the design results are retrieved for the frame object specified by the Name item.
+            If this item is Group, the design results are retrieved for all frame objects in the group specified by the Name item.
+            If this item is SelectedObjects, the design results are retrieved for all selected frame objects, and the Name item is ignored.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.SetComboStrength(System.String,System.Boolean)">
+            <summary>
+            Selects or deselects a load combination for strength design.
+            </summary>
+            <param name="nameLoadCombination">Name of an existing load combination.</param>
+            <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
+            False: The combination is not selected for strength design.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.GetDetailedResultsText(System.String,MPT.CSI.API.Core.eItemType,System.Int32,System.String,System.Int32@,System.String[]@,System.String[]@)">
+            <summary>
+            This function retrieves the design results from steel design output database tables.
+            Note that the summary table of all design codes is not included in this function.
+            </summary>
+            <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="itemType">Selection type to use for applying the method.</param>
+            <param name="table">Table ID of the steel design output database Tables. 
+            The table names are input as the representative table numbers and are code-based. 
+            Please see the appendix at the bottom of the steel class.</param>
+            <param name="field">Field name with TEXT output data type in the specified steel design result database Tables. 
+            The Field Names need to be the exactly same as the names in the specified steel design output database tables except the case is insensitive.</param>
+            <param name="numberFrames">Number of frame objects for which results are obtained.</param>
+            <param name="frameNames">Frame object names for which results are obtained.</param>
+            <param name="textResults">Design results with TEXT output data type of the request field in the request table for the specified frame objects.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.GetDetailedResultsNumerical(System.String,MPT.CSI.API.Core.eItemType,System.Int32,System.String,System.Int32@,System.String[]@,System.Double[]@)">
+            <summary>
+            This function retrieves the design results from steel design output database tables.
+            Note that the summary table of all design codes is not included in this function.
+            </summary>
+            <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
+            <param name="itemType">Selection type to use for applying the method.</param>
+            <param name="table">Table ID of the steel design output database Tables. 
+            The table names are input as the representative table numbers and are code-based. 
+            Please see the appendix at the bottom of the steel class.</param>
+            <param name="field">Field name with Numerical output data type in the specified steel design result database Tables. 
+            The Field Names need to be the exactly same as the names in the specified steel design output database tables except the case is insensitive.</param>
+            <param name="numberFrames">Number of frame objects for which results are obtained.</param>
+            <param name="frameNames">Frame object names for which results are obtained.</param>
+            <param name="numericalResults">Design results with Numerical output data type of the request field in the request table for the specified frame objects.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.GetTargetDisplacement(System.Int32@,System.String[]@,System.String[]@,System.Double[]@,System.Boolean@)">
+            <summary>
+            Retrieves lateral displacement targets for steel design.
+            </summary>
+            <param name="numberItems">Number of lateral displacement targets specified.</param>
+            <param name="loadCase">Name of the static linear load case associated with each lateral displacement target.</param>
+            <param name="namePoint">Name of the point object associated to which the lateral displacement target applies.</param>
+            <param name="displacementTargets">Lateral displacement targets. [L]</param>
+            <param name="allSpecifiedTargetsActive">True: All specified lateral displacement targets are active. 
+            False: They are inactive.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.SetTargetDisplacement(System.Int32,System.String[]@,System.String[]@,System.Double[]@,System.Boolean)">
+            <summary>
+            Sets lateral displacement targets for steel design.
+            </summary>
+            <param name="numberItems">Number of lateral displacement targets specified.</param>
+            <param name="loadCase">Name of the static linear load case associated with each lateral displacement target.</param>
+            <param name="namePoint">Name of the point object associated to which the lateral displacement target applies.</param>
+            <param name="displacementTargets">Lateral displacement targets. [L]</param>
+            <param name="allSpecifiedTargetsActive">True: All specified lateral displacement targets are active. 
+            False: They are inactive.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.GetTargetPeriod(System.Int32@,System.String@,System.Int32[]@,System.Double[]@,System.Boolean@)">
+            <summary>
+            Retrieves time period targets for steel design.
+            </summary>
+            <param name="numberItems">Number of targets specified.</param>
+            <param name="modalCase">Name of the modal load case for which the target applies.</param>
+            <param name="modeNumbers">Mode number associated with each target.</param>
+            <param name="periodTargets">Target periods. [s]</param>
+            <param name="allSpecifiedTargetsActive">True: All specified targets are active. 
+            False: They are inactive.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Design.DesignSteel.SetTargetPeriod(System.Int32,System.String,System.Int32[]@,System.Double[]@,System.Boolean)">
+            <summary>
+            Sets time period targets for steel design.
+            </summary>
+            <param name="numberItems">Number of targets specified.</param>
+            <param name="modalCase">Name of the modal load case for which the target applies.</param>
+            <param name="modeNumbers">Mode number associated with each target.</param>
+            <param name="periodTargets">Target periods. [s]</param>
+            <param name="allSpecifiedTargetsActive">True: All specified targets are active. 
+            False: They are inactive.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.CreateAnalysisModel">
+            <summary>
+            Creates the analysis model. 
+            If the analysis model is already created and current, nothing is done.
+            It is not necessary to call this function before running an analysis. 
+            The analysis model is automatically created, if necessary, when the model is run.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.RunAnalysis(System.String)">
+            <summary>
+            Runs the analysis. 
+            The analysis model is automatically created as part of this function.
+            </summary>
+            <param name="filePath">Path to the model file.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.GetActiveDOF(System.Boolean[]@)">
+            <summary>
+            Retrieves the model global degrees of freedom.
+            </summary>
+            <param name="dofArray">Boolean indications of which degrees of freedom are active.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.SetActiveDOF(System.Boolean[])">
+            <summary>
+            Sets the model global degrees of freedom.
+            </summary>
+            <param name="dofArray">Boolean indications of which degrees of freedom are active.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.GetSolverOption_1(System.Int32@,System.Int32@,System.Boolean@,System.String@)">
+            <summary>
+            Retrieves the model solver options.
+            </summary>
+            <param name="solverType"></param>
+            <param name="solverProcessType"></param>
+            <param name="force32BitSolver">True: Rhe analysis is always run using 32-bit, even on 64-bit computers.</param>
+            <param name="stiffCase">The name of the load case used when outputting the mass and stiffness matrices to text files. 
+            If this item is blank, no matrices are output.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.SetSolverOption_1(System.Int32,System.Int32,System.Boolean,System.String)">
+            <summary>
+             Sets the model solver options.
+            </summary>
+            <param name="solverType"></param>
+            <param name="solverProcessType"></param>
+            <param name="force32BitSolver">True: Rhe analysis is always run using 32-bit, even on 64-bit computers.</param>
+            <param name="stiffCase">The name of the load case used when outputting the mass and stiffness matrices to text files. 
+            If this item is blank, no matrices are output.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.DeleteResults(System.String,System.Boolean)">
+            <summary>
+            Deletes results for the specified load case.
+            </summary>
+            <param name="nameLoadCase">The name of an existing load case that is to have its results deleted.
+            This item is ignored when the 'All' item is 'True'.</param>
+            <param name="deleteAll">True: Results are deleted for all load cases, and the Name item is ignored.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.ModifyUnDeformedGeometry(System.String,System.Double,System.Int32,System.Boolean)">
+            <summary>
+            Modifies the undeformed geometry based on displacements obtained from a specified load case.
+            </summary>
+            <param name="caseName">The name of the static load case from which displacements are obtained.</param>
+            <param name="scaleFactor">The scale factor applied to the displacements.</param>
+            <param name="stageOfStageConstruction">This item applies only when the specified load case is a staged construction load case. 
+            It is the stage number from which the displacements are obtained.
+            Specifying a -1 for this item means to use the last run stage.</param>
+            <param name="resetToOriginal">True: All other input items in this function are ignored and the original undeformed geometry data is reinstated.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.ModifyUndeformedGeometryModeShape(System.String,System.Int32,System.Double,System.Int32,System.Boolean)">
+            <summary>
+            This function modifies the undeformed geometry based on the shape of a specified mode from a specified modal or buckling load case.
+            </summary>
+            <param name="caseName">The name of a modal or buckling load case.</param>
+            <param name="mode">The mode shape to consider.</param>
+            <param name="maxDisplacement">The maximum displacement to which the mode shape will be scaled.</param>
+            <param name="direction">The direction in which to apply the geometry modification.</param>
+            <param name="resetToOriginal">True: All other input items in this function are ignored and the original undeformed geometry data is reinstated.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.GetCaseStatus(System.Int32@,System.String[]@,System.Int32[]@)">
+            <summary>
+            Retrieves the status for all load cases.
+            </summary>
+            <param name="numberOfCases">The number of load cases for which the status is reported.</param>
+            <param name="caseName">This is an array that includes the name of each analysis case for which the status is reported.</param>
+            <param name="caseStatus">This is an array of that includes 1, 2, 3 or 4, indicating the load case status.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.GetRunCaseFlag(System.Int32@,System.String[]@,System.Boolean[]@)">
+            <summary>
+            Retrieves the run flags for all analysis cases.
+            </summary>
+            <param name="numberOfCases">The number of load cases for which the run flag is reported.</param>
+            <param name="caseName">This is an array that includes the name of each analysis case for which the run flag is reported.</param>
+            <param name="caseSetToRun">This is an array of boolean values indicating if the specified load case is to be run.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Analyzer.SetRunCaseFlag(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Sets the run flag for all of the existing load cases.
+            </summary>
+            <param name="caseName">The name of an existing load case that is to have its flag set.</param>
+            <param name="caseSetToRun">>True: The specified load case is to be run.</param>
+            <param name="applyToAll">True: The run flag is set as specified by the Run item for all load cases, and the Name item is ignored.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definitions.GetNotionalSize(System.String,System.String@,System.Double@)">
+            <summary>
+            Retrieves the method to determine the notional size of an area section for the creep and shrinkage calculations. 
+            This function is currently worked for shell type area section.
+            </summary>
+            <param name="nameShellSection">The name of an existing shell-type area section property.</param>
+            <param name="notionalSectionType">The type of notional size that is defined for the section.</param>
+            <param name="value">For notionalSectionType "Auto", the Value represents for the scale factor to the program-determined notional size. 
+            For notionalSectionType “User”, the Value represents for the user-defined notional size [L].</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Definitions.SetNotionalSize(System.String,System.String,System.Double)">
+            <summary>
+            Sets the method to determine the notional size of an area section for the creep and shrinkage calculations. 
+            This function is currently worked for shell type area section.
+            </summary>
+            <param name="nameShellSection">The name of an existing shell-type area section property.</param>
+            <param name="notionalSectionType">The type of notional size that is defined for the section.</param>
+            <param name="value">For notionalSectionType "Auto", the Value represents for the scale factor to the program-determined notional size. 
+            For notionalSectionType “User”, the Value represents for the user-defined notional size [L].</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Options.GetDimensions(System.Double@,System.Double@,System.Double@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            This function retrieves the program dimension and tolerance items.
+            </summary>
+            <param name="cuttingPlaneTol">The tolerance for 2D view cutting planes. [L]</param>
+            <param name="worldSpacing">The plan fine grid spacing. [L]</param>
+            <param name="nudgeValue">The plan nudge value. [L]</param>
+            <param name="pixelClickSize">The screen selection tolerance in pixels.</param>
+            <param name="pixelSnapSize">The screen snap tolerance in pixels.</param>
+            <param name="screenLineThickness">The screen line thickness in pixels.</param>
+            <param name="printLineThickness">The printer line thickness in pixels.</param>
+            <param name="maxFont">The maximum graphic font size in points.</param>
+            <param name="minFont">The minimum graphic font size in points.</param>
+            <param name="zoomStep">The auto zoom step size in percent (0 &lt; ZoomStep &lt;= 100).</param>
+            <param name="shrinkFactor">The shrink factor in percent (0 &lt; ShrinkFact &lt;= 100).</param>
+            <param name="textFileMaxChar">The maximum line length in the text file (ShrinkFact &gt;= 80).</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Options.SetDimensions(System.Double,System.Double,System.Double,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            This function sets program dimension and tolerance items. 
+            Inputting 0 for any item means that the item will be ignored by the program; that is, its current value will not be changed.
+            </summary>
+            <param name="cuttingPlaneTol">The tolerance for 2D view cutting planes. [L]</param>
+            <param name="worldSpacing">The plan fine grid spacing. [L]</param>
+            <param name="nudgeValue">The plan nudge value. [L]</param>
+            <param name="pixelClickSize">The screen selection tolerance in pixels.</param>
+            <param name="pixelSnapSize">The screen snap tolerance in pixels.</param>
+            <param name="screenLineThickness">The screen line thickness in pixels.</param>
+            <param name="printLineThickness">The printer line thickness in pixels.</param>
+            <param name="maxFont">The maximum graphic font size in points.</param>
+            <param name="minFont">The minimum graphic font size in points.</param>
+            <param name="zoomStep">The auto zoom step size in percent (0 &lt; ZoomStep &lt;= 100).</param>
+            <param name="shrinkFactor">The shrink factor in percent (0 &lt; ShrinkFact &lt;= 100).</param>
+            <param name="textFileMaxChar">The maximum line length in the text file (ShrinkFact &gt;= 80).</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.All(System.Boolean)">
+            <summary>
+            This function selects or deselects all objects in the model.
+            </summary>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.ClearSelection">
+            <summary>
+            This function deselects all objects in the model.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.InvertSelection">
+            <summary>
+            This function deselects all selected objects and selects all unselected objects; that is, it inverts the selection
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PreviousSelection">
+            <summary>
+            This function restores the previous selection.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.GetSelected(System.Int32@,System.Int32[]@,System.String[]@)">
+            <summary>
+            This function retrieves a list of selected objects.
+            </summary>
+            <param name="numberItems">The number of selected objects.</param>
+            <param name="objectType">This is an array that includes the object type of each selected object. 1 = Point object, 2 = Frame object, 3 = Cable object, 4 = Tendon object, 5 = Area object, 6 = Solid object, 7 = Link object</param>
+            <param name="objectName">This is an array that includes the name of each selected object.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.Constraint(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all point objects to which the specified constraint has been assigned.
+            </summary>
+            <param name="name">The name of an existing joint constraint.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.Group(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all objects in the specified group.
+            </summary>
+            <param name="name">The name of an existing group.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PropertyArea(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all area objects to which the specified section has been assigned.
+            </summary>
+            <param name="name">The name of an existing area section property.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PropertyCable(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all cable objects to which the specified section has been assigned.
+            </summary>
+            <param name="name">The name of an existing cable section property.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PropertyFrame(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all line objects to which the specified section has been assigned.
+            </summary>
+            <param name="name">The name of an existing frame section property.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PropertyLink(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all link objects to which the specified section property has been assigned.
+            </summary>
+            <param name="name">The name of an existing link property.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PropertyLinkFD(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all link objects to which the specified frequency dependent link property has been assigned.
+            </summary>
+            <param name="name">The name of an existing frequency dependent link property</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PropertyMaterial(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all objects to which the specified material property has been assigned.
+            </summary>
+            <param name="name">The name of an existing material property.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PropertySolid(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all solid objects to which the specified property has been assigned.
+            </summary>
+            <param name="name">The name of an existing solid property.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PropertyTendon(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all tendon objects to which the specified section has been assigned.
+            </summary>
+            <param name="name">The name of an existing tendon section property.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.LinesParallelToCoordAxis(System.Boolean[]@,System.String,System.Double,System.Boolean)">
+            <summary>
+            This function selects or deselects objects parallel to specified coordinate axes or planes.
+            </summary>
+            <param name="parallelTo">This is an array of six booleans representing three coordinate axes and three coordinate planes. Any combination of the six may be specified: X, Y, Z, XY, XZ, YZ.</param>
+            <param name="coordinateSystem">The name of the coordinate system to which the ParallelTo items apply.</param>
+            <param name="tolerance">Line objects that are within this angle in degrees of being parallel to a specified coordinate axis or plane are selected or deselected. [deg]</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.LinesParallelToLine(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all line objects that are parallel to a specified line object.
+            </summary>
+            <param name="name">The name of a line object.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PlaneXY(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all objects that are in the same XY plane (in the present coordinate system) as the specified point object.
+            </summary>
+            <param name="name">The name of a point object.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PlaneXZ(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all objects that are in the same XZ plane (in the present coordinate system) as the specified point object.
+            </summary>
+            <param name="name">The name of a point object.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.PlaneYZ(System.String,System.Boolean)">
+            <summary>
+            This function selects or deselects all objects that are in the same YZ plane (in the present coordinate system) as the specified point object.
+            </summary>
+            <param name="name">The name of a point object.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Selector.SupportedPoints(System.Boolean[]@,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            This function selects or deselects point objects with support in the specified degrees of freedom.
+            </summary>
+            <param name="DOF">This is an array of six booleans for the six degrees of freedom of a point object: U1, U2, U3, R1, R2, R3.</param>
+            <param name="coordinateSystem">The name of the coordinate system in which degrees of freedom (DOF) are specified. 
+            This is either Local or the name of a defined coordinate system. Local means the point local coordinate system.</param>
+            <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+            <param name="selectRestraints">True: Points with restraint assignments in one of the specified degrees of freedom are selected or deselected.</param>
+            <param name="selectJointSprings">True: Points with joint spring assignments in one of the specified degrees of freedom are selected or deselected.</param>
+            <param name="selectLineSprings">True: Points with a contribution from line spring assignments in one of the specified degrees of freedom are selected or deselected.</param>
+            <param name="selectAreaSprings">True: Points with a contribution from area spring assignments in one of the specified degrees of freedom are selected or deselected.</param>
+            <param name="selectSolidSprings">True: Points with a contribution from solid surface spring assignments in one of the specified degrees of freedom are selected or deselected.</param>
+            <param name="selectOneJointLinks">True: Points with one joint link assignments in one of the specified degrees of freedom are selected or deselected.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Viewer.RefreshView(System.Int32,System.Boolean)">
+            <summary>
+            This function refreshes the view for the specified window(s). 
+            A RefreshView takes longer to complete than a RefreshWindow.
+            RefreshView rebuilds all object arrays used for display and then updates the display. 
+            The RefreshView function should be called after operations that add, delete or move objects.
+            For example, after adding a new point object to the model, the  RefreshView function should be called. 
+            After modifying a joint restraint, the RefreshWindow function should be called.
+            </summary>
+            <param name="window">This is 0 meaning all windows or an existing window number. 
+            It indicates the window(s) to have its view refreshed.</param>
+            <param name="zoom">True: Window zoom is maintained when the view is refreshed. 
+            False: Zoom returns to a default zoom.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.ModelBehavior.Viewer.RefreshWindow(System.Int32)">
+            <summary>
+            This function refreshes the specified window(s).
+            A RefreshWindow takes shorter to complete than a RefreshView.
+            RefreshWindow simply updates the display.
+            The RefreshWindow function is adequate for other types of changes than operations that add, delete or move objects. 
+            For example, after adding a new point object to the model, the  RefreshView function should be called. 
+            After modifying a joint restraint, the RefreshWindow function should be called.
+            </summary>
+            <param name="window">This is 0 meaning all windows or an existing window number. 
+            It indicates the window(s) to have its view refreshed.</param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.CSiApplication">
+            <summary>
+            Manipulates the CSi application, such as opening, closing, setting visiblity and active object, etc.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiApplication.ApplicationStart(MPT.CSI.API.Core.eUnits,System.Boolean,System.String)">
+            <summary>
+            This function starts the application.
+            When the model is not visible it does not appear on screen and it does not appear in the Windows task bar. 
+            If no filename is specified, you can later open a model or create a model through the API.
+            The file name must have an .sdb, .$2k, .s2k, .xls, or .mdb extension. 
+            Files with .sdb extensions are opened as standard SAP2000 files. 
+            Files with .$2k and .s2k extensions are imported as text files. 
+            Files with .xls extensions are imported as Microsoft Excel files. 
+            Files with .mdb extensions are imported as Microsoft Access files.
+            </summary>
+            <param name="units">The database units used when a new model is created. 
+            Data is internally stored in the program in the database units.</param>
+            <param name="visible">True: The application is visible when started.  False: The application is hidden when started.</param>
+            <param name="fileName">The full path of a model file to be opened when the application is started. 
+            If no file name is specified, the application starts without loading an existing model.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiApplication.ApplicationExit(System.Boolean)">
+            <summary>
+            This function closes the application. 
+            If the model file is saved then it is saved with its current name.
+            </summary>
+            <param name="fileSave">True: The existing model file is saved prior to closing program.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiApplication.Hide">
+            <summary>
+            This function hides the application. 
+            When the application is hidden it is not visible on the screen or on the Windows task bar.
+            If the application is already hidden, no action is taken.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiApplication.UnHide">
+            <summary>
+            This function unhides the application. 
+            When the application is hidden it is not visible on the screen or on the Windows task bar.
+            If the application is already visible, no action is taken.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiApplication.Visible">
+            <summary>
+            True: The application is visible on the screen.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiApplication.SetAsActiveObject">
+            <summary>
+             This function sets the active instance of a _SapObject in the system Running Object Table (ROT), replacing the previous instance(s).
+            When a new _SapObject is created using the OAPI, it is automatically added to the system ROT if none is already present. 
+            Subsequent instances of the _SapObject do not alter the ROT as long as at least one active instance of a _SapObject is present in the ROT.
+            The Windows API call GetObject() can be used to attach to the active _SapObject instance registered in the ROT. 
+            When the application is started normally (i.e. not from the OAPI), it does not add an instance of the _SapObject to the ROT, hence the GetObject() call cannot be used to attach to the active _SapObject instance.
+            The Windows API call CreateObject() or New Sap2000v16._SapObject command can be used to attach to an instance of SAP2000 that is started normally (i.e. not from the OAPI). 
+            If there are multiple such instances, the first instance that will be attached to is the one that is started first.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiApplication.UnsetAsActiveObject">
+            <summary>
+            This function removes the current instance of a _sapObject from the system Running Object Table (ROT).
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.File">
+            <summary>
+            Implements all API functions within the 'File' namespace.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.File._fileName">
+            <summary>
+            File name of the current model, as tracked by the program and not obtained from the API.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.File._filePath">
+            <summary>
+            File path of the current model, as tracked by the program and not obtained from the API.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.FileName(System.Boolean)">
+            <summary>
+            Filename of the current model file, with or without the full path.
+            </summary>
+            <param name="includePath">True: Returned filename includes the full path where the file is located.</param>
+            <returns></returns>
+        </member>
+        <member name="P:MPT.CSI.API.Core.Program.File.FilePath">
+            <summary>
+            Path to the current model file.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.Open(System.String)">
+            <summary>
+            Opens the specified model file if it exists.
+            The file name must have an sdb, $2k, s2k, xlsx, xls, or mdb extension. 
+            Files with sdb extensions are opened as standard Sap2000 files. 
+            Files with $2k and s2k extensions are imported as text files. 
+            Files with xlsx and xls extensions are imported as Microsoft Excel files. 
+            Files with mdb extensions are imported as Microsoft Access files.
+            This function returns zero if the file is successfully opened and nonzero if it is not opened.
+            The function is only applicable when you are accessing the application API from an external application. 
+            It will return an error if you call it from VBA inside Sap2000.
+            </summary>
+            <param name="filePath">The full path of a model file to be opened in the application.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.Save(System.String)">
+            <summary>
+            Saves the model to a file. 
+            If no file name is specified, the file is saved using its current name.
+            </summary>
+            <param name="filePath">The full path to which the model file is saved.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.GetModelFileName(System.Boolean)">
+            <summary>
+            The function returns a string that represents the filename of the current model, with or without the full path.
+            </summary>
+            <param name="includePath">True: Returned filename includes the full path where the file is located.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.GetModelFilePath">
+            <summary>
+            Returns a string that represents the filepath of the current model.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.NewBlank">
+            <summary>
+            Creates a new blank model from template.
+            Do not use this function to add to an existing model. 
+            This function should be used only for creating a new model and typically would be preceded by calls to ApplicationStart or InitializeNewModel.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.New2DFrame(SAP2000v19.e2DFrameType,System.Int32,System.Double,System.Int32,System.Double,System.Boolean,System.String,System.String,System.String)">
+            <summary>
+            Creates a new template model of a 2D Frame.
+            Do not use this function to add to an existing model. 
+            This function should be used only for creating a new model and typically would be preceded by calls to ApplicationStart or InitializeNewModel.
+            </summary>
+            <param name="tempType"></param>
+            <param name="numberStories"></param>
+            <param name="storyHeight"></param>
+            <param name="numberBays"></param>
+            <param name="bayWidth"></param>
+            <param name="restraint"></param>
+            <param name="beam"></param>
+            <param name="column"></param>
+            <param name="brace"></param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.New3DFrame(SAP2000v19.e3DFrameType,System.Int32,System.Double,System.Int32,System.Int32,System.Double,System.Double,System.Boolean,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Creates a new template model of a 3D Frame.
+            Do not use this function to add to an existing model. 
+            This function should be used only for creating a new model and typically would be preceded by calls to ApplicationStart or InitializeNewModel.
+            </summary>
+            <param name="tempType"></param>
+            <param name="numberStories"></param>
+            <param name="storyHeight"></param>
+            <param name="numberBaysX"></param>
+            <param name="numberBaysY"></param>
+            <param name="bayWidthX"></param>
+            <param name="bayWidthY"></param>
+            <param name="restraint"></param>
+            <param name="beam"></param>
+            <param name="column"></param>
+            <param name="area"></param>
+            <param name="numberXDivisions"></param>
+            <param name="numberYDivisions"></param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.NewBeam(System.Int32,System.Double,System.Boolean,System.String)">
+            <summary>
+            Creates a new template model of a Beam.
+            Do not use this function to add to an existing model. 
+            This function should be used only for creating a new model and typically would be preceded by calls to ApplicationStart or InitializeNewModel.
+            </summary>
+            <param name="numberSpans"></param>
+            <param name="spanLength"></param>
+            <param name="restraint"></param>
+            <param name="beam"></param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.NewWall(System.Int32,System.Int32,System.Double,System.Double,System.Boolean,System.String)">
+            <summary>
+            Creates a new template model of a Wall.
+            Do not use this function to add to an existing model. 
+            This function should be used only for creating a new model and typically would be preceded by calls to ApplicationStart or InitializeNewModel.
+            </summary>
+            <param name="numberXDivisions"></param>
+            <param name="numberZDivisions"></param>
+            <param name="divisionWidthX"></param>
+            <param name="divisionWidthZ"></param>
+            <param name="restraint"></param>
+            <param name="area"></param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.File.NewSolidBlock(System.Double,System.Double,System.Double,System.Boolean,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new template model of a Solid.
+            Do not use this function to add to an existing model. 
+            This function should be used only for creating a new model and typically would be preceded by calls to ApplicationStart or InitializeNewModel.
+            </summary>
+            <param name="xWidth"></param>
+            <param name="yWidth"></param>
+            <param name="height"></param>
+            <param name="restraint"></param>
+            <param name="solid"></param>
+            <param name="numberXDivisions"></param>
+            <param name="numberYDivisions"></param>
+            <param name="numberZDivisions"></param>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Program.CSiModel">
+            <summary>
+            Main CSi program object. Most API functions are called on this or contained delegate objects.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.File">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.Application">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.AnalysisModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.Analyze">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.Definitions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.Design">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.Editor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.ObjectModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.Options">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.Results">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.Selector">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.Viewer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MPT.CSI.API.Core.Program.CSiModel.IsModelLocked">
+            <summary>
+            True: Model is unlocked.
+            With some exceptions, definitions and assignments can not be changed in a model while the model is locked. 
+            If an attempt is made to change a definition or assignment while the model is locked and that change is not allowed in a locked model, an error will be returned.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Program.CSiModel.Path">
+            <summary>
+            Path to the CSi application that the class manipulates.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="path">Path to the CSi application that the class manipulates.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.InitializeProgram(MPT.CSI.API.Core.eUnits)">
+            <summary>
+            Opens a fresh instance of the CSi program.
+            </summary>
+            <param name="units">The database units for the new model. 
+            All data is internally stored in the model in these units.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.InitializeNewModel(MPT.CSI.API.Core.eUnits)">
+            <summary>
+            This function clears the previous model and initializes the program for a new model. 
+            If it is later needed, you should save your previous model prior to calling this function.
+            After calling the InitializeNewModel function, it is not necessary to also call the ApplicationStart function because the functionality of the ApplicationStart function is included in the InitializeNewModel function.
+            </summary>
+            <param name="units">The database units for the new model. 
+            All data is internally stored in the model in these units.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.GetModelIsLocked">
+            <summary>
+            True: Model is unlocked.
+            With some exceptions, definitions and assignments cannot be changed in a model while the model is locked. 
+            If an attempt is made to change a definition or assignment while the model is locked and that change is not allowed in a locked model, an error will be returned.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.SetModelIsLocked(System.Boolean)">
+            <summary>
+            Sets whether or not the model is locked.
+            With some exceptions, definitions and assignments can not be changed in a model while the model is locked. 
+            If an attempt is made to change a definition or assignment while the model is locked and that change is not allowed in a locked model, an error will be returned.
+            </summary>
+            <param name="lockModel">True: Model will be locked.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.GetUserComment(System.String@)">
+            <summary>
+            Retrieves the data in the user comments and log.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.SetUserComment(System.String,System.Int32,System.Boolean)">
+            <summary>
+            This function sets the user comments and log data.
+            </summary>
+            <param name="commentUser">The data to be added to the user comments and log.</param>
+            <param name="numberLinesBlank">The number of carriage return and line feeds to be included before the specified comment. 
+            This item is ignored if there are no existing comments.</param>
+            <param name="replace">True: All existing comments are replaced with the specified comment.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.GetDatabaseUnits">
+            <summary>
+            Returns the database units for the model. 
+            All data is internally stored in the model in these units and converted to the present units as needed.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.GetPresentUnits">
+            <summary>
+            Returns the units presently specified for the model.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.SetPresentUnits(MPT.CSI.API.Core.eUnits)">
+            <summary>
+            Sets the units presently specified for the model.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.GetMergeTolerance(System.Double@)">
+            <summary>
+            Retrieves the value of the program auto merge tolerance.
+            </summary>
+            <param name="mergeTolerance">The program auto merge tolerance. [L</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.SetMergeTolerance(System.Double)">
+            <summary>
+            Sets the value of the program auto merge toleranc
+            </summary>
+            <param name="mergeTolerance">The program auto merge tolerance. [L]</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.GetPresentCoordSystem">
+            <summary>
+            Returns the name of the present coordinate system.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.SetPresentCoordSystem(System.String)">
+            <summary>
+            Sets the present coordinate system.
+            </summary>
+            <param name="nameCoordinateSystem">The name of a defined coordinate system.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.GetProjectInfo(System.Int32@,System.String[]@,System.String[]@)">
+            <summary>
+            Retrieves the project information data.
+            </summary>
+            <param name="numberItems">The number of project info items returned.</param>
+            <param name="projectInfoItems">This is an array that includes the name of the project information item.</param>
+            <param name="projectInfoData">This is an array that includes the data for the specified project information item.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.SetProjectInfo(System.String,System.String)">
+            <summary>
+            Sets the data for an item in the project information.
+            </summary>
+            <param name="projectInfoItem">Name of the project information item</param>
+            <param name="projectInfoData">Data for the specified project information item.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Program.CSiModel.initializeProgramSpecific(System.String)">
+            <summary>
+            Performs the application-specific steps of initializing the program.
+            This initializes SapObject and SapModel.
+            </summary>
+            <param name="path">Path to the CSi application that the class manipulates. 
+            Make sure this is a valid path before using this method.</param>
+            <returns></returns>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eLetters">
+            <summary>
+            Exposure category.
+            Subtract by 1, and don't use A, for UBC codes.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eRomanNumerals">
+            <summary>
+            Terrain category: Eurocode 1-2005.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eUseFactor">
+            <summary>
+            Determines whether or not a factorr is used based on the number provided.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eUseFactor.No">
+            <summary>
+            0 = No.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eUseFactor.Yes">
+            <summary>
+            Any other value = Yes.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eConcreteDesignOption">
+            <summary>
+            Options for how concrete frame.
+            Used in GetSummaryResultsColumn.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eConcreteDesignOption.Check">
+            <summary>
+            Concrete frame rebar will be checked for adequacy for demands.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eConcreteDesignOption.Design">
+            <summary>
+            Concrete frame rebar will be designed for demands.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eCoordinateSystem">
+            <summary>
+            Common coordinate system types.
+            These are used with the program as strings.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eFramingType">
+            <summary>
+            Framing types available in the application.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eFramingType.MomentFrame">
+            <summary>
+            Moment frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eFramingType.BracedFrame">
+            <summary>
+            Braced frame.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eFramingTypeSeismic">
+            <summary>
+            Framing types available in the application, inculding seismic classifications.
+            AISC360_05_IBC2006
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eFramingTypeSeismic.ProgramDefault">
+            <summary>
+            Program default.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eFramingTypeSeismic.SMF">
+            <summary>
+            Special Moment Frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eFramingTypeSeismic.IMF">
+            <summary>
+            Intermediate Moment Frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eFramingTypeSeismic.OMF">
+            <summary>
+            Ordinary Moment Frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eFramingTypeSeismic.SCBF">
+            <summary>
+            Special Concentric Braced Frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eFramingTypeSeismic.OCBF">
+            <summary>
+            Ordinary Concentric Braced Frame.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eFramingTypeSeismic.OCBFI">
+            <summary>
+            Ordinary Concentric Braced Frame?.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eFramingTypeSeismic.EBF">
+            <summary>
+            Eccentric braced Frame.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eLimitType">
+            <summary>
+            Limit type comparisons available in the application.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eLimitType.ProgramDefault">
+            <summary>
+            Program default.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eLimitType.Ratio">
+            <summary>
+            Ratio.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eLimitType.Absolute">
+            <summary>
+            Absolute.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eLimitType.Both">
+            <summary>
+            Both.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eMultiResponseCaseDesign">
+            <summary>
+            Multi-response case design.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eMultiResponseCaseDesign.Envelopes">
+            <summary>
+            Envelopes.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eMultiResponseCaseDesign.StepByStep">
+            <summary>
+            Step-by-step.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eMultiResponseCaseDesign.LastStep">
+            <summary>
+            Last step.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eMultiResponseCaseDesign.EnvelopesAll">
+            <summary>
+            Envelopes - All.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eMultiResponseCaseDesign.StepByStepAll">
+            <summary>
+            Step-by-step - All.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eNotionalSectionType">
+            <summary>
+            Section type used for notional size calculations.
+            These are used with the program as strings.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eNotionalSectionType.Auto">
+            <summary>
+            Program will determine the notional size based on the average thickness of an area element.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eNotionalSectionType.User">
+            <summary>
+            The notional size is based on the user-defined value.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eNotionalSectionType.None">
+            <summary>
+            Notional size will not be considered. In other words, the time-dependent effect of this section will not be considered.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eCaseStatus">
+            <summary>
+            Analysis status states of a load case.
+            These are used with the program by numerical code.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eCaseStatus.NotRun">
+            <summary>
+            Not run.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eCaseStatus.CouldNotStart">
+            <summary>
+            Could not start.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eCaseStatus.NotFinished">
+            <summary>
+            Not finished.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eCaseStatus.Finished">
+            <summary>
+            Finished.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eObjectType">
+            <summary>
+            Object types.
+            These are used with the program by numerical code.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eSteelOverwriteItem">
+            <summary>
+            Steel overwrite items allowed in the application for steel design code:
+            AISC360_05_IBC2006
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.FramingType">
+            <summary>
+            Framing type.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.Omega0">
+            <summary>
+            Omega0.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.ConsiderDeflection">
+            <summary>
+            Consider deflection.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.DeflectionCheckType">
+            <summary>
+            Deflection check type.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.DeflectionLimitRelativeDL">
+            <summary>
+            DL deflection limit, L/Value.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.DeflectionLimitRelativeSDL_LL">
+            <summary>
+            SDL + LL deflection limit, L/Value.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.DeflectionLimitRelativeLL">
+            <summary>
+            LL deflection limit, L/Value.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.DeflectionLimitRelativeTotal">
+            <summary>
+            Total load deflection limit, L/Value.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.CamberLimitRelativeTotal">
+            <summary>
+            Total camber limit, L/Value.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.DeflectionLimitAbsoluteDL">
+            <summary>
+            DL deflection limit, absolute.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.DeflectionLimitAbsoluteSDL_LL">
+            <summary>
+            SDL + LL deflection limit, absolute.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.DeflectionLimitAbsoluteLL">
+            <summary>
+            LL deflection limit, absolute.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.DeflectionLimitAbsoluteTotal">
+            <summary>
+            Total load deflection limit, absolute.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.CamberLimitAbsoluteTotal">
+            <summary>
+            Total camber limit, absolute.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.CamberSpecified">
+            <summary>
+            Specified camber.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.NetAreaToTotalAreaRatio">
+            <summary>
+            Net area to total area ratio.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.LiveLoadReductionFactor">
+            <summary>
+            Live load reduction factor.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.UnbracedLengthRatioMajor">
+            <summary>
+            Unbraced length ratio, Major.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.UnbracedLengthRatioMinor">
+            <summary>
+            Unbraced length ratio, Minor.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.UnbracedLengthRatioLTB">
+            <summary>
+            Unbraced length ratio, Lateral Torsional Buckling.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.EffectiveLengthFactorK1Major">
+            <summary>
+            Effective length factor, K1 Major.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.EffectiveLengthFactorK1Minor">
+            <summary>
+            Effective length factor, K1 Minor.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.EffectiveLengthFactorK2Major">
+            <summary>
+            Effective length factor, K2 Major.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.EffectiveLengthFactorK2Minor">
+            <summary>
+            Effective length factor, K2 Minor.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.EffectiveLengthFactorKLTB">
+            <summary>
+            Effective length factor, K Lateral Torsional Buckling.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.MomentCoefficientCmMajor">
+            <summary>
+            Moment coefficient, Cm Major.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.MomentCoefficientCmMinor">
+            <summary>
+            Moment coefficient, Cm Minor.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.BendingCoefficientCb">
+            <summary>
+            Bending coefficient, Cb.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.NonswayMomentFactorB1Major">
+            <summary>
+            Nonsway moment factor, B1 Major.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.NonswayMomentFactorB1Minor">
+            <summary>
+            Nonsway moment factor, B1 Minor.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.SwayMomentFactorB2Major">
+            <summary>
+            Sway moment factor, B2 Major.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.SwayMomentFactorB2Minor">
+            <summary>
+            Sway moment factor, B2 Minor.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.ReduceHSSThickness">
+            <summary>
+            Reduce HSS thickness.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.HSSWeldingType">
+            <summary>
+            HSS welding type.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.YieldStressFy">
+            <summary>
+            Yield stress, Fy.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.ExpectedToSpecifiedFyRatioRy">
+            <summary>
+            Expected to specified Fy ratio, Ry.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.CompressiveCapacityPnc">
+            <summary>
+            Compressive capacity, Pnc.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.TensileCapacityPnt">
+            <summary>
+            Tensile capacity, Pnt.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.MajorBendingCapacityMn3">
+            <summary>
+            Major bending capacity, Mn3.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.MinorBendingCapacityMn2">
+            <summary>
+            Minor bending capacity, Mn2.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.MajorShearCapacityVn2">
+            <summary>
+            Major shear capacity, Vn2.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.MinorShearCapacityVn3">
+            <summary>
+            Minor shear capacity, Vn3.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eSteelOverwriteItem.DemandCapacityRatioLimit">
+            <summary>
+            Demand/capacity ratio limit.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eWeldingType">
+            <summary>
+            Welding types available in the program.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eWeldingType.ProgramDefault">
+            <summary>
+            Program default.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eWeldingType.ERW">
+            <summary>
+            Electric resistance welding.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eWeldingType.SAW">
+            <summary>
+            Submerged arc welding.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eYesNo">
+            <summary>
+            General choices in the application.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eYesNo.ProgramDefault">
+            <summary>
+            Program default.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eYesNo.No">
+            <summary>
+            No.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eYesNo.Yes">
+            <summary>
+            Yes.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eDCMethod">
+            <summary>
+            Demand/Capacity method by which a frame element is judged to have failed.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eDCMethod.Strength">
+            <summary>
+            Design codes are used to determine D/C of the force or stress load vs. capacity. 
+            Usually uses seismic code for ductile design.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eDCMethod.Ductility">
+            <summary>
+            Calculations are done to determine plastic deformations of a frame section, which are compared against elongation and rotational limits.
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eGeometricNonlinearity">
+            <summary>
+            Geometric nonlinearity option to set in the non-linear analysis cases.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eHingeAcceptanceCriteria">
+            <summary>
+            Hinge acceptance criteria used to determine where on the force/deformation curve the hinge lies. 
+            Various actions may be taken beyond various criteria. 
+            The criteria corresponds to Performance Based Design standards.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eHingeAcceptanceCriteria.toIO">
+            [summary]
+            Immediate Occupancy
+            [/summary]
+            [remarks][/remarks]
+        </member>
+        <member name="F:MPT.CSI.API.Core.eHingeAcceptanceCriteria.toLS">
+            [summary]
+            Life Safety
+            [/summary]
+            [remarks][/remarks]
+        </member>
+        <member name="F:MPT.CSI.API.Core.eHingeAcceptanceCriteria.toCP">
+            [summary]
+            Collapse Prevention
+            [/summary]
+            [remarks][/remarks]
+        </member>
+        <member name="F:MPT.CSI.API.Core.eHingeAcceptanceCriteria.toCPPlus">
+            [summary]
+            Collapse
+            [/summary]
+            [remarks][/remarks]
+        </member>
+        <member name="T:MPT.CSI.API.Core.eHingeState">
+            <summary>
+            Hinge state classifications used to determine where on the force/deformation curve the hinge lies. 
+            Various actions may be taken beyond various classifications.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eItemType">
+            <summary>
+            Item type available for selection filtering.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eItemType.Object">
+            <summary>
+            Object specified by GUID or name.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eItemType.Group">
+            <summary>
+            Group specified by name.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eItemType.SelectedObjects">
+            <summary>
+            Objects currently selected in the program.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eLoadPatternType">
+            <summary>
+            Load pattern types available in the application.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eLoadType">
+            <summary>
+            Load type to set in load cases.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eOverStrength">
+            <summary>
+            Method by which the overstrength factor is determined in seismic design strength D/C cases.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.eOverStrength.CodeDefault">
+            ' <summary>
+            ' The value specified in the code, if available.
+            ' </summary>
+            ' <remarks></remarks>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eRebarType">
+            <summary>
+            Rebar type used in a concrete frame. 
+            This determines the rebar detailing available, and whether a frame is treated as a beam or a column.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.eUnits">
+            <summary>
+            Standardized unit combinations available in the application.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Support.CSiEnumConverter">
+            <summary>
+            Converts enumerations between those used in this library and those used in the CSi program supported by a given compilation.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Support.CSiException">
+            <summary>
+            Exception thrown when a CSi API function fails to return 0 indicating success.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Support.CSiRegistration">
+            <summary>
+            Handles the registration of CSi program *.dll files.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Support.CSiRegistration.ProgramPath">
+            <summary>
+            Path to the CSi program to register.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Support.CSiRegistration.ApiDllFileName">
+            <summary>
+            Name of the API *.dll file corresponding with the program to be used.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Support.CSiRegistration.#ctor(System.String,System.String)">
+            <summary>
+            Object initializer.
+            </summary>
+            <param name="apiDllFileName">Name of the API *.dll file corresponding with the program to be used.</param>
+            <param name="programPath">Path to the CSi program to register.</param>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Support.CSiRegistration.Register(System.Boolean)">
+            <summary>
+            Registers the specified CSi program if it is currently unregistered. Returns 'True' if successful.
+            </summary>
+            <param name="registerIfFileNotExists">If no *.dll file currently exists, then any existing matching program will be unregistered and the specified program will be registered.</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Support.CSiRegistration.WriteRegisterBatchFile">
+            <summary>
+            Writes a batch file registers the CSi program after unregistering any currently registered CSi program of the same name.
+            </summary>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Support.CSiApiBase">
+            <summary>
+            Stores references to the basic, fundamental objects of the program for implementing a listener pattern.
+            </summary>
+        </member>
+        <member name="F:MPT.CSI.API.Core.Support.CSiApiBase._callCode">
+            <summary>
+            Code returned by a call to an API method.
+            </summary>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Support.CSiApiBase.apiCallIsSuccessful(System.Int32)">
+            <summary>
+            Returns 'true' if the API success code indicates a successful call.
+            </summary>
+            <param name="successCode">Code returned by the API call.
+            0 means the call was successful.
+            Any other code indicates failure.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.CSI.API.Core.Support.CSiApiBase.throwCurrentApiException(System.Int32)">
+            <summary>
+            Returns 'true' if the API success code indicates a failed call and exceptions are set by this object to be thrown.
+            </summary>
+            <param name="successCode">Code returned by the API call.
+            0 means the call was successful.
+            Any other code indicates failure.</param>
+            <returns></returns>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Support.CSiApiSeed">
+            <summary>
+            Exposes CSiApiBase properties as read-only.
+            This class primarly functions as a means of compactly transporting this collection of core objects as a unit.
+            </summary>
+        </member>
+        <member name="T:MPT.CSI.API.Core.Support.CSiReservedNameException">
+            <summary>
+            Exception thrown when a CSi API function fails to return 0 indicating success.
+            </summary>
+        </member>
+    </members>
+</doc>

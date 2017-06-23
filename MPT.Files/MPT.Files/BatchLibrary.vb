@@ -3,7 +3,6 @@ Option Explicit On
 
 Imports System.IO
 
-Imports MPT.FileSystem.FoldersLibrary
 Imports MPT.FileSystem.PathLibrary
 
 ''' <summary>
@@ -77,7 +76,7 @@ Public NotInheritable Class BatchLibrary
                                Optional ByVal p_consoleIsNotVisible As Boolean = False)
         Dim batchProcess As New Process()
         batchProcess.StartInfo.FileName = p_pathBatch
-        batchProcess.StartInfo.WorkingDirectory = pathStartup()    'Default location, same spot as location of .EXE
+        batchProcess.StartInfo.WorkingDirectory = PathStartupApp()    'Default location, same spot as location of .EXE
         batchProcess.StartInfo.CreateNoWindow = p_consoleIsNotVisible
         If p_consoleIsNotVisible Then
             batchProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden

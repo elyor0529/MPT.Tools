@@ -1,0 +1,1 @@
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.Geometry\MPT.Geometry\obj\Debug\MPT.Geometry.csprojResolveAssemblyReference.cache

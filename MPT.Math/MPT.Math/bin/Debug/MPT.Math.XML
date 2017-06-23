@@ -16,6 +16,35 @@
             <param name="values"></param>
             <returns></returns>
         </member>
+        <member name="M:MPT.Math.Algebra.IntersectionX(System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            X-coordinate of a horizontal line intersecting the line described by the points provided.
+            </summary>
+            <param name="y">Y-coordinate of the horizontal line.</param>
+            <param name="x1">X-coordinate of first point.</param>
+            <param name="y1">Y-coordinate of first point.</param>
+            <param name="x2">X-coordinate of second point.</param>
+            <param name="y2">Y-coordinate of second point.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Algebra.IntersectionX(System.Double,System.Windows.Point,System.Windows.Point)">
+            <summary>
+            X-coordinate of a horizontal line intersecting the line described by the points provided.
+            </summary>
+            <param name="y">Y-coordinate of the horizontal line.</param>
+            <param name="I">First point.</param>
+            <param name="J">Second point.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Algebra.CrossProduct(System.Windows.Point,System.Windows.Point)">
+            <summary>
+            Returns the cross product/determinant of the points. 
+            x1*y2-x2*y1
+            </summary>
+            <param name="point1">First point.</param>
+            <param name="point2">Second point.</param>
+            <returns></returns>
+        </member>
         <member name="T:MPT.Math.Numbers">
             <summary>
             Contains static methods dealing generically with numbers. 
@@ -193,7 +222,152 @@
             Library of methods related to vectors.
             </summary>
         </member>
-        <member name="M:MPT.Math.Vector.IsColinearSameDirection(System.Windows.Vector,System.Windows.Vector,System.Double)">
+        <member name="P:MPT.Math.Vector.Tolerance">
+            <summary>
+            Tolerance to use in all calculations with double types.
+            </summary>
+        </member>
+        <member name="P:MPT.Math.Vector.Magnitude">
+            <summary>
+            Length of this vector.
+            </summary>
+        </member>
+        <member name="P:MPT.Math.Vector.MagnitudeSquared">
+            <summary>
+            Gets the square of the length of this vector.
+            </summary>
+        </member>
+        <member name="P:MPT.Math.Vector.Xcomponent">
+            <summary>
+            Gets the x-component of this vector.
+            </summary>
+        </member>
+        <member name="P:MPT.Math.Vector.Ycomponent">
+            <summary>
+            Gets the y-component of this vector.
+            </summary>
+        </member>
+        <member name="P:MPT.Math.Vector.Location">
+            <summary>
+            Gets the location of this vector in Euclidean space.
+            </summary>
+        </member>
+        <member name="M:MPT.Math.Vector.#ctor(System.Windows.Vector)">
+            <summary>
+            Initializes the class with a vector structure.
+            </summary>
+            <param name="vector"></param>
+        </member>
+        <member name="M:MPT.Math.Vector.#ctor(System.Windows.Vector,System.Windows.Point)">
+            <summary>
+            Initializes the class with a vector structure and a point coinciding with the location of the vector.
+            </summary>
+            <param name="vector"></param>
+            <param name="location"></param>
+        </member>
+        <member name="M:MPT.Math.Vector.IsColinearSameDirection(System.Windows.Vector)">
+            <summary>
+            True: Segments are parallel, on the same line, oriented in the same direction.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.IsConcave(System.Windows.Vector)">
+            <summary>
+            Vectors form a concave angle.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.IsOrthogonal(System.Windows.Vector)">
+            <summary>
+            Vectors form a 90 degree angle.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.IsConvex(System.Windows.Vector)">
+            <summary>
+            Vectors form a convex angle.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.IsColinearOppositeDirection(System.Windows.Vector)">
+            <summary>
+             True: Segments are parallel, on the same line, oriented in the opposite direction.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.ConcaveInside(System.Windows.Vector)">
+            <summary>
+            True: The concave side of the vector is inside the shape.
+            This is determined by the direction of the vector.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.ConvexInside(System.Windows.Vector)">
+            <summary>
+            True: The convex side of the vector is inside the shape.
+            This is determined by the direction of the vector.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.ConcavityColinearity(System.Windows.Vector)">
+            <summary>
+            Returns a value indicating the concavity of the vectors. 
+            1 = Pointing the same way. 
+            &gt; 0 = Concave. 
+            0 = Orthogonal. 
+            &lt; 0 = Convex. 
+            -1 = Pointing the exact opposite way.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.Dot(System.Windows.Vector)">
+            <summary>
+            Dot product of two vectors.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.Cross(System.Windows.Vector)">
+            <summary>
+            Cross-product of two vectors.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.Angle">
+            <summary>
+            Returns the angle [radians] of a vector from the origin axis (x, positive, +ccw).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.Angle(System.Windows.Vector)">
+            <summary>
+            Returns the angle [radians] between the two vectors.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.Vector.Area(System.Windows.Vector)">
+            <summary>
+            Returns the area between two vectors.
+            </summary>
+            <param name="vector"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MPT.Math.VectorLibrary">
+            <summary>
+            Contains static methods for common vector operations.
+            </summary>
+        </member>
+        <member name="M:MPT.Math.VectorLibrary.IsColinearSameDirection(System.Windows.Vector,System.Windows.Vector,System.Double)">
             <summary>
             True: Segments are parallel, on the same line, oriented in the same direction.
             </summary>
@@ -202,7 +376,7 @@
             <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.IsConcave(System.Windows.Vector,System.Windows.Vector,System.Double)">
+        <member name="M:MPT.Math.VectorLibrary.IsConcave(System.Windows.Vector,System.Windows.Vector,System.Double)">
             <summary>
             Vectors form a concave angle.
             </summary>
@@ -211,7 +385,7 @@
             <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.IsOrthogonal(System.Windows.Vector,System.Windows.Vector,System.Double)">
+        <member name="M:MPT.Math.VectorLibrary.IsOrthogonal(System.Windows.Vector,System.Windows.Vector,System.Double)">
             <summary>
             Vectors form a 90 degree angle.
             </summary>
@@ -220,7 +394,7 @@
             <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.IsConvex(System.Windows.Vector,System.Windows.Vector,System.Double)">
+        <member name="M:MPT.Math.VectorLibrary.IsConvex(System.Windows.Vector,System.Windows.Vector,System.Double)">
             <summary>
             Vectors form a convex angle.
             </summary>
@@ -229,7 +403,7 @@
             <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.IsColinearOppositeDirection(System.Windows.Vector,System.Windows.Vector,System.Double)">
+        <member name="M:MPT.Math.VectorLibrary.IsColinearOppositeDirection(System.Windows.Vector,System.Windows.Vector,System.Double)">
             <summary>
              True: Segments are parallel, on the same line, oriented in the opposite direction.
             </summary>
@@ -238,7 +412,7 @@
             <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.ConcaveInside(System.Windows.Vector,System.Windows.Vector,System.Double)">
+        <member name="M:MPT.Math.VectorLibrary.ConcaveInside(System.Windows.Vector,System.Windows.Vector,System.Double)">
             <summary>
             True: The concave side of the vector is inside the shape.
             This is determined by the direction of the vector.
@@ -248,7 +422,7 @@
             <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.ConvexInside(System.Windows.Vector,System.Windows.Vector,System.Double)">
+        <member name="M:MPT.Math.VectorLibrary.ConvexInside(System.Windows.Vector,System.Windows.Vector,System.Double)">
             <summary>
             True: The convex side of the vector is inside the shape.
             This is determined by the direction of the vector.
@@ -258,7 +432,7 @@
             <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.ConcavityColinearity(System.Windows.Vector,System.Windows.Vector)">
+        <member name="M:MPT.Math.VectorLibrary.ConcavityColinearity(System.Windows.Vector,System.Windows.Vector)">
             <summary>
             Returns a value indicating the concavity of the vectors. 
             1 = Pointing the same way. 
@@ -271,7 +445,7 @@
             <param name="vector2"></param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.Dot(System.Windows.Vector,System.Windows.Vector)">
+        <member name="M:MPT.Math.VectorLibrary.Dot(System.Windows.Vector,System.Windows.Vector)">
             <summary>
             Dot product of two vectors.
             </summary>
@@ -279,7 +453,7 @@
             <param name="vector2"></param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.Cross(System.Windows.Vector,System.Windows.Vector)">
+        <member name="M:MPT.Math.VectorLibrary.Cross(System.Windows.Vector,System.Windows.Vector)">
             <summary>
             Cross-product of two vectors.
             </summary>
@@ -287,7 +461,7 @@
             <param name="vector2"></param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.Angle(System.Windows.Vector,System.Windows.Vector)">
+        <member name="M:MPT.Math.VectorLibrary.Angle(System.Windows.Vector,System.Windows.Vector)">
             <summary>
             Returns the angle [radians] between the two vectors.
             </summary>
@@ -295,7 +469,14 @@
             <param name="vector2"></param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.Area(System.Windows.Vector,System.Windows.Vector)">
+        <member name="M:MPT.Math.VectorLibrary.Angle(System.Windows.Vector)">
+            <summary>
+            Returns the angle [radians] of the vector from the x-axis, counter clockwise.
+            </summary>
+            <param name="vector1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Math.VectorLibrary.Area(System.Windows.Vector,System.Windows.Vector)">
             <summary>
             Returns the area between two vectors.
             </summary>
@@ -303,25 +484,40 @@
             <param name="vector2"></param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.IntersectionX(System.Double,System.Double,System.Double,System.Double,System.Double)">
+        <member name="T:MPT.Geometry.Line.Vector3D">
             <summary>
-            X-coordinate of a horizontal line intersecting the line described by the points provided.
+            Represents a vector in 3D space.
             </summary>
-            <param name="y">Y-coordinate of the horizontal line.</param>
-            <param name="x1">X-coordinate of first point.</param>
-            <param name="y1">Y-coordinate of first point.</param>
-            <param name="x2">X-coordinate of second point.</param>
-            <param name="y2">Y-coordinate of second point.</param>
-            <returns></returns>
         </member>
-        <member name="M:MPT.Math.Vector.IntersectionX(System.Double,System.Windows.Point,System.Windows.Point)">
+        <member name="P:MPT.Geometry.Line.Vector3D.Magnitude">
             <summary>
-            X-coordinate of a horizontal line intersecting the line described by the points provided.
+            Length of this vector.
             </summary>
-            <param name="y">Y-coordinate of the horizontal line.</param>
-            <param name="I">First point.</param>
-            <param name="J">Second point.</param>
-            <returns></returns>
+        </member>
+        <member name="P:MPT.Geometry.Line.Vector3D.MagnitudeSquared">
+            <summary>
+            Gets the square of the length of this vector.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Line.Vector3D.Xcomponent">
+            <summary>
+            Gets the x-component of this vector.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Line.Vector3D.Ycomponent">
+            <summary>
+            Gets the y-component of this vector.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Line.Vector3D.Zcomponent">
+            <summary>
+            Gets the z-component of this vector.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Line.Vector3D.Location">
+            <summary>
+            Gets the location of this vector in Euclidean space.
+            </summary>
         </member>
     </members>
 </doc>

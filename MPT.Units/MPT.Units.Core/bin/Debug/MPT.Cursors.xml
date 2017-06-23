@@ -1,0 +1,51 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MPT.Cursors
+</name>
+</assembly>
+<members>
+<member name="M:MPT.Cursors.cCursorWait.#ctor(System.Boolean)">
+	<summary>
+ Class constructor.
+ </summary>
+	<param name="start">True: Wait cursor will begin upon class initialization.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Cursors.cCursorWait.StartCursor">
+	<summary>
+ Starts the wait cursor if one is not currently set. This status is recorded in the class.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.Cursors.cCursorWait.EndCursor">
+	<summary>
+ If the class has started a wait cursor, the class will then end it.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.Cursors.cCursorWait.waitCursorIsActive">
+	<summary>
+ True: Wait cursor is running or set to be running in the current class.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:MPT.Cursors.cCursorWait">
+	<summary>
+ Cursor that appears over a segment of time determined by toggling the cursor on or off.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:MPT.Cursors.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:MPT.Cursors.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:MPT.Cursors.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

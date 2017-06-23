@@ -1,0 +1,589 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MPT.Forms
+</name>
+</assembly>
+<members>
+<member name="M:MPT.Forms.cLibDataGrid.GetSelectedRow(System.Windows.Controls.DataGrid)">
+	<summary>
+ Returns the selected DataGridRow object.
+ </summary>
+	<param name="p_grid">DataGrid object that contains the selection.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetRowByIndex(System.Windows.Controls.DataGrid,System.Int32)">
+	<summary>
+ Returns a DataGridRow object based on the provided row index.
+ </summary>
+	<param name="p_dataGrid">DataGrid object that contains the selection.</param>
+	<param name="p_index">0-based index that corresponds to a row in the DataGrid to be returned.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetSelectedCell(System.Windows.Controls.DataGrid,System.Int32)">
+	<summary>
+ Returns the DataGridCell object of the selected cell.
+ </summary>
+	<param name="p_grid">DataGrid object that contains the selection.</param>
+	<param name="p_column">0-based index of the column that contains the selection within the DataGrid object.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetCellByRowSelection(System.Windows.Controls.DataGrid,System.Windows.Controls.DataGridRow,System.Int32)">
+	<summary>
+ Returns the DataGridCell object of the selected row.
+ </summary>
+	<param name="p_grid">DataGrid object that contains the selection.</param>
+	<param name="p_row">DataGridRow object that is selected.</param>
+	<param name="p_column">0-based index of the column that contains the selection within the DataGrid object.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetCellByRowColumnIndex(System.Windows.Controls.DataGrid,System.Int32,System.Int32)">
+	<summary>
+ Returns the DataGridCell object specified by row and column indices.
+ </summary>
+	<param name="p_grid">DataGrid object that contains the selection.</param>
+	<param name="p_row">0-based index of the row that contains the selection within the DataGrid object.</param>
+	<param name="p_column">0-based index of the column that contains the selection within the DataGrid object.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.FindVisualChild``1(System.Windows.DependencyObject)">
+	<summary>
+	</summary>
+	<typeparam name="childItem"></typeparam>
+	<param name="obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetColumnIndexFromSelectionDG(System.Windows.Controls.DataGrid,System.Int32)">
+	<summary>
+ Determines the column index for a selected cell. Returns -1 if there is no selection.
+ </summary>
+	<param name="p_dataGrid">Datagrid object.</param>
+	<param name="p_priorColIndex">Integer of the prior column index, in case the function fails, to prevent resetting to zero.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetColumnHeader(System.Windows.Controls.DataGrid,System.Int32)">
+	<summary>
+ Gets the header name of the column containing the specified cell. If no column index is given, the selected cell is used.
+ </summary>
+	<param name="p_dataGrid">Datagrid object.</param>
+	<param name="p_colIndex">Optional: Column index of the selected cell.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetCellValue(System.Windows.Controls.DataGrid,System.Int32)">
+	<summary>
+ Gets the value of the specified cell. If no column index is given, the selected cell value is returned.
+ </summary>
+	<param name="p_dataGrid">Datagrid object.</param>
+	<param name="p_colIndex">Optional: Column index of the selected cell.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetRowIndexFromSelection(System.Windows.Controls.DataGrid)">
+	<summary>
+ Determines the row index for a selected cell.
+ </summary>
+	<param name="p_dataGrid">Datagrid object queried for the row index.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetIndicesFromDataGridByCellValue(System.Windows.Controls.DataGrid,System.String)">
+	<summary>
+ Returns the row and column indices of the cells in the provided datagrid that contain the value provided. Returns -1 if no match is found.
+ </summary>
+	<param name="p_dataGrid">Datagrid object queried for the indices.</param>
+	<param name="p_cellValue">Value to search for in the DataGrid.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetRowFromCell(System.Windows.Controls.DataGridCell)">
+	<summary>
+ Returns the row object associated with the cell object provided.
+ </summary>
+	<param name="p_cell">Cell object which is queried.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetColumnFromCell(System.Windows.Controls.DataGridCell)">
+	<summary>
+ Returns the DataGridColumn object of the cell object provided.
+ </summary>
+	<param name="p_cell">Cell object which is queried.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetColumnHeaderFromCell(System.Windows.Controls.DataGridCell)">
+	<summary>
+ Returns the ColumnHeader object of the cell object provided.
+ </summary>
+	<param name="p_cell">Cell object which is queried.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetColIndexFromHeader(System.Windows.Controls.DataGrid,System.String)">
+	<summary>
+ Returns the column index that corresponds to the header. If no match is found, -1 is returned.
+ </summary>
+	<param name="p_grid">Grid object to search.</param>
+	<param name="p_header">Header to search for in the DataGrid.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetValueFromRowAndIndex(System.Windows.Controls.DataGridRow,System.Int32)">
+	<summary>
+ Returns the value of a cell in a given DataGridRow at the specified column index.
+ </summary>
+	<param name="p_row">DataGridRow to search for the value.</param>
+	<param name="p_colIndex">Index corresponding to the column that contains the value in the row.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetValueFromRowAndHeader(System.Windows.Controls.DataGridRow,System.String)">
+	<summary>
+ Returns the value of a cell in a given DataGridRow at the specified column header.
+ </summary>
+	<param name="p_row">DataGridRow to search for the value.</param>
+	<param name="p_header">Header corresponding to the column that contains the value in the row.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetCellFromRightClick(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+	<summary>
+ Returns the DataGridCell that was right clicked.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetIndicesFromPosition(System.Windows.Controls.DataGrid,System.Windows.Point)">
+	<summary>
+ Returns the row and column indices of a datagrid cell based on the provided x- &amp; y- coordinates.
+ </summary>
+	<param name="p_dataGrid">DataGrid object to query.</param>
+	<param name="p_position">X- &amp; Y- position to use.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.SelectRowByIndices(System.Windows.Controls.DataGrid,System.Collections.Generic.List{System.Int32},System.Int32)">
+	<summary>
+	</summary>
+	<param name="p_dataGrid"></param>
+	<param name="p_rowIndices"></param>
+	<param name="p_columnIndex"></param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.SelectRowByIndex(System.Windows.Controls.DataGrid,System.Int32,System.Int32,System.Boolean)">
+	<summary>
+ Programmatically selects the row in a DataGrid.
+ </summary>
+	<param name="p_dataGrid">DataGrid within which a row is to be selected.</param>
+	<param name="p_rowIndex">Index for the row to select.</param>
+	<param name="p_columnIndex">If provided, the specific column cell in the row will receive focus. Otherwise, the firs cell will be selected.</param>
+	<param name="p_selectRowByIndices">If true, the specific column cell in the row will also be selected.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.SelectCellByIndices(System.Windows.Controls.DataGrid,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+	<summary>
+ Selects the DataGridCell objects by the provided row-column indices.
+ </summary>
+	<param name="p_dataGrid">DataGrid object within which to select the cells.</param>
+	<param name="p_cellIndices">Row-column indices to select within the DataGrid.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.SelectCellsByIndex(System.Windows.Controls.DataGrid,System.Int32,System.Int32,System.Boolean)">
+	<summary>
+ Selects the DataGridCell object by the provided row-column index pairs.
+ </summary>
+	<param name="p_dataGrid">DataGrid object within which to select the cells.</param>
+	<param name="p_rowIndex">Row index for the cell to be selected.</param>
+	<param name="p_columnIndex">Column index for the cell to be selected.</param>
+	<param name="p_selectByIndices">If 'True', then multiple selections are being perfomed, so the current selection will not be cleared. 
+ If 'False', the current selection will be cleared.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.SelectDataGridCells(System.Windows.Controls.DataGrid,System.Windows.Controls.DataGridCell)">
+	<summary>
+ Selects the DataGridCell(s) corresponding to the provided DataGridCell object. If multiple matches are found, multiple selections will be made.
+ </summary>
+	<param name="p_dataGrid">DataGrid from within which to select a cell.</param>
+	<param name="p_dataGridCell">DataGridCell object to select.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.SelectDataGridCellsByValue(System.Windows.Controls.DataGrid,System.String)">
+	<summary>
+ Selects the DataGridCell(s) corresponding to the provided cell value. If multiple matches are found, multiple selections will be made.
+ </summary>
+	<param name="p_dataGrid">DataGrid from within which to select a cell.</param>
+	<param name="p_cellValue">Value of the cell to select.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.SelectDataGridCellByCursor(System.Windows.Controls.DataGrid,System.Windows.Point)">
+	<summary>
+ Selects the DataGridCell corresponding to the specified coordinates.
+ </summary>
+	<param name="p_dataGrid">DataGrid from within which to select a cell.</param>
+	<param name="p_position">X- &amp; Y- coordinates of the position within the datagrid to grab.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetCellFromDGRowAndColIndex(System.Windows.Controls.DataGrid,System.Windows.Controls.DataGridRow,System.Int32)">
+	<summary>
+	</summary>
+	<param name="p_dataGrid"></param>
+	<param name="p_rowContainer"></param>
+	<param name="p_columnIndex"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.SizeGridToDataGrid(System.Windows.Controls.ColumnDefinitionCollection@,System.Collections.ObjectModel.ObservableCollection{System.Windows.Controls.DataGridColumn},System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+	<summary>
+ Adjusts the width of the supplied grid layout columns to match those of the supplied datagrid.
+ </summary>
+	<param name="p_gridColumns">Columns of a layout grid.</param>
+	<param name="p_dgColumns">Collection of columns from a datagrid.</param>
+	<param name="p_indexRange">If specified, only the key=start;value=end indices will be considered. Otherwise, all datagrid columns will be used.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.SizeButtonsToDataGrid(System.Windows.Controls.Button[]@,System.Collections.ObjectModel.ObservableCollection{System.Windows.Controls.DataGridColumn},System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+	<summary>
+ Adjusts the width of the supplied buttons to match those of the supplied datagrid.
+ </summary>
+	<param name="p_buttons">Array of buttons.</param>
+	<param name="p_dgColumns">Collection of columns from a datagrid.</param>
+	<param name="p_indexRange">If specified, only the key=start;value=end indices will be considered. Otherwise, all datagrid columns will be used.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetLeftJustifyColumnHeaderPosition(System.Windows.Controls.DataGrid)">
+	<summary>
+ Returns the offset value for the left side of the unit buttons such that they are flush with the left edge of the left-most data grid column.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.DGRowHeadersWidth(System.Windows.Controls.DataGrid)">
+	<summary>
+ Returns the width of the row headers element of the datagrid.
+ </summary>
+	<param name="p_dataGrid">Datagrid object to query.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.DataGridHeightMin(System.Windows.Controls.DataGrid,System.Windows.Controls.Primitives.DataGridColumnHeadersPresenter,System.Int32,System.Collections.Generic.List{System.Windows.Controls.DataGridRow})">
+	<summary>
+ Gets the minimum height for the DataGrid for the following criteria: Column header, horizontal scrollbar, and at least one row (or more if specified) are visible.
+ </summary>
+	<param name="p_dataGrid">DataGrid object to determine the minimum height from.</param>
+	<param name="p_colHeadersPresenter">Column headers. If not supplied, they will be derived from the DataGrid object.</param>
+	<param name="p_numRowsMin">Minimum number of rows to have visible, &gt;= 1. 
+ This is determined from the DataGrid object, but overwritten by any supplied rows object list.</param>
+	<param name="p_rows">Minimum DataGrid row objects set to include, starting from the first row. 
+ If not supplied, they will be derived from the DataGrid object.
+ This overwrites the specified minimum number of rows if both are specified.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.DataGridWidthMin(System.Windows.Controls.DataGrid,System.Windows.Controls.Primitives.DataGridRowHeader,System.Int32,System.Collections.Generic.List{System.Windows.Controls.DataGridColumn})">
+	<summary>
+ Gets the minimum width for the DataGrid for the following criteria: Row header, vertical scrollbar, and at least one column (or more if specified) are visible.
+ </summary>
+	<param name="p_dataGrid">DataGrid object to determine the minimum height from.</param>
+	<param name="p_rowHeaders">Row headers. If not supplied, they will be derived from the DataGrid object.</param>
+	<param name="p_numColumnsMin">Minimum number of columns to have visible, &gt;= 1. 
+ This is determined from the DataGrid object, but overwritten by any supplied rows object list.</param>
+	<param name="p_columns">Minimum DataGrid column objects set to include, starting from the first column. 
+ If not supplied, they will be derived from the DataGrid object.
+ This overwrites the specified minimum number of rows if both are specified.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetDataGridCellExtentHeaders(System.Windows.Controls.DataGrid)">
+	<summary>
+ Gets the minimum upper-left coordinate of the cells in the DataGrid accounting for headers.
+ </summary>
+	<param name="p_dataGrid">DataGrid object to use.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibDataGrid.GetDataGridCellExtentScrollbars(System.Windows.Controls.DataGrid)">
+	<summary>
+ Gets the maximum lower-right coordinate of the cells in the DataGrid accounting for scrollbars.
+ </summary>
+	<param name="p_dataGrid">DataGrid object to use.</param>
+	<remarks></remarks>
+</member><member name="T:MPT.Forms.cLibDataGrid">
+	<summary>
+ Contains routines used with dataGrids for programmatic selection and manipulation of objects.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibFormsWinForms.BrowseForFilesWinForm(System.Collections.Generic.List{System.String}@,System.String,System.String)">
+	<summary>
+ User selects an arbitrary set of files and file names and absolute paths are stored in a provided list object.
+ </summary>
+	<param name="ftype">File type to find</param>
+	<param name="dirPath">Optional starting directory</param>
+	<param name="pathsList">List to be populated with the file path names.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibFormsWinForms.BrowseForFileWinForm(System.String@,System.String,System.String)">
+	<summary>
+ User selects a file based on a provided file type to get its path
+ </summary>
+	<param name="ftype">File type to apply to the filter</param>
+	<param name="dirPath">Default starting directory path</param>
+	<remarks>dirPath currently is not working with this dialog</remarks>
+</member><member name="M:MPT.Forms.cLibFormsWinForms.BrowseForFolderWinForm(System.String,System.String)">
+	<summary>
+ User selects a folder location. Folder location is stored as a string
+ </summary>
+	<param name="description">Description to be provided in the file browser</param>
+	<param name="startupDir">Default starting directory</param>
+	<remarks></remarks>
+</member><member name="T:MPT.Forms.cLibFormsWinForms">
+	<summary>
+ Contains procedures using libraries specific to WinForms. Use these sparingly in this project. There are namespace ambiguities with other System.Windows namespaces needed for a WPF project 
+ </summary>
+	<remarks>Currently none of the procedures are used in the project</remarks>
+</member><member name="M:MPT.Forms.cLibForms.CheckValidEntryNumeric(System.String,System.Boolean,System.String)">
+	<summary>
+ Returns True value if it is numeric. Optionally informs user if text is not numeric.
+ </summary>
+	<param name="p_value">Text to check.</param>
+	<param name="p_isPositive">True if value must be a positive number.</param>
+	<param name="p_alertUser">Alert to present to the user if the entry is not numeric.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.CheckValidEntryInteger(System.String@,System.Boolean,System.String,System.String)">
+	<summary>
+ Returns text value if it is an integer. Returns the provided default if it is not. Optionally informs user if text is not an integer or numeric.
+ </summary>
+	<param name="p_value">Text to check.</param>
+	<param name="p_isPositive">True if value must be a positive number.</param>
+	<param name="p_alertUserNum">Alert to present to the user if the entry is not numeric.</param>
+	<param name="p_alertUserInt">Alert to present to the user if the entry is not an integer.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.CheckValidEntryRange(System.String@,System.Double,System.Double,System.Boolean,System.String,System.String,System.String,System.String)">
+	<summary>
+ Returns text value if it is an integer. Returns the provided default if it is not. Optionally informs user if text if various criteria fail to be met.
+ </summary>
+	<param name="p_value">Text to check.</param>
+	<param name="p_min">Minimum value allowed for text.</param>
+	<param name="p_max">Maximum value allowed for text.</param>
+	<param name="p_isInteger">Specifies if numeric number should also be confirmed as an integer.</param>
+	<param name="p_alertUserNum">Alert to present to the user if the entry is not numeric.</param>
+	<param name="p_alertUserInt">Alert to present to the user if the entry is not an integer.</param>
+	<param name="p_alertUserRangeMaxMin">Alert to present to the user if the entry is not within the specified range. 
+ If myAlertRangeMin is specified, this alert is only used if the entry is above the specified maximum.</param>
+	<param name="p_alertUserRangeMin">Alert to present to the user if the entry is below the specified minimum.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.checkEntryExistsListBox(System.Windows.Controls.ListBox@,System.Windows.Controls.TextBox@)">
+	<summary>
+ Checks whether the text in a textbox matches an entry in a listbox.
+ </summary>
+	<param name="p_listBox">Name of the listbox to search.</param>
+	<param name="p_textBox">Name of the textbox that contains the entry to search fo.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.checkValidEmail(System.Windows.Controls.TextBox@)">
+	<summary>
+ Checks if a textbox entry e-mail is valid by searching for the "@" character, and then whether a "." character follows.
+ </summary>
+	<param name="p_textBox">Textbox object to check entries from.</param>
+	<returns>True: e-mail is valid. False: e-mail is not valid.</returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.SetDateComboBoxes(System.Windows.Controls.ComboBox@,System.Windows.Controls.ComboBox@,System.Windows.Controls.ComboBox@,System.Boolean)">
+	<summary>
+ Populates combo boxes for a date entry with the correct list of years, and numeric months and days. 
+ Also automatically sets the drop boxes to the current date and time.
+ </summary>
+	<param name="p_cmbBxYear">Combo Box for selecting the year.</param>
+	<param name="p_cmbBxMonth">Combo Box for selecting the month (as number).</param>
+	<param name="p_cmbBxDay">Combo Box for selecting the day (as number).</param>
+	<param name="p_setCurrentTime">Optional: If true, combo boxes will automatically be set to select the current year, month and day, as applicable.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.UpdateDayComboBox(System.Int32,System.Windows.Controls.ComboBox@)">
+	<summary>
+ Updates the 'days' combo box list depending on the month selected.
+ </summary>
+	<param name="p_monthValue">The month (as number), to be referenced.</param>
+	<param name="p_cmbBxDay">Combo Box for selecting the day (as number), to be altered.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.GetSelectedIndex(System.String,System.Collections.ObjectModel.ObservableCollection{System.String})">
+	<summary>
+ Gets the selected index for a combo box by matching the list item to its position in the list of list items. Returns the 0-based index. If no list item or list are provided, returns 0.
+ </summary>
+	<param name="p_item">Item to get selected index for.</param>
+	<param name="p_items">List to query for the selected index.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.LoadComboBoxes(System.Windows.Controls.ComboBox@,System.Collections.ObjectModel.ObservableCollection{System.String},System.String,System.Boolean,System.Boolean)">
+	<summary>
+ Populates the combo box and sets the selected item.
+ </summary>
+	<param name="p_comboBox">Name of the combo box to be filled.</param>
+	<param name="p_items">List of items to add to the combo box.</param>
+	<param name="p_selection">Item to select in the combo box.</param>
+	<param name="p_ifEmptyCollapse">For handling a drop box where the list is empty. 
+ True: Control visibility will be collapsed. 
+ False: Control will be visible but disabled.</param>
+	<param name="p_caseSensitive">True: Selection will consider case.
+ False: Case will be ignored when matching the selection value to those in the list.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.SetComboBoxSelection(System.Windows.Controls.ComboBox@,System.String,System.Boolean,System.Boolean)">
+	<summary>
+ Sets the combo box to select the specified list entry, if it exists in the combo box list.
+ </summary>
+	<param name="p_comboBox">The combo box to be manipulated.</param>
+	<param name="p_selection">Item to select in the combo box.</param>
+	<param name="p_useIndex">True: Selection is made by using the combo box index, rather than the selected text. 
+ This might be desireable as sometimes if the text is the same as other items that occur earlier in the list, an incorrect or no selection might be made.</param>
+	<param name="p_caseSensitive">True: Selection will consider case.
+ False: Case will be ignored when matching the selection value to those in the list.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.UpdateDataGridHeight(System.Windows.Controls.DataGrid@,System.Windows.Controls.Grid,System.Windows.Controls.RowDefinition,System.Windows.Controls.Border)">
+	<summary>
+ Changes the maximum displayed height of the DataGrid provided based on the dimensions of the other objects provided so that scrollbars appear where appropriate.
+ </summary>
+	<param name="p_dataGrid">DataGrid object to resize.</param>
+	<param name="p_gridMain">Main grid system for the form.</param>
+	<param name="p_dgRow">Grid row that contains the DataGrid.</param>
+	<param name="p_border">Border surrounding the DataGrid, if present.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.AssignFormDimensions(System.Windows.Window@,System.Double,System.Double,System.Double,System.Double,System.Boolean,System.Boolean)">
+	<summary>
+ Assigns the minimum/maximum form dimensions for the parameters provided. 
+ By default, minimum dimensions are only assigned if they are greater than the current min size (meant for form first-loading).
+ By default, maximum dimensions are only assigned if they are less than the current max size (meant for form first-loading).
+ </summary>
+	<param name="p_form">Form object to size.</param>
+	<param name="p_minHeight">Minimum height allowed for the DataGrid.</param>
+	<param name="p_minWidth">Minimum width allowed for the DataGrid.</param>
+	<param name="p_maxHeight">Maximum height allowed for the DataGrid.</param>
+	<param name="p_maxWidth">Maximum width allowed for the DataGrid.</param>
+	<param name="p_overwriteAll">If 'True', DataGrid extents are assigned the provided parameters regardless of the existing sizes. 
+ Otherwise, assignments are only made based on default considerations that are expected of forms when they are first loading.</param>
+	<param name="p_setSizeToMaximum">If 'True', then the form size will be set to the maximum size possible.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.SetSizeToMaximum(System.Windows.Window@)">
+	<summary>
+ Sets the form size to the maximum sizes determined for the form, bounded by screen dimensions.
+ </summary>
+	<param name="p_form">Form object to size.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.AssignDGDimensions(System.Windows.Controls.DataGrid@,System.Double,System.Double,System.Double,System.Double,System.Boolean)">
+	<summary>
+ Assigns the minimum/maximum DataGrid dimensions for the parameters provided. 
+ By default, minimum dimensions are only assigned if they are greater than the current min size (meant for form first-loading).
+ By default, maximum dimensions are only assigned if they are less than the current max size (meant for form first-loading).
+ </summary>
+	<param name="p_dataGrid">DataGrid object to size.</param>
+	<param name="p_minHeight">Minimum height allowed for the DataGrid.</param>
+	<param name="p_minWidth">Minimum width allowed for the DataGrid.</param>
+	<param name="p_maxHeight">Maximum height allowed for the DataGrid.</param>
+	<param name="p_maxWidth">Maximum width allowed for the DataGrid.</param>
+	<param name="p_overwriteAll">If 'True', DataGrid extents are assigned the provided parameters regardless of the existing sizes. 
+ Otherwise, assignments are only made based on default considerations that are expected of forms when they are first loading.</param>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.GetFormHeightMinElements(System.Windows.Window,System.Windows.Controls.GroupBox,System.Windows.Controls.Grid)">
+	<summary>
+ Gets the minimum height of the form based on the standard included elements. 
+ This includes the form outside border.
+ </summary>
+	<param name="p_form">Form object to get the height og.</param>
+	<param name="p_grpBx">Form main groupbox.</param>
+	<param name="p_grid">Form main grid.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.GetFormWidthMinElements(System.Windows.Window,System.Windows.Controls.GroupBox,System.Windows.Controls.Grid)">
+	<summary>
+ Gets the minimum width of the form based on the standard included elements. 
+ This includes the form outside border.
+ </summary>
+	<param name="p_form">Form object to get the height og.</param>
+	<param name="p_grpBx">Form main groupbox.</param>
+	<param name="p_grid">Form main grid.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.GetGridHeights(System.Collections.Generic.List{System.Windows.Controls.RowDefinition})">
+	<summary>
+ Gets the total outside height of the list of grid rows provided. 
+ This includes all components of the control size.
+ </summary>
+	<param name="p_gridRows">List of grid rows to total into one height dimension.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.GetGridWidths(System.Collections.Generic.List{System.Windows.Controls.ColumnDefinition})">
+	<summary>
+ Gets the total outside width of the list of grid columns provided. 
+ This includes all components of the control size.
+ </summary>
+	<param name="p_gridColumns">List of grid columns to total into one width dimension.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.GetButtonHeights(System.Collections.Generic.List{System.Windows.Controls.Button})">
+	<summary>
+ Gets the total outside height of the list of buttons provided. 
+ This includes all components of the control size.
+ </summary>
+	<param name="p_buttons">List of buttons to total into one height dimension.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.GetButtonWidths(System.Collections.Generic.List{System.Windows.Controls.Button})">
+	<summary>
+ Gets the total outside width of the list of grid columns provided. 
+ This includes all components of the control size.
+ </summary>
+	<param name="p_buttons">List of buttons to total into one width dimension.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.GetDataGridHeightMax(System.Windows.Controls.DataGrid,System.Windows.Controls.Border,System.Collections.Generic.List{System.Windows.Controls.DataGridRow},System.Windows.Controls.Primitives.DataGridColumnHeadersPresenter,System.Windows.Controls.ScrollViewer)">
+	<summary>
+ Gets the total outside maximum height of the DataGrid provided, including standard margins &amp; borders. 
+ This includes all components of the control size.
+ </summary>
+	<param name="p_dataGrid">DataGrid object to query for the max height.</param>
+	<param name="p_border">Border object that is typically included with the DataGrid.</param>
+	<param name="p_rows">Rows to consider for the fully displayed DataGrid for max height. 
+ If not provided, it is determined from the DataGrid object.
+ If one is provided, all rows are assumed to be the same size.</param>
+	<param name="p_colHeadersPresenter">Column headers to consider. 
+ If not provided, it is determined from the DataGrid object.</param>
+	<param name="p_scrollViewer">Scrollviewer object to query for the total display height.
+ If not provided, it is determined from the DataGrid object.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.GetDataGridHeightMin(System.Windows.Controls.DataGrid,System.Windows.Controls.Border,System.Double,System.Windows.Controls.Primitives.DataGridColumnHeadersPresenter,System.Collections.Generic.List{System.Windows.Controls.DataGridRow})">
+	<summary>
+ Gets the total outside minimum height of the DataGrid provided, including standard margins &amp; borders. 
+ This includes all components of the control size.
+ </summary>
+	<param name="p_dataGrid">DataGrid object to query for the max height.</param>
+	<param name="p_border">Border object that is typically included with the DataGrid.</param>
+	<param name="p_minDGHeight">Calculated minimum DataGrid height.
+ If not provided, it is determined from the DataGrid object.</param>
+	<param name="p_colHeadersPresenter">Column headers to consider. 
+ If not provided, it is determined from the DataGrid object.</param>
+	<param name="p_rows"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.GetDataGridWidthMax(System.Windows.Controls.DataGrid,System.Windows.Controls.Border,System.Windows.Controls.ScrollViewer)">
+	<summary>
+  Gets the total outside maximum width of the DataGrid provided, including standard margins &amp; borders. 
+ This includes all components of the control size.
+ </summary>
+	<param name="p_dataGrid">DataGrid object to query for the max height.</param>
+	<param name="p_border">Border object that is typically included with the DataGrid.</param>
+	<param name="p_scrollViewer">Scrollviewer object to query for the total display width.
+ If not provided, it is determined from the DataGrid object.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.CalcDataGridWidthMax(System.Windows.Controls.DataGrid@,System.Windows.Controls.Border)">
+	<summary>
+ Determines the maximim width of the DataGrid including border elements and all visible columns.
+ </summary>
+	<param name="p_dataGrid">DataGrid object to determine the maximum width from.</param>
+	<param name="p_borders">Border object surrounding DataGrid to include in the width.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MPT.Forms.cLibForms.ExpandLastColumnToFit(System.Windows.Controls.DataGrid@,System.Double,System.Double)">
+	<summary>
+ Expand the last column of the provided DataGrid to fill the DataGrid if the grid size cannot match the columns. 
+ This prevents an empty trailing column from appearing.
+ </summary>
+	<param name="p_dataGrid">DataGrid to perform the method on.</param>
+	<param name="p_minWidth">Minimum width to be allowed for the DataGrid.</param>
+	<param name="p_maxWidth">Maximum width to be allowed for the DataGrid.</param>
+	<remarks></remarks>
+</member><member name="T:MPT.Forms.cLibForms">
+	<summary>
+ Contains methods specific to the functions of a form, but not any particular form, such as field entry validation.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:MPT.Forms.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:MPT.Forms.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:MPT.Forms.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

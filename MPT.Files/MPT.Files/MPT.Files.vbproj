@@ -52,17 +52,8 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 11.0\Visual Studio Tools for Office\PIA\Office14\Microsoft.Office.Interop.Access.dll</HintPath>
     </Reference>
-    <Reference Include="MPT.Cursors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\MPT.Cursors.dll</HintPath>
-    </Reference>
-    <Reference Include="MPT.FileSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MPT.FileSystem">
       <HintPath>..\lib\MPT.FileSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="MPT.PropertyChanger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\MPT.PropertyChanger.dll</HintPath>
     </Reference>
     <Reference Include="MPT.Reflections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

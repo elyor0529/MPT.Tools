@@ -277,11 +277,11 @@ MPT.FileSystem
  Used for returning a list of folders that are filtered based on some criteria.
  </summary>
 </member>
-<member name="M:MPT.FileSystem.IFolderFilter.MatchingFiles(System.Collections.Generic.List{MPT.FileSystem.cPath})">
+<member name="M:MPT.FileSystem.IFolderFilter.MatchingFolders(System.Collections.Generic.List{MPT.FileSystem.cPath})">
  <summary>
  Returns a list of path objects for all matching folders.
  </summary>
- <param name="searchedFiles">List of files to search.</param>
+ <param name="searchedFolders">List of folders to search.</param>
  <returns></returns>
 </member>
 <member name="T:MPT.FileSystem.Processor.FileProcessor">
@@ -464,6 +464,62 @@ MPT.FileSystem
  <param name="fileProcessor">Object containing the logic to use for file processing.</param>
  <remarks></remarks>
 </member>
+<member name="P:MPT.FileSystem.Validator.FileValidator.ExcludeFile">
+ <summary>
+ True: Matching criteria will exclude the file.
+ False: Matching criteria will include the file.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.FileSystem.Validator.FileValidator.#ctor(System.Boolean)">
+ <summary>
+ 
+ </summary>
+ <param name="excludeFile">True: Matching criteria will exclude the file.
+ False: Matching criteria will include the file.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.FileSystem.Validator.FileValidator.Result(System.Boolean)">
+ <summary>
+ Returns the correct boolean result of the following combinations:
+ 1. isValid and Not excluded = True 
+ 2. Not isValid and Not excluded = False 
+ 3. isValid and excluded = False 
+ 4. Not isValid and excluded = True
+ </summary>
+ <param name="isValid"></param>
+ <returns></returns>
+</member>
+<member name="P:MPT.FileSystem.Validator.FolderValidator.ExcludeFolder">
+ <summary>
+ True: Matching criteria will exclude the file.
+ False: Matching criteria will include the file.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.FileSystem.Validator.FolderValidator.#ctor(System.Boolean)">
+ <summary>
+ 
+ </summary>
+ <param name="excludeFolder">True: Matching criteria will exclude the folder.
+ False: Matching criteria will include the folder.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.FileSystem.Validator.FolderValidator.Result(System.Boolean)">
+ <summary>
+ Returns the correct boolean result of the following combinations:
+ 1. isValid and Not excluded = True 
+ 2. Not isValid and Not excluded = False 
+ 3. isValid and excluded = False 
+ 4. Not isValid and excluded = True
+ </summary>
+ <param name="isValid"></param>
+ <returns></returns>
+</member>
 <member name="T:MPT.FileSystem.Validator.IValidateFolder">
  <summary>
  Determines if a folder is valid by specified criteria.
@@ -501,15 +557,6 @@ MPT.FileSystem
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="P:MPT.FileSystem.Validator.NameFolderValidator.ExcludeFolder">
- <summary>
- True: Matching criteria will exclude the folder.
- False: Matching criteria will include the folder.
- </summary>
- <value></value>
- <returns></returns>
- <remarks></remarks>
-</member>
 <member name="M:MPT.FileSystem.Validator.NameFolderValidator.#ctor(System.String,System.Boolean)">
  <summary>
  
@@ -541,15 +588,6 @@ MPT.FileSystem
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="P:MPT.FileSystem.Validator.PartialNameMatchValidator.ExcludeFile">
- <summary>
- True: Matching criteria will exclude the file.
- False: Matching criteria will include the file.
- </summary>
- <value></value>
- <returns></returns>
- <remarks></remarks>
-</member>
 <member name="M:MPT.FileSystem.Validator.PartialNameMatchValidator.#ctor(System.String,System.Boolean)">
  <summary>
  
@@ -563,7 +601,7 @@ MPT.FileSystem
  <summary>
  True: File is a valid file based on the selection criteria.
  </summary>
- <param name="path">Path to the file to validate.</param>
+ <param name="partialMatch">Name of or path to the file to validate as matching part of the base file name.</param>
  <returns></returns>
  <remarks></remarks>
 </member>
@@ -573,21 +611,20 @@ MPT.FileSystem
  </summary>
  <remarks></remarks>
 </member>
-<member name="P:MPT.FileSystem.Validator.ReadOnlyFileValidator.ExcludeFile">
- <summary>
- True: Matching criteria will exclude the file.
- False: Matching criteria will include the file.
- </summary>
- <value></value>
- <returns></returns>
- <remarks></remarks>
-</member>
 <member name="M:MPT.FileSystem.Validator.ReadOnlyFileValidator.#ctor(System.Boolean)">
  <summary>
  
  </summary>
  <param name="excludeFile">True: Matching criteria will exclude the file.
  False: Matching criteria will include the file.</param>
+ <remarks></remarks>
+</member>
+<member name="M:MPT.FileSystem.Validator.ReadOnlyFileValidator.IsValidFile(System.String)">
+ <summary>
+ True: File is a valid file based on the selection criteria.
+ </summary>
+ <param name="path">Path to the file to validate.</param>
+ <returns></returns>
  <remarks></remarks>
 </member>
 <member name="T:MPT.FileSystem.Validator.NameExtensionFileValidator">
@@ -607,15 +644,6 @@ MPT.FileSystem
 <member name="P:MPT.FileSystem.Validator.NameExtensionFileValidator.Extension">
  <summary>
  File extension.
- </summary>
- <value></value>
- <returns></returns>
- <remarks></remarks>
-</member>
-<member name="P:MPT.FileSystem.Validator.NameExtensionFileValidator.ExcludeFile">
- <summary>
- True: Matching criteria will exclude the file.
- False: Matching criteria will include the file.
  </summary>
  <value></value>
  <returns></returns>
@@ -760,7 +788,7 @@ MPT.FileSystem
  <param name="promptMessage">Message to display to the user if a file exists.</param>
  <remarks></remarks>
 </member>
-<member name="M:MPT.FileSystem.FileLibrary.MoveFile(System.String,System.String,System.Boolean)">
+<member name="M:MPT.FileSystem.FileLibrary.MoveFile(System.String,System.String,System.Boolean,System.Boolean)">
  <summary>
  Moves a file from a specified source to destination. 
  May or may not remove the original file depending on parameter inputs.
@@ -770,6 +798,7 @@ MPT.FileSystem
  <param name="pathDestination">Path to where the original file is to be moved.</param>
  <param name="deleteOriginal">True: Original file will be deleted after copy action. 
  False: Original file will be left as is.</param>
+ <param name="overWriteExisting">True: Destination directory and files will be overwritten if they already exist.</param>
  <remarks></remarks>
 </member>
 <member name="M:MPT.FileSystem.FileLibrary.ComponentCopyFileAction(System.String,System.String,System.Boolean,System.String)">
@@ -891,7 +920,7 @@ MPT.FileSystem
  <param name="overWriteExisting">True: Destination directory and files will be overwritten if they already exist.</param>
  <remarks></remarks>
 </member>
-<member name="M:MPT.FileSystem.FolderLibrary.MoveFolder(System.String,System.String,System.Boolean)">
+<member name="M:MPT.FileSystem.FolderLibrary.MoveFolder(System.String,System.String,System.Boolean,System.Boolean)">
  <summary>
  Moves a file from a specified source to destination. 
  May or may not remove the original file depending on parameter inputs.
@@ -901,6 +930,7 @@ MPT.FileSystem
  <param name="pathDestination">Path to where the original folder is to be moved.</param>
  <param name="deleteOriginal">True: Original folder will be deleted after copy action. 
  False: Original folder will be left as is.</param>
+ <param name="overWriteExisting">True: Destination directory and files will be overwritten if they already exist.</param>
  <remarks></remarks>
 </member>
 <member name="M:MPT.FileSystem.FolderLibrary.CreateReplaceDirectoryAndIncrementNameIfDuplicate(System.String,System.Int32)">
@@ -944,26 +974,29 @@ MPT.FileSystem
  </summary>
  <remarks></remarks>
 </member>
-<member name="M:MPT.FileSystem.PathLibrary.AbsolutePath(System.String@,System.String,System.String,System.Boolean,System.Boolean)">
+<member name="M:MPT.FileSystem.PathLibrary.AbsolutePath(System.String@,System.String,System.String)">
  <summary>
- Checks if path is relative or absolute. If path is relative, path is converted to absolute. Returns true if an absolute path was created. False otherwise.
+ Checks if path is relative or absolute. 
+ If path is relative, path is converted to absolute. 
+ Returns true if a valid absolute path was created, and False indicates that the new value is possibly incorrect
  </summary>
- <param name="p_path">Path to be checked and, if necessary, converted.</param>
- <param name="p_relativeToProgram">If base reference is relative to the program, specify the relative path difference with this parameter.</param>
- <param name="p_referencePath">Path to which the conversion is related. This is an absolute path.</param>
- <param name="p_ignoreFailure">Optional: If true, then even in development mode the failure warning message is suppressed, but the function returns the relative path.</param>
- <param name="p_cleanPath">True: The path will be trimmed of white space, leading and ending "\", and all "\\".</param>
+ <param name="pathCheckConvert">Path to return as an absolute path.</param>
+ <param name="relativePathFromBase">If base reference is relative to the program, specify the relative path difference with this parameter.</param>
+ <param name="basePath">Absolute path to the base directory. 
+ Default path is to the of the running application.</param>
  <remarks></remarks>
 </member>
-<member name="M:MPT.FileSystem.PathLibrary.RelativePath(System.String@,System.Boolean,System.String,System.String,System.Boolean)">
+<member name="M:MPT.FileSystem.PathLibrary.RelativePath(System.String@,System.Boolean,System.String,System.String)">
  <summary>
- Checks if path is relative or absolute. If path is absolute, path is converted to relative.
+ Checks if path is relative or absolute. 
+ If path is absolute, path is converted to relative. 
+ Returns true if a valid relative path was created, and False indicates that the new value is possibly incorrect.
  </summary>
- <param name="p_path">Path to be checked and, if necessary, converted.</param>
- <param name="p_isFile">True: Path is to a file. False (default): Path is to a directory.</param>
- <param name="p_relativeToProgram">If base reference is relative to the program, specify the relative path difference with this parameter.</param>
- <param name="p_referencePath">Path to which the conversion is related. This is an absolute path.</param>
- <param name="p_cleanPath">True: The path will be trimmed of white space, leading and ending "\", and all "\\".</param>
+ <param name="pathCheckConvert">Path to return as a relative path.</param>
+ <param name="isFile">True: Path is to a file. False: Path is to a directory.</param>
+ <param name="relativePathFromBase">If base reference is relative to the program, specify the relative path difference with this parameter.</param>
+ <param name="basePath">Absolute path to the base directory. 
+ Default path is to the of the running application.</param>
  <remarks></remarks>
 </member>
 <member name="M:MPT.FileSystem.PathLibrary.ConvertPathAbsoluteToRelative(System.String,System.String,System.Boolean,System.String)">
@@ -976,11 +1009,12 @@ MPT.FileSystem
  <param name="targetPath">Absolute path to target directory.</param>
  <param name="isTargetPathToFile">True: Path is to a file. False: Path is assumed to be to a directory.</param>
  <param name="relativePathFromBase">If base reference is to be relative to the base directory, specify the relative path difference with this parameter. 
- The presence of starting and endings slashes does not matter.</param>
+ The presence of starting and endings slashes does not matter. 
+ Currently only supports relative path to a child directory of the base path.</param>
  <returns></returns>
  <remarks>Format right now is to end relative path a "\" for folder destinations.</remarks>
 </member>
-<member name="M:MPT.FileSystem.PathLibrary.ConvertPathRelativeToAbsolute(System.String,System.String,System.String,System.Boolean)">
+<member name="M:MPT.FileSystem.PathLibrary.ConvertPathRelativeToAbsolute(System.String,System.String,System.String)">
  <summary>
  Converts relative path to absolute path.
  Format is not to end relative path with a "\" for folder destinations.
@@ -989,8 +1023,8 @@ MPT.FileSystem
  <param name="basePath">Absolute path to the base directory, such as that of the running application or DLL.</param>
  <param name="targetPath">Relative path to target directory.</param>
  <param name="relativePathFromBase">If base reference is to be relative to the base directory, specify the relative path difference with this parameter. 
- The presence of starting and endings slashes does not matter.</param>
- <param name="ignoreFailure">True: Even in development mode the failure warning message is suppressed, but the function returns the relative path.</param>
+ The presence of starting and endings slashes does not matter. 
+ Currently only supports relative path to a child directory of the base path.</param>
  <returns></returns>
  <remarks>Format right now is to end absolute path without a "\".</remarks>
 </member>
@@ -1022,13 +1056,15 @@ MPT.FileSystem
  <param name="name">Name of folder on the next level relative to the running *.dll location</param>
  <remarks></remarks>
 </member>
-<member name="M:MPT.FileSystem.PathLibrary.SetCurrDir(System.String@,System.String)">
+<member name="M:MPT.FileSystem.PathLibrary.CurrentDirectoryPath(System.String,System.String)">
  <summary>
- Sets starting directory to a folder or file, accounting for relative vs. absolute paths, and whether the path is valid. Assigns a default if path is not valid.
+ Sets starting directory to an existing folder, accounting for relative vs. absolute paths, and paths to files. 
+ Assigns a default if path is not valid.
+ If it is already valid, path is returned unmodified (apart from excluding any existing file name).
  </summary>
- <param name="path">Path to be checked.</param>
+ <param name="pathCheckConvert">Path to be checked.</param>
  <param name="defaultRelativePath">Default path is to the program. 
- Optional: For the conditional default path, add any additional path to a subdirectory of the program.</param>
+ Add any additional relative path to a subdirectory of the program for any altered path returned.</param>
  <remarks></remarks>
 </member>
 <member name="M:MPT.FileSystem.PathLibrary.IsRelativePath(System.String)">
@@ -1036,16 +1072,6 @@ MPT.FileSystem
  Checks whether a path is relative or absolute by the presence of the ":" symbol.
  </summary>
  <param name="path">Path to be checked for relative vs. absolute type.</param>
- <returns></returns>
- <remarks></remarks>
-</member>
-<member name="M:MPT.FileSystem.PathLibrary.IsValidRelativePath(System.String,System.String,System.String)">
- <summary>
- Checks whether or not the relative path was successfully converted.
- </summary>
- <param name="originalPath">Original path that was to be converted.</param>
- <param name="referencePath">Path to which the conversion is related.</param>
- <param name="relativeToProgram">If base reference is relative to the program, specify the relative path difference with this parameter.</param>
  <returns></returns>
  <remarks></remarks>
 </member>
@@ -1184,15 +1210,6 @@ MPT.FileSystem
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="M:MPT.FileSystem.PathLibrary.FolderSource(System.String,MPT.FileSystem.cFilePaths)">
- <summary>
- Get the common folder source from the files provided if a folder source was not specified.
- </summary>
- <param name="folderSourceSpecified">File path to the source folder containing the examples to be worked with.</param>
- <param name="filePaths"></param>
- <returns></returns>
- <remarks></remarks>
-</member>
 <member name="M:MPT.FileSystem.PathLibrary.CleanPath(System.String)">
  <summary>
  Cleans the path by removing all whitespace, all starting and ending backslashes, and cleaning all repeating backslashes.
@@ -1296,6 +1313,21 @@ MPT.FileSystem
  <param name="folderName">Only paths for the specified folder name will be returned.</param>
  <returns></returns>
  <remarks></remarks>
+</member>
+<member name="M:MPT.FileSystem.PathLibrary.NumberOfMatchingDirectories(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+ <summary>
+ Determines the number of directories in the two lists match in name and index.
+ </summary>
+ <param name="directories1"></param>
+ <param name="directories2"></param>
+ <returns></returns>
+</member>
+<member name="M:MPT.FileSystem.PathLibrary.NewDefaultPath(System.String)">
+ <summary>
+ Retrusn the new default path of the existing running application or combination of it and the default relative path.
+ </summary>
+ <param name="defaultRelativePath">Any additional relative path to a subdirectory of the program for any altered path returned.</param>
+ <returns></returns>
 </member>
 <member name="M:MPT.FileSystem.PathLibrary.TrimStartingSlashes(System.String)">
  <summary>
