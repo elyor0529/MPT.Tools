@@ -10,8 +10,10 @@
         /// An error occurs if the analysis model does not exist.
         /// </summary>
         /// <param name="name">The name of an existing object.</param>
-        /// <param name="elementName">The name of the element created from the specified object.</param>
+        /// <param name="numberOfElements">The number of area elements created from the specified area object.</param>
+        /// <param name="elementNames">The name of each element created from the specified object.</param>
         void GetElement(string name,
-            ref string elementName);
+            ref int numberOfElements,
+            ref string[] elementNames);
     }
 }

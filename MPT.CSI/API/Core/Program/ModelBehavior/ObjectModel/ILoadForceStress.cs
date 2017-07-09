@@ -26,7 +26,7 @@
         /// If this item is <see cref="eItemType.Group"/>, the assignments are retrieved for the objects included in the group specified by the <paramref name="name"/> item.
         /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are retrieved for all selected objects, and the <paramref name="name"/> item is ignored.</param>
         void GetLoadForceStress(string name,
-            ref int[] numberItems,
+            ref int numberItems,
             ref string[] tendonNames,
             ref string[] loadPatterns,
             ref eTendonJack[] jackedFrom,

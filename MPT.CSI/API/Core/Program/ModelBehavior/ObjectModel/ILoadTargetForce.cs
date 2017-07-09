@@ -16,7 +16,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="names">The name of the element associated with each target force.</param>
         /// <param name="loadPatterns">The name of the load pattern associated with each target force.</param>
         /// <param name="forcesActive">Boolean values indicating if the considered degree of freedom has a target force assignment.</param>
-        /// <param name="deformations">Target force values. 
+        /// <param name="forcesValues">Target force values. 
         /// The target forces specified for a given degree of freedom are only applicable if the corresponding DOF item for that degree of freedom is True.</param>
         /// <param name="relativeForcesLocations">Relative distances along the line elements where the target force values apply. 
         /// The relative distances specified for a given degree of freedom are only applicable if the corresponding dofn item for that degree of freedom is True.</param>
@@ -28,7 +28,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             ref string[] names,
             ref string[] loadPatterns,
             ref ForcesActive[] forcesActive,
-            ref Deformations[] deformations,
+            ref Forces[] forcesValues,
             ref Forces[] relativeForcesLocations,
             eItemType itemType = eItemType.Object);
 
@@ -38,7 +38,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="name">The name of an existing object, element or group of objects, depending on the value of <paramref name="itemType"/>.</param>
         /// <param name="loadPattern">The name of the load pattern associated with each target force.</param>
         /// <param name="forcesActive">Boolean values indicating if the considered degree of freedom has a target force assignment.</param>
-        /// <param name="deformations">Target force values. 
+        /// <param name="forceValues">Target force values. 
         /// The target forces specified for a given degree of freedom are only applicable if the corresponding DOF item for that degree of freedom is True.</param>
         /// <param name="relativeForcesLocation">Relative distances along the line elements where the target force values apply. 
         /// The relative distances specified for a given degree of freedom are only applicable if the corresponding dofn item for that degree of freedom is True.</param>
@@ -46,10 +46,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
         /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
         void SetLoadTargetForce(string name,
-            ref string loadPattern,
-            ref ForcesActive forcesActive,
-            ref Deformations deformations,
-            ref Forces relativeForcesLocation,
+            string loadPattern,
+            ForcesActive forcesActive,
+            Forces forceValues,
+            Forces relativeForcesLocation,
             eItemType itemType = eItemType.Object);
 
         /// <summary>

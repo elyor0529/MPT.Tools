@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
 
@@ -33,8 +33,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 
         #endregion
 
-        #region Methods: Interface
-
+        #region Query
         /// <summary>
         /// This function returns the total number of defined solid elements in the model.
         /// </summary>
@@ -43,8 +42,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         {
             return _sapModel.SolidElm.Count();
         }
-
-        // === Get ===
 
         /// <summary>
         /// This function retrieves the names of all items.
@@ -56,40 +53,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         {
             _callCode = _sapModel.SolidElm.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves the section property assigned to a solid element.
-        /// </summary>
-        /// <param name="name">The name of a defined solid element.</param>
-        /// <param name="propertyName">The name of the section property assigned to the solid element.</param>
-        public void GetSection(string name, ref string propertyName)
-        {
-            _callCode = _sapModel.SolidElm.GetProperty(name, ref propertyName);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves the local axis angle assignment for the solid element.
-        /// </summary> 
-        /// <param name="name">The name of an existing solid element.</param>
-        /// <param name="angleOffset">This is the angle 'a' that the local 1 and 2 axes are rotated about the positive local 3 axis from the default orientation. 
-        /// The rotation for a positive angle appears counter clockwise when the local +3 axis is pointing toward you. [deg]
-        /// For some objects, the following rotations are also performed:
-        /// 2. Rotate about the resulting 2 axis by angle b.
-        /// 3. Rotate about the resulting 1 axis by angle c.</param>
-        public void GetLocalAxes(string name,
-            ref AngleLocalAxes angleOffset)
-        {
-            double angleA = 0;
-            double angleB = 0;
-            double angleC = 0;
-            _callCode = _sapModel.SolidElm.GetLocalAxes(name, ref angleA, ref angleB, ref angleC);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            angleOffset.AngleA = angleA;
-            angleOffset.AngleB = angleB;
-            angleOffset.AngleC = angleC;
         }
 
         /// <summary>
@@ -131,8 +94,44 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.SolidElm.GetObj(name, ref nameObject);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+        #endregion
 
-        // === Loads ===
+        #region Axes
+        /// <summary>
+        /// This function retrieves the local axis angle assignment for the solid element.
+        /// </summary> 
+        /// <param name="name">The name of an existing solid element.</param>
+        /// <param name="angleOffset">This is the angle 'a' that the local 1 and 2 axes are rotated about the positive local 3 axis from the default orientation. 
+        /// The rotation for a positive angle appears counter clockwise when the local +3 axis is pointing toward you. [deg]
+        /// For some objects, the following rotations are also performed:
+        /// 2. Rotate about the resulting 2 axis by angle b.
+        /// 3. Rotate about the resulting 1 axis by angle c.</param>
+        public void GetLocalAxes(string name,
+            ref AngleLocalAxes angleOffset)
+        {
+            double angleA = 0;
+            double angleB = 0;
+            double angleC = 0;
+            _callCode = _sapModel.SolidElm.GetLocalAxes(name, ref angleA, ref angleB, ref angleC);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            angleOffset.AngleA = angleA;
+            angleOffset.AngleB = angleB;
+            angleOffset.AngleC = angleC;
+        }
+        #endregion
+        
+        #region Cross-Section & Material Properties
+        /// <summary>
+        /// This function retrieves the section property assigned to a solid element.
+        /// </summary>
+        /// <param name="name">The name of a defined solid element.</param>
+        /// <param name="propertyName">The name of the section property assigned to the solid element.</param>
+        public void GetSection(string name, ref string propertyName)
+        {
+            _callCode = _sapModel.SolidElm.GetProperty(name, ref propertyName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
 
         /// <summary>
         /// This function retrieves the material temperature assignments to elements.
@@ -141,7 +140,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// <param name="temperature">This is the material temperature value assigned to the element. [T]</param>
         /// <param name="patternName">This is blank or the name of a defined joint pattern. 
         /// If it is blank, the material temperature for the line element is uniform along the element at the value specified by <paramref name="temperature"/>.
-        /// If PatternName is the name of a defined joint pattern, the material temperature for the line element may vary from one end to the other.
+        /// If <paramref name="patternName"/> is the name of a defined joint pattern, the material temperature for the line element may vary from one end to the other.
         /// The material temperature at each end of the element is equal to the specified temperature multiplied by the pattern value at the joint at the end of the line element.</param>
         public void GetMaterialTemperature(string name,
             ref double temperature,
@@ -150,7 +149,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.SolidElm.GetMatTemp(name, ref temperature, ref patternName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+        #endregion
+        
+        #region Loads
         /// <summary>
         /// This function retrieves the temperature load assignments to elements.
         /// </summary>
@@ -213,11 +214,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.SolidElm.GetLoadSurfacePressure(name, ref numberItems, ref names, ref loadPatterns, ref csiFaceApplied, ref surfacePressureLoadValues, ref jointPatternNames, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            faceApplied = new eFace[csiFaceApplied.Length - 1];
-            for (int i = 0; i < csiFaceApplied.Length; i++)
-            {
-                faceApplied[i] = (eFace)csiFaceApplied[i];
-            }
+            faceApplied = csiFaceApplied.Cast<eFace>().ToArray();
         }
 
         /// <summary>
@@ -248,11 +245,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.SolidElm.GetLoadStrain(name, ref numberItems, ref names, ref loadPatterns, ref csiComponent, ref strainLoadValues, ref jointPatternNames, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            component = new eStrainComponent[csiComponent.Length - 1];
-            for (int i = 0; i < csiComponent.Length; i++)
-            {
-                component[i] = (eStrainComponent)csiComponent[i];
-            }
+            component = csiComponent.Cast<eStrainComponent>().ToArray();
         }
 
         /// <summary>
@@ -308,6 +301,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.SolidElm.GetLoadGravity(name, ref numberItems, ref names, ref loadPatterns, ref coordinateSystems, ref xLoadMultiplier, ref yLoadMultiplier, ref zLoadMultiplier, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+
         #endregion
     }
 }

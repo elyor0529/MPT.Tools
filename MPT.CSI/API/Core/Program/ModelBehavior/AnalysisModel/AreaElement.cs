@@ -1,4 +1,5 @@
-﻿using MPT.CSI.API.Core.Helpers;
+﻿using System.Linq;
+using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
@@ -32,7 +33,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         public AreaElement(CSiApiSeed seed) : base(seed) { }
         #endregion
 
-        #region Methods: Interface
+        #region Query
         /// <summary>
         /// This function returns the total number of defined area elements in the model.
         /// </summary>
@@ -41,79 +42,17 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         {
             return _sapModel.AreaElm.Count();
         }
-
-        // === Get ===
-
+        
         /// <summary>
         /// This function retrieves the names of all items.
         /// </summary>
         /// <param name="numberOfNames">The number of item names retrieved by the program.</param>
         /// <param name="names">Names retrieved by the program.</param>
-        public void GetNameList(ref int numberOfNames, 
+        public void GetNameList(ref int numberOfNames,
             ref string[] names)
         {
             _callCode = _sapModel.AreaElm.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves the section property assigned to an area element.
-        /// </summary>
-        /// <param name="name">The name of a defined area element.</param>
-        /// <param name="propertyName">The name of the section property assigned to the area element. 
-        /// This item is None if there is no section property assigned to the area element.</param>
-        public void GetSection(string name, 
-            ref string propertyName)
-        {
-            _callCode = _sapModel.AreaElm.GetProperty(name, ref propertyName);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves the material overwrite assigned to an area element, if any. 
-        /// The material property name is indicated as None if there is no material overwrite assignment.
-        /// </summary>
-        /// <param name="name">The name of a defined area element.</param>
-        /// <param name="propertyName">This is None, indicating that no material overwrite exists for the specified area element, or it is the name of an existing material property.</param>
-        public void GetMaterialOverwrite(string name, 
-            ref string propertyName)
-        {
-            _callCode = _sapModel.AreaElm.GetMaterialOverwrite(name, ref propertyName);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves the modifier assignment for area elements. 
-        /// The default value for all modifiers is one.
-        /// </summary>
-        /// <param name="name">The name of an existing area element or object.</param>
-        /// <param name="modifiers">Unitless modifiers.</param>
-        public void GetModifiers(string name, 
-            ref Modifier modifiers)
-        {
-            if (modifiers == null) { modifiers = new Modifier(); }
-            double[] csiModifiers = new double[0];
-
-            _callCode = _sapModel.AreaElm.GetModifiers(name, ref csiModifiers);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            modifiers.FromArray(csiModifiers);
-        }
-
-        /// <summary>
-        /// This function retrieves the local axis angle assignment for the area .
-        /// </summary> 
-        /// <param name="name">The name of an existing area element.</param>
-        /// <param name="angleOffset">This is the angle 'a' that the local 1 and 2 axes are rotated about the positive local 3 axis from the default orientation. 
-        /// The rotation for a positive angle appears counter clockwise when the local +3 axis is pointing toward you. [deg]</param>
-        public void GetLocalAxes(string name,
-            ref AngleLocalAxes angleOffset)
-        {
-            double angleA = 0;
-            _callCode = _sapModel.AreaElm.GetLocalAxes(name, ref angleA);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            angleOffset.AngleA = angleA;
         }
 
         /// <summary>
@@ -137,8 +76,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// <param name="numberPoints">The number of point elements that define the area element.</param>
         /// <param name="points">The names of the points that defined the area element.
         /// The point names are listed in the positive order around the element.</param>
-        public void GetPoints(string name, 
-            ref int numberPoints, 
+        public void GetPoints(string name,
+            ref int numberPoints,
             ref string[] points)
         {
             _callCode = _sapModel.AreaElm.GetPoints(name, ref numberPoints, ref points);
@@ -151,14 +90,105 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// </summary>
         /// <param name="name">The name of an existing area element.</param>
         /// <param name="nameObject">The name of the area object from which the area element was created.</param>
-        public void GetObject(string name, 
+        public void GetObject(string name,
             ref string nameObject)
         {
             _callCode = _sapModel.AreaElm.GetObj(name, ref nameObject);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+        #endregion
 
-        // === Loads ===
+        #region Axes
+        /// <summary>
+        /// This function retrieves the local axis angle assignment for the area .
+        /// </summary> 
+        /// <param name="name">The name of an existing area element.</param>
+        /// <param name="angleOffset">This is the angle 'a' that the local 1 and 2 axes are rotated about the positive local 3 axis from the default orientation. 
+        /// The rotation for a positive angle appears counter clockwise when the local +3 axis is pointing toward you. [deg]</param>
+        public void GetLocalAxes(string name,
+            ref AngleLocalAxes angleOffset)
+        {
+            double angleA = 0;
+            _callCode = _sapModel.AreaElm.GetLocalAxes(name, ref angleA);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            angleOffset.AngleA = angleA;
+        }
+        #endregion
+
+        #region Modifiers
+        /// <summary>
+        /// This function retrieves the modifier assignment for area elements. 
+        /// The default value for all modifiers is one.
+        /// </summary>
+        /// <param name="name">The name of an existing area element or object.</param>
+        /// <param name="modifiers">Unitless modifiers.</param>
+        public void GetModifiers(string name,
+            ref Modifier modifiers)
+        {
+            if (modifiers == null) { modifiers = new Modifier(); }
+            double[] csiModifiers = new double[0];
+
+            _callCode = _sapModel.AreaElm.GetModifiers(name, ref csiModifiers);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            modifiers.FromArray(csiModifiers);
+        }
+        #endregion
+
+        #region Cross-Section & Material Properties
+        /// <summary>
+        /// This function retrieves the section property assigned to an area element.
+        /// </summary>
+        /// <param name="name">The name of a defined area element.</param>
+        /// <param name="propertyName">The name of the section property assigned to the area element. 
+        /// This item is None if there is no section property assigned to the area element.</param>
+        public void GetSection(string name,
+            ref string propertyName)
+        {
+            _callCode = _sapModel.AreaElm.GetProperty(name, ref propertyName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        /// <summary>
+        /// This function retrieves the thickness overwrite assignments for area elements.
+        /// </summary>
+        /// <param name="name">The name of an existing area element.</param>
+        /// <param name="thicknessType">Indicates the thickness overwrite type.</param>
+        /// <param name="thicknessPattern">This item applies only when <paramref name="thicknessType"/> = <see cref="eAreaThicknessType.OverwriteByJointPattern"/>. 
+        /// It is the name of the defined joint pattern that is used to calculate the thicknesses.</param>
+        /// <param name="thicknessPatternScaleFactor">This item applies only when <paramref name="thicknessType"/> = <see cref="eAreaThicknessType.OverwriteByJointPattern"/>. 
+        /// It is the scale factor applied to the joint pattern when calculating the thicknesses. [L]</param>
+        /// <param name="thicknesses">This item applies only when <paramref name="thicknessType"/> = <see cref="eAreaThicknessType.OverwriteByPoint"/>. 
+        /// It is an array of thicknesses at each of the points that define the area element. [L]</param>
+        public void GetThickness(string name,
+            ref eAreaThicknessType thicknessType,
+            ref string thicknessPattern,
+            ref double thicknessPatternScaleFactor,
+            ref double[] thicknesses)
+        {
+            int csiThicknessType = 0;
+
+            _callCode = _sapModel.AreaElm.GetThickness(name, ref csiThicknessType, ref thicknessPattern, ref thicknessPatternScaleFactor, ref thicknesses);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            thicknessType = (eAreaThicknessType)csiThicknessType;
+        }
+
+
+        /// <summary>
+        /// This function retrieves the material overwrite assigned to an area element, if any. 
+        /// The material property name is indicated as None if there is no material overwrite assignment.
+        /// </summary>
+        /// <param name="name">The name of a defined area element.</param>
+        /// <param name="propertyName">This is None, indicating that no material overwrite exists for the specified area element, or it is the name of an existing material property.</param>
+        public void GetMaterialOverwrite(string name,
+            ref string propertyName)
+        {
+            _callCode = _sapModel.AreaElm.GetMaterialOverwrite(name, ref propertyName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
 
         /// <summary>
         /// This function retrieves the material temperature assignments to elements.
@@ -167,16 +197,47 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// <param name="temperature">This is the material temperature value assigned to the element. [T]</param>
         /// <param name="patternName">This is blank or the name of a defined joint pattern. 
         /// If it is blank, the material temperature for the line element is uniform along the element at the value specified by <paramref name="temperature"/>.
-        /// If PatternName is the name of a defined joint pattern, the material temperature for the line element may vary from one end to the other.
+        /// If <paramref name="patternName"/> is the name of a defined joint pattern, the material temperature for the line element may vary from one end to the other.
         /// The material temperature at each end of the element is equal to the specified temperature multiplied by the pattern value at the joint at the end of the line element.</param>
-        public void GetMaterialTemperature(string name, 
-            ref double temperature, 
+        public void GetMaterialTemperature(string name,
+            ref double temperature,
             ref string patternName)
         {
             _callCode = _sapModel.AreaElm.GetMatTemp(name, ref temperature, ref patternName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+        #endregion
 
+        #region Area Properties
+        /// <summary>
+        /// This function retrieves the joint offset assignments for area elements.
+        /// </summary>
+        /// <param name="name">The name of an existing area element.</param>
+        /// <param name="offsetType">Indicates the joint offset type.</param>
+        /// <param name="offsetPattern">This item applies only when <paramref name="offsetType"/> = <see cref="eAreaOffsetType.OffsetByJointPattern"/>. 
+        /// It is the name of the defined joint pattern that is used to calculate the thicknesses.</param>
+        /// <param name="offsetPatternScaleFactor">This item applies only when <paramref name="offsetType"/> = <see cref="eAreaOffsetType.OffsetByJointPattern"/>. 
+        /// It is the scale factor applied to the joint pattern when calculating the thicknesses. [L]</param>
+        /// <param name="offsets">This item applies only when <paramref name="offsetType"/> = <see cref="eAreaOffsetType.OffsetByPoint"/>. 
+        /// It is an array of thicknesses at each of the points that define the area element. [L]</param>
+        public void GetOffsets(string name,
+            ref eAreaOffsetType offsetType,
+            ref string offsetPattern,
+            ref double offsetPatternScaleFactor,
+            ref double[] offsets)
+        {
+            int csiOffsetType = 0;
+
+            _callCode = _sapModel.AreaElm.GetThickness(name, ref csiOffsetType, ref offsetPattern, ref offsetPatternScaleFactor, ref offsets);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            offsetType = (eAreaOffsetType)csiOffsetType;
+        }
+
+
+        #endregion
+
+        #region Loads
         /// <summary>
         /// This function retrieves the gravity load assignments to elements.
         /// </summary>
@@ -259,11 +320,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.AreaElm.GetLoadStrain(name, ref numberItems, ref names, ref loadPatterns, ref csiComponent, ref strainLoadValues, ref jointPatternNames, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            component = new eStrainComponent[csiComponent.Length-1];
-            for (int i = 0; i < csiComponent.Length; i++)
-            {
-                component[i] = (eStrainComponent)csiComponent[i];
-            }
+            component = csiComponent.Cast<eStrainComponent>().ToArray();
         }
 
         /// <summary>
@@ -294,12 +351,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 
             _callCode = _sapModel.AreaElm.GetLoadSurfacePressure(name, ref numberItems, ref names, ref loadPatterns, ref csiFaceApplied, ref surfacePressureLoadValues, ref jointPatternNames, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            faceApplied = new eFace[csiFaceApplied.Length - 1];
-            for (int i = 0; i < csiFaceApplied.Length; i++)
-            {
-                faceApplied[i] = (eFace)csiFaceApplied[i];
-            }
+            
+            faceApplied = csiFaceApplied.Cast<eFace>().ToArray();
         }
 
         /// <summary>
@@ -327,14 +380,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         {
             int[] csiTemperatureLoadType = new int[0];
 
-            _callCode = _sapModel.AreaElm.GetLoadTemperature( name, ref numberItems, ref names, ref loadPatterns, ref csiTemperatureLoadType, ref temperatureLoadValues, ref jointPatternNames, CSiEnumConverter.ToCSi(itemType));
+            _callCode = _sapModel.AreaElm.GetLoadTemperature(name, ref numberItems, ref names, ref loadPatterns, ref csiTemperatureLoadType, ref temperatureLoadValues, ref jointPatternNames, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            temperatureLoadType = new eLoadTemperatureType[csiTemperatureLoadType.Length - 1];
-            for (int i = 0; i < csiTemperatureLoadType.Length; i++)
-            {
-                temperatureLoadType[i] = (eLoadTemperatureType)csiTemperatureLoadType[i];
-            }
+            
+            temperatureLoadType = csiTemperatureLoadType.Cast<eLoadTemperatureType>().ToArray();
         }
 
         /// <summary>
@@ -364,68 +413,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 
             _callCode = _sapModel.AreaElm.GetLoadUniform(name, ref numberItems, ref names, ref loadPatterns, ref coordinateSystems, ref csiDirectionApplied, ref uniformLoadValues, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            directionApplied = new eLoadDirection[csiDirectionApplied.Length - 1];
-            for (int i = 0; i < csiDirectionApplied.Length; i++)
-            {
-                directionApplied[i] = (eLoadDirection)csiDirectionApplied[i];
-            }
+            
+            directionApplied = csiDirectionApplied.Cast<eLoadDirection>().ToArray();
         }
-        #endregion
-
-        #region Methods: Public
-
-        /// <summary>
-        /// This function retrieves the joint offset assignments for area elements.
-        /// </summary>
-        /// <param name="name">The name of an existing area element.</param>
-        /// <param name="offsetType">Indicates the joint offset type.</param>
-        /// <param name="offsetPattern">This item applies only when <paramref name="offsetType"/> = <see cref="eAreaOffsetType.OffsetByJointPattern"/>. 
-        /// It is the name of the defined joint pattern that is used to calculate the thicknesses.</param>
-        /// <param name="offsetPatternScaleFactor">This item applies only when <paramref name="offsetType"/> = <see cref="eAreaOffsetType.OffsetByJointPattern"/>. 
-        /// It is the scale factor applied to the joint pattern when calculating the thicknesses. [L]</param>
-        /// <param name="offsets">This item applies only when <paramref name="offsetType"/> = <see cref="eAreaOffsetType.OffsetByPoint"/>. 
-        /// It is an array of thicknesses at each of the points that define the area element. [L]</param>
-        public void GetOffsets(string name,
-            ref eAreaOffsetType offsetType,
-            ref string offsetPattern,
-            ref double offsetPatternScaleFactor,
-            ref double[] offsets)
-        {
-            int csiOffsetType = 0;
-
-            _callCode = _sapModel.AreaElm.GetThickness(name, ref csiOffsetType, ref offsetPattern, ref offsetPatternScaleFactor, ref offsets);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            offsetType = (eAreaOffsetType)csiOffsetType;
-        }
-
-        /// <summary>
-        /// This function retrieves the thickness overwrite assignments for area elements.
-        /// </summary>
-        /// <param name="name">The name of an existing area element.</param>
-        /// <param name="thicknessType">Indicates the thickness overwrite type.</param>
-        /// <param name="thicknessPattern">This item applies only when <paramref name="thicknessType"/> = <see cref="eAreaThicknessType.OverwriteByJointPattern"/>. 
-        /// It is the name of the defined joint pattern that is used to calculate the thicknesses.</param>
-        /// <param name="thicknessPatternScaleFactor">This item applies only when <paramref name="thicknessType"/> = <see cref="eAreaThicknessType.OverwriteByJointPattern"/>. 
-        /// It is the scale factor applied to the joint pattern when calculating the thicknesses. [L]</param>
-        /// <param name="thicknesses">This item applies only when <paramref name="thicknessType"/> = <see cref="eAreaThicknessType.OverwriteByPoint"/>. 
-        /// It is an array of thicknesses at each of the points that define the area element. [L]</param>
-        public void GetThickness(string name,
-            ref eAreaThicknessType thicknessType,
-            ref string thicknessPattern,
-            ref double thicknessPatternScaleFactor,
-            ref double[] thicknesses)
-        {
-            int csiThicknessType = 0;
-
-            _callCode = _sapModel.AreaElm.GetThickness(name, ref csiThicknessType, ref thicknessPattern, ref thicknessPatternScaleFactor, ref thicknesses);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            thicknessType = (eAreaThicknessType)csiThicknessType;
-        }
-
-
 
 
         #endregion

@@ -7,7 +7,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     public interface ISolidObject :
         IAddableObject,
         ICountable, IListableNames, IChangeableName, IGroupAssignable, ISelectable, IDeletable,
-        ILocalAxes, ILocalAxesAdvanced, IGUID, IAutoMesh, IEdgeConstraints, 
+        ILocalAxes, ILocalAxesAdvancedWithPoints, IGUID, ISolidAutoMesh, IEdgeConstraints, 
         ISurfaceSpring, IDeletableSpring,
 
         IObservableTransformationMatrix, IObservablePoints, IObservableElement,
@@ -20,7 +20,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         ILoadPorePressure, 
         ILoadStrain, 
         ILoadSurfacePressure, 
-        ILoadTemperature 
+        ILoadTemperatureConstant 
     {
         
     }

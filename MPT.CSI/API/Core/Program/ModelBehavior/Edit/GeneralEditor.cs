@@ -25,20 +25,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
     /// </summary>
     public class GeneralEditor : CSiApiBase
     {
-
-        #region Fields
-
-
-        #endregion
-
-
-        #region Properties
-
-
-
-        #endregion
-
-
         #region Initialization
 
         public GeneralEditor(CSiApiSeed seed) : base(seed) { }
@@ -47,17 +33,80 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         #endregion
 
         #region Methods: Public
-
-        public void GetThing(ref string param)
+        
+        public void ExtrudeAreaToSolidLinearNormal(string param)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.EditSolid.ExtrudeAreaToSolidLinearNormal();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
-        public void SetThing(string param)
+
+        public void ExtrudeAreaToSolidLinearUser(string param)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.EditSolid.ExtrudeAreaToSolidLinearUser();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void ExtrudeAreaToSolidRadial(string param)
+        {
+            //_callCode = _sapModel.EditSolid.ExtrudeAreaToSolidRadial();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void ExtrudeFrameToAreaLinear(string param)
+        {
+            //_callCode = _sapModel.EditSolid.ExtrudeFrameToAreaLinear();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void ExtrudeFrameToAreaRadial(string param)
+        {
+            //_callCode = _sapModel.EditSolid.ExtrudeFrameToAreaRadial();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void ExtrudePointToFrameLinear(string param)
+        {
+            //_callCode = _sapModel.EditSolid.ExtrudePointToFrameLinear();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void ExtrudePointToFrameRadial(string param)
+        {
+            //_callCode = _sapModel.EditSolid.ExtrudePointToFrameRadial();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void Move(string param)
+        {
+            //_callCode = _sapModel.EditSolid.Move();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void ReplicateLinear(string param)
+        {
+            //_callCode = _sapModel.EditSolid.ReplicateLinear();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        public void ReplicateMirror(string param)
+        {
+            //_callCode = _sapModel.EditSolid.ReplicateMirror();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void ReplicateRadial(string param)
+        {
+            //_callCode = _sapModel.EditSolid.ReplicateRadial();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 

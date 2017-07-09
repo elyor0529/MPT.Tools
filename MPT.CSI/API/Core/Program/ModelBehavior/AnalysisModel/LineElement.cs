@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
 
@@ -32,7 +33,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         public LineElement(CSiApiSeed seed) : base(seed) { }
         #endregion
 
-        #region Methods: Interface
+        #region Query
         /// <summary>
         /// This function returns the total number of defined line elements in the model.
         /// </summary>
@@ -41,9 +42,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         {
             return _sapModel.LineElm.Count();
         }
-
-        // === Get ===
-
+        
         /// <summary>
         /// This function retrieves the names of all items.
         /// </summary>
@@ -54,97 +53,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         {
             _callCode = _sapModel.LineElm.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-        /// <summary>
-        /// This function retrieves the section property assigned to a line element.
-        /// </summary>
-        /// <param name="name">The name of a defined line element.</param>
-        /// <param name="propertyName">The name of the frame, cable or tendon section property assigned to the line element.</param>
-        public void GetSection(string name, 
-            ref string propertyName)
-        {
-            int csiObjectType = 0;
-            bool isPrismatic = false;
-            double nonPrismaticTotalLength = 0;
-            double nonPrismaticRelativeStartLocation = 0;
-
-            _callCode = _sapModel.LineElm.GetProperty(name, ref propertyName, ref csiObjectType, ref isPrismatic, ref nonPrismaticTotalLength, ref nonPrismaticRelativeStartLocation);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves the section property assigned to an line element, as well as the type and nonprismatic properties.
-        /// </summary>
-        /// <param name="name">The name of a defined line element.</param>
-        /// <param name="propertyName">The name of the frame section, cable or tendon property assigned to the line element.</param>
-        /// <param name="objectType">The type of object from which the line element was created.</param>
-        /// <param name="isPrismatic">True: Specified property is a nonprismatic (variable) frame section property.</param>
-        /// <param name="nonPrismaticTotalLength">Total assumed length of the nonprismatic section. 
-        /// A zero value for this item means that the section length is the same as the line element length.</param>
-        /// <param name="nonPrismaticRelativeStartLocation">Relative distance along the nonprismatic section to the I-End (start) of the line element. 
-        /// This item is ignored when <paramref name="nonPrismaticTotalLength"/> is 0.</param>
-        public void GetSection(string name, 
-            ref string propertyName,
-            ref eLineTypeObject objectType,
-            ref bool isPrismatic,
-            ref double nonPrismaticTotalLength,
-            ref double nonPrismaticRelativeStartLocation)
-        {
-            int csiObjectType = 0;
-
-            _callCode = _sapModel.LineElm.GetProperty(name, ref propertyName, ref csiObjectType, ref isPrismatic, ref nonPrismaticTotalLength, ref nonPrismaticRelativeStartLocation);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            objectType = (eLineTypeObject) csiObjectType;
-        }
-
-        /// <summary>
-        /// This function retrieves the modifier assignment for line elements. 
-        /// The default value for all modifiers is one.
-        /// </summary>
-        /// <param name="name">The name of an existing line element or object.</param>
-        /// <param name="modifiers">Unitless modifiers.</param>
-        public void GetModifiers(string name,
-            ref Modifier modifiers)
-        {
-            if (modifiers == null) { modifiers = new Modifier(); }
-            double[] csiModifiers = new double[0];
-
-            _callCode = _sapModel.LineElm.GetModifiers(name, ref csiModifiers);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            modifiers.FromArray(csiModifiers);
-        }
-
-        /// <summary>
-        /// This function retrieves the material overwrite assigned to a line element, if any. 
-        /// The material property name is indicated as None if there is no material overwrite assignment.
-        /// </summary>
-        /// <param name="name">The name of a defined line element.</param>
-        /// <param name="propertyName">This is None, indicating that no material overwrite exists for the specified line element, or it is the name of an existing material property.</param>
-        public void GetMaterialOverwrite(string name, 
-            ref string propertyName)
-        {
-            _callCode = _sapModel.LineElm.GetMaterialOverwrite(name, ref propertyName);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves the local axis angle assignment for the line element.
-        /// </summary> 
-        /// <param name="name">The name of an existing line element.</param>
-        /// <param name="angleOffset">This is the angle 'a' that the local 1 and 2 axes are rotated about the positive local 3 axis from the default orientation. 
-        /// The rotation for a positive angle appears counter clockwise when the local +3 axis is pointing toward you. [deg]</param>
-        public void GetLocalAxes(string name,
-            ref AngleLocalAxes angleOffset)
-        {
-            double angleA = 0;
-            _callCode = _sapModel.LineElm.GetLocalAxes(name, ref angleA);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            angleOffset.AngleA = angleA;
         }
 
         /// <summary>
@@ -168,8 +76,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// <param name="numberPoints">The number of point elements that define the line element.</param>
         /// <param name="points">The names of the points that defined the line element.
         /// The point names are listed in the positive order around the element.</param>
-        public void GetPoints(string name, 
-            ref int numberPoints, 
+        public void GetPoints(string name,
+            ref int numberPoints,
             ref string[] points)
         {
             string point1 = "";
@@ -189,7 +97,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// </summary>
         /// <param name="name">The name of an existing line element.</param>
         /// <param name="nameObject">The name of the line object from which the line element was created.</param>
-        public void GetObject(string name, 
+        public void GetObject(string name,
             ref string nameObject)
         {
             int csiObjectType = 0;
@@ -211,8 +119,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// The relative distance is calculated as the distance from the I-End of the object to the I-End of the line element divided by the length of the object.</param>
         /// <param name="relativeDistanceJ">The relative distance from the I-End of the object identified by the <paramref name="objectType"/> item to the J-End of the considered line element. 
         /// The relative distance is calculated as the distance from the I-End of the object to the J-End of the line element divided by the length of the object.</param>
-        public void GetObject(string name, 
-            ref string nameObject, 
+        public void GetObject(string name,
+            ref string nameObject,
             ref eLineTypeObject objectType,
             ref double relativeDistanceI,
             ref double relativeDistanceJ)
@@ -223,8 +131,106 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 
             objectType = (eLineTypeObject)csiObjectType;
         }
+        #endregion
 
-        // === Loads ===
+        #region Axes
+        /// <summary>
+        /// This function retrieves the local axis angle assignment for the line element.
+        /// </summary> 
+        /// <param name="name">The name of an existing line element.</param>
+        /// <param name="angleOffset">This is the angle 'a' that the local 1 and 2 axes are rotated about the positive local 3 axis from the default orientation. 
+        /// The rotation for a positive angle appears counter clockwise when the local +3 axis is pointing toward you. [deg]</param>
+        public void GetLocalAxes(string name,
+            ref AngleLocalAxes angleOffset)
+        {
+            double angleA = 0;
+            _callCode = _sapModel.LineElm.GetLocalAxes(name, ref angleA);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            angleOffset.AngleA = angleA;
+        }
+
+
+        #endregion
+
+        #region Modifiers
+        /// <summary>
+        /// This function retrieves the modifier assignment for line elements. 
+        /// The default value for all modifiers is one.
+        /// </summary>
+        /// <param name="name">The name of an existing line element or object.</param>
+        /// <param name="modifiers">Unitless modifiers.</param>
+        public void GetModifiers(string name,
+            ref Modifier modifiers)
+        {
+            if (modifiers == null) { modifiers = new Modifier(); }
+            double[] csiModifiers = new double[0];
+
+            _callCode = _sapModel.LineElm.GetModifiers(name, ref csiModifiers);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            modifiers.FromArray(csiModifiers);
+        }
+
+
+        #endregion
+
+        #region Cross-Section & Material Properties
+        /// <summary>
+        /// This function retrieves the section property assigned to a line element.
+        /// </summary>
+        /// <param name="name">The name of a defined line element.</param>
+        /// <param name="propertyName">The name of the frame, cable or tendon section property assigned to the line element.</param>
+        public void GetSection(string name,
+            ref string propertyName)
+        {
+            int csiObjectType = 0;
+            bool isPrismatic = false;
+            double nonPrismaticTotalLength = 0;
+            double nonPrismaticRelativeStartLocation = 0;
+
+            _callCode = _sapModel.LineElm.GetProperty(name, ref propertyName, ref csiObjectType, ref isPrismatic, ref nonPrismaticTotalLength, ref nonPrismaticRelativeStartLocation);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function retrieves the section property assigned to an line element, as well as the type and nonprismatic properties.
+        /// </summary>
+        /// <param name="name">The name of a defined line element.</param>
+        /// <param name="propertyName">The name of the frame section, cable or tendon property assigned to the line element.</param>
+        /// <param name="objectType">The type of object from which the line element was created.</param>
+        /// <param name="isPrismatic">True: Specified property is a nonprismatic (variable) frame section property.</param>
+        /// <param name="nonPrismaticTotalLength">Total assumed length of the nonprismatic section. 
+        /// A zero value for this item means that the section length is the same as the line element length.</param>
+        /// <param name="nonPrismaticRelativeStartLocation">Relative distance along the nonprismatic section to the I-End (start) of the line element. 
+        /// This item is ignored when <paramref name="nonPrismaticTotalLength"/> is 0.</param>
+        public void GetSection(string name,
+            ref string propertyName,
+            ref eLineTypeObject objectType,
+            ref bool isPrismatic,
+            ref double nonPrismaticTotalLength,
+            ref double nonPrismaticRelativeStartLocation)
+        {
+            int csiObjectType = 0;
+
+            _callCode = _sapModel.LineElm.GetProperty(name, ref propertyName, ref csiObjectType, ref isPrismatic, ref nonPrismaticTotalLength, ref nonPrismaticRelativeStartLocation);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            objectType = (eLineTypeObject)csiObjectType;
+        }
+
+        /// <summary>
+        /// This function retrieves the material overwrite assigned to a line element, if any. 
+        /// The material property name is indicated as None if there is no material overwrite assignment.
+        /// </summary>
+        /// <param name="name">The name of a defined line element.</param>
+        /// <param name="propertyName">This is None, indicating that no material overwrite exists for the specified line element, or it is the name of an existing material property.</param>
+        public void GetMaterialOverwrite(string name,
+            ref string propertyName)
+        {
+            _callCode = _sapModel.LineElm.GetMaterialOverwrite(name, ref propertyName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
 
         /// <summary>
         /// This function retrieves the material temperature assignments to elements.
@@ -233,7 +239,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// <param name="temperature">This is the material temperature value assigned to the element. [T]</param>
         /// <param name="patternName">This is blank or the name of a defined joint pattern. 
         /// If it is blank, the material temperature for the line element is uniform along the element at the value specified by <paramref name="temperature"/>.
-        /// If PatternName is the name of a defined joint pattern, the material temperature for the line element may vary from one end to the other.
+        /// If <paramref name="patternName"/> is the name of a defined joint pattern, the material temperature for the line element may vary from one end to the other.
         /// The material temperature at each end of the element is equal to the specified temperature multiplied by the pattern value at the joint at the end of the line element.</param>
         public void GetMaterialTemperature(string name,
             ref double temperature,
@@ -243,6 +249,109 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+
+
+        /// <summary>
+        /// This function retrieves line element insertion point assignments. 
+        /// The assignments are reported as end joint offsets.
+        /// </summary>
+        /// <param name="name">The name of an existing line element.</param>
+        /// <param name="offsetDistancesI">Three joint offset distances, in the Global coordinate system, at the I-End of the line element. [L]</param>
+        /// <param name="offsetDistancesJ">Three joint offset distances, in the Global coordinate system, at the J-End of the line element. [L]</param>
+        public void GetInsertionPoint(string name,
+            ref Displacements offsetDistancesI,
+            ref Displacements offsetDistancesJ)
+        {
+            double[] csiOffsetDistancesI = new double[0];
+            double[] csiOffsetDistancesJ = new double[0];
+
+            _callCode = _sapModel.LineElm.GetInsertionPoint(name, ref csiOffsetDistancesI, ref csiOffsetDistancesJ);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            offsetDistancesI.UX = csiOffsetDistancesI[0];
+            offsetDistancesI.UY = csiOffsetDistancesI[1];
+            offsetDistancesI.UZ = csiOffsetDistancesI[2];
+
+            offsetDistancesJ.UX = csiOffsetDistancesJ[0];
+            offsetDistancesJ.UY = csiOffsetDistancesJ[1];
+            offsetDistancesJ.UZ = csiOffsetDistancesJ[2];
+        }
+
+
+
+        /// <summary>
+        /// This function retrieves the tension/compression force limit assignments to line elements.
+        /// Note that the tension and compression limits are only used in nonlinear analyses.
+        /// </summary>
+        /// <param name="name">The name of an existing line element.</param>
+        /// <param name="limitCompressionExists">True: A compression force limit exists for the line element.</param>
+        /// <param name="limitCompression">The compression force limit for the line element. [F]</param>
+        /// <param name="limitTensionExists">True: A tension force limit exists for the line element.</param>
+        /// <param name="limitTension">The tension force limit for the line element. [F]</param>
+        public void GetTensionCompressionLimits(string name,
+            ref bool limitCompressionExists,
+            ref double limitCompression,
+            ref bool limitTensionExists,
+            ref double limitTension)
+        {
+            _callCode = _sapModel.LineElm.GetTCLimits(name, ref limitCompressionExists, ref limitCompression, ref limitTensionExists, ref limitTension);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+        #endregion
+
+        #region Frame Properties
+        /// <summary>
+        /// This function retrieves the line element end offsets along the 1-axis of the element.
+        /// </summary>
+        /// <param name="name">The name of an existing line element.</param>
+        /// <param name="lengthIEnd">The offset length along the 1-axis of the line element at the I-End of the line element. [L]</param>
+        /// <param name="lengthJEnd">The offset along the 1-axis of the line element at the J-End of the line element. [L]</param>
+        /// <param name="rigidZoneFactor">The rigid zone factor.  
+        /// This is the fraction of the end offset length assumed to be rigid for bending and shear deformations.</param>
+        public void GetEndLengthOffset(string name,
+            ref double lengthIEnd,
+            ref double lengthJEnd,
+            ref double rigidZoneFactor)
+        {
+            _callCode = _sapModel.LineElm.GetEndLengthOffset(name, ref lengthIEnd, ref lengthJEnd, ref rigidZoneFactor);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        #endregion
+
+        #region Support & Connections
+        /// <summary>
+        /// This function retrieves the release assignments for a frame end release.
+        /// </summary>
+        /// <param name="name">The name of an existing frame end release.</param>
+        /// <param name="iEndRelease">Booleans indicating the I-End releases.</param>
+        /// <param name="jEndRelease">Booleans indicating the J-End releases.</param>
+        /// <param name="iEndFixity">Values indicating the I-End partial fixity springs.</param>
+        /// <param name="jEndFixity">Values indicating the J-End partial fixity springs.</param>
+        public void GetReleases(string name,
+        ref DegreesOfFreedomLocal iEndRelease,
+        ref DegreesOfFreedomLocal jEndRelease,
+        ref Fixity iEndFixity,
+        ref Fixity jEndFixity)
+        {
+            bool[] csiiEndRelease = new bool[0];
+            bool[] csijEndRelease = new bool[0];
+            double[] csiiEndFixity = new double[0];
+            double[] csijEndFixity = new double[0];
+
+            _callCode = _sapModel.LineElm.GetReleases(name, ref csiiEndRelease, ref csijEndRelease, ref csiiEndFixity, ref csijEndFixity);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            iEndRelease.FromArray(csiiEndRelease);
+            jEndRelease.FromArray(csijEndRelease);
+            iEndFixity.FromArray(csiiEndFixity);
+            jEndFixity.FromArray(csijEndFixity);
+        }
+        
+        #endregion
+
+        #region Loads
         /// <summary>
         /// This function retrieves the deformation load assignments to elements.
         /// </summary>
@@ -282,7 +391,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.LineElm.GetLoadDeformation(name, ref numberItems, ref names, ref loadPatterns, ref dof1, ref dof2, ref dof3, ref dof4, ref dof5, ref dof6, ref u1Deformation, ref u2Deformation, ref u3Deformation, ref r1Deformation, ref r2Deformation, ref r3Deformation, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            degreesOfFreedom = new DegreesOfFreedomLocal[numberItems-1];
+            degreesOfFreedom = new DegreesOfFreedomLocal[numberItems - 1];
             deformations = new Deformations[numberItems - 1];
             for (int i = 0; i < numberItems; i++)
             {
@@ -358,12 +467,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 
             _callCode = _sapModel.LineElm.GetLoadStrain(name, ref numberItems, ref names, ref loadPatterns, ref csiComponent, ref strainLoadValues, ref jointPatternNames, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            component = new eStrainComponent[csiComponent.Length - 1];
-            for (int i = 0; i < csiComponent.Length; i++)
-            {
-                component[i] = (eStrainComponent)csiComponent[i];
-            }
+            
+            component = csiComponent.Cast<eStrainComponent>().ToArray();
         }
 
         /// <summary>
@@ -470,58 +575,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 
             _callCode = _sapModel.LineElm.GetLoadTemperature(name, ref numberItems, ref names, ref loadPatterns, ref csiTemperatureLoadType, ref temperatureLoadValues, ref jointPatternNames, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            temperatureLoadType = new eLoadTemperatureType[csiTemperatureLoadType.Length - 1];
-            for (int i = 0; i < csiTemperatureLoadType.Length; i++)
-            {
-                temperatureLoadType[i] = (eLoadTemperatureType)csiTemperatureLoadType[i];
-            }
-        }
-        #endregion
-
-        #region Methods: Public
-
-        /// <summary>
-        /// This function retrieves the line element end offsets along the 1-axis of the element.
-        /// </summary>
-        /// <param name="name">The name of an existing line element.</param>
-        /// <param name="lengthIEnd">The offset length along the 1-axis of the line element at the I-End of the line element. [L]</param>
-        /// <param name="lengthJEnd">The offset along the 1-axis of the line element at the J-End of the line element. [L]</param>
-        /// <param name="rigidZoneFactor">The rigid zone factor.  
-        /// This is the fraction of the end offset length assumed to be rigid for bending and shear deformations.</param>
-        public void GetEndLengthOffset(string name,
-            ref double lengthIEnd,
-            ref double lengthJEnd,
-            ref double rigidZoneFactor)
-        {
-            _callCode = _sapModel.LineElm.GetEndLengthOffset(name, ref lengthIEnd, ref lengthJEnd, ref rigidZoneFactor);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves line element insertion point assignments. 
-        /// The assignments are reported as end joint offsets.
-        /// </summary>
-        /// <param name="name">The name of an existing line element.</param>
-        /// <param name="offsetDistancesI">Three joint offset distances, in the Global coordinate system, at the I-End of the line element. [L]</param>
-        /// <param name="offsetDistancesJ">Three joint offset distances, in the Global coordinate system, at the J-End of the line element. [L]</param>
-        public void GetInsertionPoint(string name,
-            ref Displacements offsetDistancesI,
-            ref Displacements offsetDistancesJ)
-        {
-            double[] csiOffsetDistancesI = new double[0];
-            double[] csiOffsetDistancesJ = new double[0];
-
-            _callCode = _sapModel.LineElm.GetInsertionPoint(name, ref csiOffsetDistancesI, ref csiOffsetDistancesJ);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            offsetDistancesI.UX = csiOffsetDistancesI[0];
-            offsetDistancesI.UY = csiOffsetDistancesI[1];
-            offsetDistancesI.UZ = csiOffsetDistancesI[2];
-
-            offsetDistancesJ.UX = csiOffsetDistancesJ[0];
-            offsetDistancesJ.UY = csiOffsetDistancesJ[1];
-            offsetDistancesJ.UZ = csiOffsetDistancesJ[2];
+            
+            temperatureLoadType = csiTemperatureLoadType.Cast<eLoadTemperatureType>().ToArray();
         }
 
         /// <summary>
@@ -543,62 +598,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 
             _callCode = _sapModel.LineElm.GetPDeltaForce(name, ref numberForces, ref pDeltaForces, ref csiDirections, ref coordinateSystems);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            directions = new ePDeltaDirection[numberForces];
-            for (int i = 0; i < numberForces; i++)
-            {
-                directions[i] = (ePDeltaDirection)csiDirections[i];
-            }
+            
+            directions = csiDirections.Cast<ePDeltaDirection>().ToArray();
         }
 
-        /// <summary>
-        /// This function retrieves the tension/compression force limit assignments to line elements.
-        /// Note that the tension and compression limits are only used in nonlinear analyses.
-        /// </summary>
-        /// <param name="name">The name of an existing line element.</param>
-        /// <param name="limitCompressionExists">True: A compression force limit exists for the line element.</param>
-        /// <param name="limitCompression">The compression force limit for the line element. [F]</param>
-        /// <param name="limitTensionExists">True: A tension force limit exists for the line element.</param>
-        /// <param name="limitTension">The tension force limit for the line element. [F]</param>
-        public void GetTensionCompressionLimits(string name,
-            ref bool limitCompressionExists,
-            ref double limitCompression,
-            ref bool limitTensionExists,
-            ref double limitTension)
-        {
-            _callCode = _sapModel.LineElm.GetTCLimits(name, ref limitCompressionExists, ref limitCompression, ref limitTensionExists, ref limitTension);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves the release assignments for a frame end release.
-        /// </summary>
-        /// <param name="name">The name of an existing frame end release.</param>
-        /// <param name="iEndRelease">Booleans indicating the I-End releases.</param>
-        /// <param name="jEndRelease">Booleans indicating the J-End releases.</param>
-        /// <param name="iEndFixity">Values indicating the I-End partial fixity springs.</param>
-        /// <param name="jEndFixity">Values indicating the J-End partial fixity springs.</param>
-        public void GetReleases(string name,
-        ref DegreesOfFreedomLocal iEndRelease,
-        ref DegreesOfFreedomLocal jEndRelease,
-        ref Fixity iEndFixity,
-        ref Fixity jEndFixity)
-        {
-            bool[] csiiEndRelease = new bool[0];
-            bool[] csijEndRelease = new bool[0];
-            double[] csiiEndFixity = new double[0];
-            double[] csijEndFixity = new double[0];
-
-            _callCode = _sapModel.LineElm.GetReleases(name, ref csiiEndRelease, ref csijEndRelease, ref csiiEndFixity, ref csijEndFixity);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            iEndRelease.FromArray(csiiEndRelease);
-            jEndRelease.FromArray(csijEndRelease);
-            iEndFixity.FromArray(csiiEndFixity);
-            jEndFixity.FromArray(csijEndFixity);
-        }
-
-        // === Loads ===
         /// <summary>
         /// This function retrieves the distributed load assignments to elements.
         /// </summary>
@@ -643,13 +646,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.LineElm.GetLoadDistributed(name, ref numberItems, ref names, ref loadPatterns, ref csiForceTypes, ref coordinateSystems, ref csiLoadDirections, ref relativeDistanceStartFromI, ref relativeDistanceEndFromI, ref absoluteDistanceStartFromI, ref absoluteDistanceEndFromI, ref startLoadValues, ref endLoadValues, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            forceTypes = new eLoadForceType[numberItems - 1];
-            loadDirections = new eLoadDirection[numberItems - 1];
-            for (int i = 0; i < numberItems; i++)
-            {
-                forceTypes[i] = (eLoadForceType)csiForceTypes[i];
-                loadDirections[i] = (eLoadDirection)csiLoadDirections[i];
-            }
+            forceTypes = csiForceTypes.Cast<eLoadForceType>().ToArray();
+            loadDirections = csiLoadDirections.Cast<eLoadDirection>().ToArray();
         }
 
         /// <summary>
@@ -688,19 +686,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 
             _callCode = _sapModel.LineElm.GetLoadPoint(name, ref numberItems, ref names, ref loadPatterns, ref csiForceTypes, ref coordinateSystems, ref csiLoadDirections, ref relativeDistanceFromI, ref absoluteDistanceFromI, ref pointLoadValues, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            forceTypes = new eLoadForceType[numberItems - 1];
-            loadDirections = new eLoadDirection[numberItems - 1];
-            for (int i = 0; i < numberItems; i++)
-            {
-                forceTypes[i] = (eLoadForceType)csiForceTypes[i];
-                loadDirections[i] = (eLoadDirection)csiLoadDirections[i];
-            }
+            
+            forceTypes = csiForceTypes.Cast<eLoadForceType>().ToArray();
+            loadDirections = csiLoadDirections.Cast<eLoadDirection>().ToArray();
         }
-
-
-
-
         #endregion
     }
 }

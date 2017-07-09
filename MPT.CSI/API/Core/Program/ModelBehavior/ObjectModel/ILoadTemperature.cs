@@ -1,8 +1,7 @@
-﻿
-namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
+﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
-    /// Object has a CRUDable temperature load.
+    /// Object has a CRUDable temperature load that can have a gradient loading.
     /// </summary>
     public interface ILoadTemperature
     {
@@ -13,8 +12,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="numberItems">The total number of temperature loads retrieved for the specified elements.</param>
         /// <param name="names">The name of the element associated with each temperature load.</param>
         /// <param name="loadPatterns">The name of the load pattern associated with each temperature load.</param>
-        /// <param name="temperatureLoadType">Indicates the type of temperature load.</param>
-        /// <param name="temperatureLoadValues">Temperature load values, [T] for <paramref name="temperatureLoadType"/> = Temperature, [T/L] for all others.</param>
+        /// <param name="temperatureLoadTypes">Indicates the type of temperature load.</param>
+        /// <param name="temperatureLoadValues">Temperature load values, [T] for <paramref name="temperatureLoadTypes"/> = Temperature, [T/L] for all others.</param>
         /// <param name="jointPatternNames">The joint pattern name, if any, used to specify the temperature load.</param>
         /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the load assignments are retrieved for the objects specified by the <paramref name="name"/> item.
         /// If this item is <see cref="eItemType.Group"/>, the load assignments are retrieved for the objects included in the group specified by the <paramref name="name"/> item.
@@ -23,7 +22,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             ref int numberItems,
             ref string[] names,
             ref string[] loadPatterns,
-            ref eLoadTemperatureType[] temperatureLoadType,
+            ref eLoadTemperatureType[] temperatureLoadTypes,
             ref double[] temperatureLoadValues,
             ref string[] jointPatternNames,
             eItemType itemType = eItemType.Object);
@@ -47,7 +46,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             string jointPatternName,
             bool replace,
             eItemType itemType = eItemType.Object);
-
 
         /// <summary>
         /// This function deletes the temperature load assignments to the specified objects for the specified load pattern.

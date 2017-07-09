@@ -40,7 +40,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// If it is the name of a defined property, that property is assigned to the object.</param>
         /// <param name="userName">This is an optional user specified name for the object. 
         /// If a <paramref name="userName"/> is specified and that name is already used for another object of the same type, the program ignores the <paramref name="userName"/>.</param>
-        void AddByPoint(ref string[] pointNames, 
+        void AddByPoint(string[] pointNames, 
             ref string name,
             string nameProperty = "Default",
             string userName = "");

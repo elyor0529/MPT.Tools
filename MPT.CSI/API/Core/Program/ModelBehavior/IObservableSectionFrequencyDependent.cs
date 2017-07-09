@@ -13,6 +13,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// <param name="name">The name of an existing link element.</param>
         /// <param name="propertyName">The name of the frequency dependent link property assigned to the link element.</param>
         void GetSectionFrequencyDependent(string name, 
-            string propertyName);
+            ref string propertyName);
     }
 }

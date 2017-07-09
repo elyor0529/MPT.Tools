@@ -31,7 +31,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         public LinkElement(CSiApiSeed seed) : base(seed) { }
         #endregion
 
-        #region Methods: Interface
+        #region Query
         /// <summary>
         /// This function returns the total number of defined link elements in the model.
         /// </summary>
@@ -40,10 +40,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         {
             return _sapModel.LinkElm.Count();
         }
-
-
-        // === Get ===
-
+        
         /// <summary>
         /// This function retrieves the names of all items.
         /// </summary>
@@ -54,48 +51,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         {
             _callCode = _sapModel.LineElm.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-        /// <summary>
-        /// This function retrieves the section property assigned to a link element.
-        /// </summary>
-        /// <param name="name">The name of a defined link element.</param>
-        /// <param name="propertyName">The name of the section property assigned to the link element.</param>
-        public void GetSection(string name, 
-            ref string propertyName)
-        {
-            _callCode = _sapModel.LinkElm.GetProperty(name, ref propertyName);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves the frequency dependent property assignment to a link element. 
-        /// If no frequency dependent property is assigned to the link, the PropName is returned as None.
-        /// </summary>
-        /// <param name="name">The name of an existing link element.</param>
-        /// <param name="propertyName">The name of the frequency dependent link property assigned to the link element.</param>
-        public void GetSectionFrequencyDependent(string name, 
-            string propertyName)
-        {
-            _callCode = _sapModel.LinkElm.GetPropertyFD(name, ref propertyName);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function retrieves the local axis angle assignment for the link element.
-        /// </summary> 
-        /// <param name="name">The name of an existing link element.</param>
-        /// <param name="angleOffset">This is the angle 'a' that the local 1 and 2 axes are rotated about the positive local 3 axis from the default orientation. 
-        /// The rotation for a positive angle appears counter clockwise when the local +3 axis is pointing toward you. [deg]</param>
-        public void GetLocalAxes(string name,
-            ref AngleLocalAxes angleOffset)
-        {
-            double angleA = 0;
-            _callCode = _sapModel.LinkElm.GetLocalAxes(name, ref angleA);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            angleOffset.AngleA = angleA;
         }
 
         /// <summary>
@@ -119,8 +74,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// <param name="numberPoints">The number of point elements that define the link element.</param>
         /// <param name="points">The names of the points that defined the link element.
         /// The point names are listed in the positive order around the element.</param>
-        public void GetPoints(string name, 
-            ref int numberPoints, 
+        public void GetPoints(string name,
+            ref int numberPoints,
             ref string[] points)
         {
             string point1 = "";
@@ -140,7 +95,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// </summary>
         /// <param name="name">The name of an existing link element.</param>
         /// <param name="nameObject">The name of the link object from which the link element was created.</param>
-        public void GetObject(string name, 
+        public void GetObject(string name,
             ref string nameObject)
         {
             int csiObjectType = 0;
@@ -156,8 +111,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// <param name="name">The name of an existing link element.</param>
         /// <param name="nameObject">The name of the link object from which the link element was created.</param>
         /// <param name="objectType">Type of object or defined item that is associated with the link element.</param>
-        public void GetObject(string name, 
-            ref string nameObject, 
+        public void GetObject(string name,
+            ref string nameObject,
             ref ePointTypeObject objectType)
         {
             int csiObjectType = 0;
@@ -166,9 +121,57 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 
             objectType = (ePointTypeObject)csiObjectType;
         }
+        #endregion
 
-        // === Loads ===
+        #region Axes
+        /// <summary>
+        /// This function retrieves the local axis angle assignment for the link element.
+        /// </summary> 
+        /// <param name="name">The name of an existing link element.</param>
+        /// <param name="angleOffset">This is the angle 'a' that the local 1 and 2 axes are rotated about the positive local 3 axis from the default orientation. 
+        /// The rotation for a positive angle appears counter clockwise when the local +3 axis is pointing toward you. [deg]</param>
+        public void GetLocalAxes(string name,
+            ref AngleLocalAxes angleOffset)
+        {
+            double angleA = 0;
+            _callCode = _sapModel.LinkElm.GetLocalAxes(name, ref angleA);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
+            angleOffset.AngleA = angleA;
+        }
+
+
+        #endregion
+        
+        #region Cross-Section & Material Properties
+        /// <summary>
+        /// This function retrieves the section property assigned to a link element.
+        /// </summary>
+        /// <param name="name">The name of a defined link element.</param>
+        /// <param name="propertyName">The name of the section property assigned to the link element.</param>
+        public void GetSection(string name,
+            ref string propertyName)
+        {
+            _callCode = _sapModel.LinkElm.GetProperty(name, ref propertyName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function retrieves the frequency dependent property assignment to a link element. 
+        /// If no frequency dependent property is assigned to the link, the PropName is returned as None.
+        /// </summary>
+        /// <param name="name">The name of an existing link element.</param>
+        /// <param name="propertyName">The name of the frequency dependent link property assigned to the link element.</param>
+        public void GetSectionFrequencyDependent(string name,
+            ref string propertyName)
+        {
+            _callCode = _sapModel.LinkElm.GetPropertyFD(name, ref propertyName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        #endregion
+
+        #region Loads
         /// <summary>
         /// This function retrieves the deformation load assignments to elements.
         /// </summary>

@@ -28,9 +28,9 @@ namespace MPT.CSI.API.Core.Helpers
         /// Array must have 6 entries.
         /// </summary>
         /// <param name="coordinates">1x6 matrix of values of Cartesian coordinates along the corresponding degree of freedom:
-        /// Value(0) = <see cref="X"/>;
-        /// Value(1) = <see cref="Y"/>;
-        /// Value(2) = <see cref="Z"/>;</param>
+        /// Value(0) = <see cref="X"/> [L];
+        /// Value(1) = <see cref="Y"/> [L];
+        /// Value(2) = <see cref="Z"/> [L];</param>
         public void FromArray(double[] coordinates)
         {
             if (coordinates.Length != 3)
@@ -44,9 +44,9 @@ namespace MPT.CSI.API.Core.Helpers
 
         /// <summary>
         /// Return a 1x6 matrix of booleans indicating Cartesian coordinate:
-        /// Value(0) = <see cref="X"/>;
-        /// Value(1) = <see cref="Y"/>;
-        /// Value(2) = <see cref="Z"/>;
+        /// Value(0) = <see cref="X"/> [L];
+        /// Value(1) = <see cref="Y"/> [L];
+        /// Value(2) = <see cref="Z"/> [L];
         /// </summary>
         /// <returns></returns>
         public double[] ToArray()

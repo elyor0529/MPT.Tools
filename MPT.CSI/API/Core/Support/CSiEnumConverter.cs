@@ -1,4 +1,6 @@
-﻿using MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel;
+﻿using System;
+using System.Linq;
+using MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 
 #if BUILD_SAP2000v16
@@ -26,6 +28,38 @@ namespace MPT.CSI.API.Core.Support
     /// </summary>
     internal class CSiEnumConverter
     {
+        internal static int[] ToIntArray<T>(T[] array) where T : struct, IComparable
+        {
+            int[] newArray = new int[array.Length - 1];
+
+            Type genericType = typeof(T);
+            if (genericType.IsEnum)
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    Enum currentItem = array[i] as Enum;
+
+                    newArray[i] = Convert.ToInt32(currentItem);
+                }
+            }
+            return newArray;
+        }
+
+        //internal static T[] FromIntArray<T>(int[] array) where T : struct, IComparable
+        //{
+        //    T[] newArray = new T[array.Length - 1];
+
+        //    Type genericType = typeof(T);
+        //    if (genericType.IsEnum)
+        //    {
+        //        for (int i = 0; i < array.Length; i++)
+        //        {
+        //            newArray[i] = (Enum)array[i];
+        //        }
+        //    }
+        //    return newArray;
+        //}
+
         // eItemType
         internal static CSiProgram.eItemType ToCSi(eItemType enumValue)
         {

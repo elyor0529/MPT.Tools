@@ -7,7 +7,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
     public interface IPlaneElement:
         ICountable, IListableNames, IObservableTransformationMatrix, IObservableLocalAxes, IObservableObject, IObservablePoints,
         IObservableSection, IObservableMaterialTemperature,
-        IObservableLoadGravity, IObservableLoadPorePressure, IObservableLoadRotate, IObservableLoadStrain, IObservableLoadSurfacePressure, IObservableLoadTemperature, IObservableLoadUniform
+        
+        IObservableLoadGravity, 
+        IObservableLoadPorePressure, 
+        IObservableLoadRotate, 
+        IObservableLoadStrain, 
+        IObservableLoadSurfacePressure, 
+        IObservableLoadTemperature, 
+        IObservableLoadUniform
     {
     }
 }

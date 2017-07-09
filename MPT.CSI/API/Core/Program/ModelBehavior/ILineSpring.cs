@@ -19,12 +19,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// This item applies only when <paramref name="springTypes"/> = <see cref="eSpringType.Simple"/>.</param>
         /// <param name="linkProperties">The name of the link property assigned to the spring.
         /// This item applies only when <paramref name="springTypes"/> = <see cref="eSpringType.Link"/>.</param>
-        /// <param name="faces">Indicates the object face to which the specified spring assignment applies.</param>
         /// <param name="springLocalOneTypes">Indicates the method used to specify the spring positive local 1-axis orientation.</param>
         /// <param name="directions">This is 1, 2, 3, -1, -2 or -3, indicating the object local axis that corresponds to the positive local 1-axis of the spring.
         /// This item applies only when <paramref name="springLocalOneTypes"/> = <see cref="eSpringLocalOneType.Parallel"/>.</param>
         /// <param name="plane23Angle">This is the angle in the frame object 2-3 plane measured counter clockwise from the frame positive 2-axis to the spring positive 1-axis. [deg] 
-        /// This item applies only when <paramref name="springLocalOneType"/> = <see cref="eSpringLocalOneType.Normal"/>.</param>
+        /// This item applies only when <paramref name="springLocalOneTypes"/> = <see cref="eSpringLocalOneType.Normal"/>.</param>
         /// <param name="vectorComponentsX">Each value in this array is the X-axis or object local 1-axis component (depending on the <paramref name="coordinateSystems"/> specified) of the user specified direction vector for the spring local 1-axis.
         /// The direction vector is in the coordinate system specified by the <paramref name="coordinateSystems"/> item.
         /// This item applies only when <paramref name="springLocalOneTypes"/> = <see cref="eSpringLocalOneType.User"/>.</param>
@@ -40,15 +39,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// This item is the coordinate system in which the user specified direction vector is specified. 
         /// This item applies only when <paramref name="springLocalOneTypes"/> = <see cref="eSpringLocalOneType.User"/>.</param>
         void GetSpring(string name,
-            int numberOfSprings,
+            ref int numberOfSprings,
             ref eSpringType[] springTypes,
             ref double[] stiffnesses,
             ref eSpringSimpleType[] springSimpleTypes,
             ref string[] linkProperties,
-            ref eFace[] faces,
             ref eSpringLocalOneType[] springLocalOneTypes,
             ref int[] directions,
-            ref double plane23Angle,
+            ref double[] plane23Angle,
             ref double[] vectorComponentsX,
             ref double[] vectorComponentsY,
             ref double[] vectorComponentsZ,
@@ -66,7 +64,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// This item applies only when <paramref name="springType"/> = <see cref="eSpringType.Simple"/>.</param>
         /// <param name="linkProperty">The name of the link property assigned to the spring.
         /// This item applies only when <paramref name="springType"/> = <see cref="eSpringType.Link"/>.</param>
-        /// <param name="face">Indicates the object face to which the specified spring assignment applies.</param>
         /// <param name="springLocalOneType">Indicates the method used to specify the spring positive local 1-axis orientation.</param>
         /// <param name="direction">This is 1, 2, 3, -1, -2 or -3, indicating the object local axis that corresponds to the positive local 1-axis of the spring.
         /// This item applies only when <paramref name="springLocalOneType"/> = <see cref="eSpringLocalOneType.Parallel"/>.</param>
@@ -90,7 +87,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
             double stiffness,
             eSpringSimpleType springSimpleType,
             string linkProperty,
-            eFace face,
             eSpringLocalOneType springLocalOneType,
             int direction,
             double plane23Angle,

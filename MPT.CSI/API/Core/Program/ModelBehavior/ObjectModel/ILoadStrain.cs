@@ -13,7 +13,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="numberItems">The total number of strain loads retrieved for the specified elements.</param>
         /// <param name="names">The name of the element associated with each strain load.</param>
         /// <param name="loadPatterns">The name of the load pattern associated with each strain load.</param>
-        /// <param name="component">Indicates the strain component associated with each strain load.</param>
+        /// <param name="components">Indicates the strain component associated with each strain load.</param>
         /// <param name="strainLoadValues">The strain values. [L/L]</param>
         /// <param name="jointPatternNames">The joint pattern name, if any, used to specify each strain load.</param>
         /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are retrieved for the objects specified by the <paramref name="name"/> item.
@@ -23,7 +23,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             ref int numberItems,
             ref string[] names,
             ref string[] loadPatterns,
-            ref eStrainComponent[] component,
+            ref eStrainComponent[] components,
             ref double[] strainLoadValues,
             ref string[] jointPatternNames,
             eItemType itemType = eItemType.Object);

@@ -16,9 +16,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// <param name="iEndFixity">Values indicating the I-End partial fixity springs.</param>
         /// <param name="jEndFixity">Values indicating the J-End partial fixity springs.</param>
         void GetReleases(string name,
-        ref DegreesOfFreedomLocal iEndRelease,
-        ref DegreesOfFreedomLocal jEndRelease,
-        ref Fixity iEndFixity,
-        ref Fixity jEndFixity);
+            ref DegreesOfFreedomLocal iEndRelease,
+            ref DegreesOfFreedomLocal jEndRelease,
+            ref Fixity iEndFixity,
+            ref Fixity jEndFixity);
     }
 }

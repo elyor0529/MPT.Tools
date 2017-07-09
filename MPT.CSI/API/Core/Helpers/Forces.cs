@@ -4,7 +4,7 @@ using MPT.CSI.API.Core.Support;
 namespace MPT.CSI.API.Core.Helpers
 {
     /// <summary>
-    /// Forces or values associated with forces.
+    /// Internal forces or values associated with forces.
     /// </summary>
     public struct Forces
     {
@@ -44,7 +44,7 @@ namespace MPT.CSI.API.Core.Helpers
         /// Assigns array values to struct properties.
         /// Array must have 6 entries.
         /// </summary>
-        /// <param name="forces">1x6 matrix of deformation values of the corresponding degree of freedom:
+        /// <param name="forces">1x6 matrix of internal force values of the corresponding degree of freedom:
         /// Value(0) = <see cref="P"/>;
         /// Value(1) = <see cref="V2"/>;
         /// Value(2) = <see cref="V3"/>;
@@ -63,7 +63,7 @@ namespace MPT.CSI.API.Core.Helpers
         }
 
         /// <summary>
-        /// Return a 1x6 matrix of deformation values of the corresponding degree of freedom:
+        /// Return a 1x6 matrix of internal force values of the corresponding degree of freedom:
         /// Value(0) = <see cref="P"/>;
         /// Value(1) = <see cref="V2"/>;
         /// Value(2) = <see cref="V3"/>;

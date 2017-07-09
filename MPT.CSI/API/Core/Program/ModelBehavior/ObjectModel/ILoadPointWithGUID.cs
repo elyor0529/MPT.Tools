@@ -18,7 +18,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="forceTypes">Force type for the point load for each load pattern.</param>
         /// <param name="coordinateSystems">Coordinated system used for each point load.
         /// It may be Local or the name of a defined coordinate system.</param>
-        /// <param name="directionsApplied">Direction that the load is applied in for each load pattern.</param>
+        /// <param name="loadDirections">Direction that the load is applied in for each load pattern.</param>
         /// <param name="relativeDistanceFromI">The relative distance from the I-End of the element to the location of the point load.</param>
         /// <param name="absoluteDistanceFromI">The actual distance from the I-End of the element to the location of the point load. [L]</param>
         /// <param name="pointLoadValues">The load value of the point loads. 
@@ -31,8 +31,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             ref string[] names,
             ref string[] loadPatterns,
             ref string[] GUIDs,
-            ref eLoadDirection[] directionsApplied,
             ref eLoadForceType[] forceTypes,
+            ref eLoadDirection[] loadDirections,
             ref double[] pointLoadValues,
             ref double[] absoluteDistanceFromI,
             ref double[] relativeDistanceFromI,
@@ -46,7 +46,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="loadPattern">The name of the load pattern associated with the uniform load.</param>
         /// <param name="GUID">This is the global unique ID of a distributed load assigned to the frame object or if it is not the global unique id of a distributed load assigned to the frame object and it is not blank, the global unique ID which is assigned to the newly assigned load. 
         /// If left blank, a new load is assigned to the frame object and the value of this parameter is set to the global unique ID of the newly assigned load.</param>
-        /// <param name="directionApplied">The direction that the load is applied.</param>
+        /// <param name="loadDirection">The direction that the load is applied.</param>
         /// <param name="forceType">Force type for the point load for the load pattern.</param>
         /// <param name="pointLoadValue">The load value of the point loads. 
         /// [F] when <paramref name="forceType"/> is <see cref="eLoadForceType.Force"/>  and [F*L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Moment"/>.</param>
@@ -58,8 +58,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         void SetLoadPointWithGUID(string name,
             string loadPattern,
             string GUID,
-            eLoadDirection directionApplied,
             eLoadForceType forceType,
+            eLoadDirection loadDirection,
             double pointLoadValue,
             double absoluteDistanceFromI,
             bool distanceIsRelative = true,

@@ -9,7 +9,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// </summary>
     public interface ITendonObject:
         IAddableObject,
-        ICountable, IListableNames, IChangeableName, IGroupAssignable, ISelectable, IDeletable,
+        ICountable, IListableNames, IChangeableName, IGroupAssignable, ISelectable, IDeletable, IDiscretizable, IGroupLoadable,
         ILocalAxes, IGUID,
         
         IObservableTransformationMatrix, IObservablePoints, IObservableElement,
@@ -19,64 +19,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         IObservableTensionCompressionLimits, IChangeableTensionCompressionLimits,
 
         // Loads
-        ILoadGravity, 
-        ILoadDeformation, 
-        ILoadTargetForce, 
+        ILoadGravity,
+        ILoadDeformationUniaxial,
 
-        ILoadStrain, 
-        ILoadTemperature, 
+        ILoadStrainUniaxial, 
+        ILoadTemperatureConstant, 
         
         ILoadForceStress
     {
-        /// <summary>
-        /// This function retrieves the maximum discretization length assignment for tendon objects.
-        /// </summary>
-        /// <param name="name">The name of an existing tendon object.</param>
-        /// <param name="maxDiscretizationLength">The maximum discretization length for the tendon. [L]</param>
-        void GetDiscretization(string name,
-            ref double maxDiscretizationLength);
-
-        /// <summary>
-        /// This function assigns a maximum discretization length to tendon objects.
-        /// </summary>
-        /// <param name="name">The name of an existing tendon object.</param>
-        /// <param name="maxDiscretizationLength">The maximum discretization length for the tendon. [L]</param>
-        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are retrieved for the objects specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.Group"/>, the assignments are retrieved for the objects included in the group specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are retrieved for all selected objects, and the <paramref name="name"/> item is ignored.</param>
-        void SetDiscretization(string name,
-            double maxDiscretizationLength,
-            eItemType itemType = eItemType.Object);
-
-
-
-
-        /// <summary>
-        /// This function retrieves the loaded group for tendon objects. 
-        /// A tendon object transfers its load to any object that is in the specified group.
-        /// </summary>
-        /// <param name="name">The name of an existing tendon object.</param>
-        /// <param name="groupName">This is the name of an existing group. 
-        /// All objects in the specified group can be loaded by the tendon.</param>
-        void GetLoadedGroup(string name,
-            ref string groupName);
-
-        /// <summary>
-        /// This function makes the loaded group assignment to tendon objects. 
-        /// A tendon object transfers its load to any object that is in the specified group.
-        /// </summary>
-        /// <param name="name">The name of an existing tendon object.</param>
-        /// <param name="groupName">This is the name of an existing group. 
-        /// All objects in the specified group can be loaded by the tendon.</param>
-        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are retrieved for the objects specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.Group"/>, the assignments are retrieved for the objects included in the group specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are retrieved for all selected objects, and the <paramref name="name"/> item is ignored.</param>
-        void SetLoadedGroup(string name,
-            string groupName,
-            eItemType itemType = eItemType.Object);
-
-
-
         /// <summary>
         /// This function assigns the tendon geometric definition parameters to a tendon object.
         /// </summary>
@@ -126,7 +76,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="coordinates">Coordinates of the considered point on the tendon in the coordinate system specified by the <paramref name="coordinateSystem"/> item. [L]</param>
         /// <param name="coordinateSystem">The name of the coordinate system in which the x, y and z coordinates are to be reported.
         /// It is Local or the name of a defined coordinate system.</param>
-        void GetTendonGeometry(ref string name,
+        void GetTendonGeometry(string name,
             ref int numberPoints,
             ref CoordinateCartesian[] coordinates,
             string coordinateSystem = CoordinateSystems.Global);

@@ -13,17 +13,17 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         Local_1 = 0,
 
         /// <summary>
-        /// Projected X direction in CSys coordinate system.
+        /// Projected X direction in global coordinate system.
         /// </summary>
         ProjectedX = 1,
 
         /// <summary>
-        /// Projected Y direction in CSys coordinate system.
+        /// Projected Y direction in global coordinate system.
         /// </summary>
         ProjectedY = 2,
 
         /// <summary>
-        /// Projected Z direction in CSys coordinate system.
+        /// Projected Z direction in global coordinate system.
         /// </summary>
         ProjectedZ = 3,
     }

@@ -7,7 +7,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
     public interface ILinkElement:
         ICountable, IListableNames, IObservableTransformationMatrix, IObservableLocalAxes, IObservableObject, IObservablePoints,
         IObservableSection, IObservableSectionFrequencyDependent,
-        IObservableLoadDeformation, IObservableLoadGravity, IObservableLoadTargetForce
+        
+        IObservableLoadDeformation, 
+        IObservableLoadGravity, 
+        IObservableLoadTargetForce
     {
         
     }
