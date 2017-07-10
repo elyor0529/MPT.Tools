@@ -26,11 +26,16 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// <summary>
     /// Represents the area object in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel.IAreaObject" />
     public class AreaObject : CSiApiBase, IAreaObject
     {
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AreaObject"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AreaObject(CSiApiSeed seed) : base(seed) { }
         #endregion
 

@@ -20,12 +20,19 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
+    /// <summary>
+    /// Represents model and application options in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class Options : CSiApiBase
     {
 
         #region Initialization
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Options"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public Options(CSiApiSeed seed) : base(seed) { }
 
 

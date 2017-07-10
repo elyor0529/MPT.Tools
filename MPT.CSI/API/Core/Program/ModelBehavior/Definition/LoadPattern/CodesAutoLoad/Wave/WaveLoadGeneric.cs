@@ -20,23 +20,18 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wave
 {
+    /// <summary>
+    /// Represents a generic auto wave load in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class WaveLoadGeneric : CSiApiBase
     {
-        #region Fields
 
-
-        #endregion
-
-
-        #region Properties
-
-
-
-        #endregion
-
-
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WaveLoadGeneric"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public WaveLoadGeneric(CSiApiSeed seed) : base(seed)
         {
         }

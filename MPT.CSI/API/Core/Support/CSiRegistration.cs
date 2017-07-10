@@ -7,6 +7,7 @@ namespace MPT.CSI.API.Core.Support
     /// <summary>
     /// Handles the registration of CSi program *.dll files.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class CSiRegistration
     {
         #region Fields
@@ -32,9 +33,9 @@ namespace MPT.CSI.API.Core.Support
         #endregion
 
 
-        #region Initialization
+        #region Initialization        
         /// <summary>
-        /// Object initializer.
+        /// Initializes a new instance of the <see cref="CSiRegistration"/> class.
         /// </summary>
         /// <param name="apiDllFileName">Name of the API *.dll file corresponding with the program to be used.</param>
         /// <param name="programPath">Path to the CSi program to register.</param>

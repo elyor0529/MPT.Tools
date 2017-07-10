@@ -25,8 +25,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// </summary>
     public class ExternalAnalysisResults : CSiApiBase
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExternalAnalysisResults"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public ExternalAnalysisResults(CSiApiSeed seed) : base(seed) { }
 
 

@@ -25,8 +25,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
     /// </summary>
     public class AreaEditor : CSiApiBase
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AreaEditor"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AreaEditor(CSiApiSeed seed) : base(seed) { }
 
 

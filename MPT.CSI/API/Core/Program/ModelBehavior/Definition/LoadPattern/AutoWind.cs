@@ -25,9 +25,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
     /// <summary>
     /// Represents an auto wind load pattern in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.IAutoLoad" />
     public class AutoWind : CSiApiBase, IAutoLoad
     {
-        #region Properties
+        #region Fields
         private readonly CSiApiSeed _seed;
 
         private User _User;
@@ -49,8 +51,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
 
         #endregion
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoWind"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AutoWind(CSiApiSeed seed) : base(seed)
         {
             _seed = seed;

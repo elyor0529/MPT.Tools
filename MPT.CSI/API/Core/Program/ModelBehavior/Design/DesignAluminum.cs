@@ -1,5 +1,4 @@
-﻿using System;
-using MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Aluminum;
+﻿using MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Aluminum;
 using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
@@ -25,6 +24,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
     /// <summary>
     /// Represents Aluminum design in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal" />
     public class DesignAluminum : CSiApiBase, IDesignMetal
     {
         #region Fields
@@ -35,16 +36,27 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
 
         #endregion
 
-        #region Properties
-
+        #region Properties        
+        /// <summary>
+        /// Gets the AA ASD 2000 design code.
+        /// </summary>
+        /// <value>The AA ASD 2000 design code.</value>
         public AA_ASD_2000 AA_ASD_2000 => _AA_ASD_2000 ?? (_AA_ASD_2000 = new AA_ASD_2000(_seed));
+
+        /// <summary>
+        /// Gets the AA LRFD 2000 design code.
+        /// </summary>
+        /// <value>The AA LRFD 2000 design code.</value>
         public AA_LRFD_2000 AA_LRFD_2000 => _AA_LRFD_2000 ?? (_AA_LRFD_2000 = new AA_LRFD_2000(_seed));
 
 
         #endregion
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DesignAluminum"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public DesignAluminum(CSiApiSeed seed) : base(seed)
         {
             _seed = seed;
@@ -87,7 +99,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// <param name="numberDidNotPass">The number of concrete frame objects that did not pass the design check.</param>
         /// <param name="numberNotChecked">The number of concrete frame objects that have not yet been checked.</param>
         /// <param name="namesNotPassedOrChecked">This is an array that includes the name of each frame object that did not pass the design check or has not yet been checked.</param>
-        public void VerifyPassed(ref int numberNotPassedOrChecked, ref int numberDidNotPass, ref int numberNotChecked, ref string[] namesNotPassedOrChecked)
+        public void VerifyPassed(ref int numberNotPassedOrChecked, 
+            ref int numberDidNotPass, 
+            ref int numberNotChecked, 
+            ref string[] namesNotPassedOrChecked)
         {
             _callCode = _sapModel.DesignAluminum.VerifyPassed(ref numberNotPassedOrChecked, ref numberDidNotPass, ref numberNotChecked, ref namesNotPassedOrChecked);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -98,7 +113,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// </summary>
         /// <param name="numberDifferentSections">The number of frame objects that have different analysis and design sections.</param>
         /// <param name="namesDifferentSections">This is an array that includes the name of each frame object that has different analysis and design sections.</param>
-        public void VerifySections(ref int numberDifferentSections, ref string[] namesDifferentSections)
+        public void VerifySections(ref int numberDifferentSections, 
+            ref string[] namesDifferentSections)
         {
             _callCode = _sapModel.DesignAluminum.VerifySections(ref numberDifferentSections, ref namesDifferentSections);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -110,13 +126,26 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// </summary>
         /// <param name="nameFrame">Name of a frame object with a frame design procedure.</param>
         /// <param name="nameSection">The name of the design section for the specified frame object.</param>
-        public void GetDesignSection(string nameFrame, ref string nameSection)
+        public void GetDesignSection(string nameFrame, 
+            ref string nameSection)
         {
             _callCode = _sapModel.DesignAluminum.GetDesignSection(nameFrame, ref nameSection);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        public void SetDesignSection(string itemName, string nameSection, bool resetToLastAnalysisSection, eItemType itemType = eItemType.Object)
+        /// <summary>
+        /// Modifies the design section for all specified frame objects that have a frame design procedure.
+        /// </summary>
+        /// <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
+        /// <param name="nameSection">Name of an existing frame section property to be used as the design section for the specified frame objects. 
+        /// This item applies only when resetToLastAnalysisSection = False.</param>
+        /// <param name="resetToLastAnalysisSection">True: The design section for the specified frame objects is reset to the last analysis section for the frame object. 
+        /// False: The design section is set to that specified by nameFrame.</param>
+        /// <param name="itemType">Selection type to use for applying the method.</param>
+        public void SetDesignSection(string itemName, 
+            string nameSection, 
+            bool resetToLastAnalysisSection, 
+            eItemType itemType = eItemType.Object)
         {
             _callCode = _sapModel.DesignAluminum.SetDesignSection(itemName, nameSection, resetToLastAnalysisSection, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -140,7 +169,16 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// If this item is Object, the design results are retrieved for the frame object specified by the Name item.
         /// If this item is Group, the design results are retrieved for all frame objects in the group specified by the Name item.
         /// If this item is SelectedObjects, the design results are retrieved for all selected frame objects, and the Name item is ignored.</param>
-        public void GetSummaryResults(string name, ref int numberResults, ref string[] frameNames, ref double[] ratios, ref int[] ratioTypes, ref double[] locations, ref string[] comboNames, ref string[] errorSummaries, ref string[] warningSummaries, eItemType itemType = eItemType.Object)
+        public void GetSummaryResults(string name, 
+            ref int numberResults, 
+            ref string[] frameNames, 
+            ref double[] ratios, 
+            ref int[] ratioTypes, 
+            ref double[] locations, 
+            ref string[] comboNames, 
+            ref string[] errorSummaries, 
+            ref string[] warningSummaries, 
+            eItemType itemType = eItemType.Object)
         {
             _callCode = _sapModel.DesignAluminum.GetSummaryResults(name, ref numberResults, ref frameNames, ref ratios, ref ratioTypes, ref locations, ref comboNames, ref errorSummaries, ref warningSummaries, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -148,21 +186,39 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
 
 
         // === Set ===
-        public void SetAutoSelectNull(string itemName, eItemType itemType = eItemType.Object)
+        /// <summary>
+        /// Removes the auto select section assignments from all specified frame objects that have a steel frame design procedure.
+        /// </summary>
+        /// <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
+        /// <param name="itemType">Selection type to use for applying the method.</param>
+        public void SetAutoSelectNull(string itemName, 
+            eItemType itemType = eItemType.Object)
         {
             _callCode = _sapModel.DesignAluminum.SetAutoSelectNull(itemName, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
-        public void SetGroup(string nameGroup, bool selectForDesign)
+        /// <summary>
+        /// Selects or deselects a group for frame design.
+        /// </summary>
+        /// <param name="nameGroup">Name of an existing group.</param>
+        /// <param name="selectForDesign">True: The specified group is selected as a design group for steel design. 
+        /// False: The group is not selected for steel design.</param>
+        public void SetGroup(string nameGroup, 
+            bool selectForDesign)
         {
             _callCode = _sapModel.DesignAluminum.SetGroup(nameGroup, selectForDesign);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
-        public void SetComboDeflection(string nameLoadCombination, bool selectLoadCombination)
+        /// <summary>
+        /// Selects or deselects a load combination for deflection design.
+        /// </summary>
+        /// <param name="nameLoadCombination">Name of an existing load combination.</param>
+        /// <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for deflection design. 
+        /// False: The combination is not selected for deflection design.</param>
+        public void SetComboDeflection(string nameLoadCombination, 
+            bool selectLoadCombination)
         {
             _callCode = _sapModel.DesignAluminum.SetComboDeflection(nameLoadCombination, selectLoadCombination);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -174,7 +230,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// <param name="nameLoadCombination">Name of an existing load combination.</param>
         /// <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
         /// False: The combination is not selected for strength design.</param>
-        public void SetComboStrength(string nameLoadCombination, bool selectLoadCombination)
+        public void SetComboStrength(string nameLoadCombination, 
+            bool selectLoadCombination)
         {
             _callCode = _sapModel.DesignAluminum.SetComboStrength(nameLoadCombination, selectLoadCombination);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }

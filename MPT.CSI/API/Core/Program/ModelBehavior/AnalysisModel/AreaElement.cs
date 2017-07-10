@@ -28,8 +28,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
     public class AreaElement : CSiApiBase, IAreaElement
     {
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AreaElement"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AreaElement(CSiApiSeed seed) : base(seed) { }
         #endregion
 

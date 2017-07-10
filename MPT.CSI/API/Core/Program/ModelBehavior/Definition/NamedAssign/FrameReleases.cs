@@ -1,5 +1,4 @@
-﻿using System;
-using MPT.CSI.API.Core.Helpers;
+﻿using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
@@ -25,13 +24,17 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedAssign
     /// <summary>
     /// Represents the frame releases in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class FrameReleases : CSiApiBase, 
         IChangeableName, ICountable, IDeletable, IListableNames,
         IObservableReleases
     {
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameReleases"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public FrameReleases(CSiApiSeed seed) : base(seed) { }
 
         #endregion
@@ -43,7 +46,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedAssign
         /// </summary>
         /// <param name="currentName">The existing name of a defined frame end release.</param>
         /// <param name="newName">The new name for the frame end release</param>
-        public void ChangeName(string currentName, string newName)
+        public void ChangeName(string currentName, 
+            string newName)
         {
             _callCode = _sapModel.NamedAssign.ReleaseFrame.ChangeName(currentName, newName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -75,7 +79,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedAssign
         /// </summary>
         /// <param name="numberOfNames">The number of frame end release names retrieved by the program.</param>
         /// <param name="names">Frame end release names retrieved by the program.</param>
-        public void GetNameList(ref int numberOfNames, ref string[] names)
+        public void GetNameList(ref int numberOfNames, 
+            ref string[] names)
         {
             _callCode = _sapModel.NamedAssign.ReleaseFrame.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }

@@ -20,11 +20,18 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
+    /// <summary>
+    /// Represents control of the view in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class Viewer : CSiApiBase
     {
         #region Initialization
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Viewer"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public Viewer(CSiApiSeed seed) : base(seed) { }
 
 
@@ -62,7 +69,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// It indicates the window(s) to have its view refreshed.</param>
         public void RefreshWindow(int window = 0)
         {
-            //_callCode = _sapModel.View.RefreshWindow();
+            _callCode = _sapModel.View.RefreshWindow();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 

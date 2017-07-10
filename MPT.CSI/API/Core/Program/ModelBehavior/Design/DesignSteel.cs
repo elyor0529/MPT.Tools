@@ -1,5 +1,4 @@
-﻿using System;
-using MPT.CSI.API.Core.Program.ModelBehavior.Design.Steel;
+﻿using MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel;
 using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
@@ -25,26 +24,135 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
     /// <summary>
     /// Represents Steel design in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal" />
     public class DesignSteel : CSiApiBase, IDesignMetal
     {
         #region Fields
         private readonly CSiApiSeed _seed;
 
         private AISC_360_05_IBC_2006 _AISC_360_05_IBC_2006;
-        
+        private AISC_360_10 _AISC_360_10;
+        private AISC_LRFD_93 _AISC_LRFD_93;
+        private API_RP2A_LRFD_97 _API_RP2A_LRFD_97;
+        private API_RP2A_WSD_2000 _API_RP2A_WSD_2000;
+        private API_RP2A_WSD_2014 _API_RP2A_WSD_2014;
+        private AS_4100_1998 _AS_4100_1998;
+        private ASCE_10_97 _ASCE_10_97;
+        private BS_5950_2000 _BS_5950_2000;
+        private Chinese_2010 _Chinese_2010;
+        private CSA_S16_09 _CSA_S16_09;
+        private Eurocode_3_2005 _Eurocode_3_2005;
+        private Indian_IS_800_2007 _Indian_IS_800_2007;
+        private Norsok_N_004 _Norsok_N_004;
+        private Norsok_N_004_2013 _Norsok_N_004_2013;
+        private NSZ_3404_1997 _NSZ_3404_1997;
         #endregion
 
-        #region Properties
-
+        #region Properties        
+        /// <summary>
+        /// Gets the AISC 360 05 IBC 2006 design code.
+        /// </summary>
+        /// <value>The AISC 360 05 IBC 2006 design code.</value>
         public AISC_360_05_IBC_2006 AISC_360_05_IBC_2006 => _AISC_360_05_IBC_2006 ?? (_AISC_360_05_IBC_2006 = new AISC_360_05_IBC_2006(_seed));
 
+        /// <summary>
+        /// Gets the AISC 360 10 design code.
+        /// </summary>
+        /// <value>The AISC 360 10 design code.</value>
+        public AISC_360_10 AISC_360_10 => AISC_360_10 ?? (_AISC_360_10 = new AISC_360_10(_seed));
 
+        /// <summary>
+        /// Gets the AISC LRFD 93 design code.
+        /// </summary>
+        /// <value>The AISC LRFD 93 design code.</value>
+        public AISC_LRFD_93 AISC_LRFD_93 => _AISC_LRFD_93 ?? (_AISC_LRFD_93 = new AISC_LRFD_93(_seed));
 
+        /// <summary>
+        /// Gets the API RP2A LRFD 97 design code.
+        /// </summary>
+        /// <value>The API RP2A LRFD 97 design code.</value>
+        public API_RP2A_LRFD_97 API_RP2A_LRFD_97 => _API_RP2A_LRFD_97 ?? (_API_RP2A_LRFD_97 = new API_RP2A_LRFD_97(_seed));
+
+        /// <summary>
+        /// Gets the API RP2A WSD 2000 design code.
+        /// </summary>
+        /// <value>The API RP2A WSD 2000 design code.</value>
+        public API_RP2A_WSD_2000 API_RP2A_WSD_2000 => _API_RP2A_WSD_2000 ?? (_API_RP2A_WSD_2000 = new API_RP2A_WSD_2000(_seed));
+
+        /// <summary>
+        /// Gets the API RP2A WSD 2014 design code.
+        /// </summary>
+        /// <value>The API RP2A WSD 2014 design code.</value>
+        public API_RP2A_WSD_2014 API_RP2A_WSD_2014 => _API_RP2A_WSD_2014 ?? (_API_RP2A_WSD_2014 = new API_RP2A_WSD_2014(_seed));
+
+        /// <summary>
+        /// Gets the AS 4100 1998 design code.
+        /// </summary>
+        /// <value>The As 4100 1998 design code.</value>
+        public AS_4100_1998 AS_4100_1998 => _AS_4100_1998 ?? (_AS_4100_1998 = new AS_4100_1998(_seed));
+
+        /// <summary>
+        /// Gets the ASCE 10 97 design code.
+        /// </summary>
+        /// <value>The ASCE 10 97 design code.</value>
+        public ASCE_10_97 ASCE_10_97 => _ASCE_10_97 ?? (_ASCE_10_97 = new ASCE_10_97(_seed));
+
+        /// <summary>
+        /// Gets the BS 5950 2000 design code.
+        /// </summary>
+        /// <value>The BS 5950 2000 design code.</value>
+        public BS_5950_2000 BS_5950_2000 => _BS_5950_2000 ?? (_BS_5950_2000 = new BS_5950_2000(_seed));
+
+        /// <summary>
+        /// Gets the Chinese 2010 design code.
+        /// </summary>
+        /// <value>The Cchinese 2010 design code.</value>
+        public Chinese_2010 Chinese_2010 => _Chinese_2010 ?? (_Chinese_2010 = new Chinese_2010(_seed));
+
+        /// <summary>
+        /// Gets the CSA S16 09 design code.
+        /// </summary>
+        /// <value>The CSA S16 09 design code.</value>
+        public CSA_S16_09 CSA_S16_09 => _CSA_S16_09 ?? (_CSA_S16_09 = new CSA_S16_09(_seed));
+
+        /// <summary>
+        /// Gets the Eurocode 3 2005 design code.
+        /// </summary>
+        /// <value>The Eurocode 3 2005 design code.</value>
+        public Eurocode_3_2005 Eurocode_3_2005 => _Eurocode_3_2005 ?? (_Eurocode_3_2005 = new Eurocode_3_2005(_seed));
+
+        /// <summary>
+        /// Gets the Indian IS 800 2007 design code.
+        /// </summary>
+        /// <value>The Indian IS 800 2007 design code.</value>
+        public Indian_IS_800_2007 Indian_IS_800_2007 => _Indian_IS_800_2007 ?? (_Indian_IS_800_2007 = new Indian_IS_800_2007(_seed));
+
+        /// <summary>
+        /// Gets the NORSOK N 004 design code.
+        /// </summary>
+        /// <value>The NORSOK N 004 design code.</value>
+        public Norsok_N_004 Norsok_N_004 => _Norsok_N_004 ?? (_Norsok_N_004 = new Norsok_N_004(_seed));
+
+        /// <summary>
+        /// Gets the NORSOK N 004 2013 design code.
+        /// </summary>
+        /// <value>The NORSOK N 004 2013 design code.</value>
+        public Norsok_N_004_2013 Norsok_N_004_2013 => _Norsok_N_004_2013 ?? (_Norsok_N_004_2013 = new Norsok_N_004_2013(_seed));
+
+        /// <summary>
+        /// Gets the NSZ 3404 1997 design code.
+        /// </summary>
+        /// <value>The NSZ 3404 1997 design code.</value>
+        public NSZ_3404_1997 NSZ_3404_1997 => _NSZ_3404_1997 ?? (_NSZ_3404_1997 = new NSZ_3404_1997(_seed));
         #endregion
 
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DesignSteel"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public DesignSteel(CSiApiSeed seed) : base(seed)
         {
             _seed = seed;
@@ -88,7 +196,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// <param name="numberDidNotPass">The number of concrete frame objects that did not pass the design check.</param>
         /// <param name="numberNotChecked">The number of concrete frame objects that have not yet been checked.</param>
         /// <param name="namesNotPassedOrChecked">This is an array that includes the name of each frame object that did not pass the design check or has not yet been checked.</param>
-        public void VerifyPassed(ref int numberNotPassedOrChecked, ref int numberDidNotPass, ref int numberNotChecked, ref string[] namesNotPassedOrChecked)
+        public void VerifyPassed(ref int numberNotPassedOrChecked, 
+            ref int numberDidNotPass, 
+            ref int numberNotChecked, 
+            ref string[] namesNotPassedOrChecked)
         {
             _callCode = _sapModel.DesignSteel.VerifyPassed(ref numberNotPassedOrChecked, ref numberDidNotPass, ref numberNotChecked, ref namesNotPassedOrChecked);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -99,7 +210,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// </summary>
         /// <param name="numberDifferentSections">The number of frame objects that have different analysis and design sections.</param>
         /// <param name="namesDifferentSections">This is an array that includes the name of each frame object that has different analysis and design sections.</param>
-        public void VerifySections(ref int numberDifferentSections, ref string[] namesDifferentSections)
+        public void VerifySections(ref int numberDifferentSections, 
+            ref string[] namesDifferentSections)
         {
             _callCode = _sapModel.DesignSteel.VerifySections(ref numberDifferentSections, ref namesDifferentSections);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -112,13 +224,26 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// </summary>
         /// <param name="nameFrame">Name of a frame object with a frame design procedure.</param>
         /// <param name="nameSection">The name of the design section for the specified frame object.</param>
-        public void GetDesignSection(string nameFrame, ref string nameSection)
+        public void GetDesignSection(string nameFrame, 
+            ref string nameSection)
         {
             _callCode = _sapModel.DesignSteel.GetDesignSection(nameFrame, ref nameSection);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        public void SetDesignSection(string itemName, string nameSection, bool resetToLastAnalysisSection, eItemType itemType = eItemType.Object)
+        /// <summary>
+        /// Modifies the design section for all specified frame objects that have a frame design procedure.
+        /// </summary>
+        /// <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
+        /// <param name="nameSection">Name of an existing frame section property to be used as the design section for the specified frame objects. 
+        /// This item applies only when resetToLastAnalysisSection = False.</param>
+        /// <param name="resetToLastAnalysisSection">True: The design section for the specified frame objects is reset to the last analysis section for the frame object. 
+        /// False: The design section is set to that specified by nameFrame.</param>
+        /// <param name="itemType">Selection type to use for applying the method.</param>
+        public void SetDesignSection(string itemName, 
+            string nameSection, 
+            bool resetToLastAnalysisSection, 
+            eItemType itemType = eItemType.Object)
         {
             _callCode = _sapModel.DesignSteel.SetDesignSection(itemName, nameSection, resetToLastAnalysisSection, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -142,21 +267,42 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// If this item is Object, the design results are retrieved for the frame object specified by the Name item.
         /// If this item is Group, the design results are retrieved for all frame objects in the group specified by the Name item.
         /// If this item is SelectedObjects, the design results are retrieved for all selected frame objects, and the Name item is ignored.</param>
-        public void GetSummaryResults(string name, ref int numberResults, ref string[] frameNames, ref double[] ratios, ref int[] ratioTypes, ref double[] locations, ref string[] comboNames, ref string[] errorSummaries, ref string[] warningSummaries, eItemType itemType = eItemType.Object)
+        public void GetSummaryResults(string name, 
+            ref int numberResults, 
+            ref string[] frameNames, 
+            ref double[] ratios, 
+            ref int[] ratioTypes, 
+            ref double[] locations, 
+            ref string[] comboNames, 
+            ref string[] errorSummaries, 
+            ref string[] warningSummaries, 
+            eItemType itemType = eItemType.Object)
         {
             _callCode = _sapModel.DesignSteel.GetSummaryResults(name, ref numberResults, ref frameNames, ref ratios, ref ratioTypes, ref locations, ref comboNames, ref errorSummaries, ref warningSummaries, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         // === Set
-
-        public void SetAutoSelectNull(string itemName, eItemType itemType = eItemType.Object)
+        /// <summary>
+        /// Removes the auto select section assignments from all specified frame objects that have a steel frame design procedure.
+        /// </summary>
+        /// <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
+        /// <param name="itemType">Selection type to use for applying the method.</param>
+        public void SetAutoSelectNull(string itemName, 
+            eItemType itemType = eItemType.Object)
         {
             _callCode = _sapModel.DesignSteel.SetAutoSelectNull(itemName, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        public void SetComboDeflection(string nameLoadCombination, bool selectLoadCombination)
+        /// <summary>
+        /// Selects or deselects a load combination for deflection design.
+        /// </summary>
+        /// <param name="nameLoadCombination">Name of an existing load combination.</param>
+        /// <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for deflection design. 
+        /// False: The combination is not selected for deflection design.</param>
+        public void SetComboDeflection(string nameLoadCombination, 
+            bool selectLoadCombination)
         {
             _callCode = _sapModel.DesignSteel.SetComboDeflection(nameLoadCombination, selectLoadCombination);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -168,15 +314,22 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// <param name="nameLoadCombination">Name of an existing load combination.</param>
         /// <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
         /// False: The combination is not selected for strength design.</param>
-        public void SetComboStrength(string nameLoadCombination, bool selectLoadCombination)
+        public void SetComboStrength(string nameLoadCombination, 
+            bool selectLoadCombination)
         {
             _callCode = _sapModel.DesignSteel.SetComboStrength(nameLoadCombination, selectLoadCombination);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        
 
-        public void SetGroup(string nameGroup, bool selectForDesign)
+        /// <summary>
+        /// Selects or deselects a group for frame design.
+        /// </summary>
+        /// <param name="nameGroup">Name of an existing group.</param>
+        /// <param name="selectForDesign">True: The specified group is selected as a design group for steel design. 
+        /// False: The group is not selected for steel design.</param>
+        public void SetGroup(string nameGroup, 
+            bool selectForDesign)
         {
             _callCode = _sapModel.DesignSteel.SetGroup(nameGroup, selectForDesign);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }

@@ -25,8 +25,11 @@ namespace MPT.CSI.API.Core.Program
     /// </summary>
     public class CSiApplication : CSiApiBase
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSiApplication"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public CSiApplication(CSiApiSeed seed) : base(seed) { }
 
 

@@ -28,8 +28,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// </summary>
     public class CableObject : CSiApiBase, ICableObject
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CableObject"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public CableObject(CSiApiSeed seed) : base(seed) { }
         #endregion
 

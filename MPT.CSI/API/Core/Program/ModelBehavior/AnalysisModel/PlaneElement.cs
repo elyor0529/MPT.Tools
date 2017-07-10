@@ -27,8 +27,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
     /// </summary>
     public class PlaneElement : CSiApiBase, IPlaneElement
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlaneElement"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public PlaneElement(CSiApiSeed seed) : base(seed) { }
         #endregion
 

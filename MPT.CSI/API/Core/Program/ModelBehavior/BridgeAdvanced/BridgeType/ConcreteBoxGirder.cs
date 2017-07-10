@@ -20,24 +20,18 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
 {
+    /// <summary>
+    /// Represents the concrete box girder bridge superstructure in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class ConcreteBoxGirder : CSiApiBase
     {
 
-        #region Fields
-
-
-        #endregion
-
-
-        #region Properties
-
-
-
-        #endregion
-
-
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConcreteBoxGirder"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public ConcreteBoxGirder(CSiApiSeed seed) : base(seed) { }
 
 
@@ -45,16 +39,65 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
 
         #region Methods: Public
 
-        public void GetThing(ref string param)
+        public void CountSuperCutWebStressPoint(string param)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.CountSuperCutWebStressPoint();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
-        public void SetThing(string param)
+        public void GetSuperCutSectionPropsAtY(string param)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionPropsAtY();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void GetSuperCutSectionValues(string param)
+        {
+            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionValues();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void GetSuperCutSlabCoordsAtX(string param)
+        {
+            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSlabCoordsAtX();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void GetSuperCutTendonNames(string param)
+        {
+            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutTendonNames();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void GetSuperCutTendonValues(string param)
+        {
+            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutTendonValues();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void GetSuperCutWebCoordsAtY(string param)
+        {
+            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebCoordsAtY();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void GetSuperCutWebStressPoint(string param)
+        {
+            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebStressPoint();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        public void GetSuperCutWebValues(string param)
+        {
+            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebValues();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 

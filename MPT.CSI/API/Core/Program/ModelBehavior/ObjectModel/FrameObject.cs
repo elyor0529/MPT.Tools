@@ -30,8 +30,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// </summary>
     public class FrameObject : CSiApiBase, IFrameObject
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameObject"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public FrameObject(CSiApiSeed seed) : base(seed) { }
         #endregion
 

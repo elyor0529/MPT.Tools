@@ -37,7 +37,7 @@ namespace MPT.CSI.API.Core.Program
         /// File path of the current model, as tracked by the program and not obtained from the API.
         /// </summary>
         private string _filePath;
-
+        // TODO: Finish consideration of filePath.
         #endregion
 
         #region Properties
@@ -65,8 +65,11 @@ namespace MPT.CSI.API.Core.Program
         }
         #endregion
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="File"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public File(CSiApiSeed seed) : base(seed) { }
 
 

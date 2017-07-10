@@ -1,5 +1,4 @@
-﻿using System;
-using MPT.CSI.API.Core.Support;
+﻿using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
 using SAP2000v16;
@@ -24,11 +23,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
     /// <summary>
     /// Represents the link properties in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class LinkProperties : CSiApiBase, 
         IChangeableName, ICountable, IDeletable, IListableNames
     {
         #region Initialization
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LinkProperties"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public LinkProperties(CSiApiSeed seed) : base(seed) { }
 
         #endregion
@@ -40,7 +43,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="currentName">The existing name of a defined link property.</param>
         /// <param name="newName">The new name for the link property.</param>
-        public void ChangeName(string currentName, string newName)
+        public void ChangeName(string currentName, 
+            string newName)
         {
             _callCode = _sapModel.PropLink.ChangeName(currentName, newName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -71,7 +75,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="numberOfNames">The number of link property names retrieved by the program.</param>
         /// <param name="names">Link property names retrieved by the program.</param>
-        public void GetNameList(ref int numberOfNames, ref string[] names)
+        public void GetNameList(ref int numberOfNames, 
+            ref string[] names)
         {
             _callCode = _sapModel.PropLink.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }

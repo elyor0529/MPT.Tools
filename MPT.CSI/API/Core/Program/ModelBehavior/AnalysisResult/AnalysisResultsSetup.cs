@@ -20,24 +20,17 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
 {
+    /// <summary>
+    /// Represents the analysis results setup in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class AnalysisResultsSetup : CSiApiBase
     {
-
-        #region Fields
-
-
-        #endregion
-
-
-        #region Properties
-
-
-
-        #endregion
-
-
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AnalysisResultsSetup"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AnalysisResultsSetup(CSiApiSeed seed) : base(seed) { }
 
 

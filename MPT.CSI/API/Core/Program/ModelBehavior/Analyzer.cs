@@ -1,5 +1,6 @@
 ﻿using IO = System.IO;
 
+using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
@@ -22,11 +23,18 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
+    /// <summary>
+    /// Represents the analysis controls in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class Analyzer : CSiApiBase
     {
         #region Initialization
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Analyzer"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public Analyzer(CSiApiSeed seed) : base(seed) { }
 
 
@@ -53,6 +61,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         public bool RunAnalysis(string filePath)
         {
             if (!IO.File.Exists(filePath)) return false;
+            // TODO: Why is this here? Check if necessary.
 
             // run model (this will create the analysis model)
             _callCode = _sapModel.Analyze.RunAnalysis();
@@ -132,19 +141,25 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// <summary>
         /// Retrieves the model global degrees of freedom.
         /// </summary>
-        /// <param name="dofArray">Boolean indications of which degrees of freedom are active.</param>
-        public void GetActiveDOF(ref bool[] dofArray)
+        /// <param name="activeDOFs">Boolean indications of which degrees of freedom are active.</param>
+        public void GetActiveDOF(ref DegreesOfFreedomGlobal activeDOFs)
         {
+            bool[] dofArray = new bool[0];
+
             _callCode = _sapModel.Analyze.GetActiveDOF(ref dofArray);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            activeDOFs.FromArray(dofArray);
         }
 
         /// <summary>
         /// Sets the model global degrees of freedom.
         /// </summary>
-        /// <param name="dofArray">Boolean indications of which degrees of freedom are active.</param>
-        public void SetActiveDOF(bool[] dofArray)
+        /// <param name="activeDOFs">Boolean indications of which degrees of freedom are active.</param>
+        public void SetActiveDOF(DegreesOfFreedomGlobal activeDOFs)
         {
+            bool[] dofArray = activeDOFs.ToArray();
+
             _callCode = _sapModel.Analyze.SetActiveDOF(ref dofArray);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }

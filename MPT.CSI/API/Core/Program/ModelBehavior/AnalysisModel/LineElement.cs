@@ -28,8 +28,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
     /// </summary>
     public class LineElement : CSiApiBase, ILineElement
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LineElement"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public LineElement(CSiApiSeed seed) : base(seed) { }
         #endregion
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
@@ -29,8 +28,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
     /// </summary>
     public class PointElement : CSiApiBase, IPointElement
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PointElement"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public PointElement(CSiApiSeed seed) : base(seed) {}
 
         #endregion

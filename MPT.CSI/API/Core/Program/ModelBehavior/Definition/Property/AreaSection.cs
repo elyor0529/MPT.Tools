@@ -29,8 +29,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         IChangeableName, ICountable, IDeletable, IListableNames, 
         IObservableModifiers, IChangeableModifiers
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AreaSection"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AreaSection(CSiApiSeed seed) : base(seed) { }
 
 
@@ -43,7 +46,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="currentName">The existing name of a defined area property.</param>
         /// <param name="newName">The new name for the area property.</param>
-        public void ChangeName(string currentName, string newName)
+        public void ChangeName(string currentName, 
+            string newName)
         {
             _callCode = _sapModel.PropArea.ChangeName(currentName, newName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -74,7 +78,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="numberOfNames">The number of area property names retrieved by the program.</param>
         /// <param name="names">Area property names retrieved by the program.</param>
-        public void GetNameList(ref int numberOfNames, ref string[] names)
+        public void GetNameList(ref int numberOfNames, 
+            ref string[] names)
         {
             _callCode = _sapModel.PropArea.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -88,7 +93,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="name">The name of an existing area property.</param>
         /// <param name="modifiers">Unitless modifiers.</param>
-        public void GetModifiers(string name, ref Modifier modifiers)
+        public void GetModifiers(string name, 
+            ref Modifier modifiers)
         {
             if (modifiers == null) { modifiers = new Modifier(); }
             double[] csiModifiers = new double[0];
@@ -105,7 +111,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="name">The name of an existing area property.</param>
         /// <param name="modifiers">Unitless modifiers.</param>
-        public void SetModifiers(string name, Modifier modifiers)
+        public void SetModifiers(string name, 
+            Modifier modifiers)
         {
             if (modifiers == null) { return; }
             double[] csiModifiers = modifiers.ToArray();
@@ -113,23 +120,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             _callCode = _sapModel.PropArea.SetModifiers(name, ref csiModifiers);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
-
-        #region Methods: Public
-
-        public void GetThing(ref string param)
-        {
-            //_callCode = _sapModel.PropArea.
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-        public void SetThing(string param)
-        {
-            //_callCode = _sapModel.PropArea.
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
         #endregion
     }
 }

@@ -27,8 +27,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
     /// </summary>
     public class SolidElement : CSiApiBase, ISolidElement
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SolidElement"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public SolidElement(CSiApiSeed seed) : base(seed) { }
 
         #endregion

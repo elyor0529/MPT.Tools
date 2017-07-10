@@ -57,12 +57,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// Modifies the design section for all specified frame objects that have a frame design procedure.
         /// </summary>
         /// <param name="itemName">Name of an existing frame object or group, depending on the value of the ItemType item.</param>
-        /// <param name="nameFrame">Name of an existing frame section property to be used as the design section for the specified frame objects. 
+        /// <param name="nameSection">Name of an existing frame section property to be used as the design section for the specified frame objects. 
         /// This item applies only when resetToLastAnalysisSection = False.</param>
         /// <param name="resetToLastAnalysisSection">True: The design section for the specified frame objects is reset to the last analysis section for the frame object. 
         /// False: The design section is set to that specified by nameFrame.</param>
         /// <param name="itemType">Selection type to use for applying the method.</param>
-        void SetDesignSection(string itemName, string nameFrame, bool resetToLastAnalysisSection, eItemType itemType = eItemType.Object);
+        void SetDesignSection(string itemName, string nameSection, bool resetToLastAnalysisSection, eItemType itemType = eItemType.Object);
 
         /// <summary>
         /// Selects or deselects a group for frame design.

@@ -1,5 +1,4 @@
-﻿using System;
-using MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete;
+﻿using MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete;
 using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
@@ -25,25 +24,121 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
     /// <summary>
     /// Represents Concrete design in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignCode" />
     public class DesignConcrete : CSiApiBase, IDesignCode
     {
         #region Fields
         private readonly CSiApiSeed _seed;
 
+        private AASHTO_07 _AASHTO_07;
+        private AASHTO_LRFD_2012 _AASHTO_LRFD_2012;
+        private AASHTO_LRFD_2014 _AASHTO_LRFD_2014;
         private ACI_318_08_IBC_2009 _ACI_318_08_IBC_2009;
-
+        private AS_3600_09 _AS_3600_09;
+        private BS_8110_97 _BS_8110_97;
+        private Chinese_2010 _Chinese_2010;
+        private CSA_A23_304 _CSA_A23_304;
+        private Eurocode_2_2004 _Eurocode_2_2004;
+        private Hong_Kong_CP_2013 _Hong_Kong_CP_2013;
+        private Indian_IS_456_2000 _Indian_IS_456_2000;
+        private KCI_1999 _KCI_1999;
+        private Singapore_CP_6599 _Singapore_CP_6599;
+        private TS_500_2000 _TS_500_2000;
         #endregion
 
-        #region Properties
+        #region Properties   
 
+        /// <summary>
+        /// Gets the AASHTO 07 design code.
+        /// </summary>
+        /// <value>The AASHTO 07 design code.</value>
+        public AASHTO_07 AASHTO_07 => _AASHTO_07 ?? (_AASHTO_07 = new AASHTO_07(_seed));
+
+        /// <summary>
+        /// Gets the AASHTO LRFD 2012 design code.
+        /// </summary>
+        /// <value>The AASHTO LRFD 2012 design code.</value>
+        public AASHTO_LRFD_2012 AASHTO_LRFD_2012 => _AASHTO_LRFD_2012 ?? (_AASHTO_LRFD_2012 = new AASHTO_LRFD_2012(_seed));
+
+        /// <summary>
+        /// Gets the AASHTO LRFD 2014 design code.
+        /// </summary>
+        /// <value>The AASHTO LRFD 2014 design code.</value>
+        public AASHTO_LRFD_2014 AASHTO_LRFD_2014 => _AASHTO_LRFD_2014 ?? (_AASHTO_LRFD_2014 = new AASHTO_LRFD_2014(_seed));
+
+        /// <summary>
+        /// Gets the ACI 318 08 IBC 2009 design code.
+        /// </summary>
+        /// <value>The ACI 318 08 IBC 2009 design code.</value>
         public ACI_318_08_IBC_2009 ACI_318_08_IBC_2009 => _ACI_318_08_IBC_2009 ?? (_ACI_318_08_IBC_2009 = new ACI_318_08_IBC_2009(_seed));
 
+        /// <summary>
+        /// Gets AS 3600 09 design code.
+        /// </summary>
+        /// <value>The AS 3600 09.</value>
+        public AS_3600_09 AS_3600_09 => _AS_3600_09 ?? (_AS_3600_09 = new AS_3600_09(_seed));
 
+        /// <summary>
+        /// Gets the BS 8110 97 design code.
+        /// </summary>
+        /// <value>The BS 8110 97 design code.</value>
+        public BS_8110_97 BS_8110_97 => _BS_8110_97 ?? (_BS_8110_97 = new BS_8110_97(_seed));
 
+        /// <summary>
+        /// Gets the Chinese 2010 design code.
+        /// </summary>
+        /// <value>The Chinese 2010 design code.</value>
+        public Chinese_2010 Chinese_2010 => _Chinese_2010 ?? (_Chinese_2010 = new Chinese_2010(_seed));
+
+        /// <summary>
+        /// Gets the CSA A23 304 design code.
+        /// </summary>
+        /// <value>The CSA A23 304 design code.</value>
+        public CSA_A23_304 CSA_A23_304 => _CSA_A23_304 ?? (_CSA_A23_304 = new CSA_A23_304(_seed));
+
+        /// <summary>
+        /// Gets the Eurocode 2 2004 design code.
+        /// </summary>
+        /// <value>The Eurocode 2 2004 design code.</value>
+        public Eurocode_2_2004 Eurocode_2_2004 => _Eurocode_2_2004 ?? (_Eurocode_2_2004 = new Eurocode_2_2004(_seed));
+
+        /// <summary>
+        /// Gets the Hong Kong CP 2013 design code.
+        /// </summary>
+        /// <value>The Hong Kong CP 2013 design code.</value>
+        public Hong_Kong_CP_2013 Hong_Kong_CP_2013 => _Hong_Kong_CP_2013 ?? (_Hong_Kong_CP_2013 = new Hong_Kong_CP_2013(_seed));
+
+        /// <summary>
+        /// Gets the Indian IS 456 2000 design code.
+        /// </summary>
+        /// <value>The Indian IS 456 2000 design code.</value>
+        public Indian_IS_456_2000 Indian_IS_456_2000 => _Indian_IS_456_2000 ?? (_Indian_IS_456_2000 = new Indian_IS_456_2000(_seed));
+
+        /// <summary>
+        /// Gets the KCI 1999 design code.
+        /// </summary>
+        /// <value>The KCI 1999 design code.</value>
+        public KCI_1999 KCI_1999 => _KCI_1999 ?? (_KCI_1999 = new KCI_1999(_seed));
+
+        /// <summary>
+        /// Gets the Singapore CP 6599 design code.
+        /// </summary>
+        /// <value>The Singapore CP 6599 design code.</value>
+        public Singapore_CP_6599 Singapore_CP_6599 => _Singapore_CP_6599 ?? (_Singapore_CP_6599 = new Singapore_CP_6599(_seed));
+
+        /// <summary>
+        /// Gets the TS 500 2000 design code.
+        /// </summary>
+        /// <value>The TS 500 2000 design code.</value>
+        public TS_500_2000 TS_500_2000 => _TS_500_2000 ?? (_TS_500_2000 = new TS_500_2000(_seed));
         #endregion
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DesignConcrete"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public DesignConcrete(CSiApiSeed seed) : base(seed)
         {
             _seed = seed;
@@ -86,7 +181,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// <param name="numberDidNotPass">The number of concrete frame objects that did not pass the design check.</param>
         /// <param name="numberNotChecked">The number of concrete frame objects that have not yet been checked.</param>
         /// <param name="namesNotPassedOrChecked">This is an array that includes the name of each frame object that did not pass the design check or has not yet been checked.</param>
-        public void VerifyPassed(ref int numberNotPassedOrChecked, ref int numberDidNotPass, ref int numberNotChecked, ref string[] namesNotPassedOrChecked)
+        public void VerifyPassed(ref int numberNotPassedOrChecked, 
+            ref int numberDidNotPass, 
+            ref int numberNotChecked, 
+            ref string[] namesNotPassedOrChecked)
         {
             _callCode = _sapModel.DesignConcrete.VerifyPassed(ref numberNotPassedOrChecked, ref numberDidNotPass, ref numberNotChecked, ref namesNotPassedOrChecked);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -97,7 +195,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// </summary>
         /// <param name="numberDifferentSections">The number of frame objects that have different analysis and design sections.</param>
         /// <param name="namesDifferentSections">This is an array that includes the name of each frame object that has different analysis and design sections.</param>
-        public void VerifySections(ref int numberDifferentSections, ref string[] namesDifferentSections)
+        public void VerifySections(ref int numberDifferentSections, 
+            ref string[] namesDifferentSections)
         {
             _callCode = _sapModel.DesignConcrete.VerifySections(ref numberDifferentSections, ref namesDifferentSections);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -109,7 +208,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// <param name="nameLoadCombination">Name of an existing load combination.</param>
         /// <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
         /// False: The combination is not selected for strength design.</param>
-        public void SetComboStrength(string nameLoadCombination, bool selectLoadCombination)
+        public void SetComboStrength(string nameLoadCombination, 
+            bool selectLoadCombination)
         {
             _callCode = _sapModel.DesignConcrete.SetComboStrength(nameLoadCombination, selectLoadCombination);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }

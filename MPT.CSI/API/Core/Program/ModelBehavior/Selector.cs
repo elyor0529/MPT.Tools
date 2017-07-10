@@ -21,11 +21,18 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
+    /// <summary>
+    /// Represents selections in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class Selector : CSiApiBase
     {
         #region Initialization
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Selector"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public Selector(CSiApiSeed seed) : base(seed) { }
 
 

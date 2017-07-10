@@ -25,8 +25,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
     /// </summary>
     public class FrameEditor : CSiApiBase
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameEditor"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public FrameEditor(CSiApiSeed seed) : base(seed) { }
 
 

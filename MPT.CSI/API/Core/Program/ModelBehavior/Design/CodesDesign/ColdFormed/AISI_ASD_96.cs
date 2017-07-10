@@ -20,10 +20,17 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.ColdFormed
 {
+    /// <summary>
+    /// Cold-formed steel design code AISI_ASD_96.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class AISI_ASD_96 : CSiApiBase
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AISI_ASD_96"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AISI_ASD_96(CSiApiSeed seed) : base(seed) { }
 
 
@@ -34,25 +41,25 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.ColdFormed
 
         public void GetOverwrite(string nameFrame)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignColdFormed.AISI_ASD96.GetOverwrite();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void GetPreference()
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignColdFormed.AISI_ASD96.GetPreference();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void SetOverwrite(string nameFrame, eItemType itemType = eItemType.Object)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignColdFormed.AISI_ASD96.SetOverwrite();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void SetPreference()
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignColdFormed.AISI_ASD96.SetPreference();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion

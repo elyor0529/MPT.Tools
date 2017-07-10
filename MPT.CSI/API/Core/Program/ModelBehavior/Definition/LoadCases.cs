@@ -1,4 +1,5 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase;
+using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
 using CSiProgram = SAP2000v16;
@@ -24,25 +25,148 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
     /// <summary>
     /// Represents the load cases in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class LoadCases : CSiApiBase, IChangeableName, ICountable, IDeletable, IListableNames
     {
 
         #region Fields
+        private readonly CSiApiSeed _seed;
 
+        private Buckling _buckling;
+        private ExternalResults _externalResults;
+        private Hyperstatic _hyperstatic;
+        private ModalEigen _modalEigen;
+        private ModalRitz _modalRitz;
+        private MovingLoad _movingLoad;
+        private PowerSpectralDensity _powerSpectralDensity;
+        private ResponseSpectrum _responseSpectrum;
+        private StaticLinear _staticLinear;
+        private StaticLinearMultistep _staticLinearMultistep;
+        private StaticNonlinear _staticNonlinear;
+        private StaticNonlinearStaged _staticNonlinearStaged;
+        private SteadyState _steadyState;
+        private TimeHistoryDirectLinear _timeHistoryDirectLinear;
+        private TimeHistoryDirectNonlinear _timeHistoryDirectNonlinear;
+        private TimeHistoryModalLinear _timeHistoryModalLinear;
+        private TimeHistoryModalNonlinear _timeHistoryModalNonlinear;
+        #endregion
+
+        #region Properties                    
+        /// <summary>
+        /// Gets the buckling load case.
+        /// </summary>
+        /// <value>The buckling load case.</value>
+        public Buckling Buckling => _buckling ?? (_buckling = new Buckling(_seed));
+
+        /// <summary>
+        /// Gets the external results load case.
+        /// </summary>
+        /// <value>The external results load case.</value>
+        public ExternalResults ExternalResults => _externalResults ?? (_externalResults = new ExternalResults(_seed));
+
+        /// <summary>
+        /// Gets the hyperstatic load case.
+        /// </summary>
+        /// <value>The hyperstatic load case.</value>
+        public Hyperstatic Hyperstatic => _hyperstatic ?? (_hyperstatic = new Hyperstatic(_seed));
+
+        /// <summary>
+        /// Gets the modal eigen load case.
+        /// </summary>
+        /// <value>The modal eigen load case.</value>
+        public ModalEigen ModalEigen => _modalEigen ?? (_modalEigen = new ModalEigen(_seed));
+
+        /// <summary>
+        /// Gets the modal ritz load case.
+        /// </summary>
+        /// <value>The modal ritz load case.</value>
+        public ModalRitz ModalRitz => _modalRitz ?? (_modalRitz = new ModalRitz(_seed));
+
+        /// <summary>
+        /// Gets the moving load load case.
+        /// </summary>
+        /// <value>The moving load load case.</value>
+        public MovingLoad MovingLoad => _movingLoad ?? (_movingLoad = new MovingLoad(_seed));
+
+        /// <summary>
+        /// Gets the power spectral density load case.
+        /// </summary>
+        /// <value>The power spectral density load case.</value>
+        public PowerSpectralDensity PowerSpectralDensity => _powerSpectralDensity ?? (_powerSpectralDensity = new PowerSpectralDensity(_seed));
+
+        /// <summary>
+        /// Gets the response spectrum load case.
+        /// </summary>
+        /// <value>The response spectrum load case.</value>
+        public ResponseSpectrum ResponseSpectrum => _responseSpectrum ?? (_responseSpectrum = new ResponseSpectrum(_seed));
+
+        /// <summary>
+        /// Gets the static linear load case.
+        /// </summary>
+        /// <value>The static linear load case.</value>
+        public StaticLinear StaticLinear => _staticLinear ?? (_staticLinear = new StaticLinear(_seed));
+
+        /// <summary>
+        /// Gets the static linear multistep load case.
+        /// </summary>
+        /// <value>The static linear multistep load case.</value>
+        public StaticLinearMultistep StaticLinearMultistep => _staticLinearMultistep ?? (_staticLinearMultistep = new StaticLinearMultistep(_seed));
+
+        /// <summary>
+        /// Gets the static nonlinear load case.
+        /// </summary>
+        /// <value>The static nonlinear load case.</value>
+        public StaticNonlinear StaticNonlinear => _staticNonlinear ?? (_staticNonlinear = new StaticNonlinear(_seed));
+
+        /// <summary>
+        /// Gets the static nonlinear staged load case.
+        /// </summary>
+        /// <value>The static nonlinear staged load case.</value>
+        public StaticNonlinearStaged StaticNonlinearStaged => _staticNonlinearStaged ?? (_staticNonlinearStaged = new StaticNonlinearStaged(_seed));
+
+        /// <summary>
+        /// Gets the state of the steady load case.
+        /// </summary>
+        /// <value>The state of the steady load case.</value>
+        public SteadyState SteadyState => _steadyState ?? (_steadyState = new SteadyState(_seed));
+
+        /// <summary>
+        /// Gets the time history direct linea load caser.
+        /// </summary>
+        /// <value>The time history direct linear load case.</value>
+        public TimeHistoryDirectLinear TimeHistoryDirectLinear => _timeHistoryDirectLinear ?? (_timeHistoryDirectLinear = new TimeHistoryDirectLinear(_seed));
+
+        /// <summary>
+        /// Gets the time history direct nonlinear load case.
+        /// </summary>
+        /// <value>The time history direct nonlinear load case.</value>
+        public TimeHistoryDirectNonlinear TimeHistoryDirectNonlinear => _timeHistoryDirectNonlinear ?? (_timeHistoryDirectNonlinear = new TimeHistoryDirectNonlinear(_seed));
+
+        /// <summary>
+        /// Gets the time history modal linear load case.
+        /// </summary>
+        /// <value>The time history modal linear load case.</value>
+        public TimeHistoryModalLinear TimeHistoryModalLinear => _timeHistoryModalLinear ?? (_timeHistoryModalLinear = new TimeHistoryModalLinear(_seed));
+
+        /// <summary>
+        /// Gets the time history modal nonlinear load case.
+        /// </summary>
+        /// <value>The time history modal nonlinear load case.</value>
+        public TimeHistoryModalNonlinear TimeHistoryModalNonlinear => _timeHistoryModalNonlinear ?? (_timeHistoryModalNonlinear = new TimeHistoryModalNonlinear(_seed));
 
         #endregion
 
 
-        #region Properties
+        #region Initialization        
 
-
-
-        #endregion
-
-
-        #region Initialization
-
-        public LoadCases(CSiApiSeed seed) : base(seed) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoadCases"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
+        public LoadCases(CSiApiSeed seed) : base(seed)
+        {
+            _seed = seed;
+        }
 
 
         #endregion
@@ -126,7 +250,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <param name="designType">Load case design type corresponding to the name provided.</param>
         /// <param name="designTypeOption">Load case type corresponding to the name provided.</param>
         /// <param name="autoCreatedCase">This is one of the following values indicating if the load case has been automatically created.</param>
-        public void GetType_1(string nameLoadCase,
+        public void GetCaseTypes(string nameLoadCase,
             ref eLoadCaseType loadCaseType,
             ref int loadCaseSubType,
             ref eLoadPatternType designType,

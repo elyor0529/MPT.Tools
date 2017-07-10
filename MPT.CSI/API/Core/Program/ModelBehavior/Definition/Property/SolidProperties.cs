@@ -1,5 +1,4 @@
-﻿using System;
-using MPT.CSI.API.Core.Helpers;
+﻿using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
@@ -25,11 +24,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
     /// <summary>
     /// Represents the solid properties in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class SolidProperties : CSiApiBase, 
         IChangeableName, ICountable, IDeletable, IListableNames
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SolidProperties"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public SolidProperties(CSiApiSeed seed) : base(seed) { }
 
         #endregion
@@ -41,7 +44,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="currentName">The existing name of a defined solid property.</param>
         /// <param name="newName">The new name for the solid property.</param>
-        public void ChangeName(string currentName, string newName)
+        public void ChangeName(string currentName, 
+            string newName)
         {
             _callCode = _sapModel.PropSolid.ChangeName(currentName, newName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -72,7 +76,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="numberOfNames">The number of solid property names retrieved by the program.</param>
         /// <param name="names">Solid property names retrieved by the program.</param>
-        public void GetNameList(ref int numberOfNames, ref string[] names)
+        public void GetNameList(ref int numberOfNames, 
+            ref string[] names)
         {
             _callCode = _sapModel.PropSolid.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }

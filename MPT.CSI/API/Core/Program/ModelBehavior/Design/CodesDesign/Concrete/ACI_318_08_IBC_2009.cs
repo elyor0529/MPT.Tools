@@ -20,10 +20,17 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
+    /// <summary>
+    /// Concrete design code ACI_318_08_IBC_2009.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class ACI_318_08_IBC_2009 : CSiApiBase
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ACI_318_08_IBC_2009"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public ACI_318_08_IBC_2009(CSiApiSeed seed) : base(seed) { }
 
 
@@ -34,25 +41,25 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 
         public void GetOverwrite(string nameFrame)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignConcrete.ACI318_08_IBC2009.GetOverwrite();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void GetPreference()
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignConcrete.ACI318_08_IBC2009.GetPreference();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void SetOverwrite(string nameFrame, eItemType itemType = eItemType.Object)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignConcrete.ACI318_08_IBC2009.SetOverwrite();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void SetPreference()
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignConcrete.ACI318_08_IBC2009.SetPreference();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion

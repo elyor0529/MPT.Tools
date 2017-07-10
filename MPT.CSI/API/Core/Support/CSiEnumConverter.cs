@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 
@@ -26,6 +25,7 @@ namespace MPT.CSI.API.Core.Support
     /// <summary>
     /// Converts enumerations between those used in this library and those used in the CSi program supported by a given compilation.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     internal class CSiEnumConverter
     {
         internal static int[] ToIntArray<T>(T[] array) where T : struct, IComparable

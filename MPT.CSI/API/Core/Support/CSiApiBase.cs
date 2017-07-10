@@ -21,14 +21,21 @@ namespace MPT.CSI.API.Core.Support
     /// <summary>
     /// Stores references to the basic, fundamental objects of the program for implementing a listener pattern.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class CSiApiBase
     {
         #region Fields
 #if BUILD_SAP2000v16
         protected SAP2000v16.SapObject _sapObject;
-#else
+#else        
+        /// <summary>
+        /// The SAP application object.
+        /// </summary>
         protected cOAPI _sapObject;
-#endif
+#endif        
+        /// <summary>
+        /// The SAP model object that contains most of the application API calls.
+        /// </summary>
         protected cSapModel _sapModel;
 
         /// <summary>
@@ -37,17 +44,25 @@ namespace MPT.CSI.API.Core.Support
         protected int _callCode;
         #endregion
 
-        #region Properties
-
+        #region Properties        
+        /// <summary>
+        /// True: Class will throw an exception if the API call fails.
+        /// </summary>
+        /// <value><c>true</c> if the class will throw an exception if an API call fails; otherwise, <c>false</c>.</value>
         public bool ThrowApiExceptions { get; set; } = true;
 
         #endregion
 
-        #region Initialiation
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSiApiBase"/> class.
+        /// </summary>
         public CSiApiBase(){ }
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSiApiBase"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public CSiApiBase(CSiApiSeed seed)
         {
             _sapObject = seed.SapObject;
@@ -55,12 +70,22 @@ namespace MPT.CSI.API.Core.Support
         }
 
 #if BUILD_SAP2000v16
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSiApiBase"/> class.
+        /// </summary>
+        /// <param name="sapObject">The sap object.</param>
+        /// <param name="sapModel">The sap model.</param>
         public CSiApiBase(SAP2000v16.SapObject sapObject, cSapModel sapModel)
         {
             _sapObject = sapObject;
             _sapModel = sapModel;
         }
-#else
+#else        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSiApiBase"/> class.
+        /// </summary>
+        /// <param name="sapObject">The sap object.</param>
+        /// <param name="sapModel">The sap model.</param>
         public CSiApiBase(cOAPI sapObject, cSapModel sapModel)
         {
             _sapObject = sapObject;

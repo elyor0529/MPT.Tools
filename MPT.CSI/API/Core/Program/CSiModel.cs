@@ -3,7 +3,7 @@ using IO = System.IO;
 
 using MPT.CSI.API.Core.Support;
 using MPT.CSI.API.Core.Program.ModelBehavior;
-
+using MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced;
 #if BUILD_SAP2000v16
 using SAP2000v16;
 #elif BUILD_SAP2000v17
@@ -26,70 +26,109 @@ using ETABS2016;
 namespace MPT.CSI.API.Core.Program
 {
     /// <summary>
-    /// Main CSi program object. Most API functions are called on this or contained delegate objects.
+    /// Main CSi program object. 
+    /// Most API functions are called on this or contained delegate objects.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class CSiModel : CSiApiSeed
     {
-        #region Properties
+        #region Fields
+        private readonly CSiApiSeed _seed;
+
+        private File _file;
+        private CSiApplication _csiApplication;
+        private AnalysisModeler _analysisModeler;
+        private ObjectModeler _objectModeler;
+        private Analyzer _analyzer;
+        private Definitions _definitions;
+        private Designer _designer;
+        private Editor _editor;
+        private Options _options;
+        private AnalysisResults _analysisResults;
+        private Selector _selector;
+        private Viewer _viewer;
+
+        private Superstructure _superstructure;
+        #endregion
+
+        #region Properties               
         /// <summary>
-        /// 
+        /// Gets the file.
         /// </summary>
-        public readonly File File;
+        /// <value>The file.</value>
+        public File File => _file ?? (_file = new File(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the application.
         /// </summary>
-        public readonly CSiApplication Application;
+        /// <value>The application.</value>
+        public CSiApplication Application => _csiApplication ?? (_csiApplication = new CSiApplication(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the analysis model.
         /// </summary>
-        public readonly AnalysisModeler AnalysisModel;
+        /// <value>The analysis model.</value>
+        public AnalysisModeler AnalysisModel => _analysisModeler ?? (_analysisModeler = new AnalysisModeler(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the analyze.
         /// </summary>
-        public readonly Analyzer Analyze;
+        /// <value>The analyze.</value>
+        public Analyzer Analyze => _analyzer ?? (_analyzer = new Analyzer(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the definitions.
         /// </summary>
-        public readonly Definitions Definitions;
+        /// <value>The definitions.</value>
+        public Definitions Definitions => _definitions ?? (_definitions = new Definitions(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the design.
         /// </summary>
-        public readonly Designer Design;
+        /// <value>The design.</value>
+        public Designer Design => _designer ?? (_designer = new Designer(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the editor.
         /// </summary>
-        public readonly Editor Editor;
+        /// <value>The editor.</value>
+        public Editor Editor => _editor ?? (_editor = new Editor(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the object model.
         /// </summary>
-        public readonly ObjectModeler ObjectModel;
+        /// <value>The object model.</value>
+        public ObjectModeler ObjectModel => _objectModeler ?? (_objectModeler = new ObjectModeler(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the options.
         /// </summary>
-        public readonly Options Options;
+        /// <value>The options.</value>
+        public Options Options => _options ?? (_options = new Options(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the analysis results.
         /// </summary>
-        public readonly AnalysisResults Results;
+        /// <value>The analysis results.</value>
+        public AnalysisResults Results => _analysisResults ?? (_analysisResults = new AnalysisResults(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the selector.
         /// </summary>
-        public readonly Selector Selector;
+        /// <value>The selector.</value>
+        public Selector Selector => _selector ?? (_selector = new Selector(_seed));
 
         /// <summary>
-        /// 
+        /// Gets the viewer.
         /// </summary>
-        public readonly Viewer Viewer;
+        /// <value>The viewer.</value>
+        public Viewer Viewer => _viewer ?? (_viewer = new Viewer(_seed));
+
+        /// <summary>
+        /// Gets the bridge superstructure.
+        /// </summary>
+        /// <value>The bridge superstructure.</value>
+        public Superstructure Superstructure => _superstructure ?? (_superstructure = new Superstructure(_seed));
 
         /// <summary>
         /// True: Model is unlocked.
@@ -111,7 +150,7 @@ namespace MPT.CSI.API.Core.Program
         #region Initialization
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="CSiModel"/> class.
         /// </summary>
         /// <param name="path">Path to the CSi application that the class manipulates.</param>
         public CSiModel(string path)
@@ -372,7 +411,6 @@ namespace MPT.CSI.API.Core.Program
                 // TODO: Determine action
                 throw;
             }
-            return false;
         }
 
 

@@ -25,12 +25,16 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedAssign
     /// <summary>
     /// Represents the area modifiers in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class AreaModifiers : CSiApiBase, 
         IChangeableName, ICountable, IDeletable, IListableNames, 
         IObservableModifiers, IChangeableModifiers
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AreaModifiers"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AreaModifiers(CSiApiSeed seed) : base(seed) { }
 
         #endregion
@@ -42,7 +46,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedAssign
         /// </summary>
         /// <param name="currentName">The existing name of a defined area property modifier.</param>
         /// <param name="newName">The new name for the area property modifier.</param>
-        public void ChangeName(string currentName, string newName)
+        public void ChangeName(string currentName, 
+            string newName)
         {
             _callCode = _sapModel.NamedAssign.ModifierArea.ChangeName(currentName, newName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -73,7 +78,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedAssign
         /// </summary>
         /// <param name="numberOfNames">The number of area property modifier names retrieved by the program.</param>
         /// <param name="names">Area property modifier names retrieved by the program.</param>
-        public void GetNameList(ref int numberOfNames, ref string[] names)
+        public void GetNameList(ref int numberOfNames, 
+            ref string[] names)
         {
             _callCode = _sapModel.NamedAssign.ModifierArea.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -86,7 +92,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedAssign
         /// </summary>
         /// <param name="name">The name of an existing area.</param>
         /// <param name="modifiers">Unitless modifiers.</param>
-        public void GetModifiers(string name, ref Modifier modifiers)
+        public void GetModifiers(string name, 
+            ref Modifier modifiers)
         {
             if (modifiers == null) { modifiers = new Modifier(); }
             double[] csiModifiers = new double[0];
@@ -103,7 +110,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedAssign
         /// </summary>
         /// <param name="name">The name of an existing areas.</param>
         /// <param name="modifiers">Unitless modifiers.</param>
-        public void SetModifiers(string name, Modifier modifiers)
+        public void SetModifiers(string name,
+            Modifier modifiers)
         {
             if (modifiers == null) { return; }
             double[] csiModifiers = modifiers.ToArray();

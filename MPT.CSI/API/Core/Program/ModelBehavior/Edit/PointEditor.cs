@@ -26,8 +26,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
     /// </summary>
     public class PointEditor : CSiApiBase
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PointEditor"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public PointEditor(CSiApiSeed seed) : base(seed) { }
 
 

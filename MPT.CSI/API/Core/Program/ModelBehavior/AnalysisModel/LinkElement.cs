@@ -26,8 +26,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
     /// </summary>
     public class LinkElement : CSiApiBase, ILinkElement
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LinkElement"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public LinkElement(CSiApiSeed seed) : base(seed) { }
         #endregion
 

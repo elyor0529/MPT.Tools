@@ -24,6 +24,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
     /// <summary>
     /// Represents an auto seismic load pattern in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.IAutoLoad" />
     public class AutoSeismic : CSiApiBase, IAutoLoad
     {
         #region Properties
@@ -48,8 +50,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
 
         #endregion
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoSeismic"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AutoSeismic(CSiApiSeed seed) : base(seed)
         {
             _seed = seed;

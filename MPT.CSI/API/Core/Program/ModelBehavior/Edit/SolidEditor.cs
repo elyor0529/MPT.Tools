@@ -25,8 +25,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
     /// </summary>
     public class SolidEditor : CSiApiBase
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SolidEditor"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public SolidEditor(CSiApiSeed seed) : base(seed) { }
 
 

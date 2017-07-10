@@ -1,4 +1,4 @@
-﻿using System;
+﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent;
 using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
@@ -24,12 +24,42 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
     /// <summary>
     /// Represents the material properties in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class MaterialProperties : CSiApiBase, 
         IChangeableName, ICountable, IDeletable, IListableNames
     {
-        #region Initialization
+        #region Fields
+        private readonly CSiApiSeed _seed;
 
-        public MaterialProperties(CSiApiSeed seed) : base(seed) { }
+        private TimeDependentConcrete _timeDependentConcrete;
+        private TimeDependentTendon _timeDependenTendon;
+        #endregion
+
+        #region Properties                              
+        /// <summary>
+        /// Gets the time dependent concrete.
+        /// </summary>
+        /// <value>The time dependent concrete.</value>
+        public TimeDependentConcrete TimeDependentConcrete => _timeDependentConcrete ?? (_timeDependentConcrete = new TimeDependentConcrete(_seed));
+
+        /// <summary>
+        /// Gets the time dependent tendon.
+        /// </summary>
+        /// <value>The time dependent tendon.</value>
+        public TimeDependentTendon TimeDependentTendon => _timeDependenTendon ?? (_timeDependenTendon = new TimeDependentTendon(_seed));
+        #endregion
+
+
+        #region Initialization        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MaterialProperties"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
+        public MaterialProperties(CSiApiSeed seed) : base(seed)
+        {
+            _seed = seed;
+        }
 
         #endregion
 

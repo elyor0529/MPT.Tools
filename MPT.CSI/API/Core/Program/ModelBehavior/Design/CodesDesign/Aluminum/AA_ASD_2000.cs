@@ -20,10 +20,17 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Aluminum
 {
+    /// <summary>
+    /// Aluminum design Code AA_ASD_2000.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class AA_ASD_2000 : CSiApiBase
     {
         #region Initialization
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AA_ASD_2000"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AA_ASD_2000(CSiApiSeed seed) : base(seed) { }
 
 
@@ -34,25 +41,25 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Aluminum
 
         public void GetOverwrite(string nameFrame)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignAluminum.AA_ASD_2000.GetOverwrite();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void GetPreference()
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignAluminum.AA_ASD_2000.GetPreference();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void SetOverwrite(string nameFrame, eItemType itemType = eItemType.Object)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignAluminum.AA_ASD_2000.SetOverwrite();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void SetPreference()
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignAluminum.AA_ASD_2000.SetPreference();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion

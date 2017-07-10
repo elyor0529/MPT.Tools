@@ -1,5 +1,5 @@
-﻿using System;
-using MPT.CSI.API.Core.Helpers;
+﻿using MPT.CSI.API.Core.Helpers;
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame;
 using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
@@ -25,14 +25,36 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
     /// <summary>
     /// Represents the frame properties in the application.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class FrameSection : CSiApiBase, 
         IChangeableName, ICountable, IDeletable, IListableNames, 
         IObservableModifiers, IChangeableModifiers
     {
-        
-        #region Initialization
+        #region Fields
+        private readonly CSiApiSeed _seed;
 
-        public FrameSection(CSiApiSeed seed) : base(seed) { }
+        private SectionDesigner _sectionDesigner;
+        #endregion
+
+        #region Properties                            
+        /// <summary>
+        /// Gets the section designer.
+        /// </summary>
+        /// <value>The section designer.</value>
+        public SectionDesigner SectionDesigner => _sectionDesigner ?? (_sectionDesigner = new SectionDesigner(_seed));
+        #endregion
+
+
+        #region Initialization        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameSection"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
+        public FrameSection(CSiApiSeed seed) : base(seed)
+        {
+            _seed = seed;
+        }
 
         #endregion
 
@@ -43,7 +65,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="currentName">The existing name of a defined frame property.</param>
         /// <param name="newName">The new name for the frame property.</param>
-        public void ChangeName(string currentName, string newName)
+        public void ChangeName(string currentName, 
+            string newName)
         {
             _callCode = _sapModel.PropFrame.ChangeName(currentName, newName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -74,7 +97,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="numberOfNames">The number of frame property names retrieved by the program.</param>
         /// <param name="names">Frame property names retrieved by the program.</param>
-        public void GetNameList(ref int numberOfNames, ref string[] names)
+        public void GetNameList(ref int numberOfNames, 
+            ref string[] names)
         {
             _callCode = _sapModel.PropFrame.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -88,7 +112,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="name">The name of an existing frame property.</param>
         /// <param name="modifiers">Unitless modifiers.</param>
-        public void GetModifiers(string name, ref Modifier modifiers)
+        public void GetModifiers(string name, 
+            ref Modifier modifiers)
         {
             if (modifiers == null) { modifiers = new Modifier(); }
             double[] csiModifiers = new double[0];
@@ -105,7 +130,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// </summary>
         /// <param name="name">The name of an existing frame property.</param>
         /// <param name="modifiers">Unitless modifiers.</param>
-        public void SetModifiers(string name, Modifier modifiers)
+        public void SetModifiers(string name,
+            Modifier modifiers)
         {
             if (modifiers == null) { return; }
             double[] csiModifiers = modifiers.ToArray();

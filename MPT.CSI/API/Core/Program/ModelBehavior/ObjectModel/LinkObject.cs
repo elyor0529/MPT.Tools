@@ -28,8 +28,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// </summary>
     public class LinkObject : CSiApiBase, ILinkObject
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LinkObject"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public LinkObject(CSiApiSeed seed) : base(seed) { }
         #endregion
 

@@ -28,9 +28,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// </summary>
     public class PointObject : CSiApiBase, IPointObject
     {
-        
-        #region Initialization
 
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PointObject"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public PointObject(CSiApiSeed seed) : base(seed) { }
         #endregion
 
@@ -1393,7 +1396,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <summary>
         /// This function makes point load assignments to point objects.
         /// </summary>
-        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="name">The name of an existing object or group.</param>
         /// <param name="loadPattern">The name of the load pattern.</param>
         /// <param name="force">The force assigned along the local or global axis direction, depending on the specified <paramref name="coordinateSystem"/>.</param>
         /// <param name="GUID">This is the global unique ID of a load force assigned to the point object or if it is not the global unique id of a load force assigned to the point object and it is not blank, the global unique ID which is assigned to the newly assigned load. 

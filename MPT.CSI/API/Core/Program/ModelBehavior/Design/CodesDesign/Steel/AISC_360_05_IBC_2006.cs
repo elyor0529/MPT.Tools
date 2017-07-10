@@ -18,12 +18,19 @@ using ETABS2015;
 using ETABS2016;
 #endif
 
-namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.Steel
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
+    /// <summary>
+    /// Steel design code AISC_360_05_IBC_2006.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class AISC_360_05_IBC_2006 : CSiApiBase
     {
         #region Initialization
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AISC_360_05_IBC_2006"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public AISC_360_05_IBC_2006(CSiApiSeed seed) : base(seed) { }
 
 
@@ -34,25 +41,25 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.Steel
 
         public void GetOverwrite(string nameFrame)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignSteel.AISC360_05_IBC2006.GetOverwrite();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void GetPreference()
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignSteel.AISC360_05_IBC2006.GetPreference();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void SetOverwrite(string nameFrame, eItemType itemType = eItemType.Object)
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignSteel.AISC360_05_IBC2006.SetOverwrite();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         public void SetPreference()
         {
-            //_callCode = _sapModel.
+            //_callCode = _sapModel.SapModel.DesignSteel.AISC360_05_IBC2006.SetPreference();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion

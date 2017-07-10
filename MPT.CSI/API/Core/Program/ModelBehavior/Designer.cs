@@ -1,5 +1,4 @@
-﻿using System;
-using MPT.CSI.API.Core.Program.ModelBehavior.Design;
+﻿using MPT.CSI.API.Core.Program.ModelBehavior.Design;
 using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
@@ -22,6 +21,10 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
+    /// <summary>
+    /// Represents structural design in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class Designer : CSiApiBase
     {
         #region Properties
@@ -36,31 +39,43 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         private DesignSteel _designSteel;
         #endregion
 
-        #region Properties
-
+        #region Properties        
+        /// <summary>
+        /// Gets the design aluminum.
+        /// </summary>
+        /// <value>The design aluminum.</value>
         public DesignAluminum DesignAluminum => _designAluminum ?? (_designAluminum = new DesignAluminum(_seed));
 
+        /// <summary>
+        /// Gets the design cold formed.
+        /// </summary>
+        /// <value>The design cold formed.</value>
         public DesignColdFormed DesignColdFormed => _designColdFormed ?? (_designColdFormed = new DesignColdFormed(_seed));
 
+        /// <summary>
+        /// Gets the design concrete.
+        /// </summary>
+        /// <value>The design concrete.</value>
         public DesignConcrete DesignConcrete => _designConcrete ?? (_designConcrete = new DesignConcrete(_seed));
 
+        /// <summary>
+        /// Gets the design steel.
+        /// </summary>
+        /// <value>The design steel.</value>
         public DesignSteel DesignSteel => _designSteel ?? (_designSteel = new DesignSteel(_seed));
         #endregion
 
 
         #region Initialization
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Designer"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public Designer(CSiApiSeed seed) : base(seed)
         {
             _seed = seed;
         }
-
-
-        #endregion
-
-        #region Methods
-
 
 
         #endregion

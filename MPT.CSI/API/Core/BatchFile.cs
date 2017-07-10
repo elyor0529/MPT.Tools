@@ -53,8 +53,11 @@ namespace MPT.CSI.API.Core
         #endregion
 
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BatchFile"/> class.
+        /// </summary>
+        /// <param name="path">The path.</param>
         public BatchFile(string path)
         {
             Path = path;
