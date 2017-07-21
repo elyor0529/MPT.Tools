@@ -89,17 +89,17 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
         /// This function retrieves the definition of a user defined response spectrum function.
         /// </summary>
         /// <param name="name">The name of a user defined response spectrum function.</param>
-        /// <param name="numberOfItems">The number of frequency and value pairs defined.</param>
         /// <param name="periods">The frequency in Hz for each data point. [cyc/s].</param>
         /// <param name="values">The function value for each data point.</param>
-        /// <param name="dampingRatio">The damping ratio for the function, 0 &lt;= DampRatio &lt; 1.</param>
+        /// <param name="dampingRatio">The damping ratio for the function, 0 &lt;= <paramref name="dampingRatio"/> &lt; 1.</param>
         /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
         public void GetUser(string name,
-            ref int numberOfItems,
             ref double[] periods,
             ref double[] values,
             ref double dampingRatio)
         {
+            int numberOfItems = 0;
+
             _callCode = _sapModel.Func.FuncRS.GetUser(name, ref numberOfItems, ref periods, ref values, ref dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
@@ -133,7 +133,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
         #region Methods: By Code
 
-        public void GetAASHTO2006(ref string param)
+        public void GetAASHTO2006(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetAASHTO2006();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -149,7 +149,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetAASHTO2007(ref string param)
+        public void GetAASHTO2007(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetAASHTO2007();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -165,7 +165,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetAS11702007(ref string param)
+        public void GetAS11702007(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetAS11702007();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -181,7 +181,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetBOCA96(ref string param)
+        public void GetBOCA96(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetBOCA96();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -197,7 +197,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetChinese2010(ref string param)
+        public void GetChinese2010(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetChinese2010();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -213,7 +213,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetCJJ1662011(ref string param)
+        public void GetCJJ1662011(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetCJJ1662011();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -229,7 +229,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetEurocode8(ref string param)
+        public void GetEurocode8(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetEuroCode8();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -245,7 +245,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetEurocode82001(ref string param)
+        public void GetEurocode82001(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetEurocode82001_1();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -261,7 +261,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetJTGB022013(ref string param)
+        public void GetJTGB022013(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetJTGB022013();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -277,7 +277,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetIBC2003(ref string param)
+        public void GetIBC2003(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetIBC2003();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -293,7 +293,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetIS18932002(ref string param)
+        public void GetIS18932002(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetIS18932002();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -309,7 +309,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetItalian3274(ref string param)
+        public void GetItalian3274(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetItalian3274();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -325,7 +325,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetNBCC2015(ref string param)
+        public void GetNBCC2015(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetNBCC2015();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -341,7 +341,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetNBCC2010(ref string param)
+        public void GetNBCC2010(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetNBCC2010();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -357,7 +357,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetNBCC2005(ref string param)
+        public void GetNBCC2005(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetNBCC2005();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -373,7 +373,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetNBCC95(ref string param)
+        public void GetNBCC95(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetNBCC95();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -389,7 +389,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetNCHRP2007(ref string param)
+        public void GetNCHRP2007(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetNCHRP2007();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -405,7 +405,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetNEHRP97(ref string param)
+        public void GetNEHRP97(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetNEHRP97();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -421,7 +421,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetNTC2008(ref string param)
+        public void GetNTC2008(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetNTC2008();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -437,7 +437,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetNZS11702004(ref string param)
+        public void GetNZS11702004(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetNZS11702004();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -453,7 +453,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetNZS42031992(ref string param)
+        public void GetNZS42031992(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetNZS42031992();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -469,7 +469,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetSP14133302014(ref string param)
+        public void GetSP14133302014(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetSP14133302014();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -485,7 +485,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetUBC94(ref string param)
+        public void GetUBC94(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetUBC94();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -501,7 +501,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 
 
 
-        public void GetUBC97(ref string param)
+        public void GetUBC97(string param)
         {
             //_callCode = _sapModel.Func.FuncRS.GetUBC97();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }

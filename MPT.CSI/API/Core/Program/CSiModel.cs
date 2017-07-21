@@ -45,6 +45,7 @@ namespace MPT.CSI.API.Core.Program
         private readonly CSiApiSeed _seed;
 
         private File _file;
+        private ExtendedEntityData _extendedEntityData;
         private CSiApplication _csiApplication;
         private AnalysisModeler _analysisModeler;
         private ObjectModeler _objectModeler;
@@ -67,6 +68,12 @@ namespace MPT.CSI.API.Core.Program
         /// </summary>
         /// <value>The file.</value>
         public File File => _file ?? (_file = new File(_seed));
+
+        /// <summary>
+        /// Gets the extended entity data.
+        /// </summary>
+        /// <value>The extended entity data.</value>
+        public ExtendedEntityData ExtendedEntityData => _extendedEntityData ?? (_extendedEntityData = new ExtendedEntityData(_seed));
 
         /// <summary>
         /// Gets the application.
@@ -344,10 +351,28 @@ namespace MPT.CSI.API.Core.Program
             _callCode = _sapModel.SetProjectInfo(projectInfoItem, projectInfoData);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-#endregion
 
 
-#region Methods: Private
+
+
+
+
+        /// <summary>
+        /// This function returns the program version.
+        /// </summary>
+        /// <param name="versionName">The program version name that is externally displayed to the user.</param>
+        /// <param name="versionNumber">The program version number that is used internally by the program and not displayed to the user.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetVersion(ref string versionName,
+            ref double versionNumber)
+        {
+            _callCode = _sapModel.GetVersion(ref versionName, ref versionNumber);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+        #endregion
+
+
+        #region Methods: Private
 
         /// <summary>
         /// Performs the application-specific steps of initializing the program.

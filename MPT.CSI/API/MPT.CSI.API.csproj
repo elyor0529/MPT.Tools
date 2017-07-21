@@ -148,6 +148,7 @@
     <Compile Include="Core\Helpers\Stiffness.cs" />
     <Compile Include="Core\Helpers\StiffnessCoupled.cs" />
     <Compile Include="Core\Helpers\Stress.cs" />
+    <Compile Include="Core\Program\ExtendedEntityData.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\IObservableConstraint.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\IObservableLoadDisplacement.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\IObservableLoadForce.cs" />
@@ -158,6 +159,10 @@
     <Compile Include="Core\Program\ModelBehavior\AnalysisResult\eAnalysisSteadyStateOptions.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisResult\eDirection.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisResult\eSteadyStateOptions.cs" />
+    <Compile Include="Core\Program\ModelBehavior\BridgeAdvanced\BridgeType\eSectionCutItem.cs" />
+    <Compile Include="Core\Program\ModelBehavior\BridgeAdvanced\BridgeType\eTendonCutItem.cs" />
+    <Compile Include="Core\Program\ModelBehavior\BridgeAdvanced\BridgeType\eCutStatus.cs" />
+    <Compile Include="Core\Program\ModelBehavior\BridgeAdvanced\BridgeType\eWebCutItem.cs" />
     <Compile Include="Core\Program\ModelBehavior\Definition\eLoadTypeModal.cs" />
     <Compile Include="Core\Program\ModelBehavior\Definition\Function\eFileValueType.cs" />
     <Compile Include="Core\Program\ModelBehavior\Definition\eFrequencyType.cs" />
@@ -281,6 +286,7 @@
     <Compile Include="Core\Program\ModelBehavior\Edit\eAxisExtrusion.cs" />
     <Compile Include="Core\Program\ModelBehavior\Edit\eAxisOrientation.cs" />
     <Compile Include="Core\Program\ModelBehavior\Edit\ePointAlignOption.cs" />
+    <Compile Include="Core\Program\ModelBehavior\eStation.cs" />
     <Compile Include="Core\Program\ModelBehavior\IObservablePointSpring.cs" />
     <Compile Include="Core\Program\ModelBehavior\IObservableRestraint.cs" />
     <Compile Include="Core\Program\ModelBehavior\eSpringLocalOneType.cs" />

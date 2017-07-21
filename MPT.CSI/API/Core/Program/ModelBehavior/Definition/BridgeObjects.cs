@@ -1,23 +1,5 @@
 ﻿using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using CSiProgram = SAP2000v16;
-#elif BUILD_SAP2000v17
-using CSiProgram = SAP2000v17;
-#elif BUILD_SAP2000v18
-using CSiProgram = SAP2000v18;
-#elif BUILD_SAP2000v19
-using CSiProgram = SAP2000v19;
-#elif BUILD_ETABS2013
-using CSiProgram = ETABS2013;
-#elif BUILD_ETABS2014
-using CSiProgram = ETABS2014;
-#elif BUILD_ETABS2015
-using CSiProgram = ETABS2015;
-#elif BUILD_ETABS2016
-using CSiProgram = ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
 #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
@@ -37,29 +19,27 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         }
 
 
-#endregion
+        #endregion
 
-        // TODO: Compiler notes for CSiBridge for thes.
-
-#region Methods: Public
+        #region Methods: Public
 
         // === Get/Set ===
 
         /// <summary>
-        /// This function returns a flag indicating if the specified bridge object is currently linked to existing objects in the model. 
+        /// This function returns a flag indicating if the specified bridge object is currently linked to existing objects in the model. <para/>
         /// If the bridge object is linked, it returns the model type (spine, area or solid) and meshing data used when the linked bridge model was updated.
         /// </summary>
         /// <param name="name">The name of an existing bridge object.</param>
         /// <param name="linkedModelExists">True: a linked bridge model exists for the specified bridge object.</param>
-        /// <param name="modelType">Indicates the linked bridge model type. 
+        /// <param name="modelType">Indicates the linked bridge model type. <para/>
         /// This only applies when <paramref name="linkedModelExists"/> is true.</param>
-        /// <param name="maxLengthDeck">The maximum length for the deck objects in the linked bridge model. [L]
+        /// <param name="maxLengthDeck">The maximum length for the deck objects in the linked bridge model. [L]<para/>
         /// This only applies when <paramref name="linkedModelExists"/> is true.</param>
-        /// <param name="maxLengthCapBeam">The maximum length for the cap beam objects in the linked bridge model. [L]
+        /// <param name="maxLengthCapBeam">The maximum length for the cap beam objects in the linked bridge model. [L]<para/>
         /// This only applies when <paramref name="linkedModelExists"/> is true.</param>
-        /// <param name="maxLengthColumn">The maximum length for the column objects in the linked bridge model. [L]
+        /// <param name="maxLengthColumn">The maximum length for the column objects in the linked bridge model. [L]<para/>
         /// This only applies when <paramref name="linkedModelExists"/> is true.</param>
-        /// <param name="subMeshSize">The maximum submesh size for area and solid objects in the linked bridge model. [L]
+        /// <param name="subMeshSize">The maximum submesh size for area and solid objects in the linked bridge model. [L]<para/>
         /// This only applies when <paramref name="linkedModelExists"/> is true and <paramref name="modelType"/> is an area or solid model.</param>
         public void GetBridgeUpdateData(string name,
             ref bool linkedModelExists,
@@ -82,15 +62,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         /// <param name="name">The name of an existing bridge object.</param>
         /// <param name="action">The action to be taken to the linked bridge object.</param>
-        /// <param name="modelType">Indicates the linked bridge model type. 
+        /// <param name="modelType">Indicates the linked bridge model type. <para/>
         /// This only applies when <paramref name="action"/> is set to update.</param>
-        /// <param name="maxLengthDeck">The maximum length for the deck objects in the linked bridge model. [L]
+        /// <param name="maxLengthDeck">The maximum length for the deck objects in the linked bridge model. [L]<para/>
         /// This only applies when <paramref name="action"/> is set to update.</param>
-        /// <param name="maxLengthCapBeam">The maximum length for the cap beam objects in the linked bridge model. [L]
+        /// <param name="maxLengthCapBeam">The maximum length for the cap beam objects in the linked bridge model. [L]<para/>
         /// This only applies when <paramref name="action"/> is set to update.</param>
-        /// <param name="maxLengthColumn">The maximum length for the column objects in the linked bridge model. [L]
+        /// <param name="maxLengthColumn">The maximum length for the column objects in the linked bridge model. [L]<para/>
         /// This only applies when <paramref name="action"/> is set to update.</param>
-        /// <param name="subMeshSize">The maximum submesh size for area and solid objects in the linked bridge model. [L]
+        /// <param name="subMeshSize">The maximum submesh size for area and solid objects in the linked bridge model. [L]<para/>
         /// This only applies when <paramref name="action"/> is set to update and <paramref name="modelType"/> is an area or solid model.</param>
         public void SetBridgeUpdateData(string name,
             eBridgeLinkAction action,
@@ -122,7 +102,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         public void SetBridgeUpdateForAnalysisFlag(bool updateBridgeObjects)
         {
             
-            _callCode = _sapModel.BridgeObj.SetBridgeUpdateForAnalysisFlag(updateBridgeObjects);
+            _callCode = _sapModel.BridgeObj.SetBridgeUpdateForAnalysisFlag(ref updateBridgeObjects);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 

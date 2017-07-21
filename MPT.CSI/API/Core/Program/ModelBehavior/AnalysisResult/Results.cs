@@ -2163,16 +2163,16 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
         }
         #endregion
 
-#region Methods: Misc        
+        #region Methods: Misc        
 #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         /// <summary>
-        /// This function returns the longitudinal stresses for multiple cases/combos at a single stress point in a superstructure section cut in a bridge object. 
+        /// This function returns the longitudinal stresses for multiple cases/combos at a single stress point in a superstructure section cut in a bridge object. <para/>
         /// Use the functions in <see cref="MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult.AnalysisResultsSetup"/> to control the loads and steps for which results are to be obtained.
         /// </summary>
         /// <param name="name">The name of an existing bridge object.</param>
-        /// <param name="cutIndex">The index number of section cut in this bridge object. 
+        /// <param name="cutIndex">The index number of section cut in this bridge object. <para/>
         /// This must be from 0 to Count-1, where Count is the value returned by function <see cref="MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.Superstructure.CountSuperCut"/></param>
-        /// <param name="pointIndex">The index number of the stress point in this section cut in this bridge object. 
+        /// <param name="pointIndex">The index number of the stress point in this section cut in this bridge object. <para/>
         /// This must be from 0 to Count-1, where Count is the value returned by function <see cref="MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.Superstructure.CountSuperCutStressPoint"/>.</param>
         /// <param name="numberOfResults">The total number of results returned by the program.</param>
         /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
@@ -2189,7 +2189,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             ref double[] stepNumbers,
             ref double[] stresses)
         {
-            // TODO: CSiBridge Only
             _callCode = _sapModel.Results.BridgeSuperCutLongitStress(name, cutIndex, pointIndex, ref numberOfResults, ref loadCases, ref stepTypes, ref stepNumbers, ref stresses);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
