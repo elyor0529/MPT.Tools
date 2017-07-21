@@ -21,6 +21,8 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
 {
+#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+
     /// <summary>
     /// Represents the bridge superstructure in the application.
     /// </summary>
@@ -28,14 +30,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
     public class Superstructure : CSiApiBase
     {
 
-        #region Fields
+    #region Fields
         private readonly CSiApiSeed _seed;
 
         private ConcreteBoxGirder _concreteBoxGirder;
-        #endregion
+    #endregion
 
 
-        #region Properties        
+    #region Properties        
         /// <summary>
         /// Gets the concrete box girder.
         /// </summary>
@@ -43,10 +45,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
         public ConcreteBoxGirder ConcreteBoxGirder => _concreteBoxGirder ?? (_concreteBoxGirder = new ConcreteBoxGirder(_seed));
 
 
-        #endregion
+    #endregion
 
 
-        #region Initialization        
+    #region Initialization        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Superstructure"/> class.
@@ -58,13 +60,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
         }
 
 
-        #endregion
+    #endregion
 
-        #region Methods: Public
-
+    #region Methods: Public        
         public void GetSuperCutStressPoint(string param)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.GetSuperCutStressPoint();
+            _callCode = _sapModel.BridgeAdvancedSuper.GetSuperCutStressPoint();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
@@ -83,7 +84,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
             int cutIndex,
             ref int numberOfStressPoints)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.CountSuperCutStressPoint(name, cutIndex, ref numberOfStressPoints);
+            _callCode = _sapModel.BridgeAdvancedSuper.CountSuperCutStressPoint(name, cutIndex, ref numberOfStressPoints);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
@@ -91,7 +92,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
 
         public void GetSuperCutLocation(ref string param)
         {
-            //_callCode = _sapModel.
+            _callCode = _sapModel.
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
@@ -108,9 +109,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
         public void CountSuperCut(string name,
             ref int count)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.CountSuperCut(name, ref count);
+            _callCode = _sapModel.BridgeAdvancedSuper.CountSuperCut(name, ref count);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+    #endregion
     }
+#endif
 }

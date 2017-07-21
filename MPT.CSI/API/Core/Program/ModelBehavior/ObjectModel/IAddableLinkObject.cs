@@ -3,6 +3,9 @@ using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
+    /// <summary>
+    /// Object can have a link object addded.
+    /// </summary>
     public interface IAddableLinkObject
     {
         /// <summary>
@@ -22,7 +25,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="userName">This is an optional user specified name for the object. 
         /// If a <paramref name="userName"/> is specified and that name is already used for another object of the same type, the program ignores the <paramref name="userName"/>.</param>
         /// <param name="coordinateSystem">The name of the coordinate system in which the object point coordinates are defined.</param>
-        void AddByCoordinate(ref CoordinateCartesian[] coordinates,
+        void AddByCoordinate(ref Coordinate3DCartesian[] coordinates,
             ref string name,
             bool isSingleJoint,
             string nameProperty = "Default",

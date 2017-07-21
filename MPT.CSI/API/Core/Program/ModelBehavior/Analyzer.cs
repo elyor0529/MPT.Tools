@@ -1,4 +1,5 @@
-﻿using IO = System.IO;
+﻿using System.Linq;
+using IO = System.IO;
 
 using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
@@ -129,10 +130,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// <param name="caseStatus">This is an array of that includes 1, 2, 3 or 4, indicating the load case status.</param>
         public void GetCaseStatus(ref int numberOfCases,
             ref string[] caseName,
-            ref int[] caseStatus)
+            ref eCaseStatus[] caseStatus)
         {
-            _callCode = _sapModel.Analyze.GetCaseStatus(ref numberOfCases, ref caseName, ref caseStatus);
+            int[] csiCaseStatus = new int[0];
+
+            _callCode = _sapModel.Analyze.GetCaseStatus(ref numberOfCases, ref caseName, ref csiCaseStatus);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            caseStatus = csiCaseStatus.Cast< eCaseStatus>().ToArray();
         }
 
         // === Get/Set ===

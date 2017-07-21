@@ -56,7 +56,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 
         #region Initialization
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoadPatterns"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public LoadPatterns(CSiApiSeed seed) : base(seed)
         {
             _seed = seed;
@@ -66,7 +69,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         #region Methods: Public
         /// <summary>
         /// Adds a new load pattern.
-        /// An error is returned if the Name item is already used for an existing load pattern.
+        /// An error is returned if the <paramref name="name"/> item is already used for an existing load pattern.
         /// </summary>
         /// <param name="name">Name for the new load pattern.</param>
         /// <param name="loadPatternType">Load pattern type.</param>

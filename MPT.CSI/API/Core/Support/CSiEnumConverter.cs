@@ -1,7 +1,7 @@
 ﻿using System;
-using MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel;
+using MPT.CSI.API.Core.Program.ModelBehavior;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
-
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property;
 #if BUILD_SAP2000v16
 using CSiProgram = SAP2000v16;
 #elif BUILD_SAP2000v17
@@ -10,6 +10,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiProgram = CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiProgram = CSiBridge19;
 #elif BUILD_ETABS2013
 using CSiProgram = ETABS2013;
 #elif BUILD_ETABS2014
@@ -28,38 +32,6 @@ namespace MPT.CSI.API.Core.Support
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     internal class CSiEnumConverter
     {
-        internal static int[] ToIntArray<T>(T[] array) where T : struct, IComparable
-        {
-            int[] newArray = new int[array.Length - 1];
-
-            Type genericType = typeof(T);
-            if (genericType.IsEnum)
-            {
-                for (int i = 0; i < array.Length; i++)
-                {
-                    Enum currentItem = array[i] as Enum;
-
-                    newArray[i] = Convert.ToInt32(currentItem);
-                }
-            }
-            return newArray;
-        }
-
-        //internal static T[] FromIntArray<T>(int[] array) where T : struct, IComparable
-        //{
-        //    T[] newArray = new T[array.Length - 1];
-
-        //    Type genericType = typeof(T);
-        //    if (genericType.IsEnum)
-        //    {
-        //        for (int i = 0; i < array.Length; i++)
-        //        {
-        //            newArray[i] = (Enum)array[i];
-        //        }
-        //    }
-        //    return newArray;
-        //}
-
         // eItemType
         internal static CSiProgram.eItemType ToCSi(eItemType enumValue)
         {
@@ -147,6 +119,39 @@ namespace MPT.CSI.API.Core.Support
         internal static eConstraintAxis FromCSi(CSiProgram.eConstraintAxis enumValue)
         {
             return (eConstraintAxis)enumValue;
+        }
+
+        // eFrameType
+        internal static CSiProgram.eFramePropType ToCSi(eFrameSectionType enumValue)
+        {
+            return (CSiProgram.eFramePropType)enumValue;
+        }
+
+        internal static eFrameSectionType FromCSi(CSiProgram.eFramePropType enumValue)
+        {
+            return (eFrameSectionType)enumValue;
+        }
+
+        // eLinkType
+        internal static CSiProgram.eLinkPropType ToCSi(eLinkPropertyType enumValue)
+        {
+            return (CSiProgram.eLinkPropType)enumValue;
+        }
+
+        internal static eLinkPropertyType FromCSi(CSiProgram.eLinkPropType enumValue)
+        {
+            return (eLinkPropertyType)enumValue;
+        }
+
+        // eMaterialPropertyType
+        internal static CSiProgram.eMatType ToCSi(eMaterialPropertyType enumValue)
+        {
+            return (CSiProgram.eMatType)enumValue;
+        }
+
+        internal static eMaterialPropertyType FromCSi(CSiProgram.eMatType enumValue)
+        {
+            return (eMaterialPropertyType)enumValue;
         }
     }
 }

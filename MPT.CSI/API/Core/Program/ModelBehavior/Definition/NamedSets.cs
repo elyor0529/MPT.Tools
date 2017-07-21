@@ -26,8 +26,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
     public class NamedSets : CSiApiBase
     {
 
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NamedSets"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public NamedSets(CSiApiSeed seed) : base(seed) { }
 
 

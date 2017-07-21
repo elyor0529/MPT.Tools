@@ -20,24 +20,28 @@ using CSiProgram = ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
+#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
     /// <summary>
     /// Represents the bridge objects in the application.
     /// </summary>
     public class BridgeObjects : CSiApiBase
     {
 
-        #region Initialization
-
+#region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BridgeObjects"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public BridgeObjects(CSiApiSeed seed) : base(seed)
         {
         }
 
 
-        #endregion
+#endregion
 
         // TODO: Compiler notes for CSiBridge for thes.
 
-        #region Methods: Public
+#region Methods: Public
 
         // === Get/Set ===
 
@@ -67,7 +71,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         {
             int csiModelType = 0;
 
-            //_callCode = _sapModel.BridgeObj.GetBridgeUpdateData(name, ref linkedModelExists, ref csiModelType, ref maxLengthDeck, ref maxLengthCapBeam, re maxLengthColumn, ref subMeshSize);
+            _callCode = _sapModel.BridgeObj.GetBridgeUpdateData(name, ref linkedModelExists, ref csiModelType, ref maxLengthDeck, ref maxLengthCapBeam, ref maxLengthColumn, ref subMeshSize);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
             modelType = (eBridgeLinkModelType) csiModelType;
@@ -96,7 +100,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             double maxLengthColumn,
             double subMeshSize)
         {
-            //_callCode = _sapModel.BridgeObj.SetBridgeUpdateData(name, (int)action, (int)modelType, maxLengthDeck, maxLengthCapBeam, maxLengthColumn, subMeshSize);
+            _callCode = _sapModel.BridgeObj.SetBridgeUpdateData(name, (int)action, (int)modelType, maxLengthDeck, maxLengthCapBeam, maxLengthColumn, subMeshSize);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
@@ -108,7 +112,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <param name="updateBridgeObjects">True: Program automatically updates bridge objects before running an analysis if it detects anything has been changed that might affect the bridge analysis.</param>
         public void GetBridgeUpdateForAnalysisFlag(ref bool updateBridgeObjects)
         {
-            //updateBridgeObjects = _sapModel.BridgeObj.GetBridgeUpdateForAnalysisFlag();
+            updateBridgeObjects = _sapModel.BridgeObj.GetBridgeUpdateForAnalysisFlag();
         }
 
         /// <summary>
@@ -118,10 +122,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         public void SetBridgeUpdateForAnalysisFlag(bool updateBridgeObjects)
         {
             
-            //_callCode = _sapModel.BridgeObj.SetBridgeUpdateForAnalysisFlag(updateBridgeObjects);
+            _callCode = _sapModel.BridgeObj.SetBridgeUpdateForAnalysisFlag(updateBridgeObjects);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
     }
+#endif
 }

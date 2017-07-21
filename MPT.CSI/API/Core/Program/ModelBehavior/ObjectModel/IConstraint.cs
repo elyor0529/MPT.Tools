@@ -23,7 +23,7 @@
         /// <param name="constraintNames">The name of the constraint that is assigned to the point element specified by the <paramref name="pointNames"/> item.</param>
         /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are retrieved for the object specified by the <paramref name="name"/> item.
         /// If this item is <see cref="eItemType.Group"/>, the assignments are retrieved for the objects included in the group specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are retrieved for all selected objects, and the <paramref name="name"/> item is ignored.</param
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are retrieved for all selected objects, and the <paramref name="name"/> item is ignored.</param>
         void GetConstraint(string name,
             ref int numberItems,
             ref string[] pointNames,

@@ -214,7 +214,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="userName">This is an optional user specified name for the object. 
         /// If a <paramref name="userName"/> is specified and that name is already used for another object of the same type, the program ignores the <paramref name="userName"/>.</param>
         /// <param name="coordinateSystem">The name of the coordinate system in which the object point coordinates are defined.</param>
-        public void AddByCoordinate(ref CoordinateCartesian[] coordinates,
+        public void AddByCoordinate(ref Coordinate3DCartesian[] coordinates,
             ref string name,
             string nameProperty = "Default",
             string userName = "",
@@ -607,7 +607,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// It is Local or the name of a defined coordinate system.</param>
         public void GetCableGeometry(string name,
             ref int numberPoints,
-            ref CoordinateCartesian[] coordinates,
+            ref Coordinate3DCartesian[] coordinates,
             ref double[] verticalSag,
             ref double[] distanceAbsolute,
             ref double[] distanceRelative,
@@ -620,7 +620,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.CableObj.GetCableGeometry(name, ref numberPoints, ref x, ref y, ref z, ref verticalSag, ref distanceAbsolute, ref distanceRelative, coordinateSystem);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            coordinates = new CoordinateCartesian[numberPoints - 1];
+            coordinates = new Coordinate3DCartesian[numberPoints - 1];
             for (int i = 0; i < numberPoints; i++)
             {
                 coordinates[i].X = x[i];

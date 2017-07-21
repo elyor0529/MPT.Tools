@@ -36,7 +36,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// <summary>
         /// Solid bject.
         /// </summary>
-        [Description("Solid bject")]SolidObject = 6,
+        [Description("Solid Object")]SolidObject = 6,
 
         /// <summary>
         /// Link Object.

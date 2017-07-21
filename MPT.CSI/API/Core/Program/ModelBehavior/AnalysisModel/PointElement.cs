@@ -189,7 +189,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// <param name="coordinate">The cartesian x-, y-, z-coordinate of the specified point element/object in the specified coordinate system.</param>
         /// <param name="coordinateSystem">The name of the coordinate system in which the joint coordinates are returned.</param>
         public void GetCoordinate(string name,
-            ref CoordinateCartesian coordinate,
+            ref Coordinate3DCartesian coordinate,
             string coordinateSystem = CoordinateSystems.Global)
         {
             double x = 0;
@@ -212,7 +212,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// <param name="coordinate">The cylindrical r-, theta-, z-coordinate of the specified point element/object in the specified coordinate system.</param>
         /// <param name="coordinateSystem">The name of the coordinate system in which the joint coordinates are returned.</param>
         public void GetCoordinate(string name,
-            ref CoordinateCylindrical coordinate,
+            ref Coordinate3DCylindrical coordinate,
             string coordinateSystem = CoordinateSystems.Global)
         {
             double radius = 0;
@@ -235,7 +235,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         /// <param name="coordinate">The spherical r-, a-, b-coordinate of the specified point element/object in the specified coordinate system.</param>
         /// <param name="coordinateSystem">The name of the coordinate system in which the joint coordinates are returned.</param>
         public void GetCoordinate(string name,
-            ref CoordinateSpherical coordinate,
+            ref Coordinate3DSpherical coordinate,
             string coordinateSystem = CoordinateSystems.Global)
         {
             double radius = 0;

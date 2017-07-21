@@ -11,6 +11,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
         /// <summary>
         /// This function retrieves the code name used for auto parameters in auto load patterns.
         /// An error is returned if the specified load pattern is not an auto load pattern.
+        /// TODO: Handle this.
         /// </summary>
         /// <param name="name">The name of an existing auto load pattern.</param>
         /// <param name="codeName">This is either blank or the name code used for the auto parameters. 

@@ -3,7 +3,7 @@
 namespace MPT.CSI.API.Core
 {
     /// <summary>
-    /// Determines whether or not a factorr is used based on the number provided.
+    /// Determines whether or not a factor is used based on the number provided.
     /// </summary>
     public enum eUseFactor
     {

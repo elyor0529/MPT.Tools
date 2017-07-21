@@ -1,4 +1,4 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
+﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
     /// <summary>
     /// Frequency types used in power spectral density functions.
@@ -6,7 +6,7 @@
     public enum eFrequencyType
     {
         /// <summary>
-        /// Frequency as hertz.
+        /// Frequency as hertz [cyc/s].
         /// </summary>
         HZ = 1,
 

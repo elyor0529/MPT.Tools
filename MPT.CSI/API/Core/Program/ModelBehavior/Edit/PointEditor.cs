@@ -101,7 +101,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         /// <param name="coordinate">Coordinate for the new point location.</param>
         /// <param name="noWindoRefresh">True: The model display window is not refreshed after the point object is moved.</param>
         public void Move(string name,
-            CoordinateCartesian coordinate,
+            Coordinate3DCartesian coordinate,
             bool noWindoRefresh = false)
         {
             _callCode = _sapModel.EditPoint.ChangeCoordinates_1(name, coordinate.X, coordinate.Y, coordinate.Z, noWindoRefresh);

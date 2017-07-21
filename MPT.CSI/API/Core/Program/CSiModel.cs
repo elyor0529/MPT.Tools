@@ -3,7 +3,12 @@ using IO = System.IO;
 
 using MPT.CSI.API.Core.Support;
 using MPT.CSI.API.Core.Program.ModelBehavior;
+
+#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
 using MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced;
+#endif
+
+
 #if BUILD_SAP2000v16
 using SAP2000v16;
 #elif BUILD_SAP2000v17
@@ -12,6 +17,10 @@ using SAP2000v17;
 using SAP2000v18;
 #elif BUILD_SAP2000v19
 using SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiBridge19;
 #elif BUILD_ETABS2013
 using System.Reflection;
 using ETABS2013;
@@ -32,7 +41,7 @@ namespace MPT.CSI.API.Core.Program
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class CSiModel : CSiApiSeed
     {
-        #region Fields
+#region Fields
         private readonly CSiApiSeed _seed;
 
         private File _file;
@@ -47,11 +56,12 @@ namespace MPT.CSI.API.Core.Program
         private AnalysisResults _analysisResults;
         private Selector _selector;
         private Viewer _viewer;
-
+    #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         private Superstructure _superstructure;
-        #endregion
+    #endif
+#endregion
 
-        #region Properties               
+#region Properties               
         /// <summary>
         /// Gets the file.
         /// </summary>
@@ -124,11 +134,13 @@ namespace MPT.CSI.API.Core.Program
         /// <value>The viewer.</value>
         public Viewer Viewer => _viewer ?? (_viewer = new Viewer(_seed));
 
+    #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         /// <summary>
         /// Gets the bridge superstructure.
         /// </summary>
         /// <value>The bridge superstructure.</value>
         public Superstructure Superstructure => _superstructure ?? (_superstructure = new Superstructure(_seed));
+    #endif
 
         /// <summary>
         /// True: Model is unlocked.
@@ -144,10 +156,10 @@ namespace MPT.CSI.API.Core.Program
 
 
 
-        #endregion
+#endregion
 
 
-        #region Initialization
+#region Initialization
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CSiModel"/> class.
@@ -183,9 +195,9 @@ namespace MPT.CSI.API.Core.Program
             _callCode = _sapModel.InitializeNewModel(CSiEnumConverter.ToCSi(units));
             return apiCallIsSuccessful(_callCode);
         }
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         // ==== Model States ===
         
         /// <summary>
@@ -332,10 +344,10 @@ namespace MPT.CSI.API.Core.Program
             _callCode = _sapModel.SetProjectInfo(projectInfoItem, projectInfoData);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
 
-        #region Methods: Private
+#region Methods: Private
 
         /// <summary>
         /// Performs the application-specific steps of initializing the program.
@@ -403,7 +415,7 @@ namespace MPT.CSI.API.Core.Program
 
             // create SapModel object
                 _sapModel = SapObject.SapModel;
-# endif
+#endif
                 return true;
             }
             catch (Exception)

@@ -26,7 +26,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// True: Points will not merge and two point objects will exist at the same location.</param>
         /// <param name="mergeNumber">Two points objects in the same location will merge only if their merge number assignments are the same. 
         /// By default all pointobjects have a merge number of zero.</param>
-        void AddByCoordinate(CoordinateCartesian coordinate,
+        void AddByCoordinate(Coordinate3DCartesian coordinate,
             ref string name,
             string userName = "",
             string coordinateSystem = CoordinateSystems.Global,
@@ -51,7 +51,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// True: Points will not merge and two point objects will exist at the same location.</param>
         /// <param name="mergeNumber">Two points objects in the same location will merge only if their merge number assignments are the same. 
         /// By default all pointobjects have a merge number of zero.</param>
-        void AddByCoordinate(CoordinateCylindrical coordinate,
+        void AddByCoordinate(Coordinate3DCylindrical coordinate,
             ref string name,
             string userName = "",
             string coordinateSystem = CoordinateSystems.Global,
@@ -76,7 +76,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// True: Points will not merge and two point objects will exist at the same location.</param>
         /// <param name="mergeNumber">Two points objects in the same location will merge only if their merge number assignments are the same. 
         /// By default all pointobjects have a merge number of zero.</param>
-        void AddByCoordinate(CoordinateSpherical coordinate,
+        void AddByCoordinate(Coordinate3DSpherical coordinate,
             ref string name,
             string userName = "",
             string coordinateSystem = CoordinateSystems.Global,

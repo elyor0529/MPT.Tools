@@ -83,7 +83,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         /// <exception cref="CSiException"></exception>
         public void ExtrudeAreaToSolidLinearUser(string name,
             string sectionPropertyName,
-            CoordinateCartesian offsets,
+            Coordinate3DCartesian offsets,
             int numberOfIncrements,
             int numberOfSolids,
             ref string[] solidNames,
@@ -117,7 +117,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         public void ExtrudeAreaToSolidRadial(string name,
             string sectionPropertyName,
             eAxisExtrusion rotateAxis,
-            CoordinateCartesian radialExtrusionCenter,
+            Coordinate3DCartesian radialExtrusionCenter,
             double incrementAngle,
             double totalRise,
             int numberOfAngleIncrements,
@@ -143,7 +143,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         /// <exception cref="CSiException"></exception>
         public void ExtrudeFrameToAreaLinear(string name,
             string sectionPropertyName,
-            CoordinateCartesian offsets,
+            Coordinate3DCartesian offsets,
             int numberOfAreas,
             ref string[] areaNames,
             bool remove = true)
@@ -172,7 +172,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         public void ExtrudeFrameToAreaRadial(string name,
             string sectionPropertyName,
             eAxisExtrusion rotateAxis,
-            CoordinateCartesian radialExtrusionCenter,
+            Coordinate3DCartesian radialExtrusionCenter,
             double incrementAngle,
             double totalRise,
             int numberOfAreas,
@@ -196,7 +196,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         /// <exception cref="CSiException"></exception>
         public void ExtrudePointToFrameLinear(string name,
             string sectionPropertyName,
-            CoordinateCartesian offsets,
+            Coordinate3DCartesian offsets,
             int numberOfFrames,
             ref string[] frameNames)
         {
@@ -223,7 +223,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         public void ExtrudePointToFrameRadial(string name,
             string sectionPropertyName,
             eAxisExtrusion rotateAxis,
-            CoordinateCartesian radialExtrusionCenter,
+            Coordinate3DCartesian radialExtrusionCenter,
             double incrementAngle,
             double totalRise,
             int numberOfFrames,
@@ -240,7 +240,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         /// </summary>
         /// <param name="offsets">The offsets used in the present coordinate system for moving the selected objects. [L]</param>
         /// <exception cref="CSiException"></exception>
-        public void Move(CoordinateCartesian offsets)
+        public void Move(Coordinate3DCartesian offsets)
         {
             _callCode = _sapModel.EditGeneral.Move(offsets.X, offsets.Y, offsets.Z);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -256,7 +256,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         /// <param name="objectTypes">The object types created by the replication.</param>
         /// <param name="remove">True: The originally selected objects are deleted after the replication is complete.</param>
         /// <exception cref="CSiException"></exception>
-        public void ReplicateLinear(CoordinateCartesian offsets,
+        public void ReplicateLinear(Coordinate3DCartesian offsets,
             int numberReplication,
             ref int numberOfObjects,
             ref string[] objectNames,
@@ -291,9 +291,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         /// <param name="remove">True: The originally selected objects are deleted after the replication is complete.</param>
         /// <exception cref="CSiException"></exception>
         public void ReplicateMirror(eAxisOrientation planeAxis,
-            CoordinateCartesian planeAxisCoordinate1,
-            CoordinateCartesian planeAxisCoordinate2, 
-            CoordinateCartesian planeCoordinate,
+            Coordinate3DCartesian planeAxisCoordinate1,
+            Coordinate3DCartesian planeAxisCoordinate2, 
+            Coordinate3DCartesian planeCoordinate,
             ref int numberOfObjects,
             ref string[] objectNames,
             ref eObjectType[] objectTypes,
@@ -326,8 +326,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
         /// <param name="remove">True: The originally selected objects are deleted after the replication is complete.</param>
         /// <exception cref="CSiException"></exception>
         public void ReplicateRadial(eAxisOrientation rotationAxis,
-            CoordinateCartesian axisCoordinate,
-            CoordinateCartesian axis3DCoordinate,
+            Coordinate3DCartesian axisCoordinate,
+            Coordinate3DCartesian axis3DCoordinate,
             int numberReplication,
             double incrementAngle,
             ref int numberOfObjects,

@@ -18,7 +18,7 @@
     <HelpFileName>MPT.CSI.API</HelpFileName>
     <HelpFileNamingMethod>MemberName</HelpFileNamingMethod>
     <ImageFolderPath />
-    <Theme>FlatGray</Theme>
+    <Theme>Classic</Theme>
     <HtmlFormats>
       <HtmlHelp>true</HtmlHelp>
       <MSHelpViewer>false</MSHelpViewer>

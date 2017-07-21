@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
 
-namespace MPT.CSI.API.Core
+namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
     /// Analysis status states of a load case.
-    /// These are used with the program by numerical code.
     /// </summary>
     public enum eCaseStatus
     {

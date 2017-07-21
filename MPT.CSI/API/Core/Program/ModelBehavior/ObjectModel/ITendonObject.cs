@@ -43,7 +43,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         void GetTendonData(string name,
             ref int numberPoints,
             ref eTendonGeometryDefinition[] tendonGeometryDefinitions,
-            ref CoordinateCartesian[] coordinates,
+            ref Coordinate3DCartesian[] coordinates,
             string coordinateSystem = CoordinateSystems.Global);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         void SetTendonData(string name,
             int numberPoints,
             eTendonGeometryDefinition[] tendonGeometryDefinitions,
-            CoordinateCartesian[] coordinates,
+            Coordinate3DCartesian[] coordinates,
             string coordinateSystem = CoordinateSystems.Global);
 
 
@@ -78,7 +78,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// It is Local or the name of a defined coordinate system.</param>
         void GetTendonGeometry(string name,
             ref int numberPoints,
-            ref CoordinateCartesian[] coordinates,
+            ref Coordinate3DCartesian[] coordinates,
             string coordinateSystem = CoordinateSystems.Global);
     }
 }

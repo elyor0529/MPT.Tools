@@ -3,9 +3,9 @@
 namespace MPT.CSI.API.Core.Helpers
 {
     /// <summary>
-    /// Coordinate by spherical values.
+    /// 3D-coordinate by spherical values.
     /// </summary>
-    public struct CoordinateSpherical
+    public struct Coordinate3DSpherical
     {
         /// <summary>
         /// The radius coordinate. [L]
@@ -30,9 +30,9 @@ namespace MPT.CSI.API.Core.Helpers
 
         /// <summary>
         /// Assigns array values to struct properties.
-        /// Array must have 6 entries.
+        /// Array must have 3 entries.
         /// </summary>
-        /// <param name="coordinates">1x6 matrix of values of spherical coordinates along the corresponding degree of freedom:
+        /// <param name="coordinates">1x3 matrix of values of spherical coordinates along the corresponding degree of freedom:
         /// Value(0) = <see cref="Radius"/> [L];
         /// Value(1) = <see cref="Theta"/> [deg];
         /// Value(2) = <see cref="Phi"/> [deg];</param>
@@ -48,7 +48,7 @@ namespace MPT.CSI.API.Core.Helpers
         }
 
         /// <summary>
-        /// Return a 1x6 matrix of booleans indicating spherical coordinate:
+        /// Return a 1x3 matrix of booleans indicating spherical coordinate:
         /// Value(0) = <see cref="Radius"/> [L];
         /// Value(1) = <see cref="Theta"/> [deg];
         /// Value(2) = <see cref="Phi"/> [deg];

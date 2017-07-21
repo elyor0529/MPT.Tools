@@ -26,8 +26,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
     /// </summary>
     public class Constraints : CSiApiBase, IChangeableName, ICountable, IDeletable, IListableNames
     {
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Constraints"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public Constraints(CSiApiSeed seed) : base(seed) { }
 
 
@@ -227,6 +230,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// If the specified name is not used for a constraint, a new constraint is defined using the specified name. 
         /// If the specified name is already used for another Diaphragm constraint, the definition of that constraint is modified. 
         /// If the specified name is already used for some constraint that is not a Diaphragm constraint, an error is returned.
+        /// TODO: Handle this.
         /// </summary>
         /// <param name="nameConstraint">The name of a constraint.</param>
         /// <param name="axis">Specifies the axis in the specified coordinate system that is perpendicular to the plane of the constraint.</param>
@@ -264,6 +268,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// If the specified name is not used for a constraint, a new constraint is defined using the specified name. 
         /// If the specified name is already used for another Equal constraint, the definition of that constraint is modified. 
         /// If the specified name is already used for some constraint that is not an Equal constraint, an error is returned.
+        /// TODO: Handle this.
         /// </summary>
         /// <param name="nameConstraint">The name of a constraint.</param>
         /// <param name="degreesOfFreedom">Indicates which joint degrees of freedom are included in the constraint.</param>
@@ -303,6 +308,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// If the specified name is not used for a constraint, a new constraint is defined using the specified name. 
         /// If the specified name is already used for another Line constraint, the definition of that constraint is modified. 
         /// If the specified name is already used for some constraint that is not a Line constraint, an error is returned.
+        /// TODO: Handle this.
         /// </summary>
         /// <param name="nameConstraint">The name of a constraint.</param>
         /// <param name="degreesOfFreedom">Indicates which joint degrees of freedom are included in the constraint.</param>
@@ -340,6 +346,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// If the specified name is not used for a constraint, a new constraint is defined using the specified name. 
         /// If the specified name is already used for another Local constraint, the definition of that constraint is modified. 
         /// If the specified name is already used for some constraint that is not a Local constraint, an error is returned.
+        /// TODO: Handle this.
         /// </summary>
         /// <param name="nameConstraint">The name of a constraint.</param>
         /// <param name="degreesOfFreedom">Indicates which joint degrees of freedom are included in the constraint.</param>
@@ -377,6 +384,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// If the specified name is not used for a constraint, a new constraint is defined using the specified name. 
         /// If the specified name is already used for another Plate constraint, the definition of that constraint is modified. 
         /// If the specified name is already used for some constraint that is not a Plate constraint, an error is returned.
+        /// TODO: Handle this.
         /// </summary>
         /// <param name="nameConstraint">The name of a constraint.</param>
         /// <param name="axis">Specifies the axis in the specified coordinate system that is perpendicular to the plane of the constraint.</param>
@@ -414,6 +422,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// If the specified name is not used for a constraint, a new constraint is defined using the specified name. 
         /// If the specified name is already used for another Rod constraint, the definition of that constraint is modified. 
         /// If the specified name is already used for some constraint that is not a Rod constraint, an error is returned.
+        /// TODO: Handle this.
         /// </summary>
         /// <param name="nameConstraint">The name of a constraint.</param>
         /// <param name="axis">Specifies the axis in the specified coordinate system that is perpendicular to the plane of the constraint.</param>
@@ -453,6 +462,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// If the specified name is not used for a constraint, a new constraint is defined using the specified name. 
         /// If the specified name is already used for another Weld constraint, the definition of that constraint is modified. 
         /// If the specified name is already used for some constraint that is not a Weld constraint, an error is returned.
+        /// TODO: Handle this.
         /// </summary>
         /// <param name="nameConstraint">The name of an existing constraint.</param>
         /// <param name="degreesOfFreedom">Indicates which joint degrees of freedom are included in the constraint.</param>

@@ -1,64 +1,60 @@
 ﻿using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-#elif BUILD_ETABS2014
-using ETABS2014;
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 {
     /// <summary>
     /// Represents the hyperstatic load case in the application.
     /// </summary>
-    public class Hyperstatic : CSiApiBase
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    public class Hyperstatic : CSiApiBase, IHyperstatic
     {
-
-        #region Fields
-
-
-        #endregion
-
-
-        #region Properties
-
-
-
-        #endregion
-
-
-        #region Initialization
-
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Hyperstatic"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
         public Hyperstatic(CSiApiSeed seed) : base(seed) { }
 
 
         #endregion
 
-        #region Methods: Public
-
-        public void GetThing(ref string param)
+        #region Methods: Public        
+        /// <summary>
+        /// This function retrieves the base case for the specified hyperstatic load case.
+        /// </summary>
+        /// <param name="name">The name of an existing hyperstatic load case.</param>
+        /// <param name="nameBaseCase">The name of an existing static linear load case that is the base case for the specified hyperstatic load case.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetBaseCase(string name,
+            ref string nameBaseCase)
         {
-            //_callCode = _sapModel.
+            _callCode = _sapModel.LoadCases.HyperStatic.GetBaseCase(name, ref nameBaseCase);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
-        public void SetThing(string param)
+        /// <summary>
+        /// This function sets the base case for the specified hyperstatic load case.
+        /// </summary>
+        /// <param name="name">The name of an existing hyperstatic load case.</param>
+        /// <param name="nameBaseCase">The name of an existing static linear load case that is the base case for the specified hyperstatic load case.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetBaseCase(string name,
+            string nameBaseCase)
         {
-            //_callCode = _sapModel.
+            _callCode = _sapModel.LoadCases.HyperStatic.SetBaseCase(name, nameBaseCase);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function initializes a hyperstatic load case. 
+        /// If this function is called for an existing load case, all items for the case are reset to their default value.
+        /// </summary>
+        /// <param name="name">The name of an existing or new load case. 
+        /// If this is an existing case, that case is modified; otherwise, a new case is added.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetCase(string name)
+        {
+            _callCode = _sapModel.LoadCases.HyperStatic.SetCase(name);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 

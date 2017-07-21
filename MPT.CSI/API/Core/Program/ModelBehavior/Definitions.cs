@@ -29,8 +29,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
     {
         #region Fields
         private readonly CSiApiSeed _seed;
-        
+
+    #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         private BridgeObjects _bridgeObjects;
+    #endif
         private Constraints _constraints;
         private CoordinateSystems _coordinateSystems;
         private Functions _functions;
@@ -46,15 +48,16 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         private NamedSets _namedSets;
         private Properties _properties;
         private SectionCuts _sectionCuts;
-        #endregion
+#endregion
 
-        #region Properties                
+#region Properties    
+#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         /// <summary>
         /// Gets the bridge objects.
         /// </summary>
         /// <value>The bridge objects.</value>
         public BridgeObjects BridgeObjects => _bridgeObjects ?? (_bridgeObjects = new BridgeObjects(_seed));
-
+#endif
         /// <summary>
         /// Gets the constraints.
         /// </summary>
@@ -145,10 +148,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// <value>The section cuts.</value>
         public SectionCuts SectionCuts => _sectionCuts ?? (_sectionCuts = new SectionCuts(_seed));
 
-        #endregion
+#endregion
 
 
-        #region Initialization
+#region Initialization
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Definitions"/> class.
@@ -160,7 +163,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         }
 
 
-        #endregion
+#endregion
 
     }
 }

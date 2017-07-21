@@ -22,7 +22,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
     /// Represents the external analysis results in the application.
+    /// See <see href="http://wiki.csiamerica.com/display/kb/External+Results+load+case">CSi Knowledge Base</see> for more information.
     /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase.ExternalResults"/>
     public class ExternalAnalysisResults : CSiApiBase
     {
         #region Initialization        

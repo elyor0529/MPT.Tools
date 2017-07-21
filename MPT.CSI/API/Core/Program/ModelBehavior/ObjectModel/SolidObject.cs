@@ -3,24 +3,6 @@ using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-#elif BUILD_ETABS2014
-using ETABS2014;
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
@@ -344,7 +326,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="userName">This is an optional user specified name for the object. 
         /// If a <paramref name="userName"/> is specified and that name is already used for another object of the same type, the program ignores the <paramref name="userName"/>.</param>
         /// <param name="coordinateSystem">The name of the coordinate system in which the object point coordinates are defined.</param>
-        public void AddByCoordinate(ref CoordinateCartesian[] coordinates,
+        public void AddByCoordinate(ref Coordinate3DCartesian[] coordinates,
             ref string name,
             string nameProperty = "Default",
             string userName = "",

@@ -3,9 +3,9 @@
 namespace MPT.CSI.API.Core.Helpers
 {
     /// <summary>
-    /// Coordinate by cylindrical values.
+    /// 3D-coordinate by cylindrical values.
     /// </summary>
-    public struct CoordinateCylindrical
+    public struct Coordinate3DCylindrical
     {
         /// <summary>
         /// The radius coordinate. [L]
@@ -27,9 +27,9 @@ namespace MPT.CSI.API.Core.Helpers
 
         /// <summary>
         /// Assigns array values to struct properties.
-        /// Array must have 6 entries.
+        /// Array must have 3 entries.
         /// </summary>
-        /// <param name="coordinates">1x6 matrix of values of cylindrical coordinates along the corresponding degree of freedom:
+        /// <param name="coordinates">1x3 matrix of values of cylindrical coordinates along the corresponding degree of freedom:
         /// Value(0) = <see cref="Radius"/> [L];
         /// Value(1) = <see cref="Theta"/> [deg];
         /// Value(2) = <see cref="Z"/> [L];</param>
@@ -45,7 +45,7 @@ namespace MPT.CSI.API.Core.Helpers
         }
 
         /// <summary>
-        /// Return a 1x6 matrix of booleans indicating cylindrical coordinate:
+        /// Return a 1x3 matrix of booleans indicating cylindrical coordinate:
         /// Value(0) = <see cref="Radius"/> [L];
         /// Value(1) = <see cref="Theta"/> [deg];
         /// Value(2) = <see cref="Z"/> [L];

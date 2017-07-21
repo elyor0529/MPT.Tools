@@ -220,7 +220,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// <param name="userName">This is an optional user specified name for the object. 
         /// If a <paramref name="userName"/> is specified and that name is already used for another object of the same type, the program ignores the <paramref name="userName"/>.</param>
         /// <param name="coordinateSystem">The name of the coordinate system in which the object point coordinates are defined.</param>
-        public void AddByCoordinate(ref CoordinateCartesian[] coordinates,
+        public void AddByCoordinate(ref Coordinate3DCartesian[] coordinates,
             ref string name,
             string nameProperty = "Default",
             string userName = "",
@@ -450,7 +450,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         public void GetTendonData(string name,
             ref int numberPoints,
             ref eTendonGeometryDefinition[] tendonGeometryDefinitions,
-            ref CoordinateCartesian[] coordinates,
+            ref Coordinate3DCartesian[] coordinates,
             string coordinateSystem = CoordinateSystems.Global)
         {
             int[] csiTendonGeometryDefinitions = new int[0];
@@ -462,7 +462,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
             tendonGeometryDefinitions = new eTendonGeometryDefinition[numberPoints - 1];
-            coordinates = new CoordinateCartesian[numberPoints - 1];
+            coordinates = new Coordinate3DCartesian[numberPoints - 1];
             for (int i = 0; i < numberPoints; i++)
             {
                 tendonGeometryDefinitions[i] = (eTendonGeometryDefinition)csiTendonGeometryDefinitions[i];
@@ -488,7 +488,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         public void SetTendonData(string name,
             int numberPoints,
             eTendonGeometryDefinition[] tendonGeometryDefinitions,
-            CoordinateCartesian[] coordinates,
+            Coordinate3DCartesian[] coordinates,
             string coordinateSystem = CoordinateSystems.Global)
         {
             int[] csiTendonGeometryDefinitions = tendonGeometryDefinitions.Cast<int>().ToArray();
@@ -516,7 +516,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// It is Local or the name of a defined coordinate system.</param>
         public void GetTendonGeometry(string name,
             ref int numberPoints,
-            ref CoordinateCartesian[] coordinates,
+            ref Coordinate3DCartesian[] coordinates,
             string coordinateSystem = CoordinateSystems.Global)
         {
             double[] x = new double[0];
@@ -526,7 +526,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.TendonObj.GetTendonGeometry(name, ref numberPoints, ref x, ref y, ref z, coordinateSystem);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
             
-            coordinates = new CoordinateCartesian[numberPoints - 1];
+            coordinates = new Coordinate3DCartesian[numberPoints - 1];
             for (int i = 0; i < numberPoints; i++)
             {
                 coordinates[i].X = x[i];

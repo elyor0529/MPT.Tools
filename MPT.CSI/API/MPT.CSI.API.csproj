@@ -52,7 +52,43 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\x86\Release-SAP2000v19\MPT.CSI.API.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-CSiBridgev19|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug-CSiBridgev19\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_CSiBridgev19</DefineConstants>
+    <DocumentationFile>bin\x86\Debug-SAP2000v19\MPT.CSI.API.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-CSiBridgev19|x86'">
+    <OutputPath>bin\x86\Release-CSiBridgev19\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_CSiBridgev19</DefineConstants>
+    <DocumentationFile>bin\x86\Release-SAP2000v19\MPT.CSI.API.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSiBridge18, Version=18.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\CSiBridge18.dll</HintPath>
+    </Reference>
+    <Reference Include="CSiBridge19, Version=19.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\CSiBridge19.dll</HintPath>
+    </Reference>
+    <Reference Include="ETABS2013, Version=13.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ETABS2013.dll</HintPath>
+    </Reference>
+    <Reference Include="ETABS2014, Version=14.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ETABS2014.dll</HintPath>
+    </Reference>
     <Reference Include="ETABS2015, Version=15.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\CSiApi\lib\ETABS2015.dll</HintPath>
@@ -97,25 +133,120 @@
   <ItemGroup>
     <Compile Include="Core\BatchFile.cs" />
     <Compile Include="Core\Helpers\AngleLocalAxes.cs" />
-    <Compile Include="Core\Helpers\CoordinateCartesian.cs" />
-    <Compile Include="Core\Helpers\CoordinateCylindrical.cs" />
-    <Compile Include="Core\Helpers\CoordinateSpherical.cs" />
+    <Compile Include="Core\Helpers\Coordinate2DCartesian.cs" />
+    <Compile Include="Core\Helpers\Coordinate3DCartesian.cs" />
+    <Compile Include="Core\Helpers\Coordinate3DCylindrical.cs" />
+    <Compile Include="Core\Helpers\Coordinate3DSpherical.cs" />
     <Compile Include="Core\Helpers\Displacements.cs" />
+    <Compile Include="Core\Helpers\PDeltaParameters.cs" />
+    <Compile Include="Core\Helpers\Reactions.cs" />
     <Compile Include="Core\Helpers\Loads.cs" />
     <Compile Include="Core\Helpers\MassWeight.cs" />
     <Compile Include="Core\Helpers\MassVolume.cs" />
     <Compile Include="Core\Helpers\Mass.cs" />
+    <Compile Include="Core\Helpers\StiffnessPendulum.cs" />
     <Compile Include="Core\Helpers\Stiffness.cs" />
     <Compile Include="Core\Helpers\StiffnessCoupled.cs" />
+    <Compile Include="Core\Helpers\Stress.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\IObservableConstraint.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\IObservableLoadDisplacement.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\IObservableLoadForce.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\IObservableOffset.cs" />
+    <Compile Include="Core\Program\ModelBehavior\AnalysisResult\eAnalysisMultiStepOptions.cs" />
+    <Compile Include="Core\Program\ModelBehavior\AnalysisResult\eAnalysisMultiValuedOptions.cs" />
+    <Compile Include="Core\Program\ModelBehavior\AnalysisResult\eAnalysisPSDOptions.cs" />
+    <Compile Include="Core\Program\ModelBehavior\AnalysisResult\eAnalysisSteadyStateOptions.cs" />
+    <Compile Include="Core\Program\ModelBehavior\AnalysisResult\eDirection.cs" />
+    <Compile Include="Core\Program\ModelBehavior\AnalysisResult\eSteadyStateOptions.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\eLoadTypeModal.cs" />
     <Compile Include="Core\Program\ModelBehavior\Definition\Function\eFileValueType.cs" />
-    <Compile Include="Core\Program\ModelBehavior\Definition\Function\eFrequencyType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\eFrequencyType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eLoadControlDisplacement.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eDampingType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eDampingTypeHysteretic.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eDampingTypeInterpolated.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eDampingTypeProportional.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eDirectionalCombination.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eHingeUnloadingType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eLoadControl.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eModalCombination.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eMonitoredDisplacementType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eMotionType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ePeriodicPlusRigidModalCombination.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eStagedConstructionObject.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eStageOperations.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eStageSavedOption.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eTimeIntegrationType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IBuckling.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IDampingModal.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IDampingProportional.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IDampingSteadyState.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IDirectionalCombination.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IEccentricity.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IExternalResults.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IGeometricNonlinearity.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IHingeUnloading.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IHyperstatic.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IInitialLoadCase.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ILoadResponseSpectrum.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ILoadStatic.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ILoadSteadyState.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ILoadTimeHistory.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IMassSource.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IModal.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IModalCase.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IModalCombination.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IModalEigen.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IModalRitz.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IMovingLoad.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\INLMTHSolutionControlParameters.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\INonlinearSolutionControlParameters.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\INLTHSolutionControlParameters.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IResponseSpectrum.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ISetLoadCase.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IStaticLinear.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IStaticNonlinear.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\IStaticNonlinearStaged.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ISteadyState.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ITargetForceParameters.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ITimeHistoryDirectLinear.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ITimeHistoryModalLinear.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ITimeHistoryModalNonlinear.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ITimeHistoryDirectNonlinear.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ITimeIntegration.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\ITimeStep.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eAluminumType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eAreaSectionType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eConcreteStressStrainCurveType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eConfinementType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\eDegreeOfFreedom.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eRebarConfiguration.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eSectionDesignerDesignOption.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eFrameSectionType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eHysteresisType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eLinkDirection.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eLinkHysteresisType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eLinkPropertyType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eMaterialComponentBehaviorType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eMaterialPerVolumeOption.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eMaterialSymmetryType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eMaterialPropertyType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\ePlaneType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\ePrismaticInertiaType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\ePrismaticType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eRebarStressStrainCurveType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eSectionDesignerSectionType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eShellLayerType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eShellSteelLayoutOption.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eShellType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eSteelStressStrainCurveType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eTendonStressStrainCurveType.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\eStressStrainPointID.cs" />
     <Compile Include="Core\Program\ModelBehavior\Definition\Property\Frame\SectionDesigner.cs" />
     <Compile Include="Core\Program\ModelBehavior\Definition\Property\TimeDependent\CodesConcrete\CEB_FIP_90.cs" />
     <Compile Include="Core\Program\ModelBehavior\Definition\Property\TimeDependent\CodesTendon\CEB_FIP_90.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\TimeDependent\CodesTendon\eCEBFIP90Class.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\Property\TimeDependent\eIntegrationType.cs" />
     <Compile Include="Core\Program\ModelBehavior\Definition\Property\TimeDependent\TimeDependentConcrete.cs" />
     <Compile Include="Core\Program\ModelBehavior\Definition\Property\TimeDependent\TimeDependentTendon.cs" />
     <Compile Include="Core\Program\ModelBehavior\Design\CodesDesign\Concrete\AASHTO_07.cs" />
@@ -157,6 +288,7 @@
     <Compile Include="Core\Program\ModelBehavior\eSpringType.cs" />
     <Compile Include="Core\Program\ModelBehavior\IChangeablePDeltaForces.cs" />
     <Compile Include="Core\Program\ModelBehavior\Definition\NamedAssigns.cs" />
+    <Compile Include="Core\Program\ModelBehavior\ObjectModel\eLoadType.cs" />
     <Compile Include="Core\Program\ModelBehavior\ObjectModel\ePanelZoneConnectivity.cs" />
     <Compile Include="Core\Program\ModelBehavior\ObjectModel\ePanelZoneLocalAxis.cs" />
     <Compile Include="Core\Program\ModelBehavior\ObjectModel\ePanelZonePropertyType.cs" />
@@ -258,7 +390,7 @@
     <Compile Include="Core\Helpers\DegreesOfFreedomGlobal.cs" />
     <Compile Include="Core\Helpers\Modifier.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\AreaElement.cs" />
-    <Compile Include="Core\Program\ModelBehavior\AnalysisModel\eItemTypeElement.cs" />
+    <Compile Include="Core\Program\ModelBehavior\eItemTypeElement.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\LineElement.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\LinkElement.cs" />
     <Compile Include="Core\Program\ModelBehavior\AnalysisModel\PlaneElement.cs" />
@@ -307,7 +439,7 @@
     <Compile Include="Core\Enum For Layer Lib\Design\eFramingTypeSeismic.cs" />
     <Compile Include="Core\Enum For Layer Lib\Design\eLimitType.cs" />
     <Compile Include="Core\Enum For Layer Lib\Design\eMultiResponseCaseDesign.cs" />
-    <Compile Include="Core\Enum For Layer Lib\eCaseStatus.cs" />
+    <Compile Include="Core\Program\ModelBehavior\eCaseStatus.cs" />
     <Compile Include="Core\Program\ModelBehavior\eObjectType.cs" />
     <Compile Include="Core\Enum For Layer Lib\Design\eSteelOverwriteItem.cs" />
     <Compile Include="Core\Enum For Layer Lib\Design\eWeldingType.cs" />
@@ -509,7 +641,7 @@
     <Compile Include="Core\Program\ModelBehavior\Selector.cs" />
     <Compile Include="Core\Program\ModelBehavior\Viewer.cs" />
     <Compile Include="Core\eDCMethod.cs" />
-    <Compile Include="Core\eGeometricNonlinearity.cs" />
+    <Compile Include="Core\Program\ModelBehavior\Definition\LoadCase\eGeometricNonlinearity.cs" />
     <Compile Include="Core\eHingeAcceptanceCriteria.cs" />
     <Compile Include="Core\eHingeState.cs" />
     <Compile Include="Core\eItemType.cs" />
@@ -528,6 +660,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="lib\CSiBridge18.dll" />
+    <Content Include="lib\CSiBridge19.dll" />
     <Content Include="lib\ETABS2013.dll" />
     <Content Include="lib\ETABS2014.dll" />
     <Content Include="lib\ETABS2015.dll" />

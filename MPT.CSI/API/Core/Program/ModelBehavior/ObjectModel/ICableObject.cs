@@ -108,7 +108,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         /// It is Local or the name of a defined coordinate system.</param>
         void GetCableGeometry(string name, 
             ref int numberPoints, 
-            ref CoordinateCartesian[] coordinates, 
+            ref Coordinate3DCartesian[] coordinates, 
             ref double[] verticalSag, 
             ref double[] distanceAbsolute, 
             ref double[] distanceRelative, 

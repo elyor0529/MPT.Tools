@@ -20,6 +20,9 @@ using ETABS2016;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
 {
+    #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+
+
     /// <summary>
     /// Represents the concrete box girder bridge superstructure in the application.
     /// </summary>
@@ -27,7 +30,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
     public class ConcreteBoxGirder : CSiApiBase
     {
 
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcreteBoxGirder"/> class.
         /// </summary>
@@ -35,72 +38,74 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
         public ConcreteBoxGirder(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
 
         public void CountSuperCutWebStressPoint(string param)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.CountSuperCutWebStressPoint();
+            _callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.CountSuperCutWebStressPoint();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
         public void GetSuperCutSectionPropsAtY(string param)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionPropsAtY();
+            _callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionPropsAtY();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
         public void GetSuperCutSectionValues(string param)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionValues();
+            _callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionValues();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
         public void GetSuperCutSlabCoordsAtX(string param)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSlabCoordsAtX();
+            _callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSlabCoordsAtX();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
         public void GetSuperCutTendonNames(string param)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutTendonNames();
+            _callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutTendonNames();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
         public void GetSuperCutTendonValues(string param)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutTendonValues();
+            _callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutTendonValues();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
         public void GetSuperCutWebCoordsAtY(string param)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebCoordsAtY();
+            _callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebCoordsAtY();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
         public void GetSuperCutWebStressPoint(string param)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebStressPoint();
+            _callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebStressPoint();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
         public void GetSuperCutWebValues(string param)
         {
-            //_callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebValues();
+            _callCode = _sapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebValues();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
     }
+
+#endif
 }
