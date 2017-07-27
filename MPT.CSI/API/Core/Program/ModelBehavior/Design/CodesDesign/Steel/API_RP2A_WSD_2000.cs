@@ -1,32 +1,15 @@
 ﻿using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-#elif BUILD_ETABS2014
-using ETABS2014;
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
+#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
     /// <summary>
-    /// Steel design code API_RP2A_WSD_2000.
+    /// Steel design code <see cref="API_RP2A_WSD_2000"/>.
     /// </summary>
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class API_RP2A_WSD_2000 : CSiApiBase
     {
-        #region Initialization
+#region Initialization
         /// <summary>
         /// Initializes a new instance of the <see cref="API_RP2A_WSD_2000"/> class.
         /// </summary>
@@ -34,34 +17,74 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
         public API_RP2A_WSD_2000(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
-
-
-        public void GetOverwrite(string nameFrame)
+#region Methods: Public
+        /// <summary>
+        /// This function retrieves the value of a steel design overwrite item.
+        /// </summary>
+        /// <param name="name">The name of a frame object with a steel frame design procedure.</param>
+        /// <param name="item">The overwrite item considered.</param>
+        /// <param name="value">The value of the considered overwrite item.</param>
+        /// <param name="programDetermined">True: The specified value is program determined.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetOverwrite(string name,
+            eOverwrites_API_RP2A_WSD_2000 item,
+            ref double value,
+            ref bool programDetermined)
         {
-            //_callCode = _sapModel.SapModel.DesignSteel.AISC360_05_IBC2006.GetOverwrite();
+            _callCode = _sapModel.DesignSteel.API_RP2A_WSD2000.GetOverwrite(name, (int)item, ref value, ref programDetermined);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        public void GetPreference()
+        /// <summary>
+        /// This function sets the value of a steel design overwrite item.
+        /// </summary>
+        /// <param name="name">The name of an existing frame object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="item">The overwrite item considered.</param>
+        /// <param name="value">The value of the considered overwrite item.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object" />, the assignment is made to the frame object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group" />, the assignment is made to all frame objects in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects" />, assignment is made to all selected frame objects, and the <paramref name="name"/> item is ignored.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetOverwrite(string name,
+            eOverwrites_API_RP2A_WSD_2000 item,
+            double value,
+            eItemType itemType = eItemType.Object)
         {
-            //_callCode = _sapModel.SapModel.DesignSteel.AISC360_05_IBC2006.GetPreference();
+            _callCode = _sapModel.DesignSteel.API_RP2A_WSD2000.SetOverwrite(name, (int)item, value, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        public void SetOverwrite(string nameFrame, eItemType itemType = eItemType.Object)
+
+
+
+        /// <summary>
+        /// This function retrieves the value of a steel design preference item.
+        /// </summary>
+        /// <param name="item">The preference item considered.</param>
+        /// <param name="value">The value of the considered preference item.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetPreference(ePreferences_API_RP2A_WSD_2000 item,
+            ref double value)
         {
-            //_callCode = _sapModel.SapModel.DesignSteel.AISC360_05_IBC2006.SetOverwrite();
+            _callCode = _sapModel.DesignSteel.API_RP2A_WSD2000.GetPreference((int)item, ref value);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        public void SetPreference()
+        /// <summary>
+        /// This function sets the value of a steel design preference item.
+        /// </summary>
+        /// <param name="item">The preference item considered.</param>
+        /// <param name="value">The value of the considered preference item.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetPreference(ePreferences_API_RP2A_WSD_2000 item,
+            double value)
         {
-            //_callCode = _sapModel.SapModel.DesignSteel.AISC360_05_IBC2006.SetPreference();
+            _callCode = _sapModel.DesignSteel.API_RP2A_WSD2000.SetPreference((int)item, value);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
+#endif
 }

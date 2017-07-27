@@ -1,26 +1,9 @@
 ﻿using MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Aluminum;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-#elif BUILD_ETABS2014
-using ETABS2014;
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
 {
+#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
     /// <summary>
     /// Represents Aluminum design in the application.
     /// </summary>
@@ -28,15 +11,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal" />
     public class DesignAluminum : CSiApiBase, IDesignMetal
     {
-        #region Fields
+#region Fields
         private readonly CSiApiSeed _seed;
 
         private AA_ASD_2000 _AA_ASD_2000;
         private AA_LRFD_2000 _AA_LRFD_2000;
 
-        #endregion
+#endregion
 
-        #region Properties        
+#region Properties        
         /// <summary>
         /// Gets the AA ASD 2000 design code.
         /// </summary>
@@ -50,9 +33,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         public AA_LRFD_2000 AA_LRFD_2000 => _AA_LRFD_2000 ?? (_AA_LRFD_2000 = new AA_LRFD_2000(_seed));
 
 
-        #endregion
+#endregion
 
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="DesignAluminum"/> class.
         /// </summary>
@@ -61,9 +44,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         {
             _seed = seed;
         }
-        #endregion
+#endregion
 
-        #region Methods: Interface
+#region Methods: Interface
         
         /// <summary>
         /// Deletes all frame design results.
@@ -238,6 +221,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         }
 
         
-        #endregion
+#endregion
     }
+#endif
 }

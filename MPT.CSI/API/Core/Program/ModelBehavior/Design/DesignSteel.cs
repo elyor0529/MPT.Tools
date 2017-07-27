@@ -1,24 +1,6 @@
 ﻿using MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-#elif BUILD_ETABS2014
-using ETABS2014;
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
 {
     /// <summary>
@@ -33,40 +15,86 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
 
         private AISC_360_05_IBC_2006 _AISC_360_05_IBC_2006;
         private AISC_360_10 _AISC_360_10;
+        private AISC_ASD_89 _AISC_ASD_89;      
+        private CSA_S16_09 _CSA_S16_09;
+        private Eurocode_3_2005 _Eurocode_3_2005;
+
+#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
         private AISC_LRFD_93 _AISC_LRFD_93;
+        private AS_4100_1998 _AS_4100_1998;
+        private BS_5950_2000 _BS_5950_2000;
+        private Chinese_2002 _Chinese_2002;
+        private Chinese_2010 _Chinese_2010;
+        private Indian_IS_800_2007 _Indian_IS_800_2007;
+        private Italian_NTC_2008 _Italian_NTC_2008;
+        private NZS_3404_1997 _NSZ_3404_1997;
+#endif
+#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+        private ASCE_10_97 _ASCE_10_97;
         private API_RP2A_LRFD_97 _API_RP2A_LRFD_97;
         private API_RP2A_WSD_2000 _API_RP2A_WSD_2000;
         private API_RP2A_WSD_2014 _API_RP2A_WSD_2014;
-        private AS_4100_1998 _AS_4100_1998;
-        private ASCE_10_97 _ASCE_10_97;
-        private BS_5950_2000 _BS_5950_2000;
-        private Chinese_2010 _Chinese_2010;
-        private CSA_S16_09 _CSA_S16_09;
-        private Eurocode_3_2005 _Eurocode_3_2005;
-        private Indian_IS_800_2007 _Indian_IS_800_2007;
-        private Norsok_N_004 _Norsok_N_004;
         private Norsok_N_004_2013 _Norsok_N_004_2013;
-        private NSZ_3404_1997 _NSZ_3404_1997;
+#endif
+
         #endregion
 
-        #region Properties        
-        /// <summary>
-        /// Gets the AISC 360 05 IBC 2006 design code.
-        /// </summary>
-        /// <value>The AISC 360 05 IBC 2006 design code.</value>
-        public AISC_360_05_IBC_2006 AISC_360_05_IBC_2006 => _AISC_360_05_IBC_2006 ?? (_AISC_360_05_IBC_2006 = new AISC_360_05_IBC_2006(_seed));
-
-        /// <summary>
-        /// Gets the AISC 360 10 design code.
-        /// </summary>
-        /// <value>The AISC 360 10 design code.</value>
-        public AISC_360_10 AISC_360_10 => AISC_360_10 ?? (_AISC_360_10 = new AISC_360_10(_seed));
-
+        #region Properties       
+#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
         /// <summary>
         /// Gets the AISC LRFD 93 design code.
         /// </summary>
         /// <value>The AISC LRFD 93 design code.</value>
         public AISC_LRFD_93 AISC_LRFD_93 => _AISC_LRFD_93 ?? (_AISC_LRFD_93 = new AISC_LRFD_93(_seed));
+
+        /// <summary>
+        /// Gets the AS 4100 1998 design code.
+        /// </summary>
+        /// <value>The As 4100 1998 design code.</value>
+        public AS_4100_1998 AS_4100_1998 => _AS_4100_1998 ?? (_AS_4100_1998 = new AS_4100_1998(_seed));
+
+        /// <summary>
+        /// Gets the BS 5950 2000 design code.
+        /// </summary>
+        /// <value>The BS 5950 2000 design code.</value>
+        public BS_5950_2000 BS_5950_2000 => _BS_5950_2000 ?? (_BS_5950_2000 = new BS_5950_2000(_seed));
+
+        /// <summary>
+        /// Gets the Chinese 2002 design code.
+        /// </summary>
+        /// <value>The Cchinese 2002 design code.</value>
+        public Chinese_2002 Chinese_2002 => _Chinese_2002 ?? (_Chinese_2002 = new Chinese_2002(_seed));
+
+        /// <summary>
+        /// Gets the Chinese 2010 design code.
+        /// </summary>
+        /// <value>The Cchinese 2010 design code.</value>
+        public Chinese_2010 Chinese_2010 => _Chinese_2010 ?? (_Chinese_2010 = new Chinese_2010(_seed));
+
+        /// <summary>
+        /// Gets the Indian IS 800 2007 design code.
+        /// </summary>
+        /// <value>The Indian IS 800 2007 design code.</value>
+        public Indian_IS_800_2007 Indian_IS_800_2007 => _Indian_IS_800_2007 ?? (_Indian_IS_800_2007 = new Indian_IS_800_2007(_seed));
+
+        /// <summary>
+        /// Gets the Italian NTC 2008 design code.
+        /// </summary>
+        /// <value>The Italian NTC 2008 design code.</value>
+        public Italian_NTC_2008 Italian_NTC_2008 => _Italian_NTC_2008 ?? (_Italian_NTC_2008 = new Italian_NTC_2008(_seed));
+
+        /// <summary>
+        /// Gets the NSZ 3404 1997 design code.
+        /// </summary>
+        /// <value>The NSZ 3404 1997 design code.</value>
+        public NZS_3404_1997 NSZ_3404_1997 => _NSZ_3404_1997 ?? (_NSZ_3404_1997 = new NZS_3404_1997(_seed));
+#endif
+#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+        /// <summary>
+        /// Gets the ASCE 10 97 design code.
+        /// </summary>
+        /// <value>The ASCE 10 97 design code.</value>
+        public ASCE_10_97 ASCE_10_97 => _ASCE_10_97 ?? (_ASCE_10_97 = new ASCE_10_97(_seed));
 
         /// <summary>
         /// Gets the API RP2A LRFD 97 design code.
@@ -87,28 +115,28 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         public API_RP2A_WSD_2014 API_RP2A_WSD_2014 => _API_RP2A_WSD_2014 ?? (_API_RP2A_WSD_2014 = new API_RP2A_WSD_2014(_seed));
 
         /// <summary>
-        /// Gets the AS 4100 1998 design code.
+        /// Gets the NORSOK N 004 2013 design code.
         /// </summary>
-        /// <value>The As 4100 1998 design code.</value>
-        public AS_4100_1998 AS_4100_1998 => _AS_4100_1998 ?? (_AS_4100_1998 = new AS_4100_1998(_seed));
+        /// <value>The NORSOK N 004 2013 design code.</value>
+        public Norsok_N_004_2013 Norsok_N_004_2013 => _Norsok_N_004_2013 ?? (_Norsok_N_004_2013 = new Norsok_N_004_2013(_seed));
+#endif
+        /// <summary>
+        /// Gets the AISC 360 05 IBC 2006 design code.
+        /// </summary>
+        /// <value>The AISC 360 05 IBC 2006 design code.</value>
+        public AISC_360_05_IBC_2006 AISC_360_05_IBC_2006 => _AISC_360_05_IBC_2006 ?? (_AISC_360_05_IBC_2006 = new AISC_360_05_IBC_2006(_seed));
 
         /// <summary>
-        /// Gets the ASCE 10 97 design code.
+        /// Gets the AISC 360 10 design code.
         /// </summary>
-        /// <value>The ASCE 10 97 design code.</value>
-        public ASCE_10_97 ASCE_10_97 => _ASCE_10_97 ?? (_ASCE_10_97 = new ASCE_10_97(_seed));
+        /// <value>The AISC 360 10 design code.</value>
+        public AISC_360_10 AISC_360_10 => _AISC_360_10 ?? (_AISC_360_10 = new AISC_360_10(_seed));
 
         /// <summary>
-        /// Gets the BS 5950 2000 design code.
+        /// Gets the AISC ASD 89 design code.
         /// </summary>
-        /// <value>The BS 5950 2000 design code.</value>
-        public BS_5950_2000 BS_5950_2000 => _BS_5950_2000 ?? (_BS_5950_2000 = new BS_5950_2000(_seed));
-
-        /// <summary>
-        /// Gets the Chinese 2010 design code.
-        /// </summary>
-        /// <value>The Cchinese 2010 design code.</value>
-        public Chinese_2010 Chinese_2010 => _Chinese_2010 ?? (_Chinese_2010 = new Chinese_2010(_seed));
+        /// <value>The AISC ASD 89 design code.</value>
+        public AISC_ASD_89 AISC_ASD_89 => _AISC_ASD_89 ?? (_AISC_ASD_89 = new AISC_ASD_89(_seed));
 
         /// <summary>
         /// Gets the CSA S16 09 design code.
@@ -121,34 +149,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// </summary>
         /// <value>The Eurocode 3 2005 design code.</value>
         public Eurocode_3_2005 Eurocode_3_2005 => _Eurocode_3_2005 ?? (_Eurocode_3_2005 = new Eurocode_3_2005(_seed));
-
-        /// <summary>
-        /// Gets the Indian IS 800 2007 design code.
-        /// </summary>
-        /// <value>The Indian IS 800 2007 design code.</value>
-        public Indian_IS_800_2007 Indian_IS_800_2007 => _Indian_IS_800_2007 ?? (_Indian_IS_800_2007 = new Indian_IS_800_2007(_seed));
-
-        /// <summary>
-        /// Gets the NORSOK N 004 design code.
-        /// </summary>
-        /// <value>The NORSOK N 004 design code.</value>
-        public Norsok_N_004 Norsok_N_004 => _Norsok_N_004 ?? (_Norsok_N_004 = new Norsok_N_004(_seed));
-
-        /// <summary>
-        /// Gets the NORSOK N 004 2013 design code.
-        /// </summary>
-        /// <value>The NORSOK N 004 2013 design code.</value>
-        public Norsok_N_004_2013 Norsok_N_004_2013 => _Norsok_N_004_2013 ?? (_Norsok_N_004_2013 = new Norsok_N_004_2013(_seed));
-
-        /// <summary>
-        /// Gets the NSZ 3404 1997 design code.
-        /// </summary>
-        /// <value>The NSZ 3404 1997 design code.</value>
-        public NSZ_3404_1997 NSZ_3404_1997 => _NSZ_3404_1997 ?? (_NSZ_3404_1997 = new NSZ_3404_1997(_seed));
-        #endregion
+#endregion
 
 
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="DesignSteel"/> class.
         /// </summary>
@@ -158,9 +162,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             _seed = seed;
         }
 
-        #endregion
+#endregion
 
-        #region Methods: Interface
+#region Methods: Interface
 
         /// <summary>
         /// Deletes all frame design results.
@@ -336,10 +340,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         }
 
 
-        #endregion
+#endregion
 
 
-        #region Methods: Public
+#region Methods: Public
 
         // === Local ===
 
@@ -476,6 +480,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         }
 
 
-        #endregion
+#endregion
     }
 }

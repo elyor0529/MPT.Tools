@@ -14,8 +14,6 @@ using CSiBridge18;
 using CSiBridge19;
 #elif BUILD_ETABS2013
 using ETABS2013;
-#elif BUILD_ETABS2014
-using ETABS2014;
 #elif BUILD_ETABS2015
 using ETABS2015;
 #elif BUILD_ETABS2016
@@ -67,15 +65,29 @@ namespace MPT.CSI.API.Core
 
         #endregion
 
+        // Only SAP2000
 #if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
 
 #endif
 
+        // Only CSiBridge
 #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
 
 #endif
-        
+
+        // Only ETABS
 #if BUILD_ETABS2013 || BUILD_ETABS2014 || BUILD_ETABS2015 || BUILD_ETABS2016
+
+#endif
+
+
+        // All but CSiBridge
+#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+
+#endif
+
+        // All but ETABS
+#if !BUILD_ETABS2013 && !BUILD_ETABS2014 && !BUILD_ETABS2015 && !BUILD_ETABS2016
 
 #endif
     }

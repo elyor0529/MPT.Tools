@@ -16,8 +16,8 @@ using CSiProgram = CSiBridge18;
 using CSiProgram = CSiBridge19;
 #elif BUILD_ETABS2013
 using CSiProgram = ETABS2013;
-#elif BUILD_ETABS2014
-using CSiProgram = ETABS2014;
+
+
 #elif BUILD_ETABS2015
 using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016

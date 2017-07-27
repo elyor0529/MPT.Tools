@@ -24,8 +24,8 @@ using CSiBridge19;
 #elif BUILD_ETABS2013
 using System.Reflection;
 using ETABS2013;
-#elif BUILD_ETABS2014
-using ETABS2014;
+
+
 #elif BUILD_ETABS2015
 using ETABS2015;
 #elif BUILD_ETABS2016
@@ -398,7 +398,7 @@ namespace MPT.CSI.API.Core.Program
         //  create SapModel object
                 _sapModel = _SapObject.SapModel;
 
-#elif BUILD_ETABS2014 || BUILD_ETABS2015 || BUILD_ETABS2016
+ || BUILD_ETABS2015 || BUILD_ETABS2016
                 // Old Method: 32bit OAPI clients can only call 32bit ETABS 2014 and 64bit OAPI clients can only call
                 //    64bit ETABS 2014. Currently only used in ETABS 2013.
                 // Create an instance of ETABSObject and get a reference to cOAPI interface

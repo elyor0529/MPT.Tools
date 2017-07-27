@@ -1,26 +1,9 @@
 ﻿using MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.ColdFormed;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-#elif BUILD_ETABS2014
-using ETABS2014;
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
 {
+#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
     /// <summary>
     /// Represents Cold-Formed Steel design in the application.
     /// </summary>
@@ -28,15 +11,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal" />
     public class DesignColdFormed : CSiApiBase, IDesignMetal
     {
-        #region Fields
+#region Fields
         private readonly CSiApiSeed _seed;
 
         private AISI_ASD_96 _AISI_ASD_96;
         private AISI_LRFD_96 _AISI_LRFD_96;
 
-        #endregion
+#endregion
 
-        #region Properties        
+#region Properties        
         /// <summary>
         /// Gets the AISI ASD 96 design code.
         /// </summary>
@@ -50,9 +33,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         public AISI_LRFD_96 AISI_LRFD_96 => _AISI_LRFD_96 ?? (_AISI_LRFD_96 = new AISI_LRFD_96(_seed));
 
 
-        #endregion
+#endregion
 
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="DesignColdFormed"/> class.
         /// </summary>
@@ -61,9 +44,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         {
             _seed = seed;
         }
-        #endregion
+#endregion
 
-        #region Methods: Interface
+#region Methods: Interface
 
         /// <summary>
         /// Deletes all frame design results.
@@ -239,6 +222,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         }
 
         
-        #endregion
+#endregion
     }
+#endif
 }

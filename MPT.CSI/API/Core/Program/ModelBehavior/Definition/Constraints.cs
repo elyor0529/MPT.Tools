@@ -11,8 +11,8 @@ using CSiProgram = SAP2000v18;
 using CSiProgram = SAP2000v19;
 #elif BUILD_ETABS2013
 using CSiProgram = ETABS2013;
-#elif BUILD_ETABS2014
-using CSiProgram = ETABS2014;
+
+
 #elif BUILD_ETABS2015
 using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016

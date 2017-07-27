@@ -1,24 +1,6 @@
 ﻿using MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-#elif BUILD_ETABS2014
-using ETABS2014;
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
 {
     /// <summary>
@@ -31,24 +13,131 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         #region Fields
         private readonly CSiApiSeed _seed;
 
+        private ACI_318_08_IBC_2009 _ACI_318_08_IBC_2009;
+        private ACI_318_11 _ACI_318_11;
+        private CSA_A23_3_04 _CSA_A23_3_04;
+        private Eurocode_2_2004 _Eurocode_2_2004;
+#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+        private AS_3600_09 _AS_3600_09;
+        private BS_8110_97 _BS_8110_97;
+        private Chinese_2002 _Chinese_2002;
+        private Chinese_2010 _Chinese_2010;
+        private Hong_Kong_CP_2013 _Hong_Kong_CP_2013;
+        private Indian_IS_456_2000 _Indian_IS_456_2000;
+        private Italian_NTC_2008 _Italian_NTC_2008;
+        private KCI_1999 _KCI_1999;
+        private Mexican_RCDF_2004 _Mexican_RCDF_2004;
+        private NZS_3101_2006 _NZS_3101_2006;
+        private Singapore_CP_6599 _Singapore_CP_6599;
+        private TS_500_2000 _TS_500_2000;
+#endif
+#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         private AASHTO_07 _AASHTO_07;
         private AASHTO_LRFD_2012 _AASHTO_LRFD_2012;
         private AASHTO_LRFD_2014 _AASHTO_LRFD_2014;
-        private ACI_318_08_IBC_2009 _ACI_318_08_IBC_2009;
-        private AS_3600_09 _AS_3600_09;
-        private BS_8110_97 _BS_8110_97;
-        private Chinese_2010 _Chinese_2010;
-        private CSA_A23_304 _CSA_A23_304;
-        private Eurocode_2_2004 _Eurocode_2_2004;
-        private Hong_Kong_CP_2013 _Hong_Kong_CP_2013;
-        private Indian_IS_456_2000 _Indian_IS_456_2000;
-        private KCI_1999 _KCI_1999;
-        private Singapore_CP_6599 _Singapore_CP_6599;
-        private TS_500_2000 _TS_500_2000;
+#endif
         #endregion
 
         #region Properties   
 
+        /// <summary>
+        /// Gets the ACI 318 08 IBC 2009 design code.
+        /// </summary>
+        /// <value>The ACI 318 08 IBC 2009 design code.</value>
+        public ACI_318_08_IBC_2009 ACI_318_08_IBC_2009 => _ACI_318_08_IBC_2009 ?? (_ACI_318_08_IBC_2009 = new ACI_318_08_IBC_2009(_seed));
+
+        /// <summary>
+        /// Gets the ACI 318 11 design code.
+        /// </summary>
+        /// <value>The ACI 318 11design code.</value>
+        public ACI_318_11 ACI_318_11 => _ACI_318_11 ?? (_ACI_318_11 = new ACI_318_11(_seed));
+
+        /// <summary>
+        /// Gets the CSA A23 304 design code.
+        /// </summary>
+        /// <value>The CSA A23 304 design code.</value>
+        public CSA_A23_3_04 CSA_A23_3_04 => _CSA_A23_3_04 ?? (_CSA_A23_3_04 = new CSA_A23_3_04(_seed));
+
+        /// <summary>
+        /// Gets the Eurocode 2 2004 design code.
+        /// </summary>
+        /// <value>The Eurocode 2 2004 design code.</value>
+        public Eurocode_2_2004 Eurocode_2_2004 => _Eurocode_2_2004 ?? (_Eurocode_2_2004 = new Eurocode_2_2004(_seed));
+
+#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+        /// <summary>
+        /// Gets AS 3600 09 design code.
+        /// </summary>
+        /// <value>The AS 3600 09.</value>
+        public AS_3600_09 AS_3600_09 => _AS_3600_09 ?? (_AS_3600_09 = new AS_3600_09(_seed));
+
+        /// <summary>
+        /// Gets the BS 8110 97 design code.
+        /// </summary>
+        /// <value>The BS 8110 97 design code.</value>
+        public BS_8110_97 BS_8110_97 => _BS_8110_97 ?? (_BS_8110_97 = new BS_8110_97(_seed));
+
+        /// <summary>
+        /// Gets the Chinese 2002 design code.
+        /// </summary>
+        /// <value>The Chinese 2002 design code.</value>
+        public Chinese_2002 Chinese_2002 => _Chinese_2002 ?? (_Chinese_2002 = new Chinese_2002(_seed));
+
+        /// <summary>
+        /// Gets the Chinese 2010 design code.
+        /// </summary>
+        /// <value>The Chinese 2010 design code.</value>
+        public Chinese_2010 Chinese_2010 => _Chinese_2010 ?? (_Chinese_2010 = new Chinese_2010(_seed));
+
+        /// <summary>
+        /// Gets the Hong Kong CP 2013 design code.
+        /// </summary>
+        /// <value>The Hong Kong CP 2013 design code.</value>
+        public Hong_Kong_CP_2013 Hong_Kong_CP_2013 => _Hong_Kong_CP_2013 ?? (_Hong_Kong_CP_2013 = new Hong_Kong_CP_2013(_seed));
+
+        /// <summary>
+        /// Gets the Indian IS 456 2000 design code.
+        /// </summary>
+        /// <value>The Indian IS 456 2000 design code.</value>
+        public Indian_IS_456_2000 Indian_IS_456_2000 => _Indian_IS_456_2000 ?? (_Indian_IS_456_2000 = new Indian_IS_456_2000(_seed));
+
+        /// <summary>
+        /// Gets the Italian NTC 2008 design code.
+        /// </summary>
+        /// <value>The Italian NTC 2008 design code.</value>
+        public Italian_NTC_2008 Italian_NTC_2008 => _Italian_NTC_2008 ?? (_Italian_NTC_2008 = new Italian_NTC_2008(_seed));
+
+        /// <summary>
+        /// Gets the KCI 1999 design code.
+        /// </summary>
+        /// <value>The KCI 1999 design code.</value>
+        public KCI_1999 KCI_1999 => _KCI_1999 ?? (_KCI_1999 = new KCI_1999(_seed));
+
+        /// <summary>
+        /// Gets the Mexican RCDF 2004 design code.
+        /// </summary>
+        /// <value>The Mexican RCDF 2004 design code.</value>
+        public Mexican_RCDF_2004 Mexican_RCDF_2004 => _Mexican_RCDF_2004 ?? (_Mexican_RCDF_2004 = new Mexican_RCDF_2004(_seed));
+
+        /// <summary>
+        /// Gets the NZS 3101 2006 design code.
+        /// </summary>
+        /// <value>The NZS 3101 2006 design code.</value>
+        public NZS_3101_2006 NZS_3101_2006 => _NZS_3101_2006 ?? (_NZS_3101_2006 = new NZS_3101_2006(_seed));
+
+        /// <summary>
+        /// Gets the Singapore CP 6599 design code.
+        /// </summary>
+        /// <value>The Singapore CP 6599 design code.</value>
+        public Singapore_CP_6599 Singapore_CP_6599 => _Singapore_CP_6599 ?? (_Singapore_CP_6599 = new Singapore_CP_6599(_seed));
+
+        /// <summary>
+        /// Gets the TS 500 2000 design code.
+        /// </summary>
+        /// <value>The TS 500 2000 design code.</value>
+        public TS_500_2000 TS_500_2000 => _TS_500_2000 ?? (_TS_500_2000 = new TS_500_2000(_seed));
+#endif
+#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         /// <summary>
         /// Gets the AASHTO 07 design code.
         /// </summary>
@@ -66,72 +155,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// </summary>
         /// <value>The AASHTO LRFD 2014 design code.</value>
         public AASHTO_LRFD_2014 AASHTO_LRFD_2014 => _AASHTO_LRFD_2014 ?? (_AASHTO_LRFD_2014 = new AASHTO_LRFD_2014(_seed));
-
-        /// <summary>
-        /// Gets the ACI 318 08 IBC 2009 design code.
-        /// </summary>
-        /// <value>The ACI 318 08 IBC 2009 design code.</value>
-        public ACI_318_08_IBC_2009 ACI_318_08_IBC_2009 => _ACI_318_08_IBC_2009 ?? (_ACI_318_08_IBC_2009 = new ACI_318_08_IBC_2009(_seed));
-
-        /// <summary>
-        /// Gets AS 3600 09 design code.
-        /// </summary>
-        /// <value>The AS 3600 09.</value>
-        public AS_3600_09 AS_3600_09 => _AS_3600_09 ?? (_AS_3600_09 = new AS_3600_09(_seed));
-
-        /// <summary>
-        /// Gets the BS 8110 97 design code.
-        /// </summary>
-        /// <value>The BS 8110 97 design code.</value>
-        public BS_8110_97 BS_8110_97 => _BS_8110_97 ?? (_BS_8110_97 = new BS_8110_97(_seed));
-
-        /// <summary>
-        /// Gets the Chinese 2010 design code.
-        /// </summary>
-        /// <value>The Chinese 2010 design code.</value>
-        public Chinese_2010 Chinese_2010 => _Chinese_2010 ?? (_Chinese_2010 = new Chinese_2010(_seed));
-
-        /// <summary>
-        /// Gets the CSA A23 304 design code.
-        /// </summary>
-        /// <value>The CSA A23 304 design code.</value>
-        public CSA_A23_304 CSA_A23_304 => _CSA_A23_304 ?? (_CSA_A23_304 = new CSA_A23_304(_seed));
-
-        /// <summary>
-        /// Gets the Eurocode 2 2004 design code.
-        /// </summary>
-        /// <value>The Eurocode 2 2004 design code.</value>
-        public Eurocode_2_2004 Eurocode_2_2004 => _Eurocode_2_2004 ?? (_Eurocode_2_2004 = new Eurocode_2_2004(_seed));
-
-        /// <summary>
-        /// Gets the Hong Kong CP 2013 design code.
-        /// </summary>
-        /// <value>The Hong Kong CP 2013 design code.</value>
-        public Hong_Kong_CP_2013 Hong_Kong_CP_2013 => _Hong_Kong_CP_2013 ?? (_Hong_Kong_CP_2013 = new Hong_Kong_CP_2013(_seed));
-
-        /// <summary>
-        /// Gets the Indian IS 456 2000 design code.
-        /// </summary>
-        /// <value>The Indian IS 456 2000 design code.</value>
-        public Indian_IS_456_2000 Indian_IS_456_2000 => _Indian_IS_456_2000 ?? (_Indian_IS_456_2000 = new Indian_IS_456_2000(_seed));
-
-        /// <summary>
-        /// Gets the KCI 1999 design code.
-        /// </summary>
-        /// <value>The KCI 1999 design code.</value>
-        public KCI_1999 KCI_1999 => _KCI_1999 ?? (_KCI_1999 = new KCI_1999(_seed));
-
-        /// <summary>
-        /// Gets the Singapore CP 6599 design code.
-        /// </summary>
-        /// <value>The Singapore CP 6599 design code.</value>
-        public Singapore_CP_6599 Singapore_CP_6599 => _Singapore_CP_6599 ?? (_Singapore_CP_6599 = new Singapore_CP_6599(_seed));
-
-        /// <summary>
-        /// Gets the TS 500 2000 design code.
-        /// </summary>
-        /// <value>The TS 500 2000 design code.</value>
-        public TS_500_2000 TS_500_2000 => _TS_500_2000 ?? (_TS_500_2000 = new TS_500_2000(_seed));
+#endif
         #endregion
 
         #region Initialization        
@@ -143,9 +167,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         {
             _seed = seed;
         }
-        #endregion
+#endregion
 
-        #region Methods: Interface
+#region Methods: Interface
         
         /// <summary>
         /// Deletes all frame design results.
@@ -214,10 +238,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             _callCode = _sapModel.DesignConcrete.SetComboStrength(nameLoadCombination, selectLoadCombination);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
 
-        #region Methods: Public
+#region Methods: Public
 
         /// <summary>
         /// Retrieves summary results for concrete design of beams.
@@ -360,6 +384,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             _callCode = _sapModel.DesignConcrete.GetSummaryResultsJoint(name, ref numberItems, ref frameName, ref LCJSRatioMajor, ref JSRatioMajor, ref LCJSRatioMinor, ref JSRatioMinor, ref LCBCCRatioMajor, ref BCCRatioMajor, ref LCBCCRatioMinor, ref BCCRatioMinor, ref errorSummary, ref warningSummary, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
