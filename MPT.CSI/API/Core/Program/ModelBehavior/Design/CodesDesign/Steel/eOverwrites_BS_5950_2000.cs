@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
-{
-    #if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
+{ 
     /// <summary>
     /// Overwrites available for <see cref="BS_5950_2000" /> steel design in the application.
     /// </summary>
@@ -135,8 +135,8 @@
         /// The equivalent uniform moment factor, mLT.
         /// </summary>
         EquivalentUniformMomentFactor_mLT = 23,
-        
-        
+
+
         /// <summary>
         /// The yield stress, Fy.
         /// </summary>
@@ -189,5 +189,5 @@
         /// </summary>
         DemandCapacityRatioLimit = 32
     }
-#endif
 }
+#endif

@@ -1,6 +1,7 @@
 ﻿
 namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Object can return strain load data.
     /// </summary>
@@ -29,4 +30,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             ref string[] jointPatternNames,
             eItemTypeElement itemType = eItemTypeElement.Element);
     }
+#endif
 }

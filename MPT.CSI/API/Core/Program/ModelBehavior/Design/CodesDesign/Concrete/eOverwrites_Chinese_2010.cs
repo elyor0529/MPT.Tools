@@ -1,6 +1,7 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-  #if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Overwrites available for <see cref="Chinese_2010"/> concrete design in the application.
     /// </summary>
@@ -50,7 +51,7 @@
         /// Beam gravity negative moment reduction factor.
         /// </summary>
         BeamGravityNegativeMomentReductionFactor = 9,
-      
+
         /// <summary>
         /// The unbraced length ratio, major.
         /// </summary>
@@ -94,7 +95,7 @@
         /// <summary>
         /// Effective length factor for gravity, K Minor.
         /// </summary>
-        EffectiveLengthFactorForGravity_K_Minor = 18,        
+        EffectiveLengthFactorForGravity_K_Minor = 18,
     }
-    #endif
 }
+#endif

@@ -1,4 +1,4 @@
-﻿
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
 using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Helpers
@@ -79,3 +79,4 @@ namespace MPT.CSI.API.Core.Helpers
         }
     }
 }
+#endif

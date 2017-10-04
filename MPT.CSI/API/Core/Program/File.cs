@@ -1,28 +1,18 @@
 ﻿using IO = System.IO;
-
-using MPT.CSI.API.Core.Support;
-
 #if BUILD_SAP2000v16
-using SAP2000v16;
+using CSiProgram = SAP2000v16;
 #elif BUILD_SAP2000v17
-using SAP2000v17;
+using CSiProgram = SAP2000v17;
 #elif BUILD_SAP2000v18
-using SAP2000v18;
+using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
-using SAP2000v19;
+using CSiProgram = SAP2000v19;
 #elif BUILD_CSiBridgev18
-using CSiBridge18;
+using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
-using CSiBridge19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
+using CSiProgram = CSiBridge19;
 #endif
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program
 {
@@ -31,7 +21,7 @@ namespace MPT.CSI.API.Core.Program
     /// </summary>
     public class File :  CSiApiBase
     {
-        #region Fields
+#region Fields
         /// <summary>
         /// File name of the current model, as tracked by the program and not obtained from the API.
         /// </summary>
@@ -42,9 +32,9 @@ namespace MPT.CSI.API.Core.Program
         /// </summary>
         private string _filePath;
         // TODO: Finish consideration of filePath.
-        #endregion
+#endregion
 
-        #region Properties
+#region Properties
         /// <summary>
         /// Filename of the current model file, with or without the full path.
         /// </summary>
@@ -67,9 +57,9 @@ namespace MPT.CSI.API.Core.Program
                 _fileName = IO.Path.GetFileName(value);
             }
         }
-        #endregion
+#endregion
 
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="File"/> class.
         /// </summary>
@@ -77,9 +67,9 @@ namespace MPT.CSI.API.Core.Program
         public File(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// Opens the specified model file if it exists.
         /// The file name must have an sdb, $2k, s2k, xlsx, xls, or mdb extension. 
@@ -161,6 +151,7 @@ namespace MPT.CSI.API.Core.Program
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Creates a new template model of a 2D Frame.
         /// Do not use this function to add to an existing model. 
@@ -185,7 +176,7 @@ namespace MPT.CSI.API.Core.Program
             string column = "Default",
             string brace = "Default")
         {
-            _callCode = _sapModel.File.New2DFrame(tempType,
+            _callCode = _sapModel.File.New2DFrame(CSiEnumConverter.ToCSi(tempType),
                 numberStories,
                 storyHeight,
                 numberBays,
@@ -194,7 +185,7 @@ namespace MPT.CSI.API.Core.Program
                 beam, column, brace);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
 #if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
         /// <summary>
         /// Creates a new template model of a 3D Frame.
@@ -225,7 +216,7 @@ namespace MPT.CSI.API.Core.Program
             string area = "Default",
             int numberXDivisions = 4, int numberYDivisions = 4)
         {
-            _callCode = _sapModel.File.New3DFrame(tempType,
+            _callCode = _sapModel.File.New3DFrame(CSiEnumConverter.ToCSi(tempType),
                                          numberStories,
                                          storyHeight,
                                          numberBaysX, bayWidthX,
@@ -311,7 +302,9 @@ namespace MPT.CSI.API.Core.Program
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 #elif BUILD_ETABS2013 || BUILD_ETABS2014 || BUILD_ETABS2015 || BUILD_ETABS2016
-
+        //NewBlank
+        //NewGridOnly
+        //NewSteelDeck
 #endif
         #endregion
     }

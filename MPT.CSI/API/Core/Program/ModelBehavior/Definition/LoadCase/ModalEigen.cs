@@ -35,9 +35,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
-
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        
         /// <summary>
         /// This function retrieves the initial condition assumed for the specified load case.
         /// </summary>
@@ -215,6 +214,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             _callCode = _sapModel.LoadCases.ModalEigen.SetParameters(name, eigenvalueShiftFrequency, cutoffFrequencyRadius, convergenceTolerance, csiAllowAutoFrequencyShifting);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
     }
 }

@@ -5,23 +5,37 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// Represents the Point Object in the application.
     /// </summary>
     public interface IPointObject:
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        ILocalAxesAdvancedWithPoints,
+
+        IObservableMerge, IChangeableMerge,
+        IObservablePattern, IChangeablePattern, IDeletablePattern,
+
+        IConstraint, 
+        IAddableCoordinate,
+
+        ILoadForceWithGUID, 
+#endif
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        ILabel,
+        IDiaphragmPoints,
+        ISpringAssignment,
+#endif
         ICountable, IListableNames, IChangeableName, IGroupAssignable, ISelectable, IDeletable,
-        ILocalAxes, ILocalAxesAdvancedWithPoints, IGUID, IMassLumped,
+        IObservableLocalAxes,  IGUID, IMassLumped,
         IObservableTransformationMatrix, IObservableElement,
         IObservableConnectivity, IObservableCommonTo,
 
-        IObservableMerge, IChangeableMerge,
-        IObservableCoordinates, IAddableCoordinate,
-        IObservablePattern, IChangeablePattern, IDeletablePattern,
-
-        IConstraint, IPanelZone, ISpecialPoint,
+       
+        IObservableCoordinates, 
+        
+        IPanelZone, ISpecialPoint,
         IObservableRestraint, IChangeableRestraint, IDeletableRestraint,
         IObservablePointSpring, IChangeablePointSpring, IDeletableSpring,
-        
+        ICountablePanelZone,
 
         // Loads
         ILoadForce, ICountableLoadForce,
-        ILoadForceWithGUID, 
         ILoadDisplacement, ICountableLoadDisplacement
     {
     }

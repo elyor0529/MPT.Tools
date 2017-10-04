@@ -1,24 +1,6 @@
 ﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
@@ -30,33 +12,54 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         #region Fields
         private readonly CSiApiSeed _seed;
 
-    #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         private BridgeObjects _bridgeObjects;
-    #endif
+#elif !BUILD_ETABS2015 && !BUILD_ETABS2016
+        private JointPatterns _jointPatterns;
+        private NamedAssigns _namedAssigns;
+        private SectionCuts _sectionCuts;
+#endif
         private Constraints _constraints;
         private CoordinateSystems _coordinateSystems;
         private Functions _functions;
         private GeneralizedDisplacements _generalizedDisplacements;
         private GeneralReferenceLines _generalReferenceLines;
         private Groups _groups;
-        private JointPatterns _jointPatterns;
+    
         private LoadCases _loadCases;
         private LoadCombinations _loadCombinations;
         private LoadPatterns _loadPatterns;
         private MassSource _massSource;
-        private NamedAssigns _namedAssigns;
         private NamedSets _namedSets;
         private Properties _properties;
-        private SectionCuts _sectionCuts;
-#endregion
+        #endregion
 
-#region Properties    
+        #region Properties    
 #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         /// <summary>
         /// Gets the bridge objects.
         /// </summary>
         /// <value>The bridge objects.</value>
         public BridgeObjects BridgeObjects => _bridgeObjects ?? (_bridgeObjects = new BridgeObjects(_seed));
+#elif !BUILD_ETABS2015 && !BUILD_ETABS2016
+
+        /// <summary>
+        /// Gets the joint patterns.
+        /// </summary>
+        /// <value>The joint patterns.</value>
+        public JointPatterns JointPatterns => _jointPatterns ?? (_jointPatterns = new JointPatterns(_seed));
+
+        /// <summary>
+        /// Gets the named assigns.
+        /// </summary>
+        /// <value>The named assigns.</value>
+        public NamedAssigns NamedAssigns => _namedAssigns ?? (_namedAssigns = new NamedAssigns(_seed));
+
+        /// <summary>
+        /// Gets the section cuts.
+        /// </summary>
+        /// <value>The section cuts.</value>
+        public SectionCuts SectionCuts => _sectionCuts ?? (_sectionCuts = new SectionCuts(_seed));
 #endif
         /// <summary>
         /// Gets the constraints.
@@ -95,12 +98,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         public Groups Groups => _groups ?? (_groups = new Groups(_seed));
 
         /// <summary>
-        /// Gets the joint patterns.
-        /// </summary>
-        /// <value>The joint patterns.</value>
-        public JointPatterns JointPatterns => _jointPatterns ?? (_jointPatterns = new JointPatterns(_seed));
-
-        /// <summary>
         /// Gets the load cases.
         /// </summary>
         /// <value>The load cases.</value>
@@ -125,12 +122,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         public MassSource MassSource => _massSource ?? (_massSource = new MassSource(_seed));
 
         /// <summary>
-        /// Gets the named assigns.
-        /// </summary>
-        /// <value>The named assigns.</value>
-        public NamedAssigns NamedAssigns => _namedAssigns ?? (_namedAssigns = new NamedAssigns(_seed));
-
-        /// <summary>
         /// Gets the named sets.
         /// </summary>
         /// <value>The named sets.</value>
@@ -141,13 +132,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// </summary>
         /// <value>The properties.</value>
         public Properties Properties => _properties ?? (_properties = new Properties(_seed));
-
-        /// <summary>
-        /// Gets the section cuts.
-        /// </summary>
-        /// <value>The section cuts.</value>
-        public SectionCuts SectionCuts => _sectionCuts ?? (_sectionCuts = new SectionCuts(_seed));
-
 #endregion
 
 

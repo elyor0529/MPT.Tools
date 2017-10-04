@@ -1,24 +1,6 @@
 ﻿using MPT.CSI.API.Core.Program.ModelBehavior.Edit;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
 
@@ -36,7 +18,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         private FrameEditor _frameEditor;
         private GeneralEditor _generalEditor;
         private PointEditor _pointEditor;
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         private SolidEditor _solidEditor;
+#endif
         #endregion
 
 
@@ -65,11 +49,13 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// <value>The point editor.</value>
         public PointEditor PointEditor => _pointEditor ?? (_pointEditor = new PointEditor(_seed));
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Gets the solid editor.
         /// </summary>
         /// <value>The solid editor.</value>
         public SolidEditor SolidEditor => _solidEditor ?? (_solidEditor = new SolidEditor(_seed));
+#endif
         #endregion
 
 

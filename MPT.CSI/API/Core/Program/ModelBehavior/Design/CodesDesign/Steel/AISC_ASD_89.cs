@@ -1,4 +1,5 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
@@ -8,7 +9,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class AISC_ASD_89 : CSiApiBase
     {
-        #region Initialization
+#region Initialization
         /// <summary>
         /// Initializes a new instance of the <see cref="AISC_ASD_89"/> class.
         /// </summary>
@@ -16,9 +17,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
         public AISC_ASD_89(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function retrieves the value of a steel design overwrite item.
         /// </summary>
@@ -83,6 +84,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
             _callCode = _sapModel.DesignSteel.AISC_ASD89.SetPreference((int)item, value);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
+#endif

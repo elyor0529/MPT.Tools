@@ -1,6 +1,4 @@
-﻿
-
-namespace MPT.CSI.API.Core
+﻿namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
     /// Item type available for selection filtering.

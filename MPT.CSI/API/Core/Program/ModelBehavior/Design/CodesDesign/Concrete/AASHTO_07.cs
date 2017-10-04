@@ -1,15 +1,15 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
     /// <summary>
     /// Concrete design code AASHTO_07.
     /// </summary>
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class AASHTO_07 : CSiApiBase
     {
-    #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="AASHTO_07"/> class.
         /// </summary>
@@ -17,9 +17,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
         public AASHTO_07(CSiApiSeed seed) : base(seed) { }
 
 
-    #endregion
+#endregion
 
-    #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function retrieves the value of a concrete design overwrite item.
         /// </summary>
@@ -84,7 +84,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
             _callCode = _sapModel.DesignConcrete.AASHTO_Concrete_07.SetPreference((int)item, value);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-    #endregion
+#endregion
     }
-#endif
 }
+#endif

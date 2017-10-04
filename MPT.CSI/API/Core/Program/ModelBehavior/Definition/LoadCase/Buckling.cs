@@ -18,6 +18,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 
         #endregion
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: Interface
         /// <summary>
         /// This function initializes a load case. 
@@ -101,6 +102,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             _callCode = _sapModel.LoadCases.Buckling.SetParameters(name, numberOfBucklingModes, eigenvalueConvergenceTolerance);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion  
+        #endregion
+#endif
     }
 }

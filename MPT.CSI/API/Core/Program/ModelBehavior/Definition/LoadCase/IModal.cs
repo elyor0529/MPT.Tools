@@ -1,13 +1,14 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 {
-    /// <summary>
-    /// Represents modal load cases in the application.
-    /// </summary>
-    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase.ISetLoadCase" />
-    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase.IInitialLoadCase" />
-    public interface IModal:
-        ISetLoadCase, IInitialLoadCase
-    {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// Represents modal load cases in the application.
+        /// </summary>
+        /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase.ISetLoadCase" />
+        /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase.IInitialLoadCase" />
+        public interface IModal:
+            ISetLoadCase, IInitialLoadCase
+        {
         /// <summary>
         /// This function retrieves the number of modes requested for the specified load case.
         /// </summary>
@@ -27,5 +28,15 @@
         void SetNumberModes(string name,
             int maxNumberModes,
             int minNumberModes);
-    }
+        }
+#else
+    /// <summary>
+    /// Represents modal load cases in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase.ISetLoadCase" />
+    public interface IModal :
+            ISetLoadCase
+        {
+        }
+#endif
 }

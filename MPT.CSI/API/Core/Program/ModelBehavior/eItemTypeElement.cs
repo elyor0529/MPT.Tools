@@ -1,5 +1,4 @@
-﻿
-namespace MPT.CSI.API.Core.Program.ModelBehavior
+﻿namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
     /// Element type from the analysis model.

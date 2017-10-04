@@ -23,7 +23,7 @@
             ref double gmcF2,
             ref ePeriodicPlusRigidModalCombination periodicPlusRigidModalCombination,
             ref double td);
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the modal combination option assigned to the specified load case.
         /// </summary>
@@ -42,5 +42,6 @@
             double gmcF2,
             ePeriodicPlusRigidModalCombination periodicPlusRigidModalCombination,
             double td);
+#endif
     }
 }

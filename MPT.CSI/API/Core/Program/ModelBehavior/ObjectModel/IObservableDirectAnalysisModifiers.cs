@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
     /// Object has observable direct analysis modifiers.
@@ -17,3 +18,4 @@
             ref double EIModifier);
     }
 }
+#endif

@@ -16,8 +16,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
         public ResponseSpectrum(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion   
+        #endregion
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: File & User
         /// <summary>
         /// This function retrieves the definition of a response spectrum function from file.
@@ -201,7 +202,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
             _callCode = _sapModel.Func.FuncRS.GetAASHTO2007(name, ref csiSeismicCoefficient, ref latitude, ref longitude, ref zipCode, ref Ss, ref S1, ref PGA, ref csiSiteClass, ref Fa, ref Fv, ref Fpga, ref dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            seismicCoefficientOption = (eSeismicCoefficient_AASHTO_2007) csiSeismicCoefficient;
+            seismicCoefficientOption = (eSeismicCoefficient_AASHTO_2007)csiSeismicCoefficient;
             siteClass = (eSiteClass_AASHTO_2007)csiSiteClass;
         }
 
@@ -241,8 +242,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
             double S1,
             double PGA,
             eSiteClass_AASHTO_2007 siteClass,
-            double Fa, 
-            double Fv, 
+            double Fa,
+            double Fv,
             double Fpga,
             double dampingRatio)
         {
@@ -276,7 +277,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
             _callCode = _sapModel.Func.FuncRS.GetAS11702007(name, ref csiSiteClass, ref kp, ref Z, ref Sp, ref u, ref dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            siteClass = (eSiteClass_AS_1170_2007) csiSiteClass;
+            siteClass = (eSiteClass_AS_1170_2007)csiSiteClass;
         }
 
         /// <summary>
@@ -372,7 +373,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
             _callCode = _sapModel.Func.FuncRS.GetChinese2010(name, ref alphaMax, ref csiSeismicIntensity, ref Tg, ref PTDF, ref dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            SI = (eSeismicIntensity_Chinese_2010) csiSeismicIntensity;
+            SI = (eSeismicIntensity_Chinese_2010)csiSeismicIntensity;
         }
 
         /// <summary>
@@ -419,7 +420,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
             _callCode = _sapModel.Func.FuncRS.GetCJJ1662011(name, ref csiDirection, ref peakAcceleration, ref Tg, ref dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            direction = (eSpectrumDirection_CJJ_166_2011) csiDirection;
+            direction = (eSpectrumDirection_CJJ_166_2011)csiDirection;
         }
 
         /// <summary>
@@ -464,7 +465,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
             _callCode = _sapModel.Func.FuncRS.GetEuroCode8(name, ref AG, ref csiSubsoilClass, ref n, ref dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
-            S = (eSiteClass_Eurocode_8) csiSubsoilClass;
+            S = (eSiteClass_Eurocode_8)csiSubsoilClass;
         }
 
         /// <summary>
@@ -483,7 +484,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
             double n,
             double dampingRatio)
         {
-            if (n < 0.7) { n = 0.7;}
+            if (n < 0.7) { n = 0.7; }
 
             _callCode = _sapModel.Func.FuncRS.SetEuroCode8(name, AG, (int)S, n, dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -1614,5 +1615,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion
+#endif
     }
 }

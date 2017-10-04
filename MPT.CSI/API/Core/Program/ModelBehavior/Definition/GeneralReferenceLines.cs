@@ -1,36 +1,25 @@
-﻿using System;
-using MPT.CSI.API.Core.Support;
-
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
+﻿using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents the general reference line in the application.
     /// </summary>
     public class GeneralReferenceLines : CSiApiBase, ICountable, IDeletable, IListableNames
     {
+#else
+    /// <summary>
+    /// Represents the general reference line in the application.
+    /// </summary>
+    public class GeneralReferenceLines : CSiApiBase
+    {
+#endif
         #region Initialization
 
         public GeneralReferenceLines(CSiApiSeed seed) : base(seed) { }
         #endregion
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: Interface
         /// <summary>
         /// This function returns the total number of defined general reference lines in the model.
@@ -201,7 +190,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             int[] csiCurveTypes = new int[curveTypes.Length - 1];
             for (int i = 0; i < curveTypes.Length; i++)
             {
-                csiCurveTypes[i] = (int) curveTypes[i];
+                csiCurveTypes[i] = (int)curveTypes[i];
             }
 
 
@@ -289,5 +278,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         }
 
         #endregion
+#endif
     }
 }

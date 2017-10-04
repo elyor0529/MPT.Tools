@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
     /// <summary>
     /// Location reference by sign.
@@ -17,3 +18,4 @@
         Negative3 = 2
     }
 }
+#endif

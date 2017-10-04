@@ -1,6 +1,7 @@
 ﻿
 namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Object can return pore pressure load data.
     /// </summary>
@@ -27,4 +28,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             ref string[] jointPatternNames,
             eItemTypeElement itemType = eItemTypeElement.Element);
     }
+#endif
 }

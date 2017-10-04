@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 {
     /// <summary>
     /// Types of aluminum.
@@ -21,3 +22,4 @@
         CastSand = 3
     }
 }
+#endif

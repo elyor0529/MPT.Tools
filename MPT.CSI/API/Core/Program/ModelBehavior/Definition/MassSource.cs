@@ -1,44 +1,20 @@
 ﻿using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents the mass source in the application.
     /// </summary>
     public class MassSource : CSiApiBase, IChangeableName, ICountable, IDeletable, IListableNames
     {
-
-        #region Fields
-
-
-        #endregion
-
-
-        #region Properties
-
-
-
-        #endregion
-
-
+#else
+    /// <summary>
+    /// Represents the mass source in the application.
+    /// </summary>
+    public class MassSource : CSiApiBase
+    {
+#endif
         #region Initialization
 
         public MassSource(CSiApiSeed seed) : base(seed) { }
@@ -47,7 +23,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         #endregion
 
         #region Methods: Public
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function changes the name of an existing mass source.
         /// If the new name already exists, a nonzero value is returned and the mass source name is not changed.
@@ -86,11 +62,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.SourceMass.Delete(nameMassSource);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
 
         // === Get/Set ===
-
-        /// <summary>
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+/// <summary>
         /// This function retrieves the names of all defined mass sources.
         /// </summary>
         /// <param name="numberNames">The number of mass source names retrieved by the program.</param>
@@ -99,6 +76,29 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             ref string[] namesMassSource)
         {
             _callCode = _sapModel.SourceMass.GetNameList(ref numberNames, ref namesMassSource);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+
+        /// <summary>
+        /// This function retrieves the default mass source name.
+        /// </summary>
+        /// <param name="nameMassSource">The name of the mass source to be flagged as the default mass source.</param>
+        public void GetDefault(ref string nameMassSource)
+        {
+            _callCode = _sapModel.SourceMass.GetDefault(ref nameMassSource);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function sets the default mass source.
+        /// Only one mass source can be the default mass source so when this assignment is set all other mass sources are automatically set to have their IsDefault flag False.
+        /// </summary>
+        /// <param name="nameMassSource">The name of the mass source to be flagged as the default mass source.</param>
+        public void SetDefault(string nameMassSource)
+        {
+            _callCode = _sapModel.SourceMass.SetDefault(nameMassSource);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
@@ -158,31 +158,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.SourceMass.SetMassSource(nameMassSource, massFromElements, massFromMasses, massFromLoads, isDefault, numberLoads, ref namesLoadPatterns, ref scaleFactors);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
-        // ===
-
-        /// <summary>
-        /// This function retrieves the default mass source name.
-        /// </summary>
-        /// <param name="nameMassSource">The name of the mass source to be flagged as the default mass source.</param>
-        public void GetDefault(ref string nameMassSource)
-        {
-            _callCode = _sapModel.SourceMass.GetDefault(ref nameMassSource);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function sets the default mass source.
-        /// Only one mass source can be the default mass source so when this assignment is set all other mass sources are automatically set to have their IsDefault flag False.
-        /// </summary>
-        /// <param name="nameMassSource">The name of the mass source to be flagged as the default mass source.</param>
-        public void SetDefault(string nameMassSource)
-        {
-            _callCode = _sapModel.SourceMass.SetDefault(nameMassSource);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
+#endif
         #endregion
     }
 }

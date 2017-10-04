@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent;
-using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
 using CSiProgram = SAP2000v16;
@@ -10,15 +8,20 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiProgram = CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiProgram = CSiBridge19;
 #elif BUILD_ETABS2013
 using CSiProgram = ETABS2013;
-
-
 #elif BUILD_ETABS2015
 using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016
 using CSiProgram = ETABS2016;
 #endif
+
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent;
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 {
@@ -187,6 +190,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             materialType = CSiEnumConverter.FromCSi(csiMaterialType);
         }
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        // Deprecated. Use AddMaterial instead
         /// <summary>
         /// Sets the material.
         /// </summary>
@@ -207,9 +212,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             _callCode = _sapModel.PropMaterial.SetMaterial(name, CSiEnumConverter.ToCSi(materialType), color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
-
+#endif
+        
         /// <summary>
         /// This function retrieves the  additional material damping data for the material.
         /// </summary>
@@ -421,6 +425,51 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         #endregion
 
         #region Methods: Mechanical Properties           
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// This function gets the mass source data for an existing mass source.
+        /// </summary>
+        /// <param name="massFromElements">True: Element self mass is included in the mass.</param>
+        /// <param name="massFromMasses">True: Assigned masses are included in the mass.</param>
+        /// <param name="massFromLoads">True: Specified load patterns are included in the mass.</param>
+        /// <param name="numberLoads">The number of load patterns specified for the mass source.  
+        /// This item is only applicable when the MassFromLoads item is True.</param>
+        /// <param name="namesLoadPatterns">This is an array of load pattern names specified for the mass source.</param>
+        /// <param name="scaleFactors">This is an array of load pattern multipliers specified for the mass source.</param>
+        public void GetMassSource(ref bool massFromElements,
+            ref bool massFromMasses,
+            ref bool massFromLoads,
+            ref int numberLoads,
+            ref string[] namesLoadPatterns,
+            ref double[] scaleFactors)
+        {
+            _callCode = _sapModel.PropMaterial.GetMassSource_1(ref massFromElements, ref massFromMasses, ref massFromLoads, ref numberLoads, ref namesLoadPatterns, ref scaleFactors);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function adds a new mass source to the model or reinitializes an existing mass source.
+        /// </summary>
+        /// <param name="massFromElements">True: Element self mass is included in the mass.</param>
+        /// <param name="massFromMasses">True: Assigned masses are included in the mass.</param>
+        /// <param name="massFromLoads">True: Specified load patterns are included in the mass.</param>
+        /// <param name="numberLoads">The number of load patterns specified for the mass source.  
+        /// This item is only applicable when the MassFromLoads item is True.</param>
+        /// <param name="namesLoadPatterns">This is an array of load pattern names specified for the mass source.</param>
+        /// <param name="scaleFactors">This is an array of load pattern multipliers specified for the mass source.</param>
+        public void SetMassSource(bool massFromElements,
+            bool massFromMasses,
+            bool massFromLoads,
+            int numberLoads,
+            string[] namesLoadPatterns,
+            double[] scaleFactors)
+        {
+            _callCode = _sapModel.PropMaterial.SetMassSource_1(ref massFromElements, ref massFromMasses, ref massFromLoads, numberLoads, ref namesLoadPatterns, ref scaleFactors);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
+        
         /// <summary>
         /// This function retrieves the mechanical properties for a material with an isotropic directional symmetry type.
         /// The function returns an error if the symmetry type of the specified material is not isotropic.
@@ -622,7 +671,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         }
         #endregion
 
-        #region Methods: Basic Types        
+        #region Methods: Basic Types 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the other material property data for aluminum materials.
         /// The function returns an error if the specified material is not aluminum.
@@ -743,8 +793,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             _callCode = _sapModel.PropMaterial.SetOColdFormed(name, Fy, Fu, (int)stressStrainHysteresisType, temperature);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
+#endif
 
         /// <summary>
         /// This function retrieves the other material property data for steel materials.

@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
     /// <summary>
     /// Overwrites available for <see cref="CSA_A23_3_04"/> concrete design in the application.
@@ -81,3 +82,4 @@
         MaxAggregateSize = 15,
     }
 }
+#endif

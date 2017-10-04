@@ -21,6 +21,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
         #endregion
 
         #region Methods: Interface
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function initializes a load case. 
         /// If this function is called for an existing load case, all items for the case are reset to their default value.
@@ -69,8 +70,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             _callCode = _sapModel.LoadCases.DirHistNonlinear.SetInitialCase(name, initialCase);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
+#endif
 
 
         /// <summary>
@@ -116,6 +116,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             }
         }
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function sets the load data for the specified analysis case.
         /// </summary>
@@ -480,6 +481,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
                             lineSearchStepFactor);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
     }
 }

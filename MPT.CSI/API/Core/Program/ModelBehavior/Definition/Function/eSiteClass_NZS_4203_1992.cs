@@ -1,5 +1,6 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Site class for NZS 4203 1992 response spectrum function.
     /// </summary>
@@ -20,4 +21,5 @@
         /// </summary>
         C = 3,
     }
+#endif
 }

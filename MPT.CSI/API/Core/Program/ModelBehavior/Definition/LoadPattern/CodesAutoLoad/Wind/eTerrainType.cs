@@ -1,5 +1,4 @@
-﻿
-
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wind
 {
     /// <summary>
@@ -24,3 +23,4 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAut
         User = 3
     }
 }
+#endif

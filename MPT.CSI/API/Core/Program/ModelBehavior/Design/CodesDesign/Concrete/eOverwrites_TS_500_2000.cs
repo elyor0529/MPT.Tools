@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
+﻿#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
     /// <summary>
     /// Overwrites available for <see cref="TS_500_2000"/> concrete design in the application.
@@ -66,3 +67,4 @@
         SwayMomentFactor_Bs_Minor = 12,
     }
 }
+#endif

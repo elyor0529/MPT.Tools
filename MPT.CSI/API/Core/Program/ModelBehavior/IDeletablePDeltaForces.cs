@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
     /// Element can delete P-Delta force assignments.
@@ -16,3 +17,4 @@
             eItemType itemType = eItemType.Object);
     }
 }
+#endif

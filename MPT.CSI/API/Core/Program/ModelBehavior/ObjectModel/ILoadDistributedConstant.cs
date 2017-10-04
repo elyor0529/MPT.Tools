@@ -1,8 +1,9 @@
-﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
-    // <summary>
+    /// <summary>
     /// Object has a CRUDable constant distributed load.
     /// </summary>
     public interface ILoadDistributedConstant
@@ -70,3 +71,4 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             eItemType itemType = eItemType.Object);
     }
 }
+#endif

@@ -1,8 +1,8 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Concrete design code <see cref="Chinese_2010"/>.
     /// </summary>
@@ -86,5 +86,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
         }
 #endregion
     }
-#endif
 }
+#endif

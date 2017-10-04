@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
-{
-#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
+{ 
     /// <summary>
     /// Preferences available for <see cref="AASHTO_07"/> concrete design in the application.
     /// </summary>
@@ -41,5 +41,5 @@
         /// </summary>
         MultiResponseCaseDesign = 7
     }
-#endif
 }
+#endif

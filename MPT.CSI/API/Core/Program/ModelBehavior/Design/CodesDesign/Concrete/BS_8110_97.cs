@@ -1,8 +1,9 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿
+#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Concrete design code <see cref="BS_8110_97"/>.
     /// </summary>
@@ -86,5 +87,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
         }
 #endregion
     }
-#endif
 }
+#endif

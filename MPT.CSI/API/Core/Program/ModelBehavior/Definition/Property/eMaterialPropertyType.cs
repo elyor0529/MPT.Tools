@@ -20,6 +20,7 @@
         /// </summary>
         NoDesign = 3,
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// The aluminum material.
         /// </summary>
@@ -29,6 +30,7 @@
         /// The cold formed material.
         /// </summary>
         ColdFormed = 5,
+#endif
 
         /// <summary>
         /// The rebar material.
@@ -38,6 +40,14 @@
         /// <summary>
         /// The tendon material.
         /// </summary>
-        Tendon = 7
+        Tendon = 7,
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016        
+        /// <summary> material.
+        /// The masonry
+        /// </summary>
+        Masonry = 8,
+#endif
+
     }
 }

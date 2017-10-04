@@ -1,23 +1,6 @@
-﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wave;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wave;
 using MPT.CSI.API.Core.Support;
-
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
 {
@@ -28,23 +11,23 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.IAutoLoad" />
     public class AutoWave : CSiApiBase, IAutoLoad
     {
-        #region Fields
+#region Fields
         private readonly CSiApiSeed _seed;
 
         private WaveLoadGeneric _WaveLoadGeneric;
 
-        #endregion
+#endregion
 
-        #region Properties
+#region Properties
         /// <summary>
         /// Auto wave load pattern according to generic definitions.
         /// </summary>
         public WaveLoadGeneric WaveLoadGeneric => _WaveLoadGeneric ?? (_WaveLoadGeneric = new WaveLoadGeneric(_seed));
 
 
-        #endregion
+#endregion
 
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="AutoWave"/> class.
         /// </summary>
@@ -53,9 +36,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
         {
             _seed = seed;
         }
-        #endregion
+#endregion
 
-        #region Methods: Interface
+#region Methods: Interface
 
         /// <summary>
         /// This function retrieves the code name used for auto wave parameters in Wave-type load patterns.
@@ -85,9 +68,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
         }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
 
         /// <summary>
         /// This function retrieves auto seastate loading parameters.
@@ -156,6 +139,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
             _callCode = _sapModel.LoadPatterns.AutoSeastate.SetAuto(name, loadMethod, coordinateSystem, adjustGravityLateral, adjustGravityLateralFactor, adjustGravityVertical, adjustGravityVerticalFactor, centerRotation, parameters, ignorePhase);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
+#endif

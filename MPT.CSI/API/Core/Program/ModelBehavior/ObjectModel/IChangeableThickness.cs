@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
     /// Object has changeable thickness properties.
@@ -27,3 +28,4 @@
             eItemType itemType = eItemType.Object);
     }
 }
+#endif

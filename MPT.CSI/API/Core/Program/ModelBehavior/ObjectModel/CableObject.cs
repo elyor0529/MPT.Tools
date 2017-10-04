@@ -1,25 +1,8 @@
-﻿using System.Linq;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using System.Linq;
 using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
-
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
@@ -28,15 +11,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// </summary>
     public class CableObject : CSiApiBase, ICableObject
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="CableObject"/> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
         public CableObject(CSiApiSeed seed) : base(seed) { }
-        #endregion
-
-        #region Query
+#endregion
+        
+#region Query
         /// <summary>
         /// This function returns the total number of defined cable properties in the model.
         /// </summary>
@@ -137,9 +120,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.CableObj.GetElm(name, ref numberOfElements, ref elementNames, ref relativeDistanceI, ref relativeDistanceJ);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
         
-        #region Modifiers
+#region Modifiers
         /// <summary>
         /// This function retrieves the modifier assignment for cable objects. 
         /// The default value for all modifiers is one.
@@ -171,9 +154,24 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.CableObj.SetModifiers(name, ref csiModifiers);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
 
-        #region Creation & Groups
+
+        /// <summary>
+        /// This function deletes a modifier assignment. 
+        /// </summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are deleted for the objects specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are deleted for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are deleted for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void DeleteModifiers(string name,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.CableObj.DeleteModifiers(name, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endregion
+
+#region Creation & Groups
         /// <summary>
         /// This function changes the name of an existing cable object.
         /// </summary>
@@ -283,9 +281,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
 
-        #region Selection
+#region Selection
         /// <summary>
         /// This function retrieves the selected status for an object.
         /// </summary>
@@ -313,9 +311,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.CableObj.SetSelected(name, isSelected, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Cross-Section & Material Properties
+#region Cross-Section & Material Properties
         /// <summary>
         /// This function retrieves the section property assigned to a cable object.
         /// </summary>
@@ -518,9 +516,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.CableObj.SetMaterialOverwrite(name, propertyName, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Cable Properties
+#region Cable Properties
         /// <summary>
         /// This function retrieves definition data for a specified cable object.
         /// </summary>
@@ -680,9 +678,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.CableObj.SetOutputStations(name, (int)outputStationType, maxStationSpacing, minStationNumber, noOutputAndDesignAtElementEnds, noOutputAndDesignAtPointLoads, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Loads
+#region Loads
         // LoadGravity
         /// <summary>
         /// This function retrieves the gravity load assignments to elements.
@@ -1171,7 +1169,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.CableObj.DeleteLoadDistributedWithGUID(name, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
     }
 }
+#endif

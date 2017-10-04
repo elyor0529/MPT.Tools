@@ -5,22 +5,12 @@ using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
+#if  BUILD_ETABS2013
+using CSiProgram = ETABS2013;
 #elif BUILD_ETABS2015
-using ETABS2015;
+using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016
-using ETABS2016;
+using CSiProgram = ETABS2016;
 #endif
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
@@ -59,6 +49,66 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.FrameObj.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// This function retrieves the names of all defined frame object properties for a given story.
+        /// </summary>
+        /// <param name="storyName">Name of the story to filter the frame object names by.</param>
+        /// <param name="numberOfNames">The number of frame object object names retrieved by the program.</param>
+        /// <param name="names">Frame object object names retrieved by the program.</param>
+        public void GetNameListOnStory(string storyName, 
+            ref int numberOfNames,
+            ref string[] names)
+        {
+            _callCode = _sapModel.FrameObj.GetNameListOnStory(storyName, ref numberOfNames, ref names);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the label and story for a unique object name.
+        /// </summary>
+        /// <param name="name">The name of the object.</param>
+        /// <param name="label">The object label.</param>
+        /// <param name="story">The object story label.</param>
+        public void GetLabelFromName(string name,
+            ref string label,
+            ref string story)
+        {
+            _callCode = _sapModel.FrameObj.GetLabelFromName(name, ref label, ref story);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the names and labels of all defined objects.
+        /// </summary>
+        /// <param name="numberOfNames">The number of object names retrieved by the program.</param>
+        /// <param name="names">The object names.</param>
+        /// <param name="labels">The object labels.</param>
+        /// <param name="stories">The story levels of the objects.</param>
+        public void GetLabelNameList(ref int numberOfNames,
+            ref string[] names,
+            ref string[] labels,
+            ref string[] stories)
+        {
+            _callCode = _sapModel.FrameObj.GetLabelNameList(ref numberOfNames, ref names, ref labels, ref stories);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the unique name of an object, given the label and story level .
+        /// </summary>
+        /// <param name="label">The object label.</param>
+        /// <param name="story">The object story level.</param>
+        /// <param name="name">The object unique name.</param>
+        public void GetNameFromLabel(string label,
+            string story,
+            ref string name)
+        {
+            _callCode = _sapModel.FrameObj.GetNameFromLabel(label, story, ref name);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
 
         /// <summary>
         /// Returns the 3x3 direction cosines to transform local coordinates to global coordinates by the equation [directionCosines]*[localCoordinates] = [globalCoordinates].
@@ -196,7 +246,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function gets the advanced local axes data for an existing object.
         /// </summary>
@@ -272,6 +322,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.FrameObj.SetLocalAxesAdvanced(name, isActive, plane2, (int)planeVectorOption, planeCoordinateSystem, ref csiPlaneVectorDirection, ref planePoint, ref planeReferenceVector, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
         #region Modifiers
@@ -308,7 +359,20 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
+        /// <summary>
+        /// This function deletes a modifier assignment. 
+        /// </summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are deleted for the objects specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are deleted for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are deleted for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void DeleteModifiers(string name,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.FrameObj.DeleteModifiers(name, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function gets the modification factors for axial and flexural stiffness for a frame object if the Direct Analysis method is used.
         /// TODO: Handle? The function will return nonzero the modification factors are not available for the frame object.
@@ -323,8 +387,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.FrameObj.GetDAMModifiers(name, ref EAModifier, ref EIModifier);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
+#endif
         #endregion
 
         #region Creation & Groups
@@ -559,7 +622,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves frame section property data for a trapezoidal frame section.
         /// </summary>
@@ -615,7 +678,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.PropFrame.SetTrapezoidal(name, materialName, sectionDepth, sectionTopWidth, sectionBottomWidth, color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
 
 
         /// <summary>
@@ -739,7 +802,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the method to determine the notional size of a frame section for the creep and shrinkage calculations. 
         /// </summary>
@@ -818,8 +881,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.FrameObj.SetMatTemp(name, temperature, patternName, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
+#endif
 
 
         /// <summary>
@@ -898,6 +960,123 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 
         #region Frame Properties
 
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves select data for all area objects in the model .
+        /// </summary>
+        /// <param name="numberOfNames">The number of names.</param>
+        /// <param name="frameNames">The name of each frame.</param>
+        /// <param name="sectionNames">The names of the sections assigned to each frame.</param>
+        /// <param name="storyNames">The story name associated with each frame</param>
+        /// <param name="pointINames">Point I associated with each frame</param>
+        /// <param name="pointJNames">Point J associated with each frame</param>
+        /// <param name="pointICoordinates">Coordinates for point I of each frame. [L].</param>
+        /// <param name="pointJCoordinates">Coordinates for point J of each frame. [L].</param>
+        /// <param name="angles">Angle of rotation of the local axis about the local-1 axis. [deg].</param>
+        /// <param name="pointIOffsets">Three joint offset distances for point I of each frame. [L].</param>
+        /// <param name="pointJOffsets">Three joint offset distances for point J of each frame. [L].</param>
+        /// <param name="cardinalInsertionPoints">The cardinal point specifies the relative position of the frame section on the line representing the frame object.</param>
+        /// <param name="coordinateSystem">The name of the coordinate system in which the coordinates are returned.</param>
+        public void GetAllFrames(ref int numberOfNames,
+            ref string[] frameNames,
+            ref string[] sectionNames,
+            ref string[] storyNames,
+            ref string[] pointINames,
+            ref string[] pointJNames,
+            ref Coordinate3DCartesian[] pointICoordinates,
+            ref Coordinate3DCartesian[] pointJCoordinates,
+            ref double[] angles,
+            ref Displacements[] pointIOffsets,
+            ref Displacements[] pointJOffsets,
+            ref eCardinalInsertionPoint[] cardinalInsertionPoints,
+            string coordinateSystem = CoordinateSystems.Global)
+        {
+            int[] csiCardinalInsertionPoints = new int[0];
+
+            double[] coordinatesIX = new double[0];
+            double[] coordinatesIY = new double[0];
+            double[] coordinatesIZ = new double[0];
+
+            double[] coordinatesJX = new double[0];
+            double[] coordinatesJY = new double[0];
+            double[] coordinatesJZ = new double[0];
+
+            double[] offsetsIX = new double[0];
+            double[] offsetsIY = new double[0];
+            double[] offsetsIZ = new double[0];
+
+            double[] offsetsJX = new double[0];
+            double[] offsetsJY = new double[0];
+            double[] offsetsJZ = new double[0];
+
+            _callCode = _sapModel.FrameObj.GetAllFrames(ref numberOfNames, ref frameNames, ref sectionNames, ref storyNames,
+                ref pointINames, ref pointJNames, 
+                ref coordinatesIX, ref coordinatesIY, ref coordinatesIZ,
+                ref coordinatesJX, ref coordinatesJY, ref coordinatesJZ,
+                ref angles, 
+                ref offsetsIX, ref offsetsIY, ref offsetsIZ,
+                ref offsetsJX, ref offsetsJY, ref offsetsJZ,
+                ref csiCardinalInsertionPoints,
+                coordinateSystem);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            cardinalInsertionPoints = csiCardinalInsertionPoints.Cast<eCardinalInsertionPoint>().ToArray();
+
+            pointICoordinates = new Coordinate3DCartesian[numberOfNames];
+            pointJCoordinates = new Coordinate3DCartesian[numberOfNames];
+            pointIOffsets = new Displacements[numberOfNames];
+            pointJOffsets = new Displacements[numberOfNames];
+            for (int i = 0; i < numberOfNames; i++)
+            {
+                pointICoordinates[i].X = coordinatesIX[i];
+                pointICoordinates[i].Y = coordinatesIY[i];
+                pointICoordinates[i].Z = coordinatesIZ[i];
+
+                pointJCoordinates[i].X = coordinatesJX[i];
+                pointJCoordinates[i].Y = coordinatesJY[i];
+                pointJCoordinates[i].Z = coordinatesJZ[i];
+
+                pointIOffsets[i].UX = offsetsIX[i];
+                pointIOffsets[i].UY = offsetsIY[i];
+                pointIOffsets[i].UZ = offsetsIZ[i];
+
+                pointJOffsets[i].UX = offsetsJX[i];
+                pointJOffsets[i].UY = offsetsJY[i];
+                pointJOffsets[i].UZ = offsetsJZ[i];
+            }
+        }
+
+
+        /// <summary>
+        /// Retrieves support data for a given frame beam object.
+        /// </summary>
+        /// <param name="name">The name of an existing frame beam object.</param>
+        /// <param name="supportNameI">The name of the column frame object, beam frame object or wall area object which supports the beam at its start node.</param>
+        /// <param name="supportTypeI">The type of support at the start node.</param>
+        /// <param name="supportNameJ">The name of the column frame object, beam frame object or wall area object which supports the beam at its end node.</param>
+        /// <param name="supportTypeJ">The type of support at the end node.</param>
+        public void GetSupports(string name,
+            ref string supportNameI,
+            ref eSupportType supportTypeI,
+            ref string supportNameJ,
+            ref eSupportType supportTypeJ)
+        {
+            CSiProgram.eObjType csiSupportTypeI = CSiProgram.eObjType.Area;
+            CSiProgram.eObjType csiSupportTypeJ = CSiProgram.eObjType.Area;
+
+            _callCode = _sapModel.FrameObj.GetSupports(name, 
+                            ref supportNameI, ref csiSupportTypeI,
+                            ref supportNameJ, ref csiSupportTypeJ);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            supportTypeI = CSiEnumConverter.FromCSi(csiSupportTypeI);
+            supportTypeJ = CSiEnumConverter.FromCSi(csiSupportTypeJ);
+
+            supportTypeI = EnumLibrary.Convert(csiSupportTypeI, supportTypeI);
+            supportTypeJ = EnumLibrary.Convert(csiSupportTypeJ, supportTypeJ);
+        }
+
+#else
         /// <summary>
         /// This function gets the fireproofing assignment to an existing frame object.
         /// </summary>
@@ -981,6 +1160,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+
+
+#endif
+
         /// <summary>
         /// This function retrieves the lateral bracing location assignments for frame objects.
         /// </summary>
@@ -1059,7 +1242,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 
 
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves definition data for all curved frame objects and returns the data in arrays.
         /// </summary>
@@ -1199,9 +1382,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.FrameObj.SetEndSkew(name, skewI, skewJ, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
-
-
+        
         /// <summary>
         /// This function retrieves the frame object end offsets along the 1-axis of the element.
         /// </summary>
@@ -1328,7 +1511,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves  the automatic meshing assignments to frame objects.
         /// </summary>
@@ -1384,8 +1567,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.FrameObj.SetAutoMesh(name, isAutoMeshed, isAutoMeshedAtPoints, isAutoMeshedAtLines, minElementNumber, autoMeshMaxLength, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
+#endif
         #endregion
 
         #region Support & Connections
@@ -1445,7 +1627,35 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        // ===
 
+        /// <summary>
+        /// Retrieves the named spring property assignment for an object.</summary>
+        /// <param name="name">The name of an existing object .</param>
+        /// <param name="nameSpring">The name of an existing point spring property.</param>
+        public void GetSpringAssignment(string name,
+            ref string nameSpring)
+        {
+            _callCode = _sapModel.FrameObj.GetSpringAssignment(name, ref nameSpring);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Assigns an existing named spring property to objects.</summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="nameSpring">The name of an existing point spring property.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void SetSpringAssignment(string name,
+            string nameSpring,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.FrameObj.SetSpringAssignment(name, nameSpring);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#else
         /// <summary>
         /// This function retrieves the spring assignments to an object face.
         /// </summary>
@@ -1550,6 +1760,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.FrameObj.SetSpring(name, (int)springType, stiffness, (int)springSimpleType, linkProperty, (int)springLocalOneType, direction, plane23Angle, ref vector, angleOffset, replace, coordinateSystem, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
+
 
         /// <summary>
         /// This function deletes all spring assignments for the specified objects.
@@ -1598,10 +1810,127 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.FrameObj.SetDesignProcedure(name, (int)designProcedure, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion  
+
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves the design orientation of a frame object.
+        /// </summary>
+        /// <param name="name">The name of a defined frame object.</param>
+        /// <param name="designOrientation">The design orientation.</param>
+        public void GetDesignOrientation(string name,
+            ref eFrameDesignOrientation designOrientation)
+        {
+            CSiProgram.eFrameDesignOrientation csiDesignOrientation = CSiProgram.eFrameDesignOrientation.Other;
+
+            _callCode = _sapModel.FrameObj.GetDesignOrientation(name, ref csiDesignOrientation);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            designOrientation = CSiEnumConverter.FromCSi(csiDesignOrientation);
+        }
+
+        // ===
+
+        /// <summary>
+        /// Retrieves the frame object column splice overwrite assignment.
+        /// </summary>
+        /// <param name="name">The name of an existing area object.</param>
+        /// <param name="spliceOption">The option used for defining the splice overwrite.</param>
+        /// <param name="height">Specifies the height of the splice above the story at the bottom of the column object, if <paramref name="spliceOption"/> = <see cref="eColumnSpliceOption.SpliceAtHeightAboveStoryAtBottomOfColumn"/></param>
+        public void GetColumnSpliceOverwrite(string name,
+            ref eColumnSpliceOption spliceOption,
+            ref double height)
+        {
+            int csiSpliceOption = 0;
+
+            _callCode = _sapModel.FrameObj.GetColumnSpliceOverwrite(name, ref csiSpliceOption, ref height);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            spliceOption = (eColumnSpliceOption) csiSpliceOption;
+        }
+
+        /// <summary>
+        /// Sets the frame object column splice overwrite assignment.
+        /// </summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="spliceOption">The option used for defining the splice overwrite.</param>
+        /// <param name="height">Specifies the height of the splice above the story at the bottom of the column object, if <paramref name="spliceOption"/> = <see cref="eColumnSpliceOption.SpliceAtHeightAboveStoryAtBottomOfColumn"/></param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void SetColumnSpliceOverwrite(string name,
+            eColumnSpliceOption spliceOption,
+            double height,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.FrameObj.SetColumnSpliceOverwrite(name, (int)spliceOption, height, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+
+        /// <summary>
+        /// Retrieves the pier label assignments of an object.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="namePier">The name of the pier assignment, if any, or "None".</param>
+        public void GetPier(string name,
+            ref string namePier)
+        {
+            _callCode = _sapModel.FrameObj.GetPier(name, ref namePier);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Sets the pier label assignment of one or more objects.
+        /// </summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="namePier">The name of the pier assignment, if any, or "None".</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void SetPier(string name,
+                string namePier,
+                eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.FrameObj.SetPier(name, namePier, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+
+        /// <summary>
+        /// Retrieves the spandrel label assignments of an object.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="nameSpandrel">The name of the spandrel assignment, if any, or "None".</param>
+        public void GetSpandrel(string name,
+            ref string nameSpandrel)
+        {
+            _callCode = _sapModel.FrameObj.GetSpandrel(name, ref nameSpandrel);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Sets the spandrel label assignment of one or more objects.
+        /// </summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="nameSpandrel">The name of the spandrel assignment, if any, or "None".</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void SetSpandrel(string name,
+            string nameSpandrel,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.FrameObj.SetSpandrel(name, nameSpandrel, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
+        #endregion
 
         #region Loads
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         // PDeltaForce
         /// <summary>
         /// This function retrieves the P-Delta force assignments to line elements.
@@ -2044,6 +2373,227 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+
+        // LoadDistributedWithGUID
+        /// <summary>
+        /// This function retrieves the distributed load assignments to objects.
+        /// </summary>
+        /// <param name="name">The name of an existing object, element or group of objects, depending on the value of <paramref name="itemType"/>.</param>
+        /// <param name="numberItems">The total number of distributed loads retrieved for the specified elements.</param>
+        /// <param name="names">The name of the element associated with each distributed load.</param>
+        /// <param name="loadPatterns">The name of the load pattern associated with each distributed load.</param>
+        /// <param name="GUIDs">This is an array that includes the global unique ID of each distributed load.</param>
+        /// <param name="forceTypes">Force type for the distributed load for each load pattern.</param>
+        /// <param name="coordinateSystems">Coordinated system used for each distributed load.
+        /// It may be Local or the name of a defined coordinate system.</param>
+        /// <param name="loadDirections">Direction that the load is applied in for each load pattern.</param>
+        /// <param name="relativeDistanceStartFromI">The relative distance from the I-End of the element to the start of the distributed load.</param>
+        /// <param name="relativeDistanceEndFromI">The relative distance from the I-End of the element to the end of the distributed load.</param>
+        /// <param name="absoluteDistanceStartFromI">The actual distance from the I-End of the element to the start of the distributed load. [L]</param>
+        /// <param name="absoluteDistanceEndFromI">The actual distance from the I-End of the element to the end of the distributed load. [L]</param>
+        /// <param name="startLoadValues">The load value at the start of the distributed load. 
+        /// [F/L] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Force"/>  and [F*L/L] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Moment"/>.</param>
+        /// <param name="endLoadValues">The load value at the end of the distributed load. 
+        /// [F/L] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Force"/>  and [F*L/L] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Moment"/>.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the load assignments are retrieved for the objects specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the load assignments are retrieved for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the load assignments are retrieved for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void GetLoadDistributedWithGUID(string name,
+            ref int numberItems,
+            ref string[] names,
+            ref string[] loadPatterns,
+            ref string[] GUIDs,
+            ref eLoadForceType[] forceTypes,
+            ref eLoadDirection[] loadDirections,
+            ref double[] startLoadValues,
+            ref double[] endLoadValues,
+            ref double[] absoluteDistanceStartFromI,
+            ref double[] absoluteDistanceEndFromI,
+            ref double[] relativeDistanceStartFromI,
+            ref double[] relativeDistanceEndFromI,
+            ref string[] coordinateSystems,
+            eItemType itemType = eItemType.Object)
+        {
+            int[] csiForceTypes = new int[0];
+            int[] csiLoadDirections = new int[0];
+
+            _callCode = _sapModel.FrameObj.GetLoadDistributedWithGUID(name, ref numberItems, ref names, ref loadPatterns, ref csiForceTypes, ref coordinateSystems, ref csiLoadDirections, ref startLoadValues, ref endLoadValues, ref absoluteDistanceStartFromI, ref absoluteDistanceEndFromI, ref relativeDistanceStartFromI, ref relativeDistanceEndFromI, ref GUIDs, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            forceTypes = csiForceTypes.Cast<eLoadForceType>().ToArray();
+            loadDirections = csiLoadDirections.Cast<eLoadDirection>().ToArray();
+        }
+
+        /// <summary>
+        /// If the frame object is already assigned a distributed load with a global unique ID matching the specified global unique ID, this function modifies that distributed load. 
+        /// Otherwise, this function assigns a new distributed load to the frame object and sets its global unique ID to the specified global unique ID.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="loadPattern">The name of the load pattern associated with the distributed load.</param>
+        /// <param name="forceType">Force type for the distributed load for the load pattern.</param>
+        /// <param name="loadDirection">Direction that the load is applied in for the load pattern.</param>
+        /// <param name="startLoadValue">The load value at the start of the distributed load. 
+        /// [F/L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Force"/>  and [F*L/L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Moment"/>.</param>
+        /// <param name="endLoadValue">The load value at the end of the distributed load. 
+        /// [F/L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Force"/>  and [F*L/L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Moment"/>.</param>
+        /// <param name="absoluteDistanceStartFromI">The actual distance from the I-End of the element to the start of the distributed load. [L]</param>
+        /// <param name="absoluteDistanceEndFromI">The actual distance from the I-End of the element to the end of the distributed load. [L]</param>
+        /// <param name="GUID">This is the global unique ID of a distributed load assigned to the frame object or if it is not the global unique id of a distributed load assigned to the frame object and it is not blank, the global unique ID which is assigned to the newly assigned load. 
+        /// If left blank, a new load is assigned to the frame object and the value of this parameter is set to the global unique ID of the newly assigned load.</param>
+        /// <param name="distanceIsRelative">True: The specified distance item is a relative distance, otherwise it is an actual distance.</param>
+        /// <param name="coordinateSystem">Coordinated system used for each distributed load.
+        /// It may be Local or the name of a defined coordinate system.</param>
+        /// <param name="replace">True: If the input GUID is not the GUID of any distributed load assigned to the frame object, all previous distributed loads, if any, assigned to the specified frame object, in the specified load pattern, are deleted before making the new assignment. 
+        /// If the input GUID is the GUID of a distributed load already assigned to the frame object, the parameters of the distributed load are updated with the values provided and this item is ignored.</param>
+        public void SetLoadDistributedWithGUID(string name,
+            string loadPattern,
+            string GUID,
+            eLoadForceType forceType,
+            eLoadDirection loadDirection,
+            double startLoadValue,
+            double endLoadValue,
+            double absoluteDistanceStartFromI,
+            double absoluteDistanceEndFromI,
+            bool distanceIsRelative = true,
+            string coordinateSystem = CoordinateSystems.Global,
+            bool replace = true)
+        {
+            _callCode = _sapModel.FrameObj.SetLoadDistributedWithGUID(name, loadPattern, (int)forceType, (int)loadDirection, startLoadValue, endLoadValue, absoluteDistanceStartFromI, absoluteDistanceEndFromI, ref GUID, coordinateSystem, distanceIsRelative, replace);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function deletes the distributed load assignments to the specified objects for the specified load pattern.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="GUID">The global unique ID of one of the distributed loads on that frame object.</param>
+        public void DeleteLoadDistributedWithGUID(string name,
+            string GUID)
+        {
+            _callCode = _sapModel.FrameObj.DeleteLoadDistributedWithGUID(name, GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        // LoadPointWithGUID
+        /// <summary>
+        /// This function retrieves the distributed load assignments to objects.
+        /// </summary>
+        /// <param name="name">The name of an existing object, element or group of objects, depending on the value of <paramref name="itemType"/>.</param>
+        /// <param name="numberItems">The total number of point loads retrieved for the specified elements.</param>
+        /// <param name="names">The name of the element associated with each point load.</param>
+        /// <param name="loadPatterns">The name of the load pattern associated with each point load.</param>
+        /// <param name="GUIDs">This is an array that includes the global unique ID of each distributed load.</param>
+        /// <param name="forceTypes">Force type for the point load for each load pattern.</param>
+        /// <param name="coordinateSystems">Coordinated system used for each point load.
+        /// It may be Local or the name of a defined coordinate system.</param>
+        /// <param name="loadDirections">Direction that the load is applied in for each load pattern.</param>
+        /// <param name="relativeDistanceFromI">The relative distance from the I-End of the element to the location of the point load.</param>
+        /// <param name="absoluteDistanceFromI">The actual distance from the I-End of the element to the location of the point load. [L]</param>
+        /// <param name="pointLoadValues">The load value of the point loads. 
+        /// [F] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Force"/>  and [F*L] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Moment"/>.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the load assignments are retrieved for the objects specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the load assignments are retrieved for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the load assignments are retrieved for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void GetLoadPointWithGUID(string name,
+            ref int numberItems,
+            ref string[] names,
+            ref string[] loadPatterns,
+            ref string[] GUIDs,
+            ref eLoadForceType[] forceTypes,
+            ref eLoadDirection[] loadDirections,
+            ref double[] pointLoadValues,
+            ref double[] absoluteDistanceFromI,
+            ref double[] relativeDistanceFromI,
+            ref string[] coordinateSystems,
+            eItemType itemType = eItemType.Object)
+        {
+            int[] csiForceTypes = new int[0];
+            int[] csiDirectionsApplied = new int[0];
+
+            _callCode = _sapModel.FrameObj.GetLoadPointWithGUID(name, ref numberItems, ref names, ref loadPatterns, ref csiForceTypes, ref coordinateSystems, ref csiDirectionsApplied, ref pointLoadValues, ref absoluteDistanceFromI, ref relativeDistanceFromI, ref GUIDs, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            forceTypes = csiForceTypes.Cast<eLoadForceType>().ToArray();
+            loadDirections = csiDirectionsApplied.Cast<eLoadDirection>().ToArray();
+        }
+
+        /// <summary>
+        /// This function assigns point loads to objects.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="loadPattern">The name of the load pattern associated with the uniform load.</param>
+        /// <param name="GUID">This is the global unique ID of a distributed load assigned to the frame object or if it is not the global unique id of a distributed load assigned to the frame object and it is not blank, the global unique ID which is assigned to the newly assigned load. 
+        /// If left blank, a new load is assigned to the frame object and the value of this parameter is set to the global unique ID of the newly assigned load.</param>
+        /// <param name="loadDirection">The direction that the load is applied.</param>
+        /// <param name="forceType">Force type for the point load for the load pattern.</param>
+        /// <param name="pointLoadValue">The load value of the point loads. 
+        /// [F] when <paramref name="forceType"/> is <see cref="eLoadForceType.Force"/>  and [F*L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Moment"/>.</param>
+        /// <param name="absoluteDistanceFromI">The actual distance from the I-End of the element to the location of the point load. [L]</param>
+        /// <param name="distanceIsRelative">True: The specified distance item is a relative distance, otherwise it is an actual distance.</param>
+        /// <param name="coordinateSystem">The name of the coordinate system associated with the uniform load.</param>
+        /// <param name="replace">True: If the input GUID is not the GUID of any distributed load assigned to the frame object, all previous distributed loads, if any, assigned to the specified frame object, in the specified load pattern, are deleted before making the new assignment. 
+        /// If the input GUID is the GUID of a distributed load already assigned to the frame object, the parameters of the distributed load are updated with the values provided and this item is ignored.</param>
+        public void SetLoadPointWithGUID(string name,
+            string loadPattern,
+            string GUID,
+            eLoadForceType forceType,
+            eLoadDirection loadDirection,
+            double pointLoadValue,
+            double absoluteDistanceFromI,
+            bool distanceIsRelative = true,
+            string coordinateSystem = CoordinateSystems.Global,
+            bool replace = true)
+        {
+            _callCode = _sapModel.FrameObj.SetLoadPointWithGUID(name, loadPattern, (int)loadDirection, (int)forceType, pointLoadValue, absoluteDistanceFromI, ref GUID, coordinateSystem, distanceIsRelative, replace);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function deletes the point load assignments to the specified objects for the specified load pattern.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="GUID">The global unique ID of one of the distributed loads on that frame object.</param>
+        public void DeleteLoadPointWithGUID(string name,
+            string GUID)
+        {
+            _callCode = _sapModel.FrameObj.DeleteLoadPointWithGUID(name, GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        // Load Transfer
+        /// <summary>
+        /// This function returns the load transfer option for a frame object.  
+        /// It indicates whether the frame receives load from an area object when the area object is loaded with a load of type uniform to frame.
+        /// </summary>
+        /// <param name="name">The name of an existing frame.</param>
+        /// <param name="loadIsTransferred">Indicates if load is allowed to be transferred from area objects to this frame object.</param>
+        public void GetLoadTransfer(string name,
+            ref bool loadIsTransferred)
+        {
+            _callCode = _sapModel.FrameObj.GetLoadTransfer(name, ref loadIsTransferred);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function returns the load transfer option for frame objects.  
+        /// It indicates whether the frame receives load from an area object when the area object is loaded with a load of type uniform to frame.
+        /// </summary><param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="loadIsTransferred">Indicates if load is allowed to be transferred from area objects to this frame object.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void SetLoadTransfer(string name,
+            bool loadIsTransferred,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.FrameObj.SetLoadTransfer(name, loadIsTransferred, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
+
+
         // LoadTemperature
         /// <summary>
         /// This function retrieves the temperature load assignments to elements.
@@ -2218,105 +2768,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
-        // LoadDistributedWithGUID
-        /// <summary>
-        /// This function retrieves the distributed load assignments to objects.
-        /// </summary>
-        /// <param name="name">The name of an existing object, element or group of objects, depending on the value of <paramref name="itemType"/>.</param>
-        /// <param name="numberItems">The total number of distributed loads retrieved for the specified elements.</param>
-        /// <param name="names">The name of the element associated with each distributed load.</param>
-        /// <param name="loadPatterns">The name of the load pattern associated with each distributed load.</param>
-        /// <param name="GUIDs">This is an array that includes the global unique ID of each distributed load.</param>
-        /// <param name="forceTypes">Force type for the distributed load for each load pattern.</param>
-        /// <param name="coordinateSystems">Coordinated system used for each distributed load.
-        /// It may be Local or the name of a defined coordinate system.</param>
-        /// <param name="loadDirections">Direction that the load is applied in for each load pattern.</param>
-        /// <param name="relativeDistanceStartFromI">The relative distance from the I-End of the element to the start of the distributed load.</param>
-        /// <param name="relativeDistanceEndFromI">The relative distance from the I-End of the element to the end of the distributed load.</param>
-        /// <param name="absoluteDistanceStartFromI">The actual distance from the I-End of the element to the start of the distributed load. [L]</param>
-        /// <param name="absoluteDistanceEndFromI">The actual distance from the I-End of the element to the end of the distributed load. [L]</param>
-        /// <param name="startLoadValues">The load value at the start of the distributed load. 
-        /// [F/L] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Force"/>  and [F*L/L] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Moment"/>.</param>
-        /// <param name="endLoadValues">The load value at the end of the distributed load. 
-        /// [F/L] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Force"/>  and [F*L/L] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Moment"/>.</param>
-        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the load assignments are retrieved for the objects specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.Group"/>, the load assignments are retrieved for the objects included in the group specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.SelectedObjects"/>, the load assignments are retrieved for all selected objects, and the <paramref name="name"/> item is ignored.</param>
-        public void GetLoadDistributedWithGUID(string name,
-            ref int numberItems,
-            ref string[] names,
-            ref string[] loadPatterns,
-            ref string[] GUIDs,
-            ref eLoadForceType[] forceTypes,
-            ref eLoadDirection[] loadDirections,
-            ref double[] startLoadValues,
-            ref double[] endLoadValues,
-            ref double[] absoluteDistanceStartFromI,
-            ref double[] absoluteDistanceEndFromI,
-            ref double[] relativeDistanceStartFromI,
-            ref double[] relativeDistanceEndFromI,
-            ref string[] coordinateSystems,
-            eItemType itemType = eItemType.Object)
-        {
-            int[] csiForceTypes = new int[0];
-            int[] csiLoadDirections = new int[0];
-
-            _callCode = _sapModel.FrameObj.GetLoadDistributedWithGUID(name, ref numberItems, ref names, ref loadPatterns, ref csiForceTypes, ref coordinateSystems, ref csiLoadDirections, ref startLoadValues, ref endLoadValues, ref absoluteDistanceStartFromI, ref absoluteDistanceEndFromI, ref relativeDistanceStartFromI, ref relativeDistanceEndFromI, ref GUIDs, CSiEnumConverter.ToCSi(itemType));
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            forceTypes = csiForceTypes.Cast<eLoadForceType>().ToArray();
-            loadDirections = csiLoadDirections.Cast<eLoadDirection>().ToArray();
-        }
-
-        /// <summary>
-        /// If the frame object is already assigned a distributed load with a global unique ID matching the specified global unique ID, this function modifies that distributed load. 
-        /// Otherwise, this function assigns a new distributed load to the frame object and sets its global unique ID to the specified global unique ID.
-        /// </summary>
-        /// <param name="name">The name of an existing object.</param>
-        /// <param name="loadPattern">The name of the load pattern associated with the distributed load.</param>
-        /// <param name="forceType">Force type for the distributed load for the load pattern.</param>
-        /// <param name="loadDirection">Direction that the load is applied in for the load pattern.</param>
-        /// <param name="startLoadValue">The load value at the start of the distributed load. 
-        /// [F/L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Force"/>  and [F*L/L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Moment"/>.</param>
-        /// <param name="endLoadValue">The load value at the end of the distributed load. 
-        /// [F/L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Force"/>  and [F*L/L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Moment"/>.</param>
-        /// <param name="absoluteDistanceStartFromI">The actual distance from the I-End of the element to the start of the distributed load. [L]</param>
-        /// <param name="absoluteDistanceEndFromI">The actual distance from the I-End of the element to the end of the distributed load. [L]</param>
-        /// <param name="GUID">This is the global unique ID of a distributed load assigned to the frame object or if it is not the global unique id of a distributed load assigned to the frame object and it is not blank, the global unique ID which is assigned to the newly assigned load. 
-        /// If left blank, a new load is assigned to the frame object and the value of this parameter is set to the global unique ID of the newly assigned load.</param>
-        /// <param name="distanceIsRelative">True: The specified distance item is a relative distance, otherwise it is an actual distance.</param>
-        /// <param name="coordinateSystem">Coordinated system used for each distributed load.
-        /// It may be Local or the name of a defined coordinate system.</param>
-        /// <param name="replace">True: If the input GUID is not the GUID of any distributed load assigned to the frame object, all previous distributed loads, if any, assigned to the specified frame object, in the specified load pattern, are deleted before making the new assignment. 
-        /// If the input GUID is the GUID of a distributed load already assigned to the frame object, the parameters of the distributed load are updated with the values provided and this item is ignored.</param>
-        public void SetLoadDistributedWithGUID(string name,
-            string loadPattern,
-            string GUID,
-            eLoadForceType forceType,
-            eLoadDirection loadDirection,
-            double startLoadValue,
-            double endLoadValue,
-            double absoluteDistanceStartFromI,
-            double absoluteDistanceEndFromI,
-            bool distanceIsRelative = true,
-            string coordinateSystem = CoordinateSystems.Global,
-            bool replace = true)
-        {
-            _callCode = _sapModel.FrameObj.SetLoadDistributedWithGUID(name, loadPattern, (int)forceType, (int)loadDirection, startLoadValue, endLoadValue, absoluteDistanceStartFromI, absoluteDistanceEndFromI, ref GUID, coordinateSystem, distanceIsRelative, replace);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function deletes the distributed load assignments to the specified objects for the specified load pattern.
-        /// </summary>
-        /// <param name="name">The name of an existing object.</param>
-        /// <param name="GUID">The global unique ID of one of the distributed loads on that frame object.</param>
-        public void DeleteLoadDistributedWithGUID(string name,
-            string GUID)
-        {
-            _callCode = _sapModel.FrameObj.DeleteLoadDistributedWithGUID(name, GUID);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
+        
 
 
         // LoadPoint
@@ -2406,124 +2858,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.FrameObj.DeleteLoadPoint(name, loadPattern, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-        // LoadPointWithGUID
-        /// <summary>
-        /// This function retrieves the distributed load assignments to objects.
-        /// </summary>
-        /// <param name="name">The name of an existing object, element or group of objects, depending on the value of <paramref name="itemType"/>.</param>
-        /// <param name="numberItems">The total number of point loads retrieved for the specified elements.</param>
-        /// <param name="names">The name of the element associated with each point load.</param>
-        /// <param name="loadPatterns">The name of the load pattern associated with each point load.</param>
-        /// <param name="GUIDs">This is an array that includes the global unique ID of each distributed load.</param>
-        /// <param name="forceTypes">Force type for the point load for each load pattern.</param>
-        /// <param name="coordinateSystems">Coordinated system used for each point load.
-        /// It may be Local or the name of a defined coordinate system.</param>
-        /// <param name="loadDirections">Direction that the load is applied in for each load pattern.</param>
-        /// <param name="relativeDistanceFromI">The relative distance from the I-End of the element to the location of the point load.</param>
-        /// <param name="absoluteDistanceFromI">The actual distance from the I-End of the element to the location of the point load. [L]</param>
-        /// <param name="pointLoadValues">The load value of the point loads. 
-        /// [F] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Force"/>  and [F*L] when <paramref name="forceTypes"/> is <see cref="eLoadForceType.Moment"/>.</param>
-        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the load assignments are retrieved for the objects specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.Group"/>, the load assignments are retrieved for the objects included in the group specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.SelectedObjects"/>, the load assignments are retrieved for all selected objects, and the <paramref name="name"/> item is ignored.</param>
-        public void GetLoadPointWithGUID(string name,
-            ref int numberItems,
-            ref string[] names,
-            ref string[] loadPatterns,
-            ref string[] GUIDs,
-            ref eLoadForceType[] forceTypes,
-            ref eLoadDirection[] loadDirections,
-            ref double[] pointLoadValues,
-            ref double[] absoluteDistanceFromI,
-            ref double[] relativeDistanceFromI,
-            ref string[] coordinateSystems,
-            eItemType itemType = eItemType.Object)
-        {
-            int[] csiForceTypes = new int[0];
-            int[] csiDirectionsApplied = new int[0];
-
-            _callCode = _sapModel.FrameObj.GetLoadPointWithGUID(name, ref numberItems, ref names, ref loadPatterns, ref csiForceTypes, ref coordinateSystems, ref csiDirectionsApplied, ref pointLoadValues, ref absoluteDistanceFromI, ref relativeDistanceFromI, ref GUIDs, CSiEnumConverter.ToCSi(itemType));
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            forceTypes = csiForceTypes.Cast<eLoadForceType>().ToArray();
-            loadDirections = csiDirectionsApplied.Cast<eLoadDirection>().ToArray();
-        }
-
-        /// <summary>
-        /// This function assigns point loads to objects.
-        /// </summary>
-        /// <param name="name">The name of an existing object.</param>
-        /// <param name="loadPattern">The name of the load pattern associated with the uniform load.</param>
-        /// <param name="GUID">This is the global unique ID of a distributed load assigned to the frame object or if it is not the global unique id of a distributed load assigned to the frame object and it is not blank, the global unique ID which is assigned to the newly assigned load. 
-        /// If left blank, a new load is assigned to the frame object and the value of this parameter is set to the global unique ID of the newly assigned load.</param>
-        /// <param name="loadDirection">The direction that the load is applied.</param>
-        /// <param name="forceType">Force type for the point load for the load pattern.</param>
-        /// <param name="pointLoadValue">The load value of the point loads. 
-        /// [F] when <paramref name="forceType"/> is <see cref="eLoadForceType.Force"/>  and [F*L] when <paramref name="forceType"/> is <see cref="eLoadForceType.Moment"/>.</param>
-        /// <param name="absoluteDistanceFromI">The actual distance from the I-End of the element to the location of the point load. [L]</param>
-        /// <param name="distanceIsRelative">True: The specified distance item is a relative distance, otherwise it is an actual distance.</param>
-        /// <param name="coordinateSystem">The name of the coordinate system associated with the uniform load.</param>
-        /// <param name="replace">True: If the input GUID is not the GUID of any distributed load assigned to the frame object, all previous distributed loads, if any, assigned to the specified frame object, in the specified load pattern, are deleted before making the new assignment. 
-        /// If the input GUID is the GUID of a distributed load already assigned to the frame object, the parameters of the distributed load are updated with the values provided and this item is ignored.</param>
-        public void SetLoadPointWithGUID(string name,
-            string loadPattern,
-            string GUID,
-            eLoadForceType forceType,
-            eLoadDirection loadDirection,
-            double pointLoadValue,
-            double absoluteDistanceFromI,
-            bool distanceIsRelative = true,
-            string coordinateSystem = CoordinateSystems.Global,
-            bool replace = true)
-        {
-            _callCode = _sapModel.FrameObj.SetLoadPointWithGUID(name, loadPattern, (int)loadDirection, (int)forceType, pointLoadValue, absoluteDistanceFromI, ref GUID, coordinateSystem, distanceIsRelative, replace);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function deletes the point load assignments to the specified objects for the specified load pattern.
-        /// </summary>
-        /// <param name="name">The name of an existing object.</param>
-        /// <param name="GUID">The global unique ID of one of the distributed loads on that frame object.</param>
-        public void DeleteLoadPointWithGUID(string name,
-            string GUID)
-        {
-            _callCode = _sapModel.FrameObj.DeleteLoadPointWithGUID(name, GUID);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-        // Load Transfer
-        /// <summary>
-        /// This function returns the load transfer option for a frame object.  
-        /// It indicates whether the frame receives load from an area object when the area object is loaded with a load of type uniform to frame.
-        /// </summary>
-        /// <param name="name">The name of an existing frame.</param>
-        /// <param name="loadIsTransferred">Indicates if load is allowed to be transferred from area objects to this frame object.</param>
-        public void GetLoadTransfer(string name,
-            ref bool loadIsTransferred)
-        {
-            _callCode = _sapModel.FrameObj.GetLoadTransfer(name, ref loadIsTransferred);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// This function returns the load transfer option for frame objects.  
-        /// It indicates whether the frame receives load from an area object when the area object is loaded with a load of type uniform to frame.
-        /// </summary><param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
-        /// <param name="loadIsTransferred">Indicates if load is allowed to be transferred from area objects to this frame object.</param>
-        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
-        public void SetLoadTransfer(string name,
-            bool loadIsTransferred,
-            eItemType itemType = eItemType.Object)
-        {
-            _callCode = _sapModel.FrameObj.SetLoadTransfer(name, loadIsTransferred, CSiEnumConverter.ToCSi(itemType));
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
         #endregion
     }
 }

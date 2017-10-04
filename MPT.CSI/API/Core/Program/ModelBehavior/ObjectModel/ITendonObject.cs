@@ -1,5 +1,4 @@
-﻿
-using MPT.CSI.API.Core.Helpers;
+﻿using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
@@ -8,9 +7,13 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// Represents the Tendon Object in the application.
     /// </summary>
     public interface ITendonObject:
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         IAddableObject,
-        ICountable, IListableNames, IChangeableName, IGroupAssignable, ISelectable, IDeletable, IDiscretizable, IGroupLoadable,
-        ILocalAxes, IGUID,
+        ICountable, IChangeableName, IGroupAssignable, 
+
+        IDeletable, IDiscretizable, IGroupLoadable,
+
+        IObservableLocalAxes, IGUID,
         
         IObservableTransformationMatrix, IObservablePoints, IObservableElement,
        
@@ -25,8 +28,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         ILoadStrainUniaxial, 
         ILoadTemperatureConstant, 
         
-        ILoadForceStress
+        ILoadForceStress,
+#endif
+        IListableNames, ISelectable
     {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function assigns the tendon geometric definition parameters to a tendon object.
         /// </summary>
@@ -80,5 +86,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             ref int numberPoints,
             ref Coordinate3DCartesian[] coordinates,
             string coordinateSystem = CoordinateSystems.Global);
+#endif
     }
 }

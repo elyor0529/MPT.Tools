@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
     /// Object can change the property assignment name for a frequency-dependent link.
@@ -19,3 +20,4 @@
             eItemType itemType = eItemType.Object);
     }
 }
+#endif

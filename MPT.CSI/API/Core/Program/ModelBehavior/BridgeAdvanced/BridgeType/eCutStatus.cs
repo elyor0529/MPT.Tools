@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
 {
     /// <summary>
     /// Status available for bridge superstructure cuts.
@@ -21,3 +22,4 @@
         SectionAndInteriorCellCut = 2
     }
 }
+#endif

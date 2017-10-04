@@ -1,6 +1,7 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
-    /// <summary>
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
     /// The limit state for NTC 2008 response spectrum.
     /// </summary>
     public enum eLimitState_NTC_2008
@@ -25,4 +26,5 @@
         /// </summary>
         SLC = 4,
     }
+#endif
 }

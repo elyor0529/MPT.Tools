@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
     /// <summary>
     /// Preferences available for <see cref="Indian_IS_800_2007"/> steel design in the application.
@@ -101,3 +102,4 @@
         MultiResponseCaseDesign = 18,
     }
 }
+#endif

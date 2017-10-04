@@ -1,25 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
-
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 {
@@ -234,7 +215,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.LineElm.GetMaterialOverwrite(name, ref propertyName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the material temperature assignments to elements.
         /// </summary>
@@ -251,7 +232,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.LineElm.GetMatTemp(name, ref temperature, ref patternName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
 
 
         /// <summary>
@@ -351,10 +332,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             iEndFixity.FromArray(csiiEndFixity);
             jEndFixity.FromArray(csijEndFixity);
         }
-        
+
         #endregion
 
         #region Loads
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the deformation load assignments to elements.
         /// </summary>
@@ -550,7 +532,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
                 relativeForcesLocation[i].M3 = T6[i];
             }
         }
-
+#endif
         /// <summary>
         /// This function retrieves the temperature load assignments to elements.
         /// </summary>
@@ -581,7 +563,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             
             temperatureLoadType = csiTemperatureLoadType.Cast<eLoadTemperatureType>().ToArray();
         }
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the P-Delta force assignments to line elements.
         /// </summary>
@@ -604,7 +586,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             
             directions = csiDirections.Cast<ePDeltaDirection>().ToArray();
         }
-
+#endif
         /// <summary>
         /// This function retrieves the distributed load assignments to elements.
         /// </summary>

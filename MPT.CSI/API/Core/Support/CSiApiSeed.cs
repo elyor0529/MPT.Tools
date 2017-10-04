@@ -12,8 +12,6 @@ using CSiBridge18;
 using CSiBridge19;
 #elif BUILD_ETABS2013
 using ETABS2013;
-
-
 #elif BUILD_ETABS2015
 using ETABS2015;
 #elif BUILD_ETABS2016

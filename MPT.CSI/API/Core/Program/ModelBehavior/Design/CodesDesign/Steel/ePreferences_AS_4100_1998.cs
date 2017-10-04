@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
     /// <summary>
     /// Preferences available for <see cref="AS_4100_1998"/> steel design in the application.
@@ -96,3 +97,4 @@
 
     }
 }
+#endif

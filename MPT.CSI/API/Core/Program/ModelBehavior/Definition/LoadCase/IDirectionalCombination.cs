@@ -17,6 +17,7 @@
             ref eDirectionalCombination directionalCombination,
             ref double scaleFactor);
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function sets the directional combination option for the specified load case.
         /// </summary>
@@ -27,5 +28,6 @@
         void SetDirectionalCombination(string name,
             eDirectionalCombination directionalCombination,
             double scaleFactor);
+#endif
     }
 }

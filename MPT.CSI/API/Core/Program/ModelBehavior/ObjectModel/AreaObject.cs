@@ -3,22 +3,13 @@ using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
 using MPT.Enums;
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
 
-
+#if  BUILD_ETABS2013
+using CSiProgram = ETABS2013;
 #elif BUILD_ETABS2015
-using ETABS2015;
+using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016
-using ETABS2016;
+using CSiProgram = ETABS2016;
 #endif
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
@@ -60,6 +51,67 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.AreaObj.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// This function retrieves the names of all defined area properties for a given story.
+        /// </summary>
+        /// <param name="storyName">Name of the story to filter the area names by.</param>
+        /// <param name="numberOfNames">The number of area object names retrieved by the program.</param>
+        /// <param name="names">Area object names retrieved by the program.</param>
+        public void GetNameListOnStory(string storyName, 
+            ref int numberOfNames, 
+            ref string[] names)
+        {
+            _callCode = _sapModel.AreaObj.GetNameListOnStory(storyName, ref numberOfNames, ref names);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the label and story for a unique object name.
+        /// </summary>
+        /// <param name="name">The name of the object.</param>
+        /// <param name="label">The object label.</param>
+        /// <param name="story">The object story label.</param>
+        public void GetLabelFromName(string name,
+            ref string label,
+            ref string story)
+        {
+            _callCode = _sapModel.AreaObj.GetLabelFromName(name, ref label, ref story);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the names and labels of all defined objects.
+        /// </summary>
+        /// <param name="numberOfNames">The number of object names retrieved by the program.</param>
+        /// <param name="names">The object names.</param>
+        /// <param name="labels">The object labels.</param>
+        /// <param name="stories">The story levels of the objects.</param>
+        public void GetLabelNameList(ref int numberOfNames,
+            ref string[] names,
+            ref string[] labels,
+            ref string[] stories)
+        {
+            _callCode = _sapModel.AreaObj.GetLabelNameList(ref numberOfNames, ref names, ref labels, ref stories);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the unique name of an object, given the label and story level .
+        /// </summary>
+        /// <param name="label">The object label.</param>
+        /// <param name="story">The object story level.</param>
+        /// <param name="name">The object unique name.</param>
+        public void GetNameFromLabel(string label,
+            string story,
+            ref string name)
+        {
+            _callCode = _sapModel.AreaObj.GetNameFromLabel(label, story, ref name);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
+
 
         /// <summary>
         /// Returns the 3x3 direction cosines to transform local coordinates to global coordinates by the equation [directionCosines]*[localCoordinates] = [globalCoordinates].
@@ -168,6 +220,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function gets the advanced local axes data for an existing object.
         /// </summary>
@@ -206,6 +260,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             planeVectorDirection = csiPlaneVectorDirection.Cast<eReferenceVectorDirection>().ToArray();
         }
 
+
         /// <summary>
         /// This function sets the advanced local axes data for an existing object.
         /// </summary>
@@ -243,6 +298,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.AreaObj.SetLocalAxesAdvanced(name, isActive, plane2, (int)planeVectorOption, planeCoordinateSystem, ref csiPlaneVectorDirection, ref planePoint, ref planeReferenceVector, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
         #region Modifiers
@@ -275,6 +331,20 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             double[] csiModifiers = modifiers.ToArray();
 
             _callCode = _sapModel.AreaObj.SetModifiers(name, ref csiModifiers);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function deletes a modifier assignment. 
+        /// </summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are deleted for the objects specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are deleted for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are deleted for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void DeleteModifiers(string name,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.AreaObj.DeleteModifiers(name, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion
@@ -488,7 +558,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the thickness overwrite assignments for area elements.
         /// </summary>
@@ -540,6 +610,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
+#endif
+
+
+
         /// <summary>
         /// This function retrieves the mass per unit area assignment from objects.
         /// </summary>
@@ -586,6 +660,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the method to determine the notional size of an area section for the creep and shrinkage calculations. 
         /// This function is currently worked for shell type area section.
@@ -666,7 +741,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.AreaObj.SetMatTemp(name, temperature, patternName, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
 
 
         /// <summary>
@@ -700,6 +775,77 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         #endregion
 
         #region Area Properties
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves select data for all area objects in the model .
+        /// </summary>
+        /// <param name="numberOfNames">The number of names.</param>
+        /// <param name="areaNames">The area names.</param>
+        /// <param name="designOrientations">The design orientations.</param>
+        /// <param name="numberOfBoundaryPts">The number of boundary points.</param>
+        /// <param name="pointDelimiters">The point delimiters.</param>
+        /// <param name="pointNames">The point names for each area.</param>
+        /// <param name="coordinates">The coordinates for each point for each area. [L].</param>
+        public void GetAllAreas(ref int numberOfNames,
+            ref string[] areaNames,
+            ref eAreaDesignOrientation[] designOrientations,
+            ref int numberOfBoundaryPts,
+            ref int[] pointDelimiters,
+            ref string[] pointNames,
+            ref Coordinate3DCartesian[] coordinates)
+        {
+            CSiProgram.eAreaDesignOrientation[] csiDesignOrientations = new CSiProgram.eAreaDesignOrientation[0];
+            double[] coordinatesX = new double[0];
+            double[] coordinatesY = new double[0];
+            double[] coordinatesZ = new double[0];
+
+            _callCode = _sapModel.AreaObj.GetAllAreas(ref numberOfNames, ref areaNames, ref csiDesignOrientations,
+                ref numberOfBoundaryPts, ref pointDelimiters, ref pointNames, ref coordinatesX, ref coordinatesY, ref coordinatesZ);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            designOrientations = new eAreaDesignOrientation[numberOfNames];
+            for (int i = 0; i < numberOfNames; i++)
+            {
+                designOrientations[i] = CSiEnumConverter.FromCSi(csiDesignOrientations[i]);
+            }
+
+            coordinates = new Coordinate3DCartesian[numberOfNames];
+            for (int i = 0; i < numberOfNames; i++)
+            {
+                coordinates[i].X = coordinatesX[i];
+                coordinates[i].Y = coordinatesY[i];
+                coordinates[i].Z = coordinatesZ[i];
+            }
+        }
+
+        /// <summary>
+        /// Retrieves whether the specified area object is an opening.
+        /// </summary>
+        /// <param name="name">The name of an existing area object.</param>
+        /// <param name="isOpening">True: Specified area object is an opening.</param>
+        public void GetOpening(string name,
+            ref bool isOpening)
+        {
+            _callCode = _sapModel.AreaObj.GetOpening(name, ref isOpening);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Designates an area object(s) as an opening.
+        /// </summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="isOpening">True: Specified area object is an opening.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void SetOpening(string name,
+            bool isOpening,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.AreaObj.SetOpening(name, isOpening, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#else
         /// <summary>
         /// This function retrieves the joint offset assignments for area elements.
         /// </summary>
@@ -882,10 +1028,63 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
                 group, subMesh, subMeshSize, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
         #endregion
 
         #region Support & Connections
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves the diaphragm for a specified object.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="diaphragmName">The name of an existing diaphragm.</param>
+        public void GetDiaphragm(string name,
+            ref string diaphragmName)
+        {
+            _callCode = _sapModel.AreaObj.GetDiaphragm(name, ref diaphragmName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Assigns a diaphragm to an object .
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="diaphragmName">The name of an existing diaphragm.</param>
+        public void SetDiaphragm(string name,
+            string diaphragmName = "")
+        {
+            _callCode = _sapModel.AreaObj.SetDiaphragm(name, diaphragmName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+
+        /// <summary>
+        /// Retrieves the named spring property assignment for an object.</summary>
+        /// <param name="name">The name of an existing object .</param>
+        /// <param name="nameSpring">The name of an existing point spring property.</param>
+        public void GetSpringAssignment(string name,
+            ref string nameSpring)
+        {
+            _callCode = _sapModel.AreaObj.GetSpringAssignment(name, ref nameSpring);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Assigns an existing named spring property to objects.</summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="nameSpring">The name of an existing point spring property.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void SetSpringAssignment(string name,
+            string nameSpring,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.AreaObj.SetSpringAssignment(name, nameSpring);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#else
         /// <summary>
         /// This function retrieves the spring assignments to an object face.
         /// </summary>
@@ -997,6 +1196,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.AreaObj.SetSpring(name, (int)springType, stiffness, (int)springSimpleType, linkProperty, (int)face, (int)springLocalOneType, direction, isOutward, ref vector, angleOffset, replace, coordinateSystem, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
+
 
         /// <summary>
         /// This function deletes all spring assignments for the specified objects.
@@ -1041,8 +1242,175 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
         #endregion
 
+        #region Design
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves the design orientation of an area object.
+        /// </summary>
+        /// <param name="name">The name of a defined area object.</param>
+        /// <param name="designOrientation">The design orientation.</param>
+        public void GetDesignOrientation(string name,
+            ref eAreaDesignOrientation designOrientation)
+        {
+            CSiProgram.eAreaDesignOrientation csiDesignOrientation = CSiProgram.eAreaDesignOrientation.Other;
+
+            _callCode = _sapModel.AreaObj.GetDesignOrientation(name, ref csiDesignOrientation);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            designOrientation = CSiEnumConverter.FromCSi(csiDesignOrientation);
+        }
+#endif
+
+        #region Design - Wall
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+
+        /// <summary>
+        /// Retrieves the pier label assignments of an object.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="namePier">The name of the pier assignment, if any, or "None".</param>
+        public void GetPier(string name,
+            ref string namePier)
+        {
+            _callCode = _sapModel.AreaObj.GetPier(name, ref namePier);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Sets the pier label assignment of one or more objects.
+        /// </summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="namePier">The name of the pier assignment, if any, or "None".</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void SetPier(string name,
+                string namePier,
+                eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.AreaObj.SetPier(name, namePier, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+
+        /// <summary>
+        /// Retrieves the spandrel label assignments of an object.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="nameSpandrel">The name of the spandrel assignment, if any, or "None".</param>
+        public void GetSpandrel(string name,
+            ref string nameSpandrel)
+        {
+            _callCode = _sapModel.AreaObj.GetSpandrel(name, ref nameSpandrel);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Sets the spandrel label assignment of one or more objects.
+        /// </summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="nameSpandrel">The name of the spandrel assignment, if any, or "None".</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void SetSpandrel(string name,
+            string nameSpandrel,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.AreaObj.SetSpandrel(name, nameSpandrel, CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+        /// <summary>
+        /// Retrieves rebar data for an area pier object.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="numberOfRebarLayers">The number of rebar layers.</param>
+        /// <param name="layerIds">The rebar layer ids.</param>
+        /// <param name="layerTypes">The rebar layer types.</param>
+        /// <param name="clearCovers">The clear cover of each rebar layer.</param>
+        /// <param name="barAreas">The bar areas for each layer.</param>
+        /// <param name="barSpacings">The bar spacings for each layer.</param>
+        /// <param name="numberOfBars">The number of bars in each layer.</param>
+        /// <param name="isConfined">Status of whether or not the rebar layer is confined.</param>
+        /// <param name="barSizeNames">The bar size names for each layer.</param>
+        /// <param name="endZoneLengths">The end zone lengths for each layer.</param>
+        /// <param name="endZoneThicknesses">The end zone thicknesses for each layer.</param>
+        /// <param name="endZoneOffsets">The end zone offsets for each layer.</param>
+        public void GetRebarDataPier(string name,
+            ref int numberOfRebarLayers,
+            ref string[] layerIds,
+            ref eWallPierRebarLayerType[] layerTypes,
+            ref double[] clearCovers,
+            ref double[] barAreas,
+            ref double[] barSpacings,
+            ref int[] numberOfBars,
+            ref bool[] isConfined,
+            ref string[] barSizeNames,
+            ref double[] endZoneLengths,
+            ref double[] endZoneThicknesses,
+            ref double[] endZoneOffsets)
+        {
+            CSiProgram.eWallPierRebarLayerType[] csiLayerTypes = new CSiProgram.eWallPierRebarLayerType[0];
+
+            _callCode = _sapModel.AreaObj.GetRebarDataPier(name, ref numberOfRebarLayers,
+                ref layerIds, ref csiLayerTypes,
+                ref clearCovers, ref barSizeNames, ref barAreas, ref barSpacings, ref numberOfBars, ref isConfined,
+                ref endZoneLengths, ref endZoneThicknesses, ref endZoneOffsets);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            layerTypes = new eWallPierRebarLayerType[numberOfRebarLayers];
+            for (int i = 0; i < numberOfRebarLayers; i++)
+            {
+                layerTypes[i] = CSiEnumConverter.FromCSi(csiLayerTypes[i]);
+            }
+        }
+
+        /// <summary>
+        /// Retrieves rebar data for an area spandrel object.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="numberOfRebarLayers">The number of rebar layers.</param>
+        /// <param name="layerIds">The rebar layer ids.</param>
+        /// <param name="layerTypes">The rebar layer types.</param>
+        /// <param name="clearCovers">The clear cover of each rebar layer.</param>
+        /// <param name="barAreas">The bar areas for each layer.</param>
+        /// <param name="barSpacings">The bar spacings for each layer.</param>
+        /// <param name="numberOfBars">The number of bars in each layer.</param>
+        /// <param name="isConfined">Status of whether or not the rebar layer is confined.</param>
+        /// <param name="barSizeIndices">The rebar size indices in each layer.</param>
+        public void GetRebarDataSpandrel(string name,
+            ref int numberOfRebarLayers,
+            ref string[] layerIds,
+            ref eWallSpandrelRebarLayerType[] layerTypes,
+            ref double[] clearCovers,
+            ref double[] barAreas,
+            ref double[] barSpacings,
+            ref int[] numberOfBars,
+            ref bool[] isConfined,
+            ref int[] barSizeIndices)
+        {
+            CSiProgram.eWallSpandrelRebarLayerType[] csiLayerTypes = new CSiProgram.eWallSpandrelRebarLayerType[0];
+
+            _callCode = _sapModel.AreaObj.GetRebarDataSpandrel(name, ref numberOfRebarLayers,
+                ref layerIds, ref csiLayerTypes,
+                ref clearCovers, ref barSizeIndices, ref barAreas, ref barSpacings, ref numberOfBars, ref isConfined);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            layerTypes = new eWallSpandrelRebarLayerType[numberOfRebarLayers];
+            for (int i = 0; i < numberOfRebarLayers; i++)
+            {
+                layerTypes[i] = CSiEnumConverter.FromCSi(csiLayerTypes[i]);
+            }
+        }
+#endif
+        #endregion
+        #endregion
 
         #region Loads
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         // LoadGravity
         /// <summary>
         /// This function retrieves the gravity load assignments to objects.
@@ -1331,9 +1699,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.AreaObj.DeleteLoadSurfacePressure(name, loadPattern, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
-
-        
         // LoadTemperature
         /// <summary>
         /// This function retrieves the temperature load assignments to objects.
@@ -1406,7 +1773,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         // LoadRotate
         /// <summary>
         /// This function retrieves the rotate load assignments to elements.
@@ -1460,8 +1827,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.AreaObj.DeleteLoadRotate(name, loadPattern, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
+#endif
 
         // LoadUniform
         /// <summary>

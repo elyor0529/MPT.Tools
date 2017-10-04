@@ -1,6 +1,4 @@
 ﻿
-using MPT.CSI.API.Core.Helpers;
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 {
     /// <summary>
@@ -10,16 +8,20 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         IObservableInsertionPoint, IObservableOffset,
         ICountable, IListableNames, IObservableTransformationMatrix, IObservableLocalAxes, 
         IObservableModifiers, IObservableObject, IObservablePoints, IObservableReleases,
-        IObservableSection, IObservableMaterialOverwrite, IObservableMaterialTemperature, IObservableTensionCompressionLimits, IObservablePDeltaForces,
+        IObservableSection, IObservableMaterialOverwrite, IObservableTensionCompressionLimits,
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        IObservablePDeltaForces,
+        IObservableMaterialTemperature, 
 
         IObservableLoadDeformation, 
-        IObservableLoadDistributed, 
         IObservableLoadGravity, 
-        IObservableLoadPoint, 
         IObservableLoadStrain, 
-        IObservableLoadTargetForce, 
+        IObservableLoadTargetForce,
+#endif
+        IObservableLoadDistributed, 
+        IObservableLoadPoint, 
         IObservableLoadTemperature
     {
-        
+
     }
 }

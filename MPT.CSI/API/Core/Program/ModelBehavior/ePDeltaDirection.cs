@@ -1,6 +1,4 @@
-﻿
-
-namespace MPT.CSI.API.Core.Program.ModelBehavior
+﻿namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
     /// Directions available for P-Delta force assignment.

@@ -1,5 +1,4 @@
-﻿
-namespace MPT.CSI.API.Core.Program.ModelBehavior
+﻿namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
     /// Object can return the names of all associated points.

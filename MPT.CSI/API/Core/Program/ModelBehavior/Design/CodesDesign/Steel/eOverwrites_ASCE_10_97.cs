@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
+﻿#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
-    #if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Overwrites available for <see cref="ASCE_10_97" /> steel design in the application.
     /// </summary>
@@ -183,5 +183,5 @@
         /// </summary>
         DemandCapacityRatioLimit = 31
     }
-#endif
 }
+#endif

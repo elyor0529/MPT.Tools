@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 {
     /// <summary>
     /// Represents the steady state-derived load case in the application.
@@ -78,3 +79,4 @@
             double[] specifiedFrequencies);
     }
 }
+#endif

@@ -1,5 +1,6 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// The option for defining the parameters for NTC 2008.
     /// </summary>
@@ -20,4 +21,5 @@
         /// </summary>
         UserDefined = 3
     }
+#endif
 }

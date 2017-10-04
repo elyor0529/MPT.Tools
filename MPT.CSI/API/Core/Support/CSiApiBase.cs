@@ -12,8 +12,6 @@ using CSiBridge18;
 using CSiBridge19;
 #elif BUILD_ETABS2013
 using ETABS2013;
-
-
 #elif BUILD_ETABS2015
 using ETABS2015;
 #elif BUILD_ETABS2016
@@ -33,12 +31,12 @@ namespace MPT.CSI.API.Core.Support
         protected SAP2000v16.SapObject _sapObject;
 #else        
         /// <summary>
-        /// The SAP application object.
+        /// The base application object.
         /// </summary>
         protected cOAPI _sapObject;
 #endif        
         /// <summary>
-        /// The SAP model object that contains most of the application API calls.
+        /// The base model object that contains most of the application API calls.
         /// </summary>
         protected cSapModel _sapModel;
 

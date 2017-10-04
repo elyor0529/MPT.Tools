@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using System.ComponentModel;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wind
 {
@@ -32,3 +33,4 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAut
         AreaAndFrameObjects = 4
     }
 }
+#endif

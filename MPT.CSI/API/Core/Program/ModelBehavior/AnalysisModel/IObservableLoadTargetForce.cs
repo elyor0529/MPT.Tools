@@ -3,6 +3,7 @@ using MPT.CSI.API.Core.Helpers;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Object can return target force data.
     /// </summary>
@@ -34,4 +35,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             eItemTypeElement itemType = eItemTypeElement.Element);
         // Line, Link
     }
+#endif
 }

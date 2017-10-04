@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using System.ComponentModel;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wave
 {
@@ -26,3 +27,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAut
         AccelerationsVelocitiesInput = 3,
     }
 }
+#endif
+

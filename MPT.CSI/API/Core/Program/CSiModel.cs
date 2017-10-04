@@ -1,36 +1,30 @@
 ﻿using System;
 using IO = System.IO;
-
-using MPT.CSI.API.Core.Support;
-using MPT.CSI.API.Core.Program.ModelBehavior;
+#if BUILD_SAP2000v16
+using CSiProgram = SAP2000v16;
+#elif BUILD_SAP2000v17
+using CSiProgram = SAP2000v17;
+#elif BUILD_SAP2000v18
+using CSiProgram = SAP2000v18;
+#elif BUILD_SAP2000v19
+using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiProgram = CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiProgram = CSiBridge19;
+#elif BUILD_ETABS2013
+using CSiProgram = ETABS2013;
+#elif BUILD_ETABS2015
+using CSiProgram = ETABS2015;
+#elif BUILD_ETABS2016
+using CSiProgram = ETABS2016;
+#endif
 
 #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
 using MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced;
 #endif
-
-
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_CSiBridgev18
-using CSiBridge18;
-#elif BUILD_CSiBridgev19
-using CSiBridge19;
-#elif BUILD_ETABS2013
-using System.Reflection;
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
+using MPT.CSI.API.Core.Support;
+using MPT.CSI.API.Core.Program.ModelBehavior;
 
 namespace MPT.CSI.API.Core.Program
 {
@@ -45,7 +39,6 @@ namespace MPT.CSI.API.Core.Program
         private readonly CSiApiSeed _seed;
 
         private File _file;
-        private ExtendedEntityData _extendedEntityData;
         private CSiApplication _csiApplication;
         private AnalysisModeler _analysisModeler;
         private ObjectModeler _objectModeler;
@@ -57,23 +50,20 @@ namespace MPT.CSI.API.Core.Program
         private AnalysisResults _analysisResults;
         private Selector _selector;
         private Viewer _viewer;
-    #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        private ExtendedEntityData _extendedEntityData;
+#endif
+#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         private Superstructure _superstructure;
-    #endif
-#endregion
+#endif
+        #endregion
 
-#region Properties               
+        #region Properties               
         /// <summary>
         /// Gets the file.
         /// </summary>
         /// <value>The file.</value>
         public File File => _file ?? (_file = new File(_seed));
-
-        /// <summary>
-        /// Gets the extended entity data.
-        /// </summary>
-        /// <value>The extended entity data.</value>
-        public ExtendedEntityData ExtendedEntityData => _extendedEntityData ?? (_extendedEntityData = new ExtendedEntityData(_seed));
 
         /// <summary>
         /// Gets the application.
@@ -141,13 +131,20 @@ namespace MPT.CSI.API.Core.Program
         /// <value>The viewer.</value>
         public Viewer Viewer => _viewer ?? (_viewer = new Viewer(_seed));
 
-    #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// Gets the extended entity data.
+        /// </summary>
+        /// <value>The extended entity data.</value>
+        public ExtendedEntityData ExtendedEntityData => _extendedEntityData ?? (_extendedEntityData = new ExtendedEntityData(_seed));
+#endif
+#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
         /// <summary>
         /// Gets the bridge superstructure.
         /// </summary>
         /// <value>The bridge superstructure.</value>
         public Superstructure Superstructure => _superstructure ?? (_superstructure = new Superstructure(_seed));
-    #endif
+#endif
 
         /// <summary>
         /// True: Model is unlocked.
@@ -230,6 +227,7 @@ namespace MPT.CSI.API.Core.Program
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         // ==== User Comment ===
         /// <summary>
         /// Retrieves the data in the user comments and log.
@@ -253,7 +251,7 @@ namespace MPT.CSI.API.Core.Program
             _callCode = _sapModel.SetUserComment(commentUser, numberLinesBlank, replace);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
 
         // ==== Units ===
         /// <summary>
@@ -265,7 +263,7 @@ namespace MPT.CSI.API.Core.Program
         {
             return CSiEnumConverter.FromCSi(_sapModel.GetDatabaseUnits());
         }
-
+        
         /// <summary>
         /// Returns the units presently specified for the model.
         /// </summary>
@@ -274,7 +272,7 @@ namespace MPT.CSI.API.Core.Program
         {
             return CSiEnumConverter.FromCSi(_sapModel.GetPresentUnits());
         }
-
+        
         /// <summary>
         /// Sets the units presently specified for the model.
         /// </summary>
@@ -284,6 +282,66 @@ namespace MPT.CSI.API.Core.Program
             _callCode = _sapModel.SetPresentUnits(CSiEnumConverter.ToCSi(units));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Returns the database units for the model. 
+        /// All data is internally stored in the model in these units and converted to the present units as needed.
+        /// </summary>
+        /// <returns></returns>
+        public void GetDatabaseUnits(ref eForce forceUnits,
+            ref eLength lengthUnits,
+            ref eTemperature temperatureUnits)
+        {
+            CSiProgram.eForce csiForceUnits = CSiProgram.eForce.NotApplicable;
+            CSiProgram.eLength csiLengthUnits = CSiProgram.eLength.NotApplicable;
+            CSiProgram.eTemperature csiTemperatureUnits = CSiProgram.eTemperature.NotApplicable;
+
+            _callCode = _sapModel.GetDatabaseUnits_2(ref csiForceUnits, ref csiLengthUnits, ref csiTemperatureUnits);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            forceUnits = CSiEnumConverter.FromCSi(csiForceUnits);
+            lengthUnits = CSiEnumConverter.FromCSi(csiLengthUnits);
+            temperatureUnits = CSiEnumConverter.FromCSi(csiTemperatureUnits);
+        }
+
+        /// <summary>
+        /// Returns the units presently specified for the model.
+        /// </summary>
+        /// <returns></returns>
+        public void GetPresentUnits(ref eForce forceUnits,
+            ref eLength lengthUnits,
+            ref eTemperature temperatureUnits)
+        {
+            CSiProgram.eForce csiForceUnits = CSiProgram.eForce.NotApplicable;
+            CSiProgram.eLength csiLengthUnits = CSiProgram.eLength.NotApplicable;
+            CSiProgram.eTemperature csiTemperatureUnits = CSiProgram.eTemperature.NotApplicable;
+
+            _callCode = _sapModel.GetPresentUnits_2(ref csiForceUnits, ref csiLengthUnits, ref csiTemperatureUnits);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            forceUnits = CSiEnumConverter.FromCSi(csiForceUnits);
+            lengthUnits = CSiEnumConverter.FromCSi(csiLengthUnits);
+            temperatureUnits = CSiEnumConverter.FromCSi(csiTemperatureUnits);
+        }
+
+        /// <summary>
+        /// Sets the units presently specified for the model.
+        /// </summary>
+        /// <returns></returns>
+        public void SetPresentUnits(eForce forceUnits,
+            eLength lengthUnits,
+            eTemperature temperatureUnits)
+        {
+            CSiProgram.eForce csiForceUnits = CSiProgram.eForce.NotApplicable;
+            CSiProgram.eLength csiLengthUnits = CSiProgram.eLength.NotApplicable;
+            CSiProgram.eTemperature csiTemperatureUnits = CSiProgram.eTemperature.NotApplicable;
+
+            _callCode = _sapModel.SetPresentUnits_2(csiForceUnits, csiLengthUnits, csiTemperatureUnits);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
 
         // ==== Get/Set Methods ===
 
@@ -316,6 +374,8 @@ namespace MPT.CSI.API.Core.Program
             return _sapModel.GetPresentCoordSystem();
         }
 
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Sets the present coordinate system.
         /// </summary>
@@ -325,6 +385,7 @@ namespace MPT.CSI.API.Core.Program
             _callCode = _sapModel.SetPresentCoordSystem(nameCoordinateSystem);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
         /// <summary>
         /// Retrieves the project information data.
@@ -398,7 +459,7 @@ namespace MPT.CSI.API.Core.Program
         //  create SapModel object
                 _sapModel = _SapObject.SapModel;
 
- || BUILD_ETABS2015 || BUILD_ETABS2016
+#elif BUILD_ETABS2015 || BUILD_ETABS2016
                 // Old Method: 32bit OAPI clients can only call 32bit ETABS 2014 and 64bit OAPI clients can only call
                 //    64bit ETABS 2014. Currently only used in ETABS 2013.
                 // Create an instance of ETABSObject and get a reference to cOAPI interface
@@ -406,14 +467,14 @@ namespace MPT.CSI.API.Core.Program
 
         // New Method: 32bit & 64bit API clients can call 32 & 64bit ETABS 2014
         //    Use the new OAPI helper class to get a reference to cOAPI interface
-            cHelper myHelper = new Helper();
+            CSiProgram.cHelper helper = new CSiProgram.Helper();
             _sapObject = helper.CreateObject(path);
 
         //    start ETABS application;
-            _sapObject.ApplicationStart()
+                _sapObject.ApplicationStart();
 
         //    create SapModel object
-            _sapModel = _SapObject.SapModel;
+            _sapModel = _sapObject.SapModel;
 #elif BUILD_SAP2000v16
             // NOTE: No path is needed for SAP2000v16. Instead, CSiProgressiveCollapse will automatically use the
             //    version currently installed. To change the version, say for testing, run the desired v16 version as 
@@ -432,8 +493,8 @@ namespace MPT.CSI.API.Core.Program
 
                 // New Method: 32bit & 64bit API clients can call 32 & 64bit ETABS 2014
                 // Use the new OAPI helper class to get a reference to cOAPI interface
-                cHelper myHelper = new Helper();
-                _sapObject = myHelper.CreateObject(path);
+                CSiProgram.cHelper helper = new CSiProgram.Helper();
+                _sapObject = helper.CreateObject(path);
 
             // start Sap2000 application
                 _sapObject.ApplicationStart();

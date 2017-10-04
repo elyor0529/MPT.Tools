@@ -1,5 +1,6 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Site class for SP 14.13330.2014 response spectrum function.
     /// </summary>
@@ -25,4 +26,5 @@
         /// </summary>
         IV = 4,
     }
+#endif
 }

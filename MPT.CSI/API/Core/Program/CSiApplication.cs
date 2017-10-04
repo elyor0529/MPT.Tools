@@ -18,6 +18,32 @@ namespace MPT.CSI.API.Core.Program
         #endregion
 
         #region Methods: Public
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// This function starts the application.
+        /// When the model is not visible it does not appear on screen and it does not appear in the Windows task bar. 
+        /// If no filename is specified, you can later open a model or create a model through the API.
+        /// The file name must have an .edb, .$et, .e2k, .xls, or .mdb extension. 
+        /// Files with .edb extensions are opened as standard SAP2000 files. 
+        /// Files with .$et and .e2k extensions are imported as text files. 
+        /// Files with .xls extensions are imported as Microsoft Excel files. 
+        /// Files with .mdb extensions are imported as Microsoft Access files.
+        /// </summary>
+        public void ApplicationStart()
+        {
+            _callCode = _sapObject.ApplicationStart();
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the OAPI version number.
+        /// </summary>
+        /// <returns>System.Double.</returns>
+        public double GetOAPIVersionNumber()
+        {
+            return _sapObject.GetOAPIVersionNumber();
+        }
+#else
         /// <summary>
         /// This function starts the application.
         /// When the model is not visible it does not appear on screen and it does not appear in the Windows task bar. 
@@ -40,10 +66,11 @@ namespace MPT.CSI.API.Core.Program
             _callCode = _sapObject.ApplicationStart(CSiEnumConverter.ToCSi(units), visible, fileName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
         /// <summary>
         /// This function closes the application. 
-         /// If the model file is saved then it is saved with its current name.
+        /// If the model file is saved then it is saved with its current name.
         /// </summary>
         /// <param name="fileSave">True: The existing model file is saved prior to closing program.</param>
         public void ApplicationExit(bool fileSave)

@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 {
     /// <summary>
     /// Plane types available in the application.
@@ -16,3 +17,4 @@
         PlaneStrain = 2
     }
 }
+#endif

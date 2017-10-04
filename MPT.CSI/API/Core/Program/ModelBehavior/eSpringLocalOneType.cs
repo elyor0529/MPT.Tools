@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
     /// Methods used to specify the spring positive local 1-axis orientation in the application.
@@ -22,3 +23,4 @@
         User = 3
     }
 }
+#endif

@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
-#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Overwrites available for <see cref="AISC_LRFD_93" /> steel design in the application.
     /// </summary>
@@ -203,5 +203,5 @@
         /// </summary>
         DemandCapacityRatioLimit = 35
     }
-#endif
 }
+#endif

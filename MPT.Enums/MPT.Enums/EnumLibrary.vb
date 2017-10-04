@@ -18,6 +18,56 @@ Public Class EnumLibrary
     '   See: http://bytes.com/topic/visual-basic-net/answers/353496-description-attribute-retrieval-enum-type
 
 #Region "Methods: Public"
+
+    '' For Convert, See: https://stackoverflow.com/questions/79126/create-generic-method-constraining-t-to-an-enum
+
+    ''' <summary>
+    ''' Converts the specified enum value to anoter enum value.
+    ''' </summary>
+    ''' <typeparam name="TEnumFrom">The type enum to convert from.</typeparam>
+    ''' <typeparam name="TEnumTo">The type of enum to conver to.</typeparam>
+    ''' <param name="enumValue">The enum value to convert.</param>
+    ''' <returns>TEnumTo.</returns>
+    ''' <exception cref="System.ArgumentException">
+    ''' TTo must be an enumerated type
+    ''' or
+    ''' TFrom must be an enumerated type
+    ''' </exception>
+    Public Shared Function Convert(Of TEnumFrom As {Structure, IConvertible}, TEnumTo As {Structure, IConvertible})(enumValue As TEnumFrom) As TEnumTo
+	    If Not GetType(TEnumTo).IsEnum Then
+		    Throw New ArgumentException("TTo must be an enumerated type")
+	    End If
+	    If Not GetType(TEnumFrom).IsEnum Then
+		    Throw New ArgumentException("TFrom must be an enumerated type")
+	    End If
+
+	    Return DirectCast(DirectCast(enumValue, Object), TEnumTo)
+    End Function
+
+    ''' <summary>
+    ''' Converts the specified enum value to anoter enum value.
+    ''' </summary>
+    ''' <typeparam name="TEnumFrom">The type enum to convert from.</typeparam>
+    ''' <typeparam name="TEnumTo">The type of enum to conver to.</typeparam>
+    ''' <param name="enumValueFrom">The enum value to convert.</param>
+    ''' <param name="enumValueTo">Dummy enum value to indicate the enum type to convert to.</param>
+    ''' <returns>TTo.</returns>
+    ''' <exception cref="System.ArgumentException">
+    ''' TTo must be an enumerated type
+    ''' or
+    ''' TFrom must be an enumerated type
+    ''' </exception>
+    Public Shared Function Convert(Of TEnumFrom As {Structure, IConvertible}, TEnumTo As {Structure, IConvertible})(enumValueFrom As TEnumFrom, enumValueTo As TEnumTo) As TEnumTo
+	    If Not GetType(TEnumTo).IsEnum Then
+		    Throw New ArgumentException("TTo must be an enumerated type")
+	    End If
+	    If Not GetType(TEnumFrom).IsEnum Then
+		    Throw New ArgumentException("TFrom must be an enumerated type")
+	    End If
+
+	    Return DirectCast(DirectCast(enumValueFrom, Object), TEnumTo)
+    End Function
+
     ''' <summary>
     ''' Returns the enum description (if any), otherwise returns the name of the enum value. 
     ''' </summary>

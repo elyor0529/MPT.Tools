@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.ColdFormed
+﻿#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.ColdFormed
 {
-    #if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
     /// <summary>
     /// Preferences available for <see cref="AISI_ASD_96"/> cold-formed steel design in the application.
     /// </summary>
@@ -56,5 +56,5 @@
         /// </summary>
         TimeHistoryDesign = 10
     }
-#endif
 }
+#endif

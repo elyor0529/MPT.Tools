@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
-{
-    #if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
+{ 
     /// <summary>
     /// Preferences available for <see cref="Chinese_2010"/> concrete design in the application.
     /// </summary>
@@ -25,7 +25,7 @@
         /// Column design procedure.
         /// </summary>
         ColumnDesignProcedure = 4,
-        
+
         /// <summary>
         /// SeismicDesignGrade.
         /// </summary>
@@ -45,21 +45,21 @@
         /// The multi-response case design.
         /// </summary>
         MultiResponseCaseDesign = 8,
-        
+
         /// <summary>
         /// Structural system.
         /// </summary>
         StructuralSystem = 9,
-        
+
         /// <summary>
         /// Is the building a tall building?
         /// </summary>
         IsTallBuilding = 10,
-        
+
         /// <summary>
         /// Seismic field type.
         /// </summary>
         SeismicFieldType = 11
     }
-#endif
 }
+#endif

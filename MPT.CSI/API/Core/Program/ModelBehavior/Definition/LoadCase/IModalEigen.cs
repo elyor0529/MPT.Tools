@@ -5,6 +5,7 @@
     /// </summary>
     public interface IModalEigen: IModal
     {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the load data for the specified load case.
         /// </summary>
@@ -73,5 +74,6 @@
             double cutoffFrequencyRadius,
             double convergenceTolerance,
             bool allowAutoFrequencyShifting);
+#endif
     }
 }

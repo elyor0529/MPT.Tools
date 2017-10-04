@@ -2,7 +2,6 @@
 using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame;
 using MPT.CSI.API.Core.Support;
-
 #if BUILD_SAP2000v16
 using CSiProgram = SAP2000v16;
 #elif BUILD_SAP2000v17
@@ -11,10 +10,12 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiProgram = CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiProgram = CSiBridge19;
 #elif BUILD_ETABS2013
 using CSiProgram = ETABS2013;
-
-
 #elif BUILD_ETABS2015
 using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016
@@ -117,6 +118,45 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             _callCode = _sapModel.PropFrame.GetNameList(ref numberOfNames, ref names, CSiEnumConverter.ToCSi(frameType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016        
+        /// <summary>
+        /// Gets all frame properties.
+        /// </summary>
+        /// <param name="numberOfNames">The number of frame property names retrieved by the program.</param>
+        /// <param name="names">Frame property names retrieved by the program.</param>
+        /// <param name="frameType">The frame type retrieved by the program.</param>
+        /// <param name="t3">The section depth. [L].</param>
+        /// <param name="t2">The flange width. [L].</param>
+        /// <param name="tf">The flange thickness. [L].</param>
+        /// <param name="tw">The web thickness. [L].</param>
+        /// <param name="t2b">The bottom flange width. [L].</param>
+        /// <param name="tfb">The bottom flange thickness. [L].</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetAllFrameProperties(ref int numberOfNames,
+            ref string[] names,
+            ref eFrameSectionType[] frameType,
+            ref double[] t3,
+            ref double[] t2,
+            ref double[] tf,
+            ref double[] tw,
+            ref double[] t2b,
+            ref double[] tfb)
+        {
+            CSiProgram.eFramePropType[] csiFrameType = new CSiProgram.eFramePropType[0];
+
+            _callCode = _sapModel.PropFrame.GetAllFrameProperties(ref numberOfNames, ref names, ref csiFrameType,
+                ref t3, ref t2, ref tf, ref tw, ref t2b, ref tfb);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            frameType = new eFrameSectionType[numberOfNames];
+            for (int i = 0; i < numberOfNames; i++)
+            {
+                frameType[i] = CSiEnumConverter.FromCSi(csiFrameType[i]);
+            }
+        }
+#endif
         #endregion
 
         #region Methods: Section
@@ -583,8 +623,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         #endregion
 
         #region Methods: Get/Set Sections - Steel: Auto-Select
-
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves frame section property data for an aluminum auto select list.
         /// </summary>
@@ -685,7 +724,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             _callCode = _sapModel.PropFrame.SetAutoSelectColdFormed(name, numberOfItems, ref sectionNames, autoStartSection, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
 
 
 
@@ -741,8 +780,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 
         #region Methods: Get/Set Sections - Steel
 
+#if BUILD_ETABS2015 || BUILD_ETABS2016
         /// <summary>
-        /// This function retrieves frame section property data for a tee-type frame section.
+        /// This function retrieves frame section property data for a steel tee-type frame section.
         /// </summary>
         /// <param name="name">The name of an existing frame section property.</param>
         /// <param name="fileName">If the section property was imported from a property file, this is the name of that file. 
@@ -752,30 +792,34 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// <param name="t2">The flange width. [L].</param>
         /// <param name="tf">The flange thickness. [L].</param>
         /// <param name="tw">The web thickness. [L].</param>
+        /// <param name="r">The fillet radius. [L]</param>
+        /// <param name="mirrorAbout3">True: The section is mirrored about the local 3-axis.</param>
         /// <param name="color">The display color assigned to the section.</param>
         /// <param name="notes">The notes, if any, assigned to the section.</param>
         /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.</param>
         /// <exception cref="CSiException"></exception>
-        public void GetTee(string name,
+        public void GetSteelTee(string name,
             ref string fileName,
             ref string nameMaterial,
             ref double t3,
             ref double t2,
             ref double tf,
             ref double tw,
+            ref double r,
+            ref bool mirrorAbout3,
             ref int color,
             ref string notes,
             ref string GUID)
         {
-            _callCode = _sapModel.PropFrame.GetTee(name, ref fileName, ref nameMaterial,
-                ref t3, ref t2, ref tf, ref tw,
+            _callCode = _sapModel.PropFrame.GetSteelTee(name, ref fileName, ref nameMaterial,
+                ref t3, ref t2, ref tf, ref tw, ref r, ref mirrorAbout3,
                 ref color, ref notes, ref GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
 
         /// <summary>
-        /// This function initializes a tee-type frame section property. 
+        /// This function initializes a steel tee-type frame section property. 
         /// If this function is called for an existing frame section property, all items for the section are reset to their default value.
         /// </summary>
         /// <param name="name">The name of an existing or new frame section property. 
@@ -785,24 +829,28 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// <param name="t2">The flange width. [L].</param>
         /// <param name="tf">The flange thickness. [L].</param>
         /// <param name="tw">The web thickness. [L].</param>
+        /// <param name="r">The fillet radius. [L]</param>
+        /// <param name="mirrorAbout3">True: The section is mirrored about the local 3-axis.</param>
         /// <param name="color">The display color assigned to the section.
         /// If <paramref name="color"/> is specified as -1, the program will automatically assign a color.</param>
         /// <param name="notes">The notes, if any, assigned to the section.</param>
         /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.
         /// If this item is input as Default, the program assigns a GUID to the section.</param>
         /// <exception cref="CSiException"></exception>
-        public void SetTee(string name,
+        public void SetSteelTee(string name,
             string nameMaterial,
             double t3,
             double t2,
             double tf,
             double tw,
+            double r,
+            bool mirrorAbout3,
             int color = -1,
             string notes = "",
             string GUID = "")
         {
-            _callCode = _sapModel.PropFrame.SetTee(name, nameMaterial,
-                 t3, t2, tf, tw,
+            _callCode = _sapModel.PropFrame.SetSteelTee(name, nameMaterial,
+                 t3, t2, tf, tw, r, mirrorAbout3,
                  color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
@@ -811,7 +859,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 
 
         /// <summary>
-        /// This function retrieves frame section property data for an angle-type frame section.
+        /// This function retrieves frame section property data for a steel angle-type frame section.
         /// </summary>
         /// <param name="name">The name of an existing frame section property.</param>
         /// <param name="fileName">If the section property was imported from a property file, this is the name of that file. 
@@ -821,29 +869,35 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// <param name="t2">The horizontal leg width. [L].</param>
         /// <param name="tf">The horizontal leg thickness. [L].</param>
         /// <param name="tw">The vertical leg thickness. [L].</param>
+        /// <param name="r">The fillet radius. [L]</param>
+        /// <param name="mirrorAbout2">True: The section is mirrored about the local 2-axis.</param>
+        /// <param name="mirrorAbout3">True: The section is mirrored about the local 3-axis.</param>
         /// <param name="color">The display color assigned to the section.</param>
         /// <param name="notes">The notes, if any, assigned to the section.</param>
         /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.</param>
         /// <exception cref="CSiException"></exception>
-        public void GetAngle(string name,
+        public void GetSteelAngle(string name,
             ref string fileName,
             ref string nameMaterial,
             ref double t3,
             ref double t2,
             ref double tf,
             ref double tw,
+            ref double r,
+            ref bool mirrorAbout2,
+            ref bool mirrorAbout3,
             ref int color,
             ref string notes,
             ref string GUID)
         {
-            _callCode = _sapModel.PropFrame.GetAngle(name, ref fileName, ref nameMaterial,
-                ref t3, ref t2, ref tf, ref tw,
+            _callCode = _sapModel.PropFrame.GetSteelAngle(name, ref fileName, ref nameMaterial,
+                ref t3, ref t2, ref tf, ref tw, ref r, ref mirrorAbout2, ref mirrorAbout3,
                 ref color, ref notes, ref GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         /// <summary>
-        /// This function initializes frame section property data for an angle-type frame section.
+        /// This function initializes frame section property data for a steel angle-type frame section.
         /// If this function is called for an existing frame section property, all items for the section are reset to their default value.
         /// </summary>
         /// <param name="name">The name of an existing or new frame section property. 
@@ -853,31 +907,35 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// <param name="t2">The horizontal leg width. [L].</param>
         /// <param name="tf">The horizontal leg thickness. [L].</param>
         /// <param name="tw">The vertical leg thickness. [L].</param>
+        /// <param name="r">The fillet radius. [L]</param>
+        /// <param name="mirrorAbout2">True: The section is mirrored about the local 2-axis.</param>
+        /// <param name="mirrorAbout3">True: The section is mirrored about the local 3-axis.</param>
         /// <param name="color">The display color assigned to the section.
         /// If <paramref name="color"/> is specified as -1, the program will automatically assign a color.</param>
         /// <param name="notes">The notes, if any, assigned to the section.</param>
         /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.
         /// If this item is input as Default, the program assigns a GUID to the section.</param>
         /// <exception cref="CSiException"></exception>
-        public void SetAngle(string name,
+        public void SetSteelAngle(string name,
             string nameMaterial,
             double t3,
             double t2,
             double tf,
             double tw,
+            double r,
+            bool mirrorAbout2,
+            bool mirrorAbout3,
             int color = -1,
             string notes = "",
             string GUID = "")
         {
-            _callCode = _sapModel.PropFrame.SetAngle(name, nameMaterial,
-                 t3, t2, tf, tw,
+            _callCode = _sapModel.PropFrame.SetSteelAngle(name, nameMaterial,
+                 t3, t2, tf, tw, r, mirrorAbout2, mirrorAbout3,
                  color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
-
-
+#endif
+ 
         /// <summary>
         /// This function retrieves frame section property data for a channel-type frame section.
         /// </summary>
@@ -1273,7 +1331,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 
 
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves frame section property data for a steel hybrid I-Section-type frame section.
         /// </summary>
@@ -1453,8 +1511,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
                  color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: Get/Set Sections - Cold-Formed Steel
         /// <summary>
         /// This function retrieves frame section property data for a cold formed C-type frame section.
@@ -1675,8 +1735,115 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion
+#endif
 
         #region Methods: Get/Set Sections - Steel/Concrete
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// This function retrieves frame section property data for a plate-type frame section.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property.</param>
+        /// <param name="fileName">If the section property was imported from a property file, this is the name of that file. 
+        /// If the section property was not imported, this item is blank.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t2">Plate width. [L].</param>
+        /// <param name="t3">Plate depth. [L].</param>
+        /// <param name="color">The display color assigned to the section.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetPlate(string name,
+           ref string fileName,
+           ref string nameMaterial,
+           ref double t3,
+           ref double t2,
+           ref int color,
+           ref string notes,
+           ref string GUID)
+        {
+            _callCode = _sapModel.PropFrame.GetPlate(name, ref fileName, ref nameMaterial,
+                ref t3, ref t2,
+                ref color, ref notes, ref GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function initializes frame section property data for a plate-type frame section.
+        /// If this function is called for an existing frame section property, all items for the section are reset to their default value.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t2">Plate width. [L].</param>
+        /// <param name="t3">Plate depth. [L].</param>
+        /// <param name="color">The display color assigned to the section.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetPlate(string name,
+            string nameMaterial,
+            double t3,
+            double t2,
+            int color = -1,
+            string notes = "",
+            string GUID = "")
+        {
+            _callCode = _sapModel.PropFrame.SetPlate(name, nameMaterial,
+                 t3, t2,
+                 color, notes, GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        /// <summary>
+        /// This function retrieves frame section property data for a rod-type frame section.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property.</param>
+        /// <param name="fileName">If the section property was imported from a property file, this is the name of that file. 
+        /// If the section property was not imported, this item is blank.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t3">The section diameter. [L].</param>
+        /// <param name="color">The display color assigned to the section.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetRod(string name,
+           ref string fileName,
+           ref string nameMaterial,
+           ref double t3,
+           ref int color,
+           ref string notes,
+           ref string GUID)
+        {
+            _callCode = _sapModel.PropFrame.GetRod(name, ref fileName, ref nameMaterial,
+                ref t3,
+                ref color, ref notes, ref GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function initializes frame section property data for a rod-type frame section.
+        /// If this function is called for an existing frame section property, all items for the section are reset to their default value.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t3">The section diameter. [L].</param>
+        /// <param name="color">The display color assigned to the section.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetRod(string name,
+            string nameMaterial,
+            double t3,
+            int color = -1,
+            string notes = "",
+            string GUID = "")
+        {
+            _callCode = _sapModel.PropFrame.SetRod(name, nameMaterial,
+                 t3,
+                 color, notes, GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
         /// <summary>
         /// This function retrieves frame section property data for a circle-type frame section.
         /// </summary>
@@ -1919,9 +2086,305 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
                  color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+
+
+        /// <summary>
+        /// This function retrieves frame section property data for a tee-type frame section.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property.</param>
+        /// <param name="fileName">If the section property was imported from a property file, this is the name of that file. 
+        /// If the section property was not imported, this item is blank.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t3">The section depth. [L].</param>
+        /// <param name="t2">The flange width. [L].</param>
+        /// <param name="tf">The flange thickness. [L].</param>
+        /// <param name="tw">The web thickness. [L].</param>
+        /// <param name="color">The display color assigned to the section.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetTee(string name,
+            ref string fileName,
+            ref string nameMaterial,
+            ref double t3,
+            ref double t2,
+            ref double tf,
+            ref double tw,
+            ref int color,
+            ref string notes,
+            ref string GUID)
+        {
+            _callCode = _sapModel.PropFrame.GetTee(name, ref fileName, ref nameMaterial,
+                ref t3, ref t2, ref tf, ref tw,
+                ref color, ref notes, ref GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        /// <summary>
+        /// This function initializes a tee-type frame section property. 
+        /// If this function is called for an existing frame section property, all items for the section are reset to their default value.
+        /// </summary>
+        /// <param name="name">The name of an existing or new frame section property. 
+        /// If this is an existing property, that property is modified; otherwise, a new property is added.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t3">The section depth. [L].</param>
+        /// <param name="t2">The flange width. [L].</param>
+        /// <param name="tf">The flange thickness. [L].</param>
+        /// <param name="tw">The web thickness. [L].</param>
+        /// <param name="color">The display color assigned to the section.
+        /// If <paramref name="color"/> is specified as -1, the program will automatically assign a color.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.
+        /// If this item is input as Default, the program assigns a GUID to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetTee(string name,
+            string nameMaterial,
+            double t3,
+            double t2,
+            double tf,
+            double tw,
+            int color = -1,
+            string notes = "",
+            string GUID = "")
+        {
+            _callCode = _sapModel.PropFrame.SetTee(name, nameMaterial,
+                 t3, t2, tf, tw,
+                 color, notes, GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+
+
+        /// <summary>
+        /// This function retrieves frame section property data for an angle-type frame section.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property.</param>
+        /// <param name="fileName">If the section property was imported from a property file, this is the name of that file. 
+        /// If the section property was not imported, this item is blank.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t3">The vertical leg depth. [L].</param>
+        /// <param name="t2">The horizontal leg width. [L].</param>
+        /// <param name="tf">The horizontal leg thickness. [L].</param>
+        /// <param name="tw">The vertical leg thickness. [L].</param>
+        /// <param name="color">The display color assigned to the section.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetAngle(string name,
+            ref string fileName,
+            ref string nameMaterial,
+            ref double t3,
+            ref double t2,
+            ref double tf,
+            ref double tw,
+            ref int color,
+            ref string notes,
+            ref string GUID)
+        {
+            _callCode = _sapModel.PropFrame.GetAngle(name, ref fileName, ref nameMaterial,
+                ref t3, ref t2, ref tf, ref tw,
+                ref color, ref notes, ref GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function initializes frame section property data for an angle-type frame section.
+        /// If this function is called for an existing frame section property, all items for the section are reset to their default value.
+        /// </summary>
+        /// <param name="name">The name of an existing or new frame section property. 
+        /// If this is an existing property, that property is modified; otherwise, a new property is added.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t3">The vertical leg depth. [L].</param>
+        /// <param name="t2">The horizontal leg width. [L].</param>
+        /// <param name="tf">The horizontal leg thickness. [L].</param>
+        /// <param name="tw">The vertical leg thickness. [L].</param>
+        /// <param name="color">The display color assigned to the section.
+        /// If <paramref name="color"/> is specified as -1, the program will automatically assign a color.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.
+        /// If this item is input as Default, the program assigns a GUID to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetAngle(string name,
+            string nameMaterial,
+            double t3,
+            double t2,
+            double tf,
+            double tw,
+            int color = -1,
+            string notes = "",
+            string GUID = "")
+        {
+            _callCode = _sapModel.PropFrame.SetAngle(name, nameMaterial,
+                 t3, t2, tf, tw,
+                 color, notes, GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
         #endregion
 
         #region Methods: Get/Set Sections - Concrete: Reinforced
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// This function retrieves frame section property data for a concrete L-type frame section.
+        /// </summary>
+        /// <param name="name">The name of an existing or new frame section property. 
+        /// If this is an existing property, that property is modified; otherwise, a new property is added.</param>
+        /// <param name="fileName">If the section property was imported from a property file, this is the name of that file. 
+        /// If the section property was not imported, this item is blank.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t3">The vertical leg depth. [L].</param>
+        /// <param name="t2">The horizontal leg width. [L].</param>
+        /// <param name="tf">The horizontal leg thickness. [L].</param>
+        /// <param name="twF">The vertical leg thickness at the flange. [L].</param>
+        /// <param name="tfT">The vertical leg thickness at the tip. [L].</param>
+        /// <param name="mirrorAbout3">True: The section is mirrored about the local 3-axis.</param>
+        /// <param name="color">The display color assigned to the section.
+        /// If <paramref name="color"/> is specified as -1, the program will automatically assign a color.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.
+        /// If this item is input as Default, the program assigns a GUID to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetConcreteTee(string name,
+            ref string fileName,
+            ref string nameMaterial,
+            ref double t3,
+            ref double t2,
+            ref double tf,
+            ref double twF,
+            ref double tfT,
+            ref bool mirrorAbout3,
+            ref int color,
+            ref string notes,
+            ref string GUID)
+        {
+            _callCode = _sapModel.PropFrame.GetConcreteTee(name, ref fileName, ref nameMaterial,
+                ref t3, ref t2, ref tf, ref twF, ref tfT, ref mirrorAbout3,
+                ref color, ref notes, ref GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        /// <summary>
+        /// This function initializes frame section property data for a concrete L-type frame section.
+        /// If this function is called for an existing frame section property, all items for the section are reset to their default value.
+        /// </summary>
+        /// <param name="name">The name of an existing or new frame section property. 
+        /// If this is an existing property, that property is modified; otherwise, a new property is added.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t3">The vertical leg depth. [L].</param>
+        /// <param name="t2">The horizontal leg width. [L].</param>
+        /// <param name="tf">The horizontal leg thickness. [L].</param>
+        /// <param name="twF">The vertical leg thickness at the flange. [L].</param>
+        /// <param name="tfT">The vertical leg thickness at the tip. [L].</param>
+        /// <param name="mirrorAbout3">True: The section is mirrored about the local 3-axis.</param>
+        /// <param name="color">The display color assigned to the section.
+        /// If <paramref name="color"/> is specified as -1, the program will automatically assign a color.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.
+        /// If this item is input as Default, the program assigns a GUID to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetConcreteTee(string name,
+            string nameMaterial,
+            double t3,
+            double t2,
+            double tf,
+            double twF,
+            double tfT,
+            bool mirrorAbout3,
+            int color = -1,
+            string notes = "",
+            string GUID = "")
+        {
+            _callCode = _sapModel.PropFrame.SetConcreteTee(name, nameMaterial,
+                 t3, t2, tf, twF, tfT, mirrorAbout3,
+                 color, notes, GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        /// <summary>
+        /// This function retrieves frame section property data for a concrete L-type frame section.
+        /// </summary>
+        /// <param name="name">The name of an existing or new frame section property. 
+        /// If this is an existing property, that property is modified; otherwise, a new property is added.</param>
+        /// <param name="fileName">If the section property was imported from a property file, this is the name of that file. 
+        /// If the section property was not imported, this item is blank.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t3">The vertical leg depth. [L].</param>
+        /// <param name="t2">The horizontal leg width. [L].</param>
+        /// <param name="tf">The horizontal leg thickness. [L].</param>
+        /// <param name="twC">The vertical leg thickness at the corner. [L].</param>
+        /// <param name="tfT">The vertical leg thickness at the tip. [L].</param>
+        /// <param name="mirrorAbout2">True: The section is mirrored about the local 2-axis.</param>
+        /// <param name="mirrorAbout3">True: The section is mirrored about the local 3-axis.</param>
+        /// <param name="color">The display color assigned to the section.
+        /// If <paramref name="color"/> is specified as -1, the program will automatically assign a color.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.
+        /// If this item is input as Default, the program assigns a GUID to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetConcreteL(string name,
+            ref string fileName,
+            ref string nameMaterial,
+            ref double t3,
+            ref double t2,
+            ref double tf,
+            ref double twC,
+            ref double tfT,
+            ref bool mirrorAbout2,
+            ref bool mirrorAbout3,
+            ref int color,
+            ref string notes,
+            ref string GUID)
+        {
+            _callCode = _sapModel.PropFrame.GetConcreteL(name, ref fileName, ref nameMaterial,
+                ref t3, ref t2, ref tf, ref twC, ref tfT, ref mirrorAbout2, ref mirrorAbout3,
+                ref color, ref notes, ref GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        /// <summary>
+        /// This function initializes frame section property data for a concrete L-type frame section.
+        /// If this function is called for an existing frame section property, all items for the section are reset to their default value.
+        /// </summary>
+        /// <param name="name">The name of an existing or new frame section property. 
+        /// If this is an existing property, that property is modified; otherwise, a new property is added.</param>
+        /// <param name="nameMaterial">The name of the material property for the section.</param>
+        /// <param name="t3">The vertical leg depth. [L].</param>
+        /// <param name="t2">The horizontal leg width. [L].</param>
+        /// <param name="tf">The horizontal leg thickness. [L].</param>
+        /// <param name="twC">The vertical leg thickness at the corner. [L].</param>
+        /// <param name="tfT">The vertical leg thickness at the tip. [L].</param>
+        /// <param name="mirrorAbout2">True: The section is mirrored about the local 2-axis.</param>
+        /// <param name="mirrorAbout3">True: The section is mirrored about the local 3-axis.</param>
+        /// <param name="color">The display color assigned to the section.
+        /// If <paramref name="color"/> is specified as -1, the program will automatically assign a color.</param>
+        /// <param name="notes">The notes, if any, assigned to the section.</param>
+        /// <param name="GUID">The GUID (global unique identifier), if any, assigned to the section.
+        /// If this item is input as Default, the program assigns a GUID to the section.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetConcreteL(string name,
+            string nameMaterial,
+            double t3,
+            double t2,
+            double tf,
+            double twC,
+            double tfT,
+            bool mirrorAbout2,
+            bool mirrorAbout3,
+            int color = -1,
+            string notes = "",
+            string GUID = "")
+        {
+            _callCode = _sapModel.PropFrame.SetConcreteL(name, nameMaterial,
+                 t3, t2, tf, twC, tfT, mirrorAbout2, mirrorAbout3,
+                 color, notes, GUID);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
+
 
         /// <summary>
         /// This function retrieves beam rebar data for frame sections.
@@ -2134,6 +2597,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         }
         #endregion
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: Get/Set Sections - Concrete: Precast
 
 
@@ -2394,5 +2858,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion
+#endif
     }
 }

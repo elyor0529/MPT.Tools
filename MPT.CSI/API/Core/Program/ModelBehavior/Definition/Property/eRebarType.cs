@@ -1,5 +1,4 @@
-﻿
-namespace MPT.CSI.API.Core
+﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 {
     /// <summary>
     /// Rebar type used in a concrete frame. 
@@ -7,8 +6,19 @@ namespace MPT.CSI.API.Core
     /// </summary>
     public enum eRebarType
     {
+        /// <summary>
+        /// None specified.
+        /// </summary>
         None = 0,
+
+        /// <summary>
+        /// Column design.
+        /// </summary>
         Column = 1,
+
+        /// <summary>
+        /// Beam design.
+        /// </summary>
         Beam = 2
     }
 }

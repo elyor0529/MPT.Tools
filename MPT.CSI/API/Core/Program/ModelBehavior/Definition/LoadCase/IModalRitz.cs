@@ -1,5 +1,6 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents the Ritz modal load case in the application.
     /// </summary>
@@ -45,4 +46,13 @@
             int[] maxNumberGenerationCycles,
             double[] targetDynamicParticipationRatio);
     }
+#else
+    /// <summary>
+    /// Represents the Ritz modal load case in the application.
+    /// </summary>
+    public interface IModalRitz 
+    {
+       
+    }
+#endif
 }

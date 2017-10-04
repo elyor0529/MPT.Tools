@@ -1,6 +1,7 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
-    /// <summary>
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+     /// <summary>
     /// The topography for NTC 2008 response spectrum.
     /// </summary>
     public enum eTopography_NTC_2008
@@ -25,4 +26,5 @@
         /// </summary>
         T4 = 4,
     }
+#endif
 }

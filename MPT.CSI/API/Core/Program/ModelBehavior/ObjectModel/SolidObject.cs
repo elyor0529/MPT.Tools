@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using System.Linq;
 using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
@@ -10,15 +11,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// </summary>
     public class SolidObject : CSiApiBase, ISolidObject
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="SolidObject"/> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
         public SolidObject(CSiApiSeed seed) : base(seed) { }
-        #endregion
+#endregion
 
-        #region Query
+#region Query
         /// <summary>
         /// This function returns the total number of defined solid properties in the model.
         /// </summary>
@@ -109,9 +110,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.SolidObj.GetElm(name, ref numberOfElements, ref elementNames);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Axes
+#region Axes
         /// <summary>
         /// This function retrieves the local axis angle assignment of the object.
         /// </summary> 
@@ -282,9 +283,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
                 CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Creation & Groups
+#region Creation & Groups
         /// <summary>
         /// This function changes the name of an existing solid object.
         /// </summary>
@@ -405,9 +406,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
 
-        #region Selection
+#region Selection
         /// <summary>
         /// This function retrieves the selected status for an object.
         /// </summary>
@@ -436,9 +437,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
 
-        #region Cross-Section & Material Properties
+#region Cross-Section & Material Properties
         /// <summary>
         /// This function retrieves the section property assigned to a solid object.
         /// </summary>
@@ -504,9 +505,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
 
-        #region Solid Properties
+#region Solid Properties
         /// <summary>
         /// This function retrieves automatic meshing assignments to objects.
         /// </summary>
@@ -594,9 +595,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.SolidObj.SetAutoMesh(name, (int)meshType, numberOfObjectsAlongPoint12, numberOfObjectsAlongPoint13, numberOfObjectsAlongPoint15, maxSizeOfObjectsAlongPoint12, maxSizeOfObjectsAlongPoint13, maxSizeOfObjectsAlongPoint15, restraintsOnEdge, restraintsOnFace, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Support & Connections
+#region Support & Connections
         /// <summary>
         /// This function retrieves the spring assignments to an object face.
         /// </summary>
@@ -750,9 +751,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.SolidObj.SetEdgeConstraint(name, constraintExists, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Loads
+#region Loads
         // LoadGravity
         /// <summary>
         /// This function retrieves the gravity load assignments to elements.
@@ -1114,6 +1115,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
-        #endregion
+#endregion
     }
 }
+#endif

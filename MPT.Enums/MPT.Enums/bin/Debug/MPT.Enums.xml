@@ -34,6 +34,35 @@ MPT.Enums
  </summary>
  <remarks></remarks>
 </member>
+<member name="M:MPT.Enums.EnumLibrary.Convert``2(``0)">
+ <summary>
+ Converts the specified enum value to anoter enum value.
+ </summary>
+ <typeparam name="TEnumFrom">The type enum to convert from.</typeparam>
+ <typeparam name="TEnumTo">The type of enum to conver to.</typeparam>
+ <param name="enumValue">The enum value to convert.</param>
+ <returns>TEnumTo.</returns>
+ <exception cref="T:System.ArgumentException">
+ TTo must be an enumerated type
+ or
+ TFrom must be an enumerated type
+ </exception>
+</member>
+<member name="M:MPT.Enums.EnumLibrary.Convert``2(``0,``1)">
+ <summary>
+ Converts the specified enum value to anoter enum value.
+ </summary>
+ <typeparam name="TEnumFrom">The type enum to convert from.</typeparam>
+ <typeparam name="TEnumTo">The type of enum to conver to.</typeparam>
+ <param name="enumValueFrom">The enum value to convert.</param>
+ <param name="enumValueTo">Dummy enum value to indicate the enum type to convert to.</param>
+ <returns>TTo.</returns>
+ <exception cref="T:System.ArgumentException">
+ TTo must be an enumerated type
+ or
+ TFrom must be an enumerated type
+ </exception>
+</member>
 <member name="M:MPT.Enums.EnumLibrary.GetEnumDescription``1(``0)">
  <summary>
  Returns the enum description (if any), otherwise returns the name of the enum value. 

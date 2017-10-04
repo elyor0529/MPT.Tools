@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using MPT.CSI.API.Core.Helpers;
-using MPT.CSI.API.Core.Support;
 
 #if BUILD_SAP2000v16
 using CSiProgram = SAP2000v16;
@@ -10,15 +8,20 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiProgram = CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiProgram = CSiBridge19;
 #elif BUILD_ETABS2013
 using CSiProgram = ETABS2013;
-
-
 #elif BUILD_ETABS2015
 using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016
 using CSiProgram = ETABS2016;
 #endif
+
+using MPT.CSI.API.Core.Helpers;
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 {
@@ -683,7 +686,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         }
 
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves link property data for a linear exponential damper-type link property.
         /// </summary>
@@ -829,7 +832,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
                 distanceFromJEndToU2Spring, distanceFromJEndToU3Spring, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
 
 
         /// <summary>
@@ -2231,8 +2234,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         }
 
 
-
-        /// <summary>
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+         /// <summary>
         /// This function retrieves link property data for a Triple Pendulum Isolator type link property.
         /// </summary>
         /// <param name="name">The name of an existing or new link property. 
@@ -2441,6 +2444,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
                 heightOuterSurface, heightInnerSurface, distanceFromJEndToU2Spring, distanceFromJEndToU3Spring, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
     }
 }

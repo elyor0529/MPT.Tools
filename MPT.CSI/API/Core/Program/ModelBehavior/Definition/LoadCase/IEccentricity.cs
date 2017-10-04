@@ -12,17 +12,6 @@
         /// <param name="eccentricity">The eccentricity ratio that applies to all diaphragms.</param>
         void GetEccentricity(string name,
             ref double eccentricity);
-
-        /// <summary>
-        /// This function sets the eccentricity ratio that applies to all diaphragms for the specified load case.
-        /// </summary>
-        /// <param name="name">The name of an existing load case.</param>
-        /// <param name="eccentricity">The eccentricity ratio that applies to all diaphragms.</param>
-        void SetEccentricity(string name,
-            double eccentricity);
-
-
-
         /// <summary>
         /// This function retrieves the diaphragm eccentricity overrides for a load case.
         /// </summary>
@@ -35,6 +24,15 @@
             ref string[] diaphragms,
             ref double[] eccentricities);
 
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// This function sets the eccentricity ratio that applies to all diaphragms for the specified load case.
+        /// </summary>
+        /// <param name="name">The name of an existing load case.</param>
+        /// <param name="eccentricity">The eccentricity ratio that applies to all diaphragms.</param>
+        void SetEccentricity(string name,
+            double eccentricity);
 
         /// <summary>
         /// This function sets the eccentricity ratio that applies to all diaphragms for the specified load case.
@@ -50,5 +48,6 @@
             string diaphragm,
             double eccentricities,
             bool delete = false);
+#endif
     }
 }

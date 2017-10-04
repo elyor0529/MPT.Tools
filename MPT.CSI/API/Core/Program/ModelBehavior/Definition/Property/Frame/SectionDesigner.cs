@@ -19,8 +19,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
 
         #endregion
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: Public
-
         /// <summary>
         /// Deletes the specified name.
         /// </summary>
@@ -37,8 +37,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
 
+
+        #endregion
+#endif
+        
         #region Methods: Get/Set Sections - Steel                
         /// <summary>
         /// This function retrieves property data for a Tee shape in a section designer section.
@@ -79,6 +82,97 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             centerCoordinate.X = xCenter;
             centerCoordinate.Y = yCenter;
         }
+        
+       
+        /// <summary>
+        /// This function retrieves property data for a Angle shape in a section designer section.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
+        /// <param name="nameShape">The name of an existing Angle shape in the specified frame section property.</param>
+        /// <param name="nameMaterial">The name of the material property for the shape.</param>
+        /// <param name="fileName">This is a blank string or the name of a defined Angle property that has been imported from a section property file. 
+        /// If it is the name of a defined Angle property, the section dimensions are taken from that property.</param>
+        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
+        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
+        /// <param name="color">The fill color assigned to the shape.</param>
+        /// <param name="h">The section depth. [L].</param>
+        /// <param name="bf">The flange width. [L].</param>
+        /// <param name="tf">The flange thickness. [L].</param>
+        /// <param name="tw">The web thickness. [L].</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetAngle(string name,
+            string nameShape,
+            ref string nameMaterial,
+            ref string fileName,
+            ref Coordinate2DCartesian centerCoordinate,
+            ref double rotation,
+            ref int color,
+            ref double h,
+            ref double bf,
+            ref double tf,
+            ref double tw)
+        {
+            double xCenter = 0;
+            double yCenter = 0;
+
+            _callCode = _sapModel.PropFrame.SDShape.GetAngle(name, nameShape, ref nameMaterial, ref fileName,
+                ref color, ref xCenter, ref yCenter,
+                ref h, ref bf, ref tf, ref tw, ref rotation);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            centerCoordinate.X = xCenter;
+            centerCoordinate.Y = yCenter;
+        }
+        
+
+        /// <summary>
+        /// This function retrieves property data for a I-Section shape in a section designer section.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
+        /// <param name="nameShape">The name of an existing I-Section shape in the specified frame section property.</param>
+        /// <param name="nameMaterial">The name of the material property for the shape.</param>
+        /// <param name="fileName">This is a blank string or the name of a defined I-Section property that has been imported from a section property file. 
+        /// If it is the name of a defined I-Section property, the section dimensions are taken from that property.</param>
+        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
+        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
+        /// <param name="color">The fill color assigned to the shape.</param>
+        /// <param name="h">The section depth. [L].</param>
+        /// <param name="bf">The top flange width. [L].</param>
+        /// <param name="tf">The top flange thickness. [L].</param>
+        /// <param name="tw">The web thickness. [L].</param>
+        /// <param name="bfBottom">The bottom flange width. [L].</param>
+        /// <param name="tfBottom">The bottom flange thickness. [L].></param>
+        /// <exception cref="CSiException"></exception>
+        public void GetISection(string name,
+            string nameShape,
+            ref string nameMaterial,
+            ref string fileName,
+            ref Coordinate2DCartesian centerCoordinate,
+            ref double rotation,
+            ref int color,
+            ref double h,
+            ref double bf,
+            ref double tf,
+            ref double tw,
+            ref double bfBottom,
+            ref double tfBottom)
+        {
+            double xCenter = 0;
+            double yCenter = 0;
+
+            _callCode = _sapModel.PropFrame.SDShape.GetISection(name, nameShape, ref nameMaterial, ref fileName,
+                ref color, ref xCenter, ref yCenter,
+                ref h, ref bf, ref tf, ref tw, ref bfBottom, ref tfBottom, ref rotation);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            centerCoordinate.X = xCenter;
+            centerCoordinate.Y = yCenter;
+        }
+
+
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+
 
         /// <summary>
         /// This function adds a new Tee shape or modifies an existing shape to be a Tee shape in a section designer property.
@@ -120,48 +214,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
-
-
-        /// <summary>
-        /// This function retrieves property data for a Angle shape in a section designer section.
-        /// </summary>
-        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
-        /// <param name="nameShape">The name of an existing Angle shape in the specified frame section property.</param>
-        /// <param name="nameMaterial">The name of the material property for the shape.</param>
-        /// <param name="fileName">This is a blank string or the name of a defined Angle property that has been imported from a section property file. 
-        /// If it is the name of a defined Angle property, the section dimensions are taken from that property.</param>
-        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
-        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
-        /// <param name="color">The fill color assigned to the shape.</param>
-        /// <param name="h">The section depth. [L].</param>
-        /// <param name="bf">The flange width. [L].</param>
-        /// <param name="tf">The flange thickness. [L].</param>
-        /// <param name="tw">The web thickness. [L].</param>
-        /// <exception cref="CSiException"></exception>
-        public void GetAngle(string name,
-            string nameShape,
-            ref string nameMaterial,
-            ref string fileName,
-            ref Coordinate2DCartesian centerCoordinate,
-            ref double rotation,
-            ref int color,
-            ref double h,
-            ref double bf,
-            ref double tf,
-            ref double tw)
-        {
-            double xCenter = 0;
-            double yCenter = 0;
-
-            _callCode = _sapModel.PropFrame.SDShape.GetAngle(name, nameShape, ref nameMaterial, ref fileName,
-                ref color, ref xCenter, ref yCenter,
-                ref h, ref bf, ref tf, ref tw, ref rotation);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            centerCoordinate.X = xCenter;
-            centerCoordinate.Y = yCenter;
-        }
 
         /// <summary>
         /// This function adds a new Angle shape or modifies an existing shape to be a Angle shape in a section designer property.
@@ -372,53 +424,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
                 h, w, tf, tw, separation);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
-
-        /// <summary>
-        /// This function retrieves property data for a I-Section shape in a section designer section.
-        /// </summary>
-        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
-        /// <param name="nameShape">The name of an existing I-Section shape in the specified frame section property.</param>
-        /// <param name="nameMaterial">The name of the material property for the shape.</param>
-        /// <param name="fileName">This is a blank string or the name of a defined I-Section property that has been imported from a section property file. 
-        /// If it is the name of a defined I-Section property, the section dimensions are taken from that property.</param>
-        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
-        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
-        /// <param name="color">The fill color assigned to the shape.</param>
-        /// <param name="h">The section depth. [L].</param>
-        /// <param name="bf">The top flange width. [L].</param>
-        /// <param name="tf">The top flange thickness. [L].</param>
-        /// <param name="tw">The web thickness. [L].</param>
-        /// <param name="bfBottom">The bottom flange width. [L].</param>
-        /// <param name="tfBottom">The bottom flange thickness. [L].></param>
-        /// <exception cref="CSiException"></exception>
-        public void GetISection(string name,
-            string nameShape,
-            ref string nameMaterial,
-            ref string fileName,
-            ref Coordinate2DCartesian centerCoordinate,
-            ref double rotation,
-            ref int color,
-            ref double h,
-            ref double bf,
-            ref double tf,
-            ref double tw,
-            ref double bfBottom,
-            ref double tfBottom)
-        {
-            double xCenter = 0;
-            double yCenter = 0;
-
-            _callCode = _sapModel.PropFrame.SDShape.GetISection(name, nameShape, ref nameMaterial, ref fileName,
-                ref color, ref xCenter, ref yCenter,
-                ref h, ref bf, ref tf, ref tw, ref bfBottom, ref tfBottom, ref rotation);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            centerCoordinate.X = xCenter;
-            centerCoordinate.Y = yCenter;
-        }
-
+        
+        
         /// <summary>
         /// This function adds a new I-Section shape or modifies an existing shape to be a I-Section shape in a section designer property.
         /// </summary>
@@ -528,9 +535,104 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
                 thickness, width);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
         #region Methods: Get/Set Sections - Solid        
+
+        /// <summary>
+        /// This function retrieves property data for a solid circle shape in a section designer section.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
+        /// <param name="nameShape">The name of an existing solid circle shape in the specified frame section property.</param>
+        /// <param name="nameMaterial">The name of the material property for the shape.</param>
+        /// <param name="stressStrainOverwrite">This is a blank string, Default, or the name of a defined stress-strain curve.
+        /// If this item is a blank string or Default, the shape stress-strain curve is based on the assigned material property.</param>
+        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
+        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
+        /// <param name="diameter">The diameter of the circle.[L].</param>
+        /// <param name="color">The fill color assigned to the shape.</param>
+        /// <param name="isReinforced">True: There is edge and corner reinforcing steel associated with the shape. 
+        /// The <paramref name="nameMaterial"/> item must refer to a concrete material for this item to be True.</param>
+        /// <param name="nameMaterialRebar">The material property for the edge and corner reinforcing steel associated with the shape. 
+        /// This item applies only when the <paramref name="nameMaterial"/> item is a concrete material and the <paramref name="isReinforced"/> item is True.</param>
+        /// <param name="numberOfBars">The number of equally spaced bars for the circular reinforcing.
+        /// This item is visible only if <paramref name="isReinforced"/> = True.</param>
+        /// <param name="cover">The clear cover for the specified rebar. [L].
+        /// This item is visible only if <paramref name="isReinforced"/> = True.</param>
+        /// <param name="barSize">The size of the reinforcing bar.
+        /// This item is visible only if <paramref name="isReinforced"/> = True.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetCircle(string name,
+            string nameShape,
+            ref string nameMaterial,
+            ref string stressStrainOverwrite,
+            ref Coordinate2DCartesian centerCoordinate,
+            ref double rotation,
+            ref double diameter,
+            ref int color,
+            ref bool isReinforced,
+            ref string nameMaterialRebar,
+            ref int numberOfBars,
+            ref double cover,
+            ref string barSize)
+        {
+            double xCoordinate = 0;
+            double yCoordinate = 0;
+
+            _callCode = _sapModel.PropFrame.SDShape.GetSolidCircle(name, nameShape, ref nameMaterial, ref stressStrainOverwrite,
+                ref color, ref xCoordinate, ref yCoordinate, ref diameter,
+                ref isReinforced, ref numberOfBars, ref rotation, ref cover, ref barSize, ref nameMaterialRebar);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            centerCoordinate.X = xCoordinate;
+            centerCoordinate.Y = yCoordinate;
+        }
+
+        /// <summary>
+        /// This function retrieves property data for a solid rectangular shape in a section designer section.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
+        /// <param name="nameShape">The name of an existing solid rectangular shape in the specified frame section property.</param>
+        /// <param name="nameMaterial">The name of the material property for the shape.</param>
+        /// <param name="stressStrainOverwrite">This is a blank string, Default, or the name of a defined stress-strain curve.
+        /// If this item is a blank string or Default, the shape stress-strain curve is based on the assigned material property.</param>
+        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
+        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
+        /// <param name="h">The section depth. [L].</param>
+        /// <param name="w">The section width. [L].</param>
+        /// <param name="color">The fill color assigned to the shape.</param>
+        /// <param name="isReinforced">True: There is edge and corner reinforcing steel associated with the shape. 
+        /// The <paramref name="nameMaterial"/> item must refer to a concrete material for this item to be True.</param>
+        /// <param name="nameMaterialRebar">The material property for the edge and corner reinforcing steel associated with the shape. 
+        /// This item applies only when the <paramref name="nameMaterial"/> item is a concrete material and the <paramref name="isReinforced"/> item is True.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetRectangle(string name,
+            string nameShape,
+            ref string nameMaterial,
+            ref string stressStrainOverwrite,
+            ref Coordinate2DCartesian centerCoordinate,
+            ref double rotation,
+            ref double h,
+            ref double w,
+            ref int color,
+            ref bool isReinforced,
+            ref string nameMaterialRebar)
+        {
+            double xCoordinate = 0;
+            double yCoordinate = 0;
+
+            _callCode = _sapModel.PropFrame.SDShape.GetSolidRect(name, nameShape, ref nameMaterial, ref stressStrainOverwrite, ref color,
+                ref xCoordinate, ref yCoordinate, ref h, ref w, ref rotation, ref isReinforced, ref nameMaterialRebar);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            centerCoordinate.X = xCoordinate;
+            centerCoordinate.Y = yCoordinate;
+        }
+
+
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves property data for a polygon shape in a section designer section.
         /// </summary>
@@ -632,7 +734,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
         /// <param name="nameMaterial">The name of the material property for the shape.</param>
         /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
         /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
-        /// <param name="angle">The angle between the two radii that define the circular sector. [deg.</param>
+        /// <param name="angle">The angle between the two radii that define the circular sector. [deg].</param>
         /// <param name="radius">The radius of the circle defining the Sector. [L].</param>
         /// <param name="color">The fill color assigned to the shape.</param>
         /// <exception cref="CSiException"></exception>
@@ -755,56 +857,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
         }
 
 
-
-        /// <summary>
-        /// This function retrieves property data for a solid circle shape in a section designer section.
-        /// </summary>
-        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
-        /// <param name="nameShape">The name of an existing solid circle shape in the specified frame section property.</param>
-        /// <param name="nameMaterial">The name of the material property for the shape.</param>
-        /// <param name="stressStrainOverwrite">This is a blank string, Default, or the name of a defined stress-strain curve.
-        /// If this item is a blank string or Default, the shape stress-strain curve is based on the assigned material property.</param>
-        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
-        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
-        /// <param name="diameter">The diameter of the circle.[L].</param>
-        /// <param name="color">The fill color assigned to the shape.</param>
-        /// <param name="isReinforced">True: There is edge and corner reinforcing steel associated with the shape. 
-        /// The <paramref name="nameMaterial"/> item must refer to a concrete material for this item to be True.</param>
-        /// <param name="nameMaterialRebar">The material property for the edge and corner reinforcing steel associated with the shape. 
-        /// This item applies only when the <paramref name="nameMaterial"/> item is a concrete material and the <paramref name="isReinforced"/> item is True.</param>
-        /// <param name="numberOfBars">The number of equally spaced bars for the circular reinforcing.
-        /// This item is visible only if <paramref name="isReinforced"/> = True.</param>
-        /// <param name="cover">The clear cover for the specified rebar. [L].
-        /// This item is visible only if <paramref name="isReinforced"/> = True.</param>
-        /// <param name="barSize">The size of the reinforcing bar.
-        /// This item is visible only if <paramref name="isReinforced"/> = True.</param>
-        /// <exception cref="CSiException"></exception>
-        public void GetCircle(string name,
-            string nameShape,
-            ref string nameMaterial,
-            ref string stressStrainOverwrite,
-            ref Coordinate2DCartesian centerCoordinate,
-            ref double rotation,
-            ref double diameter,
-            ref int color,
-            ref bool isReinforced,
-            ref string nameMaterialRebar,
-            ref int numberOfBars,
-            ref double cover,
-            ref string barSize)
-        {
-            double xCoordinate = 0;
-            double yCoordinate = 0;
-
-            _callCode = _sapModel.PropFrame.SDShape.GetSolidCircle(name, nameShape, ref nameMaterial, ref stressStrainOverwrite,
-                ref color, ref xCoordinate, ref yCoordinate, ref diameter,
-                ref isReinforced, ref numberOfBars, ref rotation, ref cover, ref barSize, ref nameMaterialRebar);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            centerCoordinate.X = xCoordinate;
-            centerCoordinate.Y = yCoordinate;
-        }
-
         /// <summary>
         /// This function adds a new solid circle shape or modifies an existing shape to be a solid circle shape in a section designer property.
         /// </summary>
@@ -925,52 +977,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
                 xCoordinate, yCoordinate, color, diameter, thickness);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
-
-
-
-        /// <summary>
-        /// This function retrieves property data for a solid rectangular shape in a section designer section.
-        /// </summary>
-        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
-        /// <param name="nameShape">The name of an existing solid rectangular shape in the specified frame section property.</param>
-        /// <param name="nameMaterial">The name of the material property for the shape.</param>
-        /// <param name="stressStrainOverwrite">This is a blank string, Default, or the name of a defined stress-strain curve.
-        /// If this item is a blank string or Default, the shape stress-strain curve is based on the assigned material property.</param>
-        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
-        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
-        /// <param name="h">The section depth. [L].</param>
-        /// <param name="w">The section width. [L].</param>
-        /// <param name="color">The fill color assigned to the shape.</param>
-        /// <param name="isReinforced">True: There is edge and corner reinforcing steel associated with the shape. 
-        /// The <paramref name="nameMaterial"/> item must refer to a concrete material for this item to be True.</param>
-        /// <param name="nameMaterialRebar">The material property for the edge and corner reinforcing steel associated with the shape. 
-        /// This item applies only when the <paramref name="nameMaterial"/> item is a concrete material and the <paramref name="isReinforced"/> item is True.</param>
-        /// <exception cref="CSiException"></exception>
-        public void GetRectangle(string name,
-            string nameShape,
-            ref string nameMaterial,
-            ref string stressStrainOverwrite,
-            ref Coordinate2DCartesian centerCoordinate,
-            ref double rotation,
-            ref double h,
-            ref double w,
-            ref int color,
-            ref bool isReinforced,
-            ref string nameMaterialRebar)
-        {
-            double xCoordinate = 0;
-            double yCoordinate = 0;
-
-            _callCode = _sapModel.PropFrame.SDShape.GetSolidRect(name, nameShape, ref nameMaterial, ref stressStrainOverwrite, ref color,
-                ref xCoordinate, ref yCoordinate, ref h, ref w, ref rotation, ref isReinforced, ref nameMaterialRebar);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            centerCoordinate.X = xCoordinate;
-            centerCoordinate.Y = yCoordinate;
-        }
-
+        
         /// <summary>
         /// This function adds a new solid rectangle shape or modifies an existing shape to be an solid rectangle shape in a section designer property.
         /// </summary>
@@ -1095,6 +1102,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
                 xCoordinate, yCoordinate, rotation, color, h, w, tf, tw);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
         #region Methods: Get/Set Sections - Concrete: Reinforcement             
@@ -1124,32 +1132,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             centerCoordinate.Y = yCenter;
         }
 
-        /// <summary>
-        /// This function adds a new single bar reinforcing shape or modifies an existing shape to be a single bar reinforcing shape in a section designer property.
-        /// </summary>
-        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
-        /// <param name="nameShape">The name of an existing or new shape in a section designer property. 
-        /// If this is an existing shape, that shape is modified; otherwise, a new shape is added.
-        /// This item may be input as a blank string, in which case the program will assign a shape name to the shape and return that name in the <paramref name="nameShape"/> variable.</param>
-        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
-        /// <param name="barSize">The size of the reinforcing bar.</param>
-        /// <param name="nameMaterial">The material property for the reinforcing steel.</param>
-        /// <exception cref="CSiException"></exception>
-        public void SetReinforcementSingle(string name,
-            ref string nameShape,
-            ref Coordinate2DCartesian centerCoordinate,
-            string barSize,
-            string nameMaterial = "")
-        {
-            _callCode = _sapModel.PropFrame.SDShape.SetReinfSingle(name, ref nameShape,
-                centerCoordinate.X, centerCoordinate.Y, barSize, nameMaterial);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-
-
-
+     
         /// <summary>
         /// This function retrieves corner point reinforcing data for solid rectangle, circle and polygon shapes in a section designer property.
         /// </summary>
@@ -1169,31 +1152,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
                 ref numberOfItems, ref pointNumbers, ref barSizes);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-        /// <summary>
-        /// This function specifies corner reinforcing in solid rectangle, circle and polygon shapes in a section designer property.
-        /// </summary>
-        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
-        /// <param name="nameShape">The name of an existing solid rectangle, circle or polygon shape in the specified section.</param>
-        /// <param name="pointNumber">A corner point number in the shape. 
-        /// This item is ignored if <paramref name="applyRebarToAllCorners"/> = True.</param>
-        /// <param name="barSize">This is "None" or the name of a defined rebar, indicating the rebar assignment to the specified corner.</param>
-        /// <param name="applyRebarToAllCorners">True: The specified rebar data applies to all corners in the shape.</param>
-        /// <exception cref="CSiException"></exception>
-        public void SetReinforcedCorner(string name,
-            ref string nameShape,
-            int pointNumber,
-            string barSize,
-            bool applyRebarToAllCorners = false)
-        {
-            _callCode = _sapModel.PropFrame.SDShape.SetReinfCorner(name, ref nameShape,
-                pointNumber, barSize, applyRebarToAllCorners);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-
-
+        
 
         /// <summary>
         /// This function retrieves edge reinforcing data for solid rectangle, circle and polygon reinforcing shapes in a section designer property.
@@ -1218,34 +1177,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
                 ref numberOfItems, ref edgeNumbers, ref barSizes, ref spacing, ref cover);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-        /// <summary>
-        /// This function specifies edge reinforcing in solid rectangle, circle, polygon and rectangular reinforcing shapes in a section designer property.
-        /// </summary>
-        /// <param name="name">The name of an existing solid rectangle, circle or polygon shape in the specified section.</param>
-        /// <param name="nameShape">The name of an existing solid rectangle, circle or polygon shape in the specified section.</param>
-        /// <param name="edgeNumber">An edge number in the shape. This item is ignored if <paramref name="applyRebarToAllEdges"/> = True.</param>
-        /// <param name="barSize">"None" or the name of a defined rebar, indicating the rebar assignment to the considered edge.</param>
-        /// <param name="spacing">The rebar maximum center-to-center along the considered edge. [L].</param>
-        /// <param name="cover">The rebar clear cover along the considered edge. [L].</param>
-        /// <param name="applyRebarToAllEdges">True: The specified rebar data applies to all edges in the shape</param>
-        /// <exception cref="CSiException"></exception>
-        public void SetReinforcedEdge(string name,
-            ref string nameShape,
-            int edgeNumber,
-            string barSize,
-            double spacing,
-            double cover,
-            bool applyRebarToAllEdges = false)
-        {
-            _callCode = _sapModel.PropFrame.SDShape.SetReinfEdge(name, ref nameShape,
-                edgeNumber, barSize, spacing, cover, applyRebarToAllEdges);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-
-
+        
 
         /// <summary>
         /// This function retrieves property data for a line reinforcing shape in a section designer section.
@@ -1285,38 +1217,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             endCoordinate.Y = yEnd;
         }
 
-        /// <summary>
-        /// This function adds a new line reinforcing shape or modifies an existing shape to be a line reinforcing shape in a section designer property.
-        /// </summary>
-        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
-        /// <param name="nameShape">The name of an existing or new shape in a section designer property. 
-        /// If this is an existing shape, that shape is modified; otherwise, a new shape is added.
-        /// This item may be input as a blank string, in which case the program will assign a shape name to the shape and return that name in the <paramref name="nameShape"/> variable.</param>
-        /// <param name="startCoordinate">Coordinate of the first drawn end point of the line pattern reinforcing. [L].</param>
-        /// <param name="endCoordinate">Coordinate of the second drawn end point of the line pattern reinforcing. [L].</param>
-        /// <param name="barSpacing">The center-to-center spacing of the bars in the line pattern shape. [L].</param>
-        /// <param name="barSize">The size of the reinforcing bars used in the line reinforcing shape.</param>
-        /// <param name="endBarsExist">True: There are bars at the end points of the line reinforcing.</param>
-        /// <param name="nameMaterial">The material property for the reinforcing steel.</param>
-        /// <exception cref="CSiException"></exception>
-        public void SetReinforcedLine(string name,
-            ref string nameShape,
-            Coordinate2DCartesian startCoordinate,
-            Coordinate2DCartesian endCoordinate,
-            string barSize,
-            double barSpacing,
-            bool endBarsExist = false,
-            string nameMaterial = "")
-        {
-            _callCode = _sapModel.PropFrame.SDShape.SetReinfLine(name, ref nameShape,
-                startCoordinate.X, startCoordinate.Y, endCoordinate.X, endCoordinate.Y,
-                barSpacing, barSize, endBarsExist, nameMaterial);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-
-
 
         /// <summary>
         /// This function retrieves property data for a circular reinforcing shape in a section designer section.
@@ -1350,39 +1250,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             centerCoordinate.Y = yCenter;
         }
 
-
-
-        /// <summary>
-        /// This function adds a new circular reinforcing shape or modifies an existing shape to be an circular reinforcing shape in a section designer property.
-        /// </summary>
-        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
-        /// <param name="nameShape">The name of an existing or new shape in a section designer property. 
-        /// If this is an existing shape, that shape is modified; otherwise, a new shape is added.
-        /// This item may be input as a blank string, in which case the program will assign a shape name to the shape and return that name in the <paramref name="nameShape"/> variable.</param>
-        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
-        /// <param name="diameter">The diameter of the circular shape. [L].</param>
-        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
-        /// <param name="numberBars">The number of equally spaced bars for the circular reinforcing.</param>
-        /// <param name="barSize">The size of the reinforcing bar.</param>
-        /// <param name="nameMaterial">The material property for the reinforcing steel.</param>
-        /// <exception cref="CSiException"></exception>
-        public void SetReinforcedCircle(string name,
-            ref string nameShape,
-            Coordinate2DCartesian centerCoordinate,
-            string barSize,
-            double rotation,
-            double diameter,
-            int numberBars,
-            string nameMaterial = "")
-        {
-            _callCode = _sapModel.PropFrame.SDShape.SetReinfCircle(name, ref nameShape,
-                centerCoordinate.X, centerCoordinate.Y, diameter, numberBars, rotation, barSize, nameMaterial);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-
-
+        
         /// <summary>
         /// This function retrieves property data for a rectangular reinforcing shape in a section designer sec.
         /// </summary>
@@ -1414,6 +1282,221 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             centerCoordinate.Y = yCenter;
         }
 
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// This function retrieves property data for a Tee shape in a section designer section.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
+        /// <param name="nameShape">The name of an existing Tee shape in the specified frame section property.</param>
+        /// <param name="nameMaterial">The name of the material property for the shape.</param>
+        /// <param name="fileName">This is a blank string or the name of a defined Tee property that has been imported from a section property file. 
+        /// If it is the name of a defined Tee property, the section dimensions are taken from that property.</param>
+        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
+        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
+        /// <param name="color">The fill color assigned to the shape.</param>
+        /// <param name="h">The section depth. [L].</param>
+        /// <param name="bf">The section width. [L].</param>
+        /// <param name="tf">The flange thickness. [L].</param>
+        /// <param name="tw">The web thickness. [L].</param>
+        /// <param name="mirrorAbout3">True: Section is mirrored about the local 3-axis.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetReinforcedTee(string name,
+            string nameShape,
+            ref string nameMaterial,
+            ref string fileName,
+            ref Coordinate2DCartesian centerCoordinate,
+            ref double rotation,
+            ref int color,
+            ref double h,
+            ref double bf,
+            ref double tf,
+            ref double tw,
+            ref bool mirrorAbout3)
+        {
+            double xCenter = 0;
+            double yCenter = 0;
+
+            _callCode = _sapModel.PropFrame.SDShape.GetConcreteTee(name, nameShape, ref nameMaterial, ref fileName,
+                ref color, ref xCenter, ref yCenter,
+                ref h, ref bf, ref tf, ref tw, ref rotation, ref mirrorAbout3);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            centerCoordinate.X = xCenter;
+            centerCoordinate.Y = yCenter;
+        }
+
+        /// <summary>
+        /// This function retrieves property data for a Tee shape in a section designer section.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
+        /// <param name="nameShape">The name of an existing Tee shape in the specified frame section property.</param>
+        /// <param name="nameMaterial">The name of the material property for the shape.</param>
+        /// <param name="fileName">This is a blank string or the name of a defined Tee property that has been imported from a section property file. 
+        /// If it is the name of a defined Tee property, the section dimensions are taken from that property.</param>
+        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
+        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
+        /// <param name="color">The fill color assigned to the shape.</param>
+        /// <param name="h">The section depth. [L].</param>
+        /// <param name="bf">The section width. [L].</param>
+        /// <param name="tf">The flange thickness. [L].</param>
+        /// <param name="tw">The web thickness. [L].</param>
+        /// <param name="mirrorAbout2">True: Section is mirrored about the local 2-axis.</param>
+        /// <param name="mirrorAbout3">True: Section is mirrored about the local 3-axis.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetReinforcedL(string name,
+            string nameShape,
+            ref string nameMaterial,
+            ref string fileName,
+            ref Coordinate2DCartesian centerCoordinate,
+            ref double rotation,
+            ref int color,
+            ref double h,
+            ref double bf,
+            ref double tf,
+            ref double tw,
+            ref bool mirrorAbout2,
+            ref bool mirrorAbout3)
+        {
+            double xCenter = 0;
+            double yCenter = 0;
+
+            _callCode = _sapModel.PropFrame.SDShape.GetConcreteL(name, nameShape, ref nameMaterial, ref fileName,
+                ref color, ref xCenter, ref yCenter,
+                ref h, ref bf, ref tf, ref tw, ref rotation, ref mirrorAbout2, ref mirrorAbout3);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            centerCoordinate.X = xCenter;
+            centerCoordinate.Y = yCenter;
+        }
+#endif
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// This function adds a new single bar reinforcing shape or modifies an existing shape to be a single bar reinforcing shape in a section designer property.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
+        /// <param name="nameShape">The name of an existing or new shape in a section designer property. 
+        /// If this is an existing shape, that shape is modified; otherwise, a new shape is added.
+        /// This item may be input as a blank string, in which case the program will assign a shape name to the shape and return that name in the <paramref name="nameShape"/> variable.</param>
+        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
+        /// <param name="barSize">The size of the reinforcing bar.</param>
+        /// <param name="nameMaterial">The material property for the reinforcing steel.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetReinforcementSingle(string name,
+            ref string nameShape,
+            ref Coordinate2DCartesian centerCoordinate,
+            string barSize,
+            string nameMaterial = "")
+        {
+            _callCode = _sapModel.PropFrame.SDShape.SetReinfSingle(name, ref nameShape,
+                centerCoordinate.X, centerCoordinate.Y, barSize, nameMaterial);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function specifies corner reinforcing in solid rectangle, circle and polygon shapes in a section designer property.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
+        /// <param name="nameShape">The name of an existing solid rectangle, circle or polygon shape in the specified section.</param>
+        /// <param name="pointNumber">A corner point number in the shape. 
+        /// This item is ignored if <paramref name="applyRebarToAllCorners"/> = True.</param>
+        /// <param name="barSize">This is "None" or the name of a defined rebar, indicating the rebar assignment to the specified corner.</param>
+        /// <param name="applyRebarToAllCorners">True: The specified rebar data applies to all corners in the shape.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetReinforcedCorner(string name,
+            ref string nameShape,
+            int pointNumber,
+            string barSize,
+            bool applyRebarToAllCorners = false)
+        {
+            _callCode = _sapModel.PropFrame.SDShape.SetReinfCorner(name, ref nameShape,
+                pointNumber, barSize, applyRebarToAllCorners);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+        /// <summary>
+        /// This function specifies edge reinforcing in solid rectangle, circle, polygon and rectangular reinforcing shapes in a section designer property.
+        /// </summary>
+        /// <param name="name">The name of an existing solid rectangle, circle or polygon shape in the specified section.</param>
+        /// <param name="nameShape">The name of an existing solid rectangle, circle or polygon shape in the specified section.</param>
+        /// <param name="edgeNumber">An edge number in the shape. This item is ignored if <paramref name="applyRebarToAllEdges"/> = True.</param>
+        /// <param name="barSize">"None" or the name of a defined rebar, indicating the rebar assignment to the considered edge.</param>
+        /// <param name="spacing">The rebar maximum center-to-center along the considered edge. [L].</param>
+        /// <param name="cover">The rebar clear cover along the considered edge. [L].</param>
+        /// <param name="applyRebarToAllEdges">True: The specified rebar data applies to all edges in the shape</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetReinforcedEdge(string name,
+            ref string nameShape,
+            int edgeNumber,
+            string barSize,
+            double spacing,
+            double cover,
+            bool applyRebarToAllEdges = false)
+        {
+            _callCode = _sapModel.PropFrame.SDShape.SetReinfEdge(name, ref nameShape,
+                edgeNumber, barSize, spacing, cover, applyRebarToAllEdges);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function adds a new line reinforcing shape or modifies an existing shape to be a line reinforcing shape in a section designer property.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
+        /// <param name="nameShape">The name of an existing or new shape in a section designer property. 
+        /// If this is an existing shape, that shape is modified; otherwise, a new shape is added.
+        /// This item may be input as a blank string, in which case the program will assign a shape name to the shape and return that name in the <paramref name="nameShape"/> variable.</param>
+        /// <param name="startCoordinate">Coordinate of the first drawn end point of the line pattern reinforcing. [L].</param>
+        /// <param name="endCoordinate">Coordinate of the second drawn end point of the line pattern reinforcing. [L].</param>
+        /// <param name="barSpacing">The center-to-center spacing of the bars in the line pattern shape. [L].</param>
+        /// <param name="barSize">The size of the reinforcing bars used in the line reinforcing shape.</param>
+        /// <param name="endBarsExist">True: There are bars at the end points of the line reinforcing.</param>
+        /// <param name="nameMaterial">The material property for the reinforcing steel.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetReinforcedLine(string name,
+            ref string nameShape,
+            Coordinate2DCartesian startCoordinate,
+            Coordinate2DCartesian endCoordinate,
+            string barSize,
+            double barSpacing,
+            bool endBarsExist = false,
+            string nameMaterial = "")
+        {
+            _callCode = _sapModel.PropFrame.SDShape.SetReinfLine(name, ref nameShape,
+                startCoordinate.X, startCoordinate.Y, endCoordinate.X, endCoordinate.Y,
+                barSpacing, barSize, endBarsExist, nameMaterial);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function adds a new circular reinforcing shape or modifies an existing shape to be an circular reinforcing shape in a section designer property.
+        /// </summary>
+        /// <param name="name">The name of an existing frame section property that is a section designer section.</param>
+        /// <param name="nameShape">The name of an existing or new shape in a section designer property. 
+        /// If this is an existing shape, that shape is modified; otherwise, a new shape is added.
+        /// This item may be input as a blank string, in which case the program will assign a shape name to the shape and return that name in the <paramref name="nameShape"/> variable.</param>
+        /// <param name="centerCoordinate">The coordinate of the center of the shape in the section designer coordinate system. [L].</param>
+        /// <param name="diameter">The diameter of the circular shape. [L].</param>
+        /// <param name="rotation">The counter clockwise rotation of the shape from its default orientation. [deg].</param>
+        /// <param name="numberBars">The number of equally spaced bars for the circular reinforcing.</param>
+        /// <param name="barSize">The size of the reinforcing bar.</param>
+        /// <param name="nameMaterial">The material property for the reinforcing steel.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetReinforcedCircle(string name,
+            ref string nameShape,
+            Coordinate2DCartesian centerCoordinate,
+            string barSize,
+            double rotation,
+            double diameter,
+            int numberBars,
+            string nameMaterial = "")
+        {
+            _callCode = _sapModel.PropFrame.SDShape.SetReinfCircle(name, ref nameShape,
+                centerCoordinate.X, centerCoordinate.Y, diameter, numberBars, rotation, barSize, nameMaterial);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
         /// <summary>
         /// This function adds a new rectangular reinforcing shape or modifies an existing shape to be a rectangular reinforcing shape in a section designer property.
         /// </summary>
@@ -1440,8 +1523,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
                 rotation, nameMaterial);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: Get/Set Sections - Reference        
         /// <summary>
         /// This function retrieves property data for a reference circle shape in a section designer section.
@@ -1538,5 +1624,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion
+#endif
     }
 }

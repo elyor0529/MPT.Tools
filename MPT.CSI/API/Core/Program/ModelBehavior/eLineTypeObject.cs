@@ -1,5 +1,4 @@
-﻿
-namespace MPT.CSI.API.Core.Program.ModelBehavior
+﻿namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
     /// Line object types available in the application.

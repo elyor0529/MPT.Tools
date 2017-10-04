@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent
 {
     /// <summary>
     /// The integration type used.
@@ -16,3 +17,4 @@
         DirichletSeries = 1
     }
 }
+#endif

@@ -1,7 +1,4 @@
-﻿using MPT.CSI.API.Core.Support;
-using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern;
-
-#if BUILD_SAP2000v16
+﻿#if BUILD_SAP2000v16
 using CSiProgram = SAP2000v16;
 #elif BUILD_SAP2000v17
 using CSiProgram = SAP2000v17;
@@ -9,15 +6,19 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiProgram = CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiProgram = CSiBridge19;
 #elif BUILD_ETABS2013
 using CSiProgram = ETABS2013;
-
-
 #elif BUILD_ETABS2015
 using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016
 using CSiProgram = ETABS2016;
 #endif
+using MPT.CSI.API.Core.Support;
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
@@ -30,8 +31,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         private readonly CSiApiSeed _seed;
         
         private AutoSeismic _autoSeismicPattern;
-        private AutoWave _autoWavePattern;
         private AutoWind _autoWindPattern;
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        private AutoWave _autoWavePattern;
+#endif
         #endregion
 
 
@@ -41,16 +44,18 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// Represents an auto seismic load pattern in the application.
         /// </summary>
         public AutoSeismic AutoSeismicPattern => _autoSeismicPattern ?? (_autoSeismicPattern = new AutoSeismic(_seed));
-
-        /// <summary>
-        /// Represents an auto wave load pattern in the application.
-        /// </summary>
-        public AutoWave AutoWavePattern => _autoWavePattern ?? (_autoWavePattern = new AutoWave(_seed));
-
+        
         /// <summary>
         /// Represents an auto wind load pattern in the application.
         /// </summary>
         public AutoWind AutoWindPattern => _autoWindPattern ?? (_autoWindPattern = new AutoWind(_seed));
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// Represents an auto wave load pattern in the application.
+        /// </summary>
+        public AutoWave AutoWavePattern => _autoWavePattern ?? (_autoWavePattern = new AutoWave(_seed));
+#endif
         #endregion
 
 
@@ -187,6 +192,49 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.LoadPatterns.SetSelfWTMultiplier(name, selfWeightMultiplier);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+
+        // ===
+
+        /// <summary>
+        /// Retrieves the code name used for auto seismic parameters in Quake-type load patterns.
+        /// </summary>
+        /// <param name="name">The name of an existing Quake-type load pattern.</param>
+        /// <param name="codeName">This is either blank or the name code used for the auto seismic parameters. 
+        /// Blank means no auto seismic load is specified for the Quake-type load pattern.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetAutoSeismicCode(string name, ref string codeName)
+        {
+            _callCode = _sapModel.LoadPatterns.GetAutoSeismicCode(name, ref codeName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the code name used for auto wind parameters in wind-type load patterns.
+        /// </summary>
+        /// <param name="name">The name of an existing wind-type load pattern.</param>
+        /// <param name="codeName">This is either blank or the name code used for the auto wind parameters. 
+        /// Blank means no auto wind load is specified for the wind-type load pattern.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetAutoWindCode(string name, ref string codeName)
+        {
+            _callCode = _sapModel.LoadPatterns.GetAutoWindCode(name, ref codeName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves the code name used for auto wave parameters in wave-type load patterns.
+        /// </summary>
+        /// <param name="name">The name of an existing wave-type load pattern.</param>
+        /// <param name="codeName">This is either blank or the name code used for the auto wave parameters. 
+        /// Blank means no auto wave load is specified for the wave-type load pattern.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetAutoWaveCode(string name, ref string codeName)
+        {
+            _callCode = _sapModel.LoadPatterns.GetAutoWaveCode(name, ref codeName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
     /// Tendon load types available in the program.
@@ -16,3 +17,4 @@
         Stress = 1
     }
 }
+#endif

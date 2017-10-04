@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
     /// Object can have a gettable/settable trapezoidal frame cross-section.
@@ -53,3 +54,4 @@
             string GUID = "");
     }
 }
+#endif

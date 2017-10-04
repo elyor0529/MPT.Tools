@@ -14,16 +14,7 @@
         void GetDampingConstant(string name,
             ref double damping);
 
-        /// <summary>
-        /// This function sets constant modal damping for the specified load case.
-        /// </summary>
-        /// <param name="name">The name of an existing load case that has constant damping.</param>
-        /// <param name="damping">The constant damping for all modes (0 &lt;= <paramref name="damping"/> &lt; 1).</param>
-        void SetDampingConstant(string name,
-            double damping);
-
-
-
+       
         /// <summary>
         /// This function retrieves the interpolated modal damping data assigned to the specified load case.
         /// </summary>
@@ -38,6 +29,41 @@
             ref int numberOfItems,
             ref double[] periodsOrFrequencies,
             ref double[] damping);
+
+        
+
+        
+        /// <summary>
+        /// This function retrieves the modal damping overrides assigned to the specified load case.
+        /// </summary>
+        /// <param name="name">The name of an existing analysis case.</param>
+        /// <param name="numberOfItems">The number of <paramref name="modes"/> and <paramref name="damping"/> pairs.</param>
+        /// <param name="modes">The modes.</param>
+        /// <param name="damping">The damping for the specified mode (0 &lt;= <paramref name="damping"/> &lt; 1).</param>
+        void GetDampingOverrides(string name,
+            ref int numberOfItems,
+            ref int[] modes,
+            ref double[] damping);
+
+
+        
+
+        /// <summary>
+        /// This function retrieves the hysteretic damping type for the specified load case.
+        /// </summary>
+        /// <param name="name">The name of an existing load case.</param>
+        /// <param name="dampingType">The modal damping type for the load case.</param>
+        void GetDampingType(string name,
+            ref eDampingType dampingType);
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+         /// <summary>
+        /// This function sets constant modal damping for the specified load case.
+        /// </summary>
+        /// <param name="name">The name of an existing load case that has constant damping.</param>
+        /// <param name="damping">The constant damping for all modes (0 &lt;= <paramref name="damping"/> &lt; 1).</param>
+        void SetDampingConstant(string name,
+            double damping);
 
         /// <summary>
         /// This function retrieves the interpolated modal damping data assigned to the specified load case.
@@ -54,24 +80,6 @@
             double[] periodsOrFrequencies,
             double[] damping);
 
-
-
-
-
-
-        /// <summary>
-        /// This function retrieves the modal damping overrides assigned to the specified load case.
-        /// </summary>
-        /// <param name="name">The name of an existing analysis case.</param>
-        /// <param name="numberOfItems">The number of <paramref name="modes"/> and <paramref name="damping"/> pairs.</param>
-        /// <param name="modes">The modes.</param>
-        /// <param name="damping">The damping for the specified mode (0 &lt;= <paramref name="damping"/> &lt; 1).</param>
-        void GetDampingOverrides(string name,
-            ref int numberOfItems,
-            ref int[] modes,
-            ref double[] damping);
-
-
         /// <summary>
         /// This function retrieves the modal damping overrides assigned to the specified load case.
         /// </summary>
@@ -83,17 +91,6 @@
             int numberOfItems,
             int[] modes,
             double[] damping);
-
-
-
-
-
-        /// <summary>
-        /// This function retrieves the hysteretic damping type for the specified load case.
-        /// </summary>
-        /// <param name="name">The name of an existing load case.</param>
-        /// <param name="dampingType">The modal damping type for the load case.</param>
-        void GetDampingType(string name,
-            ref eDampingType dampingType);
+#endif
     }
 }

@@ -1,7 +1,4 @@
-﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase;
-using MPT.CSI.API.Core.Support;
-
-#if BUILD_SAP2000v16
+﻿#if BUILD_SAP2000v16
 using CSiProgram = SAP2000v16;
 #elif BUILD_SAP2000v17
 using CSiProgram = SAP2000v17;
@@ -9,16 +6,19 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiProgram = CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiProgram = CSiBridge19;
 #elif BUILD_ETABS2013
 using CSiProgram = ETABS2013;
-
-
 #elif BUILD_ETABS2015
 using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016
 using CSiProgram = ETABS2016;
 #endif
-
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase;
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
@@ -32,37 +32,64 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         #region Fields
         private readonly CSiApiSeed _seed;
 
-        private Buckling _buckling;
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         private ExternalResults _externalResults;
+        private MovingLoad _movingLoad;
+        private PowerSpectralDensity _powerSpectralDensity;
+        private StaticLinearMultistep _staticLinearMultistep;
+        private SteadyState _steadyState;
+#endif
+        private Buckling _buckling;
         private Hyperstatic _hyperstatic;
         private ModalEigen _modalEigen;
         private ModalRitz _modalRitz;
-        private MovingLoad _movingLoad;
-        private PowerSpectralDensity _powerSpectralDensity;
         private ResponseSpectrum _responseSpectrum;
         private StaticLinear _staticLinear;
-        private StaticLinearMultistep _staticLinearMultistep;
         private StaticNonlinear _staticNonlinear;
         private StaticNonlinearStaged _staticNonlinearStaged;
-        private SteadyState _steadyState;
         private TimeHistoryDirectLinear _timeHistoryDirectLinear;
         private TimeHistoryDirectNonlinear _timeHistoryDirectNonlinear;
         private TimeHistoryModalLinear _timeHistoryModalLinear;
         private TimeHistoryModalNonlinear _timeHistoryModalNonlinear;
         #endregion
 
-        #region Properties                    
-        /// <summary>
-        /// Gets the buckling load case.
-        /// </summary>
-        /// <value>The buckling load case.</value>
-        public Buckling Buckling => _buckling ?? (_buckling = new Buckling(_seed));
-
+        #region Properties       
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Gets the external results load case.
         /// </summary>
         /// <value>The external results load case.</value>
         public ExternalResults ExternalResults => _externalResults ?? (_externalResults = new ExternalResults(_seed));
+
+        /// <summary>
+        /// Gets the moving load load case.
+        /// </summary>
+        /// <value>The moving load load case.</value>
+        public MovingLoad MovingLoad => _movingLoad ?? (_movingLoad = new MovingLoad(_seed));
+
+        /// <summary>
+        /// Gets the power spectral density load case.
+        /// </summary>
+        /// <value>The power spectral density load case.</value>
+        public PowerSpectralDensity PowerSpectralDensity => _powerSpectralDensity ?? (_powerSpectralDensity = new PowerSpectralDensity(_seed));
+
+        /// <summary>
+        /// Gets the static linear multistep load case.
+        /// </summary>
+        /// <value>The static linear multistep load case.</value>
+        public StaticLinearMultistep StaticLinearMultistep => _staticLinearMultistep ?? (_staticLinearMultistep = new StaticLinearMultistep(_seed));
+
+        /// <summary>
+        /// Gets the state of the steady load case.
+        /// </summary>
+        /// <value>The state of the steady load case.</value>
+        public SteadyState SteadyState => _steadyState ?? (_steadyState = new SteadyState(_seed));
+#endif
+        /// <summary>
+        /// Gets the buckling load case.
+        /// </summary>
+        /// <value>The buckling load case.</value>
+        public Buckling Buckling => _buckling ?? (_buckling = new Buckling(_seed));
 
         /// <summary>
         /// Gets the hyperstatic load case.
@@ -81,19 +108,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         /// <value>The modal ritz load case.</value>
         public ModalRitz ModalRitz => _modalRitz ?? (_modalRitz = new ModalRitz(_seed));
-
-        /// <summary>
-        /// Gets the moving load load case.
-        /// </summary>
-        /// <value>The moving load load case.</value>
-        public MovingLoad MovingLoad => _movingLoad ?? (_movingLoad = new MovingLoad(_seed));
-
-        /// <summary>
-        /// Gets the power spectral density load case.
-        /// </summary>
-        /// <value>The power spectral density load case.</value>
-        public PowerSpectralDensity PowerSpectralDensity => _powerSpectralDensity ?? (_powerSpectralDensity = new PowerSpectralDensity(_seed));
-
+        
         /// <summary>
         /// Gets the response spectrum load case.
         /// </summary>
@@ -107,12 +122,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         public StaticLinear StaticLinear => _staticLinear ?? (_staticLinear = new StaticLinear(_seed));
 
         /// <summary>
-        /// Gets the static linear multistep load case.
-        /// </summary>
-        /// <value>The static linear multistep load case.</value>
-        public StaticLinearMultistep StaticLinearMultistep => _staticLinearMultistep ?? (_staticLinearMultistep = new StaticLinearMultistep(_seed));
-
-        /// <summary>
         /// Gets the static nonlinear load case.
         /// </summary>
         /// <value>The static nonlinear load case.</value>
@@ -123,13 +132,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         /// <value>The static nonlinear staged load case.</value>
         public StaticNonlinearStaged StaticNonlinearStaged => _staticNonlinearStaged ?? (_staticNonlinearStaged = new StaticNonlinearStaged(_seed));
-
-        /// <summary>
-        /// Gets the state of the steady load case.
-        /// </summary>
-        /// <value>The state of the steady load case.</value>
-        public SteadyState SteadyState => _steadyState ?? (_steadyState = new SteadyState(_seed));
-
+        
         /// <summary>
         /// Gets the time history direct linea load caser.
         /// </summary>

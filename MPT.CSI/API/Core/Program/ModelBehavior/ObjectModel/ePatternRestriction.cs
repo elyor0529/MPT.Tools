@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
     /// Restriction applied to what values are use from pattern calculations.
@@ -21,3 +22,4 @@
         PositiveSetTo0 = 2
     }
 }
+#endif

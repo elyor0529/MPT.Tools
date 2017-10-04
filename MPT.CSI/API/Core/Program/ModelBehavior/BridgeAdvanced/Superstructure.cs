@@ -1,28 +1,10 @@
-﻿using MPT.CSI.API.Core.Helpers;
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
 {
-#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
 
     /// <summary>
     /// Represents the bridge superstructure in the application.
@@ -31,14 +13,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
     public class Superstructure : CSiApiBase
     {
 
-    #region Fields
+#region Fields
         private readonly CSiApiSeed _seed;
 
         private ConcreteBoxGirder _concreteBoxGirder;
-    #endregion
+#endregion
 
 
-    #region Properties        
+#region Properties        
         /// <summary>
         /// Gets the concrete box girder.
         /// </summary>
@@ -46,10 +28,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
         public ConcreteBoxGirder ConcreteBoxGirder => _concreteBoxGirder ?? (_concreteBoxGirder = new ConcreteBoxGirder(_seed));
 
 
-    #endregion
+#endregion
 
 
-    #region Initialization        
+#region Initialization        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Superstructure"/> class.
@@ -61,9 +43,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
         }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public        
+#region Methods: Public        
 
         /// <summary>
         /// This function returns location and material information about a single stress point at a superstructure section cut in a bridge object. <para/>
@@ -172,7 +154,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced
             _callCode = _sapModel.BridgeAdvancedSuper.CountSuperCut(name, ref count);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-    #endregion
+#endregion
     }
-#endif
 }
+#endif

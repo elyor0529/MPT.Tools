@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
 {
     /// <summary>
     /// Offset types used for areas in the application.
@@ -21,3 +22,4 @@
         SelectedPoints = 2
     }
 }
+#endif

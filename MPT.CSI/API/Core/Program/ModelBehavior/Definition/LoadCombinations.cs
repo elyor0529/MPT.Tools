@@ -1,6 +1,4 @@
-﻿using MPT.CSI.API.Core.Support;
-
-#if BUILD_SAP2000v16
+﻿#if BUILD_SAP2000v16
 using CSiProgram = SAP2000v16;
 #elif BUILD_SAP2000v17
 using CSiProgram = SAP2000v17;
@@ -8,24 +6,34 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiProgram = CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiProgram = CSiBridge19;
 #elif BUILD_ETABS2013
 using CSiProgram = ETABS2013;
-
-
 #elif BUILD_ETABS2015
 using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016
 using CSiProgram = ETABS2016;
 #endif
-
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents the load combinations in the application.
     /// </summary>
     public class LoadCombinations : CSiApiBase, IChangeableName, ICountable, IDeletable, IListableNames
     {
+#else
+    /// <summary>
+    /// Represents the load combinations in the application.
+    /// </summary>
+    public class LoadCombinations : CSiApiBase, IDeletable, IListableNames
+    {
+#endif
         #region Initialization
 
         public LoadCombinations(CSiApiSeed seed) : base(seed) { }
@@ -66,6 +74,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Change name of load combination.
         /// The new load combination name must be different from all other load combinations and all load cases. If the name is not unique, an error will be returned.
@@ -99,6 +108,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.RespCombo.CountCase(nameLoadCombo, ref loadCaseComboCount);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
         /// <summary>
         /// This function deletes the specified load combination.
@@ -182,6 +192,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+        
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         // == Note ==
 
         /// <summary>
@@ -207,6 +219,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.RespCombo.SetNote(nameLoadCombo, note);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
         // == Type ==
 
@@ -224,7 +237,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 
             combo = (eLoadComboType) csiCombo;
         }
-
+        
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function sets the combination type for specified load combination.
         /// </summary>
@@ -236,7 +250,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.RespCombo.SetTypeOAPI(nameLoadCombo, (int)comboType);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
         #endregion
     }
 }

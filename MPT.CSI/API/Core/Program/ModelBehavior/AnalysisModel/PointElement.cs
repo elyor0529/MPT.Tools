@@ -3,24 +3,6 @@ using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 {
     /// <summary>
@@ -203,7 +185,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             coordinate.Y = y;
             coordinate.Z = z;
         }
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Returns the r, Theta and z coordinates of the specified point element/object in the Present Units. 
         /// The coordinates are reported in the coordinate system specified by <paramref name="coordinateSystem"/>.
@@ -249,7 +231,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             coordinate.Theta = theta;
             coordinate.Phi = phi;
         }
-
+#endif
 
         /// <summary>
         /// This function returns a list of elements connected to a specified point element/object.
@@ -303,8 +285,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 
 
         #region Point Properties
-        
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the merge number for a point element/object. 
         /// By default the merge number for a point is zero. 
@@ -318,7 +300,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             _callCode = _sapModel.PointElm.GetMergeNumber(name, ref mergeNumber);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
         /// <summary>
         /// This function retrieves the joint pattern value for a specific point element/object and joint pattern.
         /// Joint pattern values are unitless.

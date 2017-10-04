@@ -1,25 +1,8 @@
 ﻿using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents the steady state function in the application.
     /// </summary>
@@ -27,7 +10,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
     public class SteadyState : CSiApiBase
     {
 
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="SteadyState"/> class.
         /// </summary>
@@ -35,9 +18,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
         public SteadyState(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: File & User
+#region Methods: File & User
         /// <summary>
         /// This function retrieves the definition of a steady state function from file.
         /// </summary>
@@ -149,6 +132,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
     }
+# endif
 }

@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
 {
     /// <summary>
     /// Superstructure tendon cut items available in the application.
@@ -31,3 +32,4 @@
         Slope = 5
     }
 }
+#endif

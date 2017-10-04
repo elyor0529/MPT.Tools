@@ -18,7 +18,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         void GetCoordinate(string name,
             ref Coordinate3DCartesian coordinate,
             string coordinateSystem = CoordinateSystems.Global);
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Returns the r, Theta and z coordinates of the specified point element/object in the Present Units. 
         /// The coordinates are reported in the coordinate system specified by <paramref name="coordinateSystem"/>.
@@ -40,5 +40,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         void GetCoordinate(string name,
             ref Coordinate3DSpherical coordinate,
             string coordinateSystem = CoordinateSystems.Global);
+#endif
     }
 }

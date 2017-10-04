@@ -8,25 +8,28 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
     /// </summary>
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignMetal" />
-    public class DesignSteel : CSiApiBase, IDesignMetal
+    public class DesignSteel : CSiApiBase, IDesignSteel
     {
         #region Fields
         private readonly CSiApiSeed _seed;
 
-        private AISC_360_05_IBC_2006 _AISC_360_05_IBC_2006;
-        private AISC_360_10 _AISC_360_10;
-        private AISC_ASD_89 _AISC_ASD_89;      
+        private AISC_360_05_IBC_2006 _AISC_360_05_IBC_2006;          
         private CSA_S16_09 _CSA_S16_09;
         private Eurocode_3_2005 _Eurocode_3_2005;
-
+#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+        private Chinese_2002 _Chinese_2002;
+        private Italian_NTC_2008 _Italian_NTC_2008;
+#endif
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        private AISC_360_10 _AISC_360_10;
+        private AISC_ASD_89 _AISC_ASD_89; 
+#endif
 #if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
         private AISC_LRFD_93 _AISC_LRFD_93;
         private AS_4100_1998 _AS_4100_1998;
         private BS_5950_2000 _BS_5950_2000;
-        private Chinese_2002 _Chinese_2002;
         private Chinese_2010 _Chinese_2010;
         private Indian_IS_800_2007 _Indian_IS_800_2007;
-        private Italian_NTC_2008 _Italian_NTC_2008;
         private NZS_3404_1997 _NSZ_3404_1997;
 #endif
 #if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
@@ -39,7 +42,51 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
 
         #endregion
 
-        #region Properties       
+        #region Properties
+        /// <summary>
+        /// Gets the AISC 360 05 IBC 2006 design code.
+        /// </summary>
+        /// <value>The AISC 360 05 IBC 2006 design code.</value>
+        public AISC_360_05_IBC_2006 AISC_360_05_IBC_2006 => _AISC_360_05_IBC_2006 ?? (_AISC_360_05_IBC_2006 = new AISC_360_05_IBC_2006(_seed));
+
+        /// <summary>
+        /// Gets the CSA S16 09 design code.
+        /// </summary>
+        /// <value>The CSA S16 09 design code.</value>
+        public CSA_S16_09 CSA_S16_09 => _CSA_S16_09 ?? (_CSA_S16_09 = new CSA_S16_09(_seed));
+
+        /// <summary>
+        /// Gets the Eurocode 3 2005 design code.
+        /// </summary>
+        /// <value>The Eurocode 3 2005 design code.</value>
+        public Eurocode_3_2005 Eurocode_3_2005 => _Eurocode_3_2005 ?? (_Eurocode_3_2005 = new Eurocode_3_2005(_seed));
+
+#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+        /// <summary>
+        /// Gets the Chinese 2002 design code.
+        /// </summary>
+        /// <value>The Cchinese 2002 design code.</value>
+        public Chinese_2002 Chinese_2002 => _Chinese_2002 ?? (_Chinese_2002 = new Chinese_2002(_seed));
+
+        /// <summary>
+        /// Gets the Italian NTC 2008 design code.
+        /// </summary>
+        /// <value>The Italian NTC 2008 design code.</value>
+        public Italian_NTC_2008 Italian_NTC_2008 => _Italian_NTC_2008 ?? (_Italian_NTC_2008 = new Italian_NTC_2008(_seed));
+#endif
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// Gets the AISC 360 10 design code.
+        /// </summary>
+        /// <value>The AISC 360 10 design code.</value>
+        public AISC_360_10 AISC_360_10 => _AISC_360_10 ?? (_AISC_360_10 = new AISC_360_10(_seed));
+
+        /// <summary>
+        /// Gets the AISC ASD 89 design code.
+        /// </summary>
+        /// <value>The AISC ASD 89 design code.</value>
+        public AISC_ASD_89 AISC_ASD_89 => _AISC_ASD_89 ?? (_AISC_ASD_89 = new AISC_ASD_89(_seed));
+#endif
 #if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
         /// <summary>
         /// Gets the AISC LRFD 93 design code.
@@ -58,13 +105,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// </summary>
         /// <value>The BS 5950 2000 design code.</value>
         public BS_5950_2000 BS_5950_2000 => _BS_5950_2000 ?? (_BS_5950_2000 = new BS_5950_2000(_seed));
-
-        /// <summary>
-        /// Gets the Chinese 2002 design code.
-        /// </summary>
-        /// <value>The Cchinese 2002 design code.</value>
-        public Chinese_2002 Chinese_2002 => _Chinese_2002 ?? (_Chinese_2002 = new Chinese_2002(_seed));
-
+        
         /// <summary>
         /// Gets the Chinese 2010 design code.
         /// </summary>
@@ -76,12 +117,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// </summary>
         /// <value>The Indian IS 800 2007 design code.</value>
         public Indian_IS_800_2007 Indian_IS_800_2007 => _Indian_IS_800_2007 ?? (_Indian_IS_800_2007 = new Indian_IS_800_2007(_seed));
-
-        /// <summary>
-        /// Gets the Italian NTC 2008 design code.
-        /// </summary>
-        /// <value>The Italian NTC 2008 design code.</value>
-        public Italian_NTC_2008 Italian_NTC_2008 => _Italian_NTC_2008 ?? (_Italian_NTC_2008 = new Italian_NTC_2008(_seed));
 
         /// <summary>
         /// Gets the NSZ 3404 1997 design code.
@@ -120,35 +155,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// <value>The NORSOK N 004 2013 design code.</value>
         public Norsok_N_004_2013 Norsok_N_004_2013 => _Norsok_N_004_2013 ?? (_Norsok_N_004_2013 = new Norsok_N_004_2013(_seed));
 #endif
-        /// <summary>
-        /// Gets the AISC 360 05 IBC 2006 design code.
-        /// </summary>
-        /// <value>The AISC 360 05 IBC 2006 design code.</value>
-        public AISC_360_05_IBC_2006 AISC_360_05_IBC_2006 => _AISC_360_05_IBC_2006 ?? (_AISC_360_05_IBC_2006 = new AISC_360_05_IBC_2006(_seed));
-
-        /// <summary>
-        /// Gets the AISC 360 10 design code.
-        /// </summary>
-        /// <value>The AISC 360 10 design code.</value>
-        public AISC_360_10 AISC_360_10 => _AISC_360_10 ?? (_AISC_360_10 = new AISC_360_10(_seed));
-
-        /// <summary>
-        /// Gets the AISC ASD 89 design code.
-        /// </summary>
-        /// <value>The AISC ASD 89 design code.</value>
-        public AISC_ASD_89 AISC_ASD_89 => _AISC_ASD_89 ?? (_AISC_ASD_89 = new AISC_ASD_89(_seed));
-
-        /// <summary>
-        /// Gets the CSA S16 09 design code.
-        /// </summary>
-        /// <value>The CSA S16 09 design code.</value>
-        public CSA_S16_09 CSA_S16_09 => _CSA_S16_09 ?? (_CSA_S16_09 = new CSA_S16_09(_seed));
-
-        /// <summary>
-        /// Gets the Eurocode 3 2005 design code.
-        /// </summary>
-        /// <value>The Eurocode 3 2005 design code.</value>
-        public Eurocode_3_2005 Eurocode_3_2005 => _Eurocode_3_2005 ?? (_Eurocode_3_2005 = new Eurocode_3_2005(_seed));
 #endregion
 
 
@@ -193,6 +199,17 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+
+        /// <summary>
+        /// True: Design results are available.
+        /// </summary>
+        /// <returns><c>true</c> if design results are available, <c>false</c> otherwise.</returns>
+        public bool ResultsAreAvailable()
+        {
+            return _sapModel.DesignSteel.GetResultsAvailable();
+        }
+
+
         /// <summary>
         /// This function retrieves the names of the frame objects that did not pass the design check or have not yet been checked, if any.
         /// </summary>
@@ -223,6 +240,30 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
 
 
         // === Get/Set ===
+        // TODO: Consider how to flexibly apply this as an enum.
+        /// <summary>
+        /// Gets the code.
+        /// </summary>
+        /// <param name="codeName">Name of the code.</param>
+        public void GetCode(ref string codeName)
+        {
+            _callCode = _sapModel.DesignSteel.GetCode(ref codeName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // TODO: Consider how to flexibly apply this as an enum.
+        /// <summary>
+        /// Gets the code.
+        /// </summary>
+        /// <param name="codeName">Name of the code.</param>
+        public void SetCode(string codeName)
+        {
+            _callCode = _sapModel.DesignSteel.SetCode(codeName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+
         /// <summary>
         /// Retrieves the design section for a specified frame object.
         /// </summary>
@@ -253,6 +294,110 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+
+        // ===
+        /// <summary>
+        /// Retrieves the names of all groups selected for design.
+        /// These groups are used in the design optimization process, where the optimization is applied at a group level.
+        /// </summary>
+        /// <param name="nameGroups">The name of each group selected for design.</param>
+        public void GetGroup(ref string[] nameGroups)
+        {
+            int numberOfGroups = 0;
+
+            _callCode = _sapModel.DesignSteel.GetGroup(ref numberOfGroups, ref nameGroups);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Selects or deselects a group for frame design.
+        /// </summary>
+        /// <param name="nameGroup">Name of an existing group.</param>
+        /// <param name="selectForDesign">True: The specified group is selected as a design group for steel design. 
+        /// False: The group is not selected for steel design.</param>
+        public void SetGroup(string nameGroup,
+            bool selectForDesign)
+        {
+            _callCode = _sapModel.DesignSteel.SetGroup(nameGroup, selectForDesign);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves the value of the automatically generated code-based design load combinations option.
+        /// </summary>
+        /// <param name="autoGenerate">True: Option to automatically generate code-based design load combinations for concrete frame design is turned on.</param>
+        public void GetComboAutoGenerate(ref bool autoGenerate)
+        {
+            _callCode = _sapModel.DesignSteel.GetComboAutoGenerate(ref autoGenerate);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Sets the value of the automatically generated code-based design load combinations option.
+        /// </summary>
+        /// <param name="autoGenerate">True: Option to automatically generate code-based design load combinations for concrete frame design is turned on.</param>
+        public void SetComboAutoGenerate(bool autoGenerate)
+        {
+            _callCode = _sapModel.DesignSteel.SetComboAutoGenerate(autoGenerate);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+#endif
+
+        /// <summary>
+        /// Gets the names of all load combinatiojns used for deflection design.
+        /// </summary>
+        /// <param name="nameLoadCombinations">The name of each load combination used for consideration of deflecton limits.</param>
+        /// <param name="numberOfItems">The number of frame objects for which results are obtained.</param>
+        public void GetComboDeflection(ref int numberOfItems, 
+            ref string[] nameLoadCombinations)
+        {
+            _callCode = _sapModel.DesignSteel.GetComboDeflection(ref numberOfItems, ref nameLoadCombinations);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Selects or deselects a load combination for deflection design.
+        /// </summary>
+        /// <param name="nameLoadCombination">Name of an existing load combination.</param>
+        /// <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for deflection design. 
+        /// False: The combination is not selected for deflection design.</param>
+        public void SetComboDeflection(string nameLoadCombination,
+            bool selectLoadCombination)
+        {
+            _callCode = _sapModel.DesignSteel.SetComboDeflection(nameLoadCombination, selectLoadCombination);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+
+        /// <summary>
+        /// Gets the load combination selected for strength design.
+        /// </summary>
+        /// <param name="nameLoadCombinations">The name of the load combinations selected.</param>
+        /// <param name="numberOfItems">The number of frame objects for which results are obtained.</param>
+        public void GetComboStrength(ref int numberOfItems, 
+            ref string[] nameLoadCombinations)
+        {
+            _callCode = _sapModel.DesignSteel.GetComboStrength(ref numberOfItems, ref nameLoadCombinations);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Selects or deselects a load combination for strength design.
+        /// </summary>
+        /// <param name="nameLoadCombination">Name of an existing load combination.</param>
+        /// <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
+        /// False: The combination is not selected for strength design.</param>
+        public void SetComboStrength(string nameLoadCombination,
+            bool selectLoadCombination)
+        {
+            _callCode = _sapModel.DesignSteel.SetComboStrength(nameLoadCombination, selectLoadCombination);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
 
         // === Get ===
         /// <summary>
@@ -298,56 +443,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             _callCode = _sapModel.DesignSteel.SetAutoSelectNull(itemName, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-        /// <summary>
-        /// Selects or deselects a load combination for deflection design.
-        /// </summary>
-        /// <param name="nameLoadCombination">Name of an existing load combination.</param>
-        /// <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for deflection design. 
-        /// False: The combination is not selected for deflection design.</param>
-        public void SetComboDeflection(string nameLoadCombination, 
-            bool selectLoadCombination)
-        {
-            _callCode = _sapModel.DesignSteel.SetComboDeflection(nameLoadCombination, selectLoadCombination);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// Selects or deselects a load combination for strength design.
-        /// </summary>
-        /// <param name="nameLoadCombination">Name of an existing load combination.</param>
-        /// <param name="selectLoadCombination">True: The specified load combination is selected as a design combination for strength design. 
-        /// False: The combination is not selected for strength design.</param>
-        public void SetComboStrength(string nameLoadCombination, 
-            bool selectLoadCombination)
-        {
-            _callCode = _sapModel.DesignSteel.SetComboStrength(nameLoadCombination, selectLoadCombination);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
+        #endregion
 
 
-        /// <summary>
-        /// Selects or deselects a group for frame design.
-        /// </summary>
-        /// <param name="nameGroup">Name of an existing group.</param>
-        /// <param name="selectForDesign">True: The specified group is selected as a design group for steel design. 
-        /// False: The group is not selected for steel design.</param>
-        public void SetGroup(string nameGroup, 
-            bool selectForDesign)
-        {
-            _callCode = _sapModel.DesignSteel.SetGroup(nameGroup, selectForDesign);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-#endregion
-
-
-#region Methods: Public
+        #region Methods: Public
 
         // === Local ===
-
-        /// <summary>
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+            /// <summary>
         /// This function retrieves the design results from steel design output database tables.
         /// Note that the summary table of all design codes is not included in this function.
         /// </summary>
@@ -398,9 +501,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             _callCode = _sapModel.DesignSteel.GetDetailResultsValue(itemName, CSiEnumConverter.ToCSi(itemType), table, field, ref numberFrames, ref frameNames, ref numericalResults);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
         // === Get/Set ===
-
         /// <summary>
         /// Retrieves lateral displacement targets for steel design.
         /// </summary>
@@ -478,8 +581,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             _callCode = _sapModel.DesignSteel.SetTargetPeriod(numberItems, modalCase, ref modeNumbers, ref periodTargets, allSpecifiedTargetsActive);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
-#endregion
+        #endregion
     }
 }

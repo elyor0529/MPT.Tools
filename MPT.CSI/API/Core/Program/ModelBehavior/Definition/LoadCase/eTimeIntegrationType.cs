@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 {
     /// <summary>
     /// Time integration types available in the application.
@@ -31,3 +32,4 @@
         ChungHulbert = 5
     }
 }
+#endif

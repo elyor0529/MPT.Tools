@@ -1,6 +1,7 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
-    /// <summary>
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
     /// The island considered for NTC 2008 response spectrum.
     /// </summary>
     public enum eIsland_NTC_2008
@@ -105,4 +106,5 @@
         /// </summary>
         Zannone  = 20,
     }
+#endif
 }

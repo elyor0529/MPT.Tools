@@ -2,24 +2,6 @@
 using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
 {
     /// <summary>
@@ -37,8 +19,20 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
 
         #endregion
 
-        #region Methods: Public        
+        #region Methods: Public     
         /// <summary>
+        /// This function moves selected point, frame, cable, tendon, area, solid and link objects.
+        /// </summary>
+        /// <param name="offsets">The offsets used in the present coordinate system for moving the selected objects. [L]</param>
+        /// <exception cref="CSiException"></exception>
+        public void Move(Coordinate3DCartesian offsets)
+        {
+            _callCode = _sapModel.EditGeneral.Move(offsets.X, offsets.Y, offsets.Z);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+         /// <summary>
         /// Extrudes the area to solid linear normal.
         /// </summary>
         /// <param name="name">The name of an existing area object to be extruded.</param>
@@ -235,16 +229,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        /// <summary>
-        /// This function moves selected point, frame, cable, tendon, area, solid and link objects.
-        /// </summary>
-        /// <param name="offsets">The offsets used in the present coordinate system for moving the selected objects. [L]</param>
-        /// <exception cref="CSiException"></exception>
-        public void Move(Coordinate3DCartesian offsets)
-        {
-            _callCode = _sapModel.EditGeneral.Move(offsets.X, offsets.Y, offsets.Z);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
 
         /// <summary>
         /// This function linearly replicates selected objects.
@@ -344,6 +328,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
 
             objectTypes = csiObjectTypes.Cast<eObjectType>().ToArray();
         }
+#endif
 
         #endregion
     }

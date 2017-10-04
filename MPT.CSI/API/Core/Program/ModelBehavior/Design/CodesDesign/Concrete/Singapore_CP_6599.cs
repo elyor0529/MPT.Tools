@@ -1,8 +1,8 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Concrete design code <see cref="Singapore_CP_6599"/>.
     /// </summary>
@@ -10,16 +10,20 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
     public class Singapore_CP_6599 : CSiApiBase
     {
 #region Initialization        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Singapore_CP_6599"/> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
-        public Singapore_CP_6599(CSiApiSeed seed) : base(seed) { }
+        public Singapore_CP_6599(CSiApiSeed seed) : base(seed)
+        {
+        }
 
 
 #endregion
 
 #region Methods: Public
+
         /// <summary>
         /// This function retrieves the value of a concrete design overwrite item.
         /// </summary>
@@ -32,9 +36,13 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
             eOverwrites_Singapore_CP_6599 item,
             ref double value,
             ref bool programDetermined)
-        {           
-            _callCode = _sapModel.DesignConcrete.Singapore_CP_65_99.GetOverwrite(name, (int)item, ref value, ref programDetermined);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }            
+        {
+            _callCode = _sapModel.DesignConcrete.Singapore_CP_65_99.GetOverwrite(name, (int) item, ref value,
+                ref programDetermined);
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
 
         /// <summary>
@@ -52,8 +60,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
             double value,
             eItemType itemType = eItemType.Object)
         {
-            _callCode = _sapModel.DesignConcrete.Singapore_CP_65_99.SetOverwrite(name, (int)item, value, CSiEnumConverter.ToCSi(itemType));
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            _callCode = _sapModel.DesignConcrete.Singapore_CP_65_99.SetOverwrite(name, (int) item, value,
+                CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
 
 
@@ -67,9 +79,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
         /// <exception cref="CSiException"></exception>
         public void GetPreference(ePreferences_Singapore_CP_6599 item,
             ref double value)
-        {          
-            _callCode = _sapModel.DesignConcrete.Singapore_CP_65_99.GetPreference((int)item, ref value);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }            
+        {
+            _callCode = _sapModel.DesignConcrete.Singapore_CP_65_99.GetPreference((int) item, ref value);
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
 
         /// <summary>
@@ -81,10 +96,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
         public void SetPreference(ePreferences_Singapore_CP_6599 item,
             double value)
         {
-            _callCode = _sapModel.DesignConcrete.Singapore_CP_65_99.SetPreference((int)item, value);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            _callCode = _sapModel.DesignConcrete.Singapore_CP_65_99.SetPreference((int) item, value);
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
+
 #endregion
     }
-#endif
 }
+#endif

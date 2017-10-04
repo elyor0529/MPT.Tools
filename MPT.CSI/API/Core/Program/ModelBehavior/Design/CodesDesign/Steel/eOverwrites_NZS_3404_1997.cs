@@ -1,17 +1,17 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
-#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Overwrites available for <see cref="NZS_3404_1997" /> steel design in the application.
     /// </summary>
     public enum eOverwrites_NZS_3404_1997
     {
-        
+
         /// <summary>
         /// The framing type.
         /// </summary>
         FramingType = 1,
-        
+
         /// <summary>
         /// The steel type.
         /// </summary>
@@ -204,8 +204,8 @@
         /// <summary>
         /// Axial capacity correction factor, Kt.
         /// </summary>
-        AxialCapacityCorrectionFactor_Kt = 37,       
-        
+        AxialCapacityCorrectionFactor_Kt = 37,
+
 
         /// <summary>
         /// The yield stress, Fy.
@@ -259,5 +259,5 @@
         /// </summary>
         DemandCapacityRatioLimit = 46
     }
-#endif
 }
+#endif

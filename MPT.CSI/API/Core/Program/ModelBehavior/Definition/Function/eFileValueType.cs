@@ -1,5 +1,6 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Value type used in files defining loading functions.
     /// </summary>
@@ -15,4 +16,5 @@
         /// </summary>
         TimeAndFunction = 2
     }
+#endif
 }

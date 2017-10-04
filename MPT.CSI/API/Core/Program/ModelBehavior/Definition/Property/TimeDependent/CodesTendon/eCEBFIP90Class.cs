@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent.CodesTendon
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent.CodesTendon
 {
     /// <summary>
     /// The CEB FIP-90 classes.
@@ -16,3 +17,4 @@
         Class2 = 2
     }
 }
+#endif

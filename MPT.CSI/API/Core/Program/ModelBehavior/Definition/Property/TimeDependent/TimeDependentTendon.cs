@@ -1,4 +1,5 @@
-﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent.CodesTendon;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent.CodesTendon;
 using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent
@@ -9,22 +10,22 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDepende
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class TimeDependentTendon : CSiApiBase
     {
-        #region Fields
+#region Fields
         private readonly CSiApiSeed _seed;
 
         private CEB_FIP_90 _CEB_FIP_90;
-        #endregion
+#endregion
 
-        #region Properties                                    
+#region Properties                                    
         /// <summary>
         /// Gets the CEB FIP 90 method.
         /// </summary>
         /// <value>The CEB FIP 90 method.</value>
         public CEB_FIP_90 CEB_FIP_90 => _CEB_FIP_90 ?? (_CEB_FIP_90 = new CEB_FIP_90(_seed));
-        #endregion
+#endregion
 
 
-        #region Initialization        
+#region Initialization        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TimeDependentTendon"/> class.
@@ -35,9 +36,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDepende
             _seed = seed;
         }
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
 
         /// <summary>
         /// This function retrieves the scale factors for the time-dependent material property data for tendon materials.
@@ -82,6 +83,32 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDepende
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+#endregion
+    }
+}
+#else
+using MPT.CSI.API.Core.Support;
+
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent
+{
+    /// <summary>
+    /// Represents time dependent tendon material in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    public class TimeDependentTendon : CSiApiBase
+    {
+        #region Initialization        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TimeDependentTendon"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
+        public TimeDependentTendon(CSiApiSeed seed) : base(seed)
+        {
+        }
+
         #endregion
     }
 }
+
+#endif

@@ -1,5 +1,6 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// The usage class for NTC 2008 response spectrum.
     /// </summary>
@@ -25,4 +26,5 @@
         /// </summary>
         IV = 4,
     }
+#endif
 }

@@ -1,5 +1,6 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// The spectral level, direction and building type for Italian 3274 response spectrum function.
     /// </summary>
@@ -45,4 +46,5 @@
         /// </summary>
         EL_V_Bridge = 7,
     }
+#endif
 }

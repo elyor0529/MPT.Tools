@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 {
     /// <summary>
     /// Load case uses solution control parameters for nonlinear time history analysis.
@@ -58,3 +59,4 @@
             double lineSearchStepFactor);
     }
 }
+#endif

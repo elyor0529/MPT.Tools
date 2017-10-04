@@ -1,27 +1,12 @@
-﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wind;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wind;
 using User = MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wind.User;
-using MPT.CSI.API.Core.Support;
-
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
 #endif
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents an auto wind load pattern in the application.
     /// </summary>
@@ -29,15 +14,13 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.IAutoLoad" />
     public class AutoWind : CSiApiBase, IAutoLoad
     {
-        #region Fields
+    #region Fields
         private readonly CSiApiSeed _seed;
-
         private User _User;
         private ASCE_7_02 _ASCE_7_02;
+    #endregion
 
-        #endregion
-
-        #region Properties
+    #region Properties
         /// <summary>
         /// Auto wind load pattern according to user definitions.
         /// </summary>
@@ -47,11 +30,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
         /// Auto wind load pattern according to ASCE 7-02.
         /// </summary>
         public ASCE_7_02 ASCE_7_02 => _ASCE_7_02 ?? (_ASCE_7_02 = new ASCE_7_02(_seed));
+    #endregion
 
 
-        #endregion
-
-        #region Initialization        
+    #region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="AutoWind"/> class.
         /// </summary>
@@ -60,9 +42,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
         {
             _seed = seed;
         }
-        #endregion
+    #endregion
 
-        #region Methods: Interface
+    #region Methods: Interface
 
         /// <summary>
         /// This function retrieves the code name used for auto seismic parameters in Wind-type load patterns.
@@ -90,9 +72,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
             _callCode = _sapModel.LoadPatterns.AutoWind.SetNone(name);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+    #endregion
 
-        #region Methods: Public
+    #region Methods: Public
         /// <summary>
         /// This function retrieves exposure parameters for auto wind loads determined from extents of rigid diaphragms. 
         /// This function does not apply for User-type auto wind loads.
@@ -143,6 +125,25 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
             _callCode = _sapModel.LoadPatterns.AutoWind.SetExposure_1(patternName, diaphragmName, xCoordinate, yCoordinate, diaphragmWidth, diaphragmDepth, diaphragmHeight);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+    #endregion
+    }
+#else
+    /// <summary>
+    /// Represents an auto wind load pattern in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    public class AutoWind : CSiApiBase
+    {
+        #region Initialization        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoWind"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
+        public AutoWind(CSiApiSeed seed) : base(seed)
+        {
+
+        }
         #endregion
     }
+#endif
 }

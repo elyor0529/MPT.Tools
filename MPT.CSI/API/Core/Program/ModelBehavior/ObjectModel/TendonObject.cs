@@ -3,24 +3,6 @@ using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
@@ -37,6 +19,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         #endregion
 
         #region Query
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function returns the total number of defined tendon properties in the model.
         /// </summary>
@@ -45,7 +28,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         {
             return _sapModel.TendonObj.Count();
         }
-
+#endif
+        
         /// <summary>
         /// This function retrieves the names of all defined tendon properties.
         /// </summary>
@@ -57,6 +41,21 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// This function retrieves the names of all defined tendon properties for a given story.
+        /// </summary>
+        /// <param name="storyName">Name of the story to filter the tendon names by.</param>
+        /// <param name="numberOfNames">The number of tendon object names retrieved by the program.</param>
+        /// <param name="names">Tendon object names retrieved by the program.</param>
+        public void GetNameListOnStory(string storyName, ref int numberOfNames, ref string[] names)
+        {
+            _callCode = _sapModel.TendonObj.GetNameListOnStory(storyName, ref numberOfNames, ref names);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Returns the 3x3 direction cosines to transform local coordinates to global coordinates by the equation [directionCosines]*[localCoordinates] = [globalCoordinates].
         /// Direction cosines returned are ordered by row, and then by column.
@@ -136,9 +135,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.TendonObj.GetElm(name, ref numberOfElements, ref elementNames, ref relativeDistanceI, ref relativeDistanceJ);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
+
         #endregion
 
         #region Axes
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the local axis angle assignment of the object.
         /// </summary> 
@@ -175,10 +177,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.TendonObj.SetLocalAxes(name, angleOffset.AngleA, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
         #endregion
-        
+
         #region Creation & Groups
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function changes the name of an existing tendon object.
         /// </summary>
@@ -288,7 +291,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.TendonObj.SetGroupAssign(name, groupName, remove, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
         #endregion
 
         #region Selection
@@ -323,6 +326,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         #endregion
 
         #region Cross-Section & Material Properties
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the section property assigned to a tendon object.
         /// </summary>
@@ -431,9 +435,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.TendonObj.SetTCLimits(name, limitCompressionExists, limitCompression, limitTensionExists, limitTension, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
         #region Tendon Properties
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function assigns the tendon geometric definition parameters to a tendon object.
         /// </summary>
@@ -598,9 +604,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.TendonObj.SetLoadedGroup(name, groupName, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
         #region Loads
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         // LoadGravity
         /// <summary>
         /// This function retrieves the gravity load assignments to elements.
@@ -964,8 +972,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.TendonObj.DeleteLoadForceStress(name, loadPattern, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
+#endif
         #endregion
 
     }

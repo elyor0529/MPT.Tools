@@ -6,8 +6,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
     /// </summary>
     public interface IPointElement:
         ICountable, IListableNames, IObservableTransformationMatrix, IObservableLocalAxes, IObservableObject,
-        IObservableCoordinates, IObservableConnectivity, IObservableMerge, IObservablePattern,
-
+        IObservableCoordinates, IObservableConnectivity, IObservablePattern,
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        IObservableMerge, 
+#endif
         IObservableConstraint, 
         IObservableRestraint, 
         IObservablePointSpring,

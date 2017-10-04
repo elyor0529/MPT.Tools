@@ -25,6 +25,8 @@
             ref string[] coordinateSystems,
             ref double[] angles);
 
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function sets the load data for the specified analysis case.
         /// </summary>
@@ -44,5 +46,6 @@
             double[] scaleFactor,
             string[] coordinateSystems,
             double[] angles);
+#endif
     }
 }

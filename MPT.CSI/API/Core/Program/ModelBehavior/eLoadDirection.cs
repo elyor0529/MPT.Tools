@@ -1,5 +1,4 @@
-﻿
-namespace MPT.CSI.API.Core.Program.ModelBehavior
+﻿namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
     /// Load directions available in the application.

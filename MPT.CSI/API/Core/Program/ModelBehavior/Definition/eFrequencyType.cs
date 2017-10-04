@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
     /// <summary>
     /// Frequency types used in power spectral density functions.
@@ -16,3 +17,4 @@
         RPM = 2
     }
 }
+#endif

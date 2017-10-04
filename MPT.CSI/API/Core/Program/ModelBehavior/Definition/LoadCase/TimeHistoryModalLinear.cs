@@ -1,23 +1,5 @@
 ﻿using MPT.CSI.API.Core.Support;
 using MPT.Enums;
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 {
@@ -138,7 +120,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
         }
 
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the motion type for the specified load case.
         /// </summary>
@@ -235,8 +217,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             _callCode = _sapModel.LoadCases.ModHistLinear.SetModalCase(name, modalCase);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Damping
 
         /// <summary>
@@ -441,5 +425,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
         }
 
         #endregion
+#endif
     }
 }

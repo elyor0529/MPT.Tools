@@ -1,23 +1,6 @@
-﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent.CodesConcrete;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent.CodesConcrete;
 using MPT.CSI.API.Core.Support;
-
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent
 {
@@ -27,22 +10,22 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDepende
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class TimeDependentConcrete : CSiApiBase
     {
-        #region Fields
+#region Fields
         private readonly CSiApiSeed _seed;
 
         private CEB_FIP_90 _CEB_FIP_90;
-        #endregion
+#endregion
 
-        #region Properties                            
+#region Properties                            
         /// <summary>
         /// Gets the CEB FIP 90 method.
         /// </summary>
         /// <value>The CEB FIP 90 method.</value>
         public CEB_FIP_90 CEB_FIP_90 => _CEB_FIP_90 ?? (_CEB_FIP_90 = new CEB_FIP_90(_seed));
-        #endregion
+#endregion
 
 
-        #region Initialization        
+#region Initialization        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TimeDependentConcrete"/> class.
@@ -53,9 +36,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDepende
             _seed = seed;
         }
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
 
         /// <summary>
         /// This function retrieves the scale factors for the time-dependent material property data for concrete materials.
@@ -114,6 +97,34 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDepende
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+#endregion
+    }
+}
+#else
+using MPT.CSI.API.Core.Support;
+
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent
+{
+    /// <summary>
+    /// Represents time dependent concrete in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    public class TimeDependentConcrete : CSiApiBase
+    {
+
+
+        #region Initialization        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TimeDependentConcrete"/> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
+        public TimeDependentConcrete(CSiApiSeed seed) : base(seed)
+        {
+        }
+
         #endregion
     }
 }
+
+#endif

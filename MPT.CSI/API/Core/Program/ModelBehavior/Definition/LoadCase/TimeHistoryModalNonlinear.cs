@@ -1,23 +1,5 @@
 ﻿using MPT.CSI.API.Core.Support;
 using MPT.Enums;
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 {
@@ -38,6 +20,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
         #endregion
 
         #region Methods: Interface
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function initializes a load case. 
         /// If this function is called for an existing load case, all items for the case are reset to their default value.
@@ -86,9 +69,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             _callCode = _sapModel.LoadCases.ModHistNonlinear.SetInitialCase(name, initialCase);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
-
-
+        
 
         /// <summary>
         /// This function retrieves the load data for the specified load case.
@@ -133,6 +116,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             }
         }
 
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function sets the load data for the specified analysis case.
         /// </summary>
@@ -319,8 +304,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
                             convergenceFactor);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Damping
 
         /// <summary>
@@ -525,5 +512,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
         }
 
         #endregion
+#endif
     }
 }

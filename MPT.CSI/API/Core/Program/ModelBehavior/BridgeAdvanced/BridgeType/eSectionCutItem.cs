@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
 {
     /// <summary>
     /// Superstructure section cut items available in the application.
@@ -86,3 +87,4 @@
         RightOutsideLengthOfTorsionCircuit = 16
     }
 }
+#endif

@@ -1,8 +1,8 @@
-﻿
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
     /// <summary>
-    /// PLot types available in the application.
+    /// Plot types available in the application.
     /// </summary>
     public enum ePlotType
     {
@@ -17,3 +17,4 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         Log = 2
     }
 }
+#endif

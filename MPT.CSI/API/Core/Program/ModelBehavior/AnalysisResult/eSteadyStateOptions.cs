@@ -1,5 +1,6 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Steady state options available for display in the application.
     /// </summary>
@@ -20,4 +21,5 @@
         /// </summary>
         All = 3
     }
+#endif
 }

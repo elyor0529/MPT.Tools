@@ -1,7 +1,4 @@
-﻿using MPT.CSI.API.Core.Helpers;
-using MPT.CSI.API.Core.Support;
-
-#if BUILD_SAP2000v16
+﻿#if BUILD_SAP2000v16
 using CSiProgram = SAP2000v16;
 #elif BUILD_SAP2000v17
 using CSiProgram = SAP2000v17;
@@ -9,23 +6,36 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiProgram = CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiProgram = CSiBridge19;
 #elif BUILD_ETABS2013
 using CSiProgram = ETABS2013;
-
-
 #elif BUILD_ETABS2015
 using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016
 using CSiProgram = ETABS2016;
 #endif
 
+using MPT.CSI.API.Core.Helpers;
+using MPT.CSI.API.Core.Support;
+
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents the constraints in the application.
     /// </summary>
     public class Constraints : CSiApiBase, IChangeableName, ICountable, IDeletable, IListableNames
     {
+#else
+    /// <summary>
+    /// Represents the constraints in the application.
+    /// </summary>
+    public class Constraints : CSiApiBase, IDeletable, IListableNames
+    {
+#endif
         #region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="Constraints"/> class.
@@ -37,8 +47,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         #endregion
 
         #region Methods: Public
-
-        /// <summary>
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+/// <summary>
         /// Changes the name of the specified constraint.
         /// </summary>
         /// <param name="nameConstraint">The existing name of a defined constraint.</param>
@@ -66,6 +76,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         {
             return _sapModel.ConstraintDef.Count(CSiEnumConverter.ToCSi(constraintType));
         }
+#endif
 
         /// <summary>
         /// The function deletes the specified constraint. 
@@ -79,7 +90,21 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         }
 
         // === Get
+        
+        /// <summary>
+        /// This function retrieves the names of all defined joint constraints.
+        /// </summary>
+        /// <param name="numberOfNames">The number of joint constraint names retrieved by the program.</param>
+        /// <param name="namesConstraint">Joint constraint names retrieved by the program.</param>
+        public void GetNameList(ref int numberOfNames, 
+            ref string[] namesConstraint)
+        {
+            _callCode = _sapModel.ConstraintDef.GetNameList(ref numberOfNames, ref namesConstraint);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
 
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// The function returns the constraint type for the specified constraint.
         /// </summary>
@@ -93,18 +118,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
             constraintType = (eConstraintType) csiConstraintType;
-        }
-
-        /// <summary>
-        /// This function retrieves the names of all defined joint constraints.
-        /// </summary>
-        /// <param name="numberOfNames">The number of joint constraint names retrieved by the program.</param>
-        /// <param name="namesConstraint">Joint constraint names retrieved by the program.</param>
-        public void GetNameList(ref int numberOfNames, 
-            ref string[] namesConstraint)
-        {
-            _callCode = _sapModel.ConstraintDef.GetNameList(ref numberOfNames, ref namesConstraint);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         /// <summary>
@@ -124,10 +137,50 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.ConstraintDef.GetSpecialRigidDiaphragmList(ref numberOfDiaphragms, ref diaphragms);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
+
+
 
 
         // === Get/Set
+        /// <summary>
+        /// The function returns the definition for the specified Diaphragm constraint.
+        /// </summary>
+        /// <param name="nameConstraint">The name of a constraint.</param>
+        /// <param name="axis">Specifies the axis in the specified coordinate system that is perpendicular to the plane of the constraint.</param>
+        /// <param name="nameCoordinateSystem">The name of the coordinate system in which the constraint is defined.</param>
+        public void GetDiaphragm(string nameConstraint,
+            ref eConstraintAxis axis,
+            ref string nameCoordinateSystem)
+        {
+            CSiProgram.eConstraintAxis csiAxis = CSiProgram.eConstraintAxis.AutoAxis;
 
+            _callCode = _sapModel.ConstraintDef.GetDiaphragm(nameConstraint, ref csiAxis, ref nameCoordinateSystem);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            axis = CSiEnumConverter.FromCSi(csiAxis);
+        }
+
+        /// <summary>
+        /// This function defines a Diaphragm constraint. 
+        /// If the specified name is not used for a constraint, a new constraint is defined using the specified name. 
+        /// If the specified name is already used for another Diaphragm constraint, the definition of that constraint is modified. 
+        /// If the specified name is already used for some constraint that is not a Diaphragm constraint, an error is returned.
+        /// TODO: Handle this.
+        /// </summary>
+        /// <param name="nameConstraint">The name of a constraint.</param>
+        /// <param name="axis">Specifies the axis in the specified coordinate system that is perpendicular to the plane of the constraint.</param>
+        /// <param name="nameCoordinateSystem">The name of the coordinate system in which the constraint is defined.</param>
+        public void SetDiaphragm(string nameConstraint,
+            eConstraintAxis axis = eConstraintAxis.AutoAxis,
+            string nameCoordinateSystem = CoordinateSystems.Global)
+        {
+            _callCode = _sapModel.ConstraintDef.SetDiaphragm(nameConstraint, CSiEnumConverter.ToCSi(axis), nameCoordinateSystem);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        // ===
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// The function returns the definition for the specified Beam constraint.
         /// </summary>
@@ -202,44 +255,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             bool[] csiDegreesOfFreedom = degreesOfFreedom.ToArray();
 
             _callCode = _sapModel.ConstraintDef.SetBody(nameConstraint, ref csiDegreesOfFreedom, nameCoordinateSystem);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        // ===
-
-        /// <summary>
-        /// The function returns the definition for the specified Diaphragm constraint.
-        /// </summary>
-        /// <param name="nameConstraint">The name of a constraint.</param>
-        /// <param name="axis">Specifies the axis in the specified coordinate system that is perpendicular to the plane of the constraint.</param>
-        /// <param name="nameCoordinateSystem">The name of the coordinate system in which the constraint is defined.</param>
-        public void GetDiaphragm(string nameConstraint, 
-            ref eConstraintAxis axis,
-            ref string nameCoordinateSystem)
-        {
-            CSiProgram.eConstraintAxis csiAxis = CSiProgram.eConstraintAxis.AutoAxis;
-
-            _callCode = _sapModel.ConstraintDef.GetDiaphragm(nameConstraint, ref csiAxis, ref nameCoordinateSystem);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            axis = CSiEnumConverter.FromCSi(csiAxis);
-        }
-
-        /// <summary>
-        /// This function defines a Diaphragm constraint. 
-        /// If the specified name is not used for a constraint, a new constraint is defined using the specified name. 
-        /// If the specified name is already used for another Diaphragm constraint, the definition of that constraint is modified. 
-        /// If the specified name is already used for some constraint that is not a Diaphragm constraint, an error is returned.
-        /// TODO: Handle this.
-        /// </summary>
-        /// <param name="nameConstraint">The name of a constraint.</param>
-        /// <param name="axis">Specifies the axis in the specified coordinate system that is perpendicular to the plane of the constraint.</param>
-        /// <param name="nameCoordinateSystem">The name of the coordinate system in which the constraint is defined.</param>
-        public void SetDiaphragm(string nameConstraint, 
-            eConstraintAxis axis = eConstraintAxis.AutoAxis,
-            string nameCoordinateSystem = CoordinateSystems.Global)
-        {
-            _callCode = _sapModel.ConstraintDef.SetDiaphragm(nameConstraint, CSiEnumConverter.ToCSi(axis), nameCoordinateSystem);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
@@ -480,6 +495,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         }
 
         // ===
+#endif
         #endregion
     }
 }

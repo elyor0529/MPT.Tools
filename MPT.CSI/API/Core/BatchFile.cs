@@ -100,7 +100,7 @@ namespace MPT.CSI.API.Core
         }
 
         /// <summary>
-        /// ppends the specified command line to a batch file. 
+        /// Appends the specified command line to a batch file. 
         /// If no lines exist, this begins a new batch file.
         /// </summary>
         /// <param name="value">String to write to append to the batch file.</param>

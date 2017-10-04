@@ -1,4 +1,5 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 {
@@ -8,7 +9,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class MovingLoad : CSiApiBase, IMovingLoad
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="MovingLoad"/> class.
         /// </summary>
@@ -16,9 +17,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
         public MovingLoad(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Interface
+#region Methods: Interface
         /// <summary>
         /// This function initializes a load case. <para/> 
         /// If this function is called for an existing load case, all items for the case are reset to their default value.
@@ -68,9 +69,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
 
-        #region Methods: Public        
+#region Methods: Public        
         /// <summary>
         /// This function retrieves the load data for the specified load case.
         /// </summary>
@@ -228,6 +229,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             _callCode = _sapModel.LoadCases.Moving.SetMultiLaneSF(name, numberOfItems, ref scaleFactors);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
+#endif

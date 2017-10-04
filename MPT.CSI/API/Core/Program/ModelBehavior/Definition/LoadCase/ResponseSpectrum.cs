@@ -1,22 +1,5 @@
 ﻿using MPT.CSI.API.Core.Support;
 using MPT.Enums;
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
 
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
@@ -50,9 +33,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             _callCode = _sapModel.LoadCases.ResponseSpectrum.SetCase(name);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
-
 
 
         /// <summary>
@@ -89,40 +69,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
         }
 
         /// <summary>
-        /// This function sets the load data for the specified analysis case.
-        /// </summary>
-        /// <param name="name">The name of an existing steady state load case.</param>
-        /// <param name="numberOfLoads">The number of loads assigned to the specified analysis case.</param>
-        /// <param name="loadDirections">U1, U2, U3, R1, R2 or R3, indicating the direction of each load.</param>
-        /// <param name="functions">The name of the steady state function associated with each load.</param>
-        /// <param name="scaleFactor">The scale factor of each load assigned to the load case. [L/s^2] for U1 U2 and U3; otherwise unitless.</param>
-        /// <param name="coordinateSystems">This is an array that includes the name of the coordinate system associated with each load. 
-        /// If this item is a blank string, the Global coordinate system is assumed.</param>
-        /// <param name="angles">This is an array that includes the angle between the acceleration local 1 axis and the +X-axis of the coordinate system specified by <paramref name="coordinateSystems"/>. 
-        /// The rotation is about the Z-axis of the specified coordinate system. [deg].</param>
-        /// <exception cref="CSiException"></exception>
-        public void SetLoads(string name,
-            int numberOfLoads,
-            eDegreeOfFreedom[] loadDirections,
-            string[] functions,
-            double[] scaleFactor,
-            string[] coordinateSystems,
-            double[] angles)
-        {
-            string[] csiLoadDirections = new string[0];
-            for (int i = 0; i < numberOfLoads; i++)
-            {
-                csiLoadDirections[i] = loadDirections[i].ToString();
-            }
-
-            _callCode = _sapModel.LoadCases.ResponseSpectrum.SetLoads(name, numberOfLoads, ref csiLoadDirections, ref functions, ref scaleFactor, ref coordinateSystems, ref angles);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-
-
-        /// <summary>
         /// This function retrieves the modal case assigned to the specified load case.
         /// </summary>
         /// <param name="name">The name of an existing load case.</param>
@@ -136,25 +82,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        /// <summary>
-        /// This function sets the modal case for the specified analysis case.
-        /// If the specified modal case is not actually a modal case, the program automatically replaces it with the first modal case it can find. 
-        /// If no modal load cases exist, an error is returned.
-        /// TODO: Handle this.
-        /// </summary>
-        /// <param name="name">The name of an existing load case.</param>
-        /// <param name="modalCase">This is either None or the name of an existing modal analysis case. 
-        /// It specifies the modal load case on which any mode-type load assignments to the specified load case are based.</param>
-        /// <exception cref="CSiException"></exception>
-        public void SetModalCase(string name,
-            string modalCase)
-        {
-            _callCode = _sapModel.LoadCases.ResponseSpectrum.SetModalCase(name, modalCase);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-
+  
         /// <summary>
         /// This function retrieves the modal combination option assigned to the specified load case.
         /// </summary>
@@ -185,6 +113,116 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             periodicPlusRigidModalCombination = (ePeriodicPlusRigidModalCombination)csiPeriodicPlusRigidModalCombination;
         }
 
+        
+        
+        /// <summary>
+        /// This function retrieves the directional combination option assigned to the specified load case.
+        /// </summary>
+        /// <param name="name">The name of an existing load case.</param>
+        /// <param name="directionalCombination">The directional combination option.</param>
+        /// <param name="scaleFactor">The abslute value scale factor.
+        /// This item applies only when <paramref name="directionalCombination"/> = <see cref="eDirectionalCombination.ABS"/></param>
+        /// <exception cref="CSiException"></exception>
+        public void GetDirectionalCombination(string name,
+            ref eDirectionalCombination directionalCombination,
+            ref double scaleFactor)
+        {
+            int csiDirectionalCombination = 0;
+
+            _callCode = _sapModel.LoadCases.ResponseSpectrum.GetDirComb(name, ref csiDirectionalCombination, ref scaleFactor);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            directionalCombination = (eDirectionalCombination)csiDirectionalCombination;
+        }
+
+        
+        
+
+        /// <summary>
+        /// This function retrieves the eccentricity ratio that applies to all diaphragms for the specified load case.
+        /// </summary>
+        /// <param name="name">The name of an existing load case.</param>
+        /// <param name="eccentricity">The eccentricity ratio that applies to all diaphragms.</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetEccentricity(string name,
+            ref double eccentricity)
+        {
+            _callCode = _sapModel.LoadCases.ResponseSpectrum.GetEccentricity(name,
+                ref eccentricity);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        
+
+        /// <summary>
+        /// This function retrieves the diaphragm eccentricity overrides for a load case.
+        /// </summary>
+        /// <param name="name">The name of an existing load case.</param>
+        /// <param name="numberOfItems">The number of diaphragm eccentricity overrides for the specified load case.</param>
+        /// <param name="diaphragms">The names of the diaphragms that have eccentricity overrides.</param>
+        /// <param name="eccentricities">The eccentricity applied to each diaphragm. [L].</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetDiaphragmEccentricityOverride(string name,
+            ref int numberOfItems,
+            ref string[] diaphragms,
+            ref double[] eccentricities)
+        {
+            _callCode = _sapModel.LoadCases.ResponseSpectrum.GetDiaphragmEccentricityOverride(name,
+                ref numberOfItems, ref diaphragms, ref eccentricities);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// This function sets the load data for the specified analysis case.
+        /// </summary>
+        /// <param name="name">The name of an existing steady state load case.</param>
+        /// <param name="numberOfLoads">The number of loads assigned to the specified analysis case.</param>
+        /// <param name="loadDirections">U1, U2, U3, R1, R2 or R3, indicating the direction of each load.</param>
+        /// <param name="functions">The name of the steady state function associated with each load.</param>
+        /// <param name="scaleFactor">The scale factor of each load assigned to the load case. [L/s^2] for U1 U2 and U3; otherwise unitless.</param>
+        /// <param name="coordinateSystems">This is an array that includes the name of the coordinate system associated with each load. 
+        /// If this item is a blank string, the Global coordinate system is assumed.</param>
+        /// <param name="angles">This is an array that includes the angle between the acceleration local 1 axis and the +X-axis of the coordinate system specified by <paramref name="coordinateSystems"/>. 
+        /// The rotation is about the Z-axis of the specified coordinate system. [deg].</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetLoads(string name,
+            int numberOfLoads,
+            eDegreeOfFreedom[] loadDirections,
+            string[] functions,
+            double[] scaleFactor,
+            string[] coordinateSystems,
+            double[] angles)
+        {
+            string[] csiLoadDirections = new string[0];
+            for (int i = 0; i < numberOfLoads; i++)
+            {
+                csiLoadDirections[i] = loadDirections[i].ToString();
+            }
+
+            _callCode = _sapModel.LoadCases.ResponseSpectrum.SetLoads(name, numberOfLoads, ref csiLoadDirections, ref functions, ref scaleFactor, ref coordinateSystems, ref angles);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function sets the modal case for the specified analysis case.
+        /// If the specified modal case is not actually a modal case, the program automatically replaces it with the first modal case it can find. 
+        /// If no modal load cases exist, an error is returned.
+        /// TODO: Handle this.
+        /// </summary>
+        /// <param name="name">The name of an existing load case.</param>
+        /// <param name="modalCase">This is either None or the name of an existing modal analysis case. 
+        /// It specifies the modal load case on which any mode-type load assignments to the specified load case are based.</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetModalCase(string name,
+            string modalCase)
+        {
+            _callCode = _sapModel.LoadCases.ResponseSpectrum.SetModalCase(name, modalCase);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
         /// <summary>
         /// This function retrieves the modal combination option assigned to the specified load case.
         /// </summary>
@@ -209,29 +247,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
-
-
-        /// <summary>
-        /// This function retrieves the directional combination option assigned to the specified load case.
-        /// </summary>
-        /// <param name="name">The name of an existing load case.</param>
-        /// <param name="directionalCombination">The directional combination option.</param>
-        /// <param name="scaleFactor">The abslute value scale factor.
-        /// This item applies only when <paramref name="directionalCombination"/> = <see cref="eDirectionalCombination.ABS"/></param>
-        /// <exception cref="CSiException"></exception>
-        public void GetDirectionalCombination(string name,
-            ref eDirectionalCombination directionalCombination,
-            ref double scaleFactor)
-        {
-            int csiDirectionalCombination = 0;
-
-            _callCode = _sapModel.LoadCases.ResponseSpectrum.GetDirComb(name, ref csiDirectionalCombination, ref scaleFactor);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            directionalCombination = (eDirectionalCombination)csiDirectionalCombination;
-        }
-
         /// <summary>
         /// This function sets the directional combination option for the specified load case.
         /// </summary>
@@ -248,23 +263,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
-
-
-        /// <summary>
-        /// This function retrieves the eccentricity ratio that applies to all diaphragms for the specified load case.
-        /// </summary>
-        /// <param name="name">The name of an existing load case.</param>
-        /// <param name="eccentricity">The eccentricity ratio that applies to all diaphragms.</param>
-        /// <exception cref="CSiException"></exception>
-        public void GetEccentricity(string name,
-            ref double eccentricity)
-        {
-            _callCode = _sapModel.LoadCases.ResponseSpectrum.GetEccentricity(name,
-                ref eccentricity);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
         /// <summary>
         /// This function sets the eccentricity ratio that applies to all diaphragms for the specified load case.
         /// </summary>
@@ -278,27 +276,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
                 eccentricity);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
-
-        /// <summary>
-        /// This function retrieves the diaphragm eccentricity overrides for a load case.
-        /// </summary>
-        /// <param name="name">The name of an existing load case.</param>
-        /// <param name="numberOfItems">The number of diaphragm eccentricity overrides for the specified load case.</param>
-        /// <param name="diaphragms">The names of the diaphragms that have eccentricity overrides.</param>
-        /// <param name="eccentricities">The eccentricity applied to each diaphragm. [L].</param>
-        /// <exception cref="CSiException"></exception>
-        public void GetDiaphragmEccentricityOverride(string name,
-            ref int numberOfItems,
-            ref string[] diaphragms,
-            ref double[] eccentricities)
-        {
-            _callCode = _sapModel.LoadCases.ResponseSpectrum.GetDiaphragmEccentricityOverride(name,
-                ref numberOfItems, ref diaphragms, ref eccentricities);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
 
         /// <summary>
         /// This function sets the eccentricity ratio that applies to all diaphragms for the specified load case.
@@ -319,6 +296,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             _callCode = _sapModel.LoadCases.ResponseSpectrum.SetDiaphragmEccentricityOverride(name, diaphragm, eccentricities, delete);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
         #region Damping
@@ -356,20 +334,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        /// <summary>
-        /// This function sets constant modal damping for the specified load case.
-        /// </summary>
-        /// <param name="name">The name of an existing load case that has constant damping.</param>
-        /// <param name="damping">The constant damping for all modes (0 &lt;= <paramref name="damping"/> &lt; 1).</param>
-        /// <exception cref="CSiException"></exception>
-        public void SetDampingConstant(string name,
-            double damping)
-        {
-            _callCode = _sapModel.LoadCases.ResponseSpectrum.SetDampConstant(name, damping);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
+        
+        
 
         /// <summary>
         /// This function retrieves the interpolated modal damping data assigned to the specified load case.
@@ -394,27 +360,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 
             dampingType = (eDampingTypeInterpolated)csiDampingType;
         }
-
-        /// <summary>
-        /// This function retrieves the interpolated modal damping data assigned to the specified load case.
-        /// </summary>
-        /// <param name="name">The name of an existing load case that has interpolated damping.</param>
-        /// <param name="dampingType">The interpolated modal damping type.</param>
-        /// <param name="numberOfItems">The number of <paramref name="periodsOrFrequencies"/> and <paramref name="damping"/> pairs.</param>
-        /// <param name="periodsOrFrequencies">The periods or frequencies, depending on the value of <paramref name="dampingType"/>.
-        /// [s] for <paramref name="dampingType"/> = <see cref="eDampingTypeInterpolated.InterpolatedByPeriod"/> and [cyc/s] for <paramref name="dampingType"/> = <see cref="eDampingTypeInterpolated.InterpolatedByFrequency"/>.</param>
-        /// <param name="damping">The damping for the specified period of frequency (0 &lt;= <paramref name="damping"/> &lt; 1).</param>
-        /// <exception cref="CSiException"></exception>
-        public void SetDampingInterpolated(string name,
-            eDampingTypeInterpolated dampingType,
-            int numberOfItems,
-            double[] periodsOrFrequencies,
-            double[] damping)
-        {
-            _callCode = _sapModel.LoadCases.ResponseSpectrum.SetDampInterpolated(name, (int)dampingType, numberOfItems, ref periodsOrFrequencies, ref damping);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
 
 
 
@@ -454,6 +399,61 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             dampingType = (eDampingTypeProportional)csiDampingType;
         }
 
+        
+
+
+        /// <summary>
+        /// This function retrieves the modal damping overrides assigned to the specified load case.
+        /// </summary>
+        /// <param name="name">The name of an existing analysis case.</param>
+        /// <param name="numberOfItems">The number of <paramref name="modes"/> and <paramref name="damping"/> pairs.</param>
+        /// <param name="modes">The modes.</param>
+        /// <param name="damping">The damping for the specified mode (0 &lt;= <paramref name="damping"/> &lt; 1).</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetDampingOverrides(string name,
+            ref int numberOfItems,
+            ref int[] modes,
+            ref double[] damping)
+        {
+            _callCode = _sapModel.LoadCases.ResponseSpectrum.GetDampOverrides(name, ref numberOfItems, ref modes, ref damping);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// This function sets constant modal damping for the specified load case.
+        /// </summary>
+        /// <param name="name">The name of an existing load case that has constant damping.</param>
+        /// <param name="damping">The constant damping for all modes (0 &lt;= <paramref name="damping"/> &lt; 1).</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetDampingConstant(string name,
+            double damping)
+        {
+            _callCode = _sapModel.LoadCases.ResponseSpectrum.SetDampConstant(name, damping);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function retrieves the interpolated modal damping data assigned to the specified load case.
+        /// </summary>
+        /// <param name="name">The name of an existing load case that has interpolated damping.</param>
+        /// <param name="dampingType">The interpolated modal damping type.</param>
+        /// <param name="numberOfItems">The number of <paramref name="periodsOrFrequencies"/> and <paramref name="damping"/> pairs.</param>
+        /// <param name="periodsOrFrequencies">The periods or frequencies, depending on the value of <paramref name="dampingType"/>.
+        /// [s] for <paramref name="dampingType"/> = <see cref="eDampingTypeInterpolated.InterpolatedByPeriod"/> and [cyc/s] for <paramref name="dampingType"/> = <see cref="eDampingTypeInterpolated.InterpolatedByFrequency"/>.</param>
+        /// <param name="damping">The damping for the specified period of frequency (0 &lt;= <paramref name="damping"/> &lt; 1).</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetDampingInterpolated(string name,
+            eDampingTypeInterpolated dampingType,
+            int numberOfItems,
+            double[] periodsOrFrequencies,
+            double[] damping)
+        {
+            _callCode = _sapModel.LoadCases.ResponseSpectrum.SetDampInterpolated(name, (int)dampingType, numberOfItems, ref periodsOrFrequencies, ref damping);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
         /// <summary>
         /// This function sets proportional modal damping data for the specified load case.
         /// </summary>
@@ -486,27 +486,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
-
-
-        /// <summary>
-        /// This function retrieves the modal damping overrides assigned to the specified load case.
-        /// </summary>
-        /// <param name="name">The name of an existing analysis case.</param>
-        /// <param name="numberOfItems">The number of <paramref name="modes"/> and <paramref name="damping"/> pairs.</param>
-        /// <param name="modes">The modes.</param>
-        /// <param name="damping">The damping for the specified mode (0 &lt;= <paramref name="damping"/> &lt; 1).</param>
-        /// <exception cref="CSiException"></exception>
-        public void GetDampingOverrides(string name,
-            ref int numberOfItems,
-            ref int[] modes,
-            ref double[] damping)
-        {
-            _callCode = _sapModel.LoadCases.ResponseSpectrum.GetDampOverrides(name, ref numberOfItems, ref modes, ref damping);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
         /// <summary>
         /// This function retrieves the modal damping overrides assigned to the specified load case.
         /// </summary>
@@ -523,7 +502,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             _callCode = _sapModel.LoadCases.ResponseSpectrum.SetDampOverrides(name, numberOfItems, ref modes, ref damping);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
         #endregion
     }
 }

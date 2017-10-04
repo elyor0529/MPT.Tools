@@ -1,4 +1,5 @@
 ﻿
+#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
     /// <summary>
@@ -22,3 +23,4 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         Convert = 3
     }
 }
+#endif

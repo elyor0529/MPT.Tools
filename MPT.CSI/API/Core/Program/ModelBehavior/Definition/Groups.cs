@@ -1,30 +1,20 @@
 ﻿using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents groups in the application.
     /// </summary>
     public class Groups : CSiApiBase, IChangeableName, ICountable, IDeletable, IListableNames
     {
+#else
+    /// <summary>
+    /// Represents groups in the application.
+    /// </summary>
+    public class Groups : CSiApiBase, ICountable, IDeletable, IListableNames
+    {
+#endif
         #region Fields
         public const string All = "ALL";
 
@@ -77,6 +67,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Changes the name of the group. 
         /// "ALL" is a reserved group name and cannot be changed.
@@ -108,7 +99,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.GroupDef.Clear(nameGroup);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
+        
         /// <summary>
         /// Retrieves the assignments to a specified group.
         /// </summary>
@@ -124,6 +116,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.GroupDef.GetAssignments(nameGroup, ref numberOfAssignmentsToGroup, ref objectType, ref objectNames);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+        
 
         /// <summary>
         /// Gets the group properties, such as display color and usages.
@@ -218,6 +211,112 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
                 specifiedForMassAndWeight);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Gets the group properties, such as display color and usages.
+        /// </summary>
+        /// <param name="name">Name of an existing group to get the properties for.</param>
+        /// <param name="color">Display color for the group specified.</param>
+        /// <param name="specifiedForSelection">True: The group is specified to be used for selection.</param>
+        /// <param name="specifiedForSectionCutDefinition">True: The group is specified to be used for defining section cuts.</param>
+        /// <param name="specifiedForSteelDesign">True: The group is specified to be used for defining steel frame design groups.</param>
+        /// <param name="specifiedForConcreteDesign">True: The group is specified to be used for defining concrete frame design groups.</param>
+        /// <param name="specifiedForStaticNLActiveStage">True: The group is specified to be used for defining stages for nonlinear static analysis.</param>
+        /// <param name="specifiedForAutoSeismicOutput">True: The group is specified to be used for reporting auto seismic loads.</param>
+        /// <param name="specifiedForAutoWindOutput">True: The group is specified to be used for reporting auto wind loads.</param>
+        /// <param name="specifiedForMassAndWeight">True: The group is specified to be used for reporting group masses and weight.</param>
+        /// <param name="specifiedForSteelJoistDesign">True: The group is specified to be used for defining steel joist design groups.</param>
+        /// <param name="specifiedForWallDesign">True: The group is specified to be used for defining wall design groups.</param>
+        /// <param name="specifiedForBasePlateDesign">True: The group is specified to be used for defining base plate design groups.</param>
+        /// <param name="specifiedForConnectionDesign">True: The group is specified to be used for defining connection design design groups.</param>
+        public void GetGroup(string name,
+            ref int color,
+            ref bool specifiedForSelection,
+            ref bool specifiedForSectionCutDefinition,
+            ref bool specifiedForSteelDesign,
+            ref bool specifiedForConcreteDesign,
+            ref bool specifiedForStaticNLActiveStage,
+            ref bool specifiedForAutoSeismicOutput,
+            ref bool specifiedForAutoWindOutput,
+            ref bool specifiedForMassAndWeight,
+            ref bool specifiedForSteelJoistDesign,
+            ref bool specifiedForWallDesign,
+            ref bool specifiedForBasePlateDesign,
+            ref bool specifiedForConnectionDesign)
+        {
+            bool specifiedForAluminumDesign = false;
+            _callCode = _sapModel.GroupDef.GetGroup_1(name,
+                ref color,
+                ref specifiedForSelection,
+                ref specifiedForSectionCutDefinition,
+                ref specifiedForSteelDesign,
+                ref specifiedForConcreteDesign,
+                ref specifiedForAluminumDesign,
+                ref specifiedForStaticNLActiveStage,
+                ref specifiedForAutoSeismicOutput,
+                ref specifiedForAutoWindOutput,
+                ref specifiedForMassAndWeight,
+                ref specifiedForSteelJoistDesign,
+                ref specifiedForWallDesign,
+                ref specifiedForBasePlateDesign,
+                ref specifiedForConnectionDesign);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Sets group properties, such as display color and usages.
+        /// </summary>
+        /// <param name="name">This is the name of a group.  
+        /// If this is the name of an existing group,  that group is modified, otherwise a new group is added.</param>
+        /// <param name="color">Display color for the group specified.
+        /// If this value is input as –1, the program automatically selects a display color for the group.</param>
+        /// <param name="specifiedForSelection">True: The group is specified to be used for selection.</param>
+        /// <param name="specifiedForSectionCutDefinition">True: The group is specified to be used for defining section cuts.</param>
+        /// <param name="specifiedForSteelDesign">True: The group is specified to be used for defining steel frame design groups.</param>
+        /// <param name="specifiedForConcreteDesign">True: The group is specified to be used for defining concrete frame design groups.</param>
+        /// <param name="specifiedForStaticNLActiveStage">True: The group is specified to be used for defining stages for nonlinear static analysis.</param>
+        /// <param name="specifiedForAutoSeismicOutput">True: The group is specified to be used for reporting auto seismic loads.</param>
+        /// <param name="specifiedForAutoWindOutput">True: The group is specified to be used for reporting auto wind loads.</param>
+        /// <param name="specifiedForMassAndWeight">True: The group is specified to be used for reporting group masses and weight.</param>
+        /// <param name="specifiedForSteelJoistDesign">True: The group is specified to be used for defining steel joist design groups.</param>
+        /// <param name="specifiedForWallDesign">True: The group is specified to be used for defining wall design groups.</param>
+        /// <param name="specifiedForBasePlateDesign">True: The group is specified to be used for defining base plate design groups.</param>
+        /// <param name="specifiedForConnectionDesign">True: The group is specified to be used for defining connection design design groups.</param>
+        public void SetGroup(string name,
+            int color = -1,
+            bool specifiedForSelection = true,
+            bool specifiedForSectionCutDefinition = true,
+            bool specifiedForSteelDesign = true,
+            bool specifiedForConcreteDesign = true,
+            bool specifiedForStaticNLActiveStage = true,
+            bool specifiedForAutoSeismicOutput = true,
+            bool specifiedForAutoWindOutput = true,
+            bool specifiedForMassAndWeight = true,
+            bool specifiedForSteelJoistDesign = true,
+            bool specifiedForWallDesign = true,
+            bool specifiedForBasePlateDesign = true,
+            bool specifiedForConnectionDesign = true)
+        {
+            bool specifiedForAluminumDesign = true;
+            _callCode = _sapModel.GroupDef.SetGroup_1(name,
+                color,
+                specifiedForSelection,
+                specifiedForSectionCutDefinition,
+                specifiedForSteelDesign,
+                specifiedForConcreteDesign,
+                specifiedForAluminumDesign,
+                specifiedForStaticNLActiveStage,
+                specifiedForAutoSeismicOutput,
+                specifiedForAutoWindOutput,
+                specifiedForMassAndWeight,
+                specifiedForSteelJoistDesign,
+                specifiedForWallDesign,
+                specifiedForBasePlateDesign,
+                specifiedForConnectionDesign);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
         #endregion
 
         #region Methods: Private

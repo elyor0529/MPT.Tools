@@ -1,4 +1,5 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDependent.CodesConcrete
 {
@@ -8,7 +9,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDepende
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class CEB_FIP_90 : CSiApiBase
     {
-        #region Initialization
+#region Initialization
         /// <summary>
         /// Initializes a new instance of the <see cref="CEB_FIP_90"/> class.
         /// </summary>
@@ -16,9 +17,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDepende
         public CEB_FIP_90(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
 
         /// <summary>
         /// This function sets the time dependent CEB FIP-90 material property data for concrete materials.
@@ -110,6 +111,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.TimeDepende
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
     }
 }
+
+#endif

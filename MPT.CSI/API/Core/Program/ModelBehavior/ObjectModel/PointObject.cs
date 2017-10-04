@@ -3,22 +3,12 @@ using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
+#if  BUILD_ETABS2013
+using CSiProgram = ETABS2013;
 #elif BUILD_ETABS2015
-using ETABS2015;
+using CSiProgram = ETABS2015;
 #elif BUILD_ETABS2016
-using ETABS2016;
+using CSiProgram = ETABS2016;
 #endif
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
@@ -47,6 +37,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             return _sapModel.PointObj.Count();
         }
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// If the <paramref name="name"/> item is provided, the function returns the total number of constraint assignments made to the specified point object. 
         /// If the <paramref name="name"/> item is not specified or is specified as an empty string, the function returns the total number of constraint assignments to all point objects in the model. 
@@ -63,6 +54,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 
             return count;
         }
+#endif
 
         /// <summary>
         /// This function returns the total number of point objects in the model with restraint assignments.
@@ -78,6 +70,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         public int CountSpring()
         {
             return _sapModel.PointObj.CountSpring();
+        }
+
+
+        /// <summary>
+        /// This function returns the total number of panel zone assignments to point objects in the model.
+        /// </summary>
+        public int CountPanelZone()
+        {
+            return _sapModel.PointObj.CountPanelZone();
         }
 
         /// <summary>
@@ -123,8 +124,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
-
-
         /// <summary>
         /// This function retrieves the names of all defined point properties.
         /// </summary>
@@ -135,6 +134,64 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.PointObj.GetNameList(ref numberOfNames, ref names);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// This function retrieves the names of all defined point object properties for a given story.
+        /// </summary>
+        /// <param name="storyName">Name of the story to filter the point object names by.</param>
+        /// <param name="numberOfNames">The number of point object object names retrieved by the program.</param>
+        /// <param name="names">Point object object names retrieved by the program.</param>
+        public void GetNameListOnStory(string storyName, ref int numberOfNames, ref string[] names)
+        {
+            _callCode = _sapModel.PointObj.GetNameListOnStory(storyName, ref numberOfNames, ref names);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the label and story for a unique object name.
+        /// </summary>
+        /// <param name="name">The name of the object.</param>
+        /// <param name="label">The object label.</param>
+        /// <param name="story">The object story label.</param>
+        public void GetLabelFromName(string name,
+            ref string label,
+            ref string story)
+        {
+            _callCode = _sapModel.PointObj.GetLabelFromName(name, ref label, ref story);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the names and labels of all defined objects.
+        /// </summary>
+        /// <param name="numberOfNames">The number of object names retrieved by the program.</param>
+        /// <param name="names">The object names.</param>
+        /// <param name="labels">The object labels.</param>
+        /// <param name="stories">The story levels of the objects.</param>
+        public void GetLabelNameList(ref int numberOfNames,
+            ref string[] names,
+            ref string[] labels,
+            ref string[] stories)
+        {
+            _callCode = _sapModel.PointObj.GetLabelNameList(ref numberOfNames, ref names, ref labels, ref stories);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Retrieves the unique name of an object, given the label and story level .
+        /// </summary>
+        /// <param name="label">The object label.</param>
+        /// <param name="story">The object story level.</param>
+        /// <param name="name">The object unique name.</param>
+        public void GetNameFromLabel(string label,
+            string story,
+            ref string name)
+        {
+            _callCode = _sapModel.PointObj.GetNameFromLabel(label, story, ref name);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
 
         /// <summary>
         /// Returns the 3x3 direction cosines to transform local coordinates to global coordinates by the equation [directionCosines]*[localCoordinates] = [globalCoordinates].
@@ -333,7 +390,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             angleOffset.AngleC = angleC;
         }
 
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the local axis angle assignment for the object.
         /// </summary> 
@@ -350,7 +407,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.PointObj.SetLocalAxes(name, angleOffset.AngleA, angleOffset.AngleB, angleOffset.AngleC, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
 
 
         /// <summary>
@@ -478,6 +534,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
                 CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
         #region Creation & Groups
@@ -535,6 +592,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function adds a point object to a model. 
         /// The added point object will be tagged as a Special Point except if it was merged with another point object. 
@@ -592,6 +650,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.PointObj.AddSpherical(coordinate.Radius, coordinate.Theta, coordinate.Phi, ref name, userName, coordinateSystem, mergeOff, mergeNumber);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
 
         /// <summary>
@@ -643,7 +702,36 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Returns the name, x, y and z coordinates of all point object in the model in Present Units. 
+        /// The coordinates are reported in the coordinate system specified by <paramref name="coordinateSystem"/>.
+        /// </summary>
+        /// <param name="numberOfPoints">The number of points returned.</param>
+        /// <param name="names">The name of an existing point object.</param>
+        /// <param name="coordinates">The cartesian x-, y-, z-coordinate of the specified point object in the specified coordinate system.</param>
+        /// <param name="coordinateSystem">The name of the coordinate system in which the joint coordinates are returned.</param>
+        public void GetAllPoints(ref int numberOfPoints,
+            ref string[] names,
+            ref Coordinate3DCartesian[] coordinates,
+            string coordinateSystem = CoordinateSystems.Global)
+        {
+            double[] xCoordinates = new double[0];
+            double[] yCoordinates = new double[0];
+            double[] zCoordinates = new double[0];
 
+            _callCode = _sapModel.PointObj.GetAllPoints(ref numberOfPoints, ref names, ref xCoordinates, ref yCoordinates, ref zCoordinates, coordinateSystem);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            coordinates = new Coordinate3DCartesian[numberOfPoints];
+            for (int i = 0; i < numberOfPoints; i++)
+            {
+                coordinates[i].X = xCoordinates[i];
+                coordinates[i].Y = yCoordinates[i];
+                coordinates[i].Z = zCoordinates[i];
+            }
+        }
+#endif
         #endregion
 
         #region Cross-Section & Material Properties
@@ -804,8 +892,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
-
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the merge number for a point object. 
         /// By default the merge number for a point is zero. 
@@ -940,6 +1027,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.PointObj.DeletePatternValue(name, patternName, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
 
 
@@ -1037,6 +1125,42 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         #endregion
 
         #region Support & Connections
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves the diaphragm for a specified object.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="diaphragmOption">The diaphragm option.</param>
+        /// <param name="diaphragmName">The name of an existing diaphragm. 
+        /// This item will only be filled if <paramref name="diaphragmOption"/> = <see cref="eDiaphragmOption.DefinedDiaphragm"/>.</param>
+        public void GetDiaphragm(string name,
+            ref eDiaphragmOption diaphragmOption,
+            ref string diaphragmName)
+        {
+            CSiProgram.eDiaphragmOption csiDiaphragmOption = CSiProgram.eDiaphragmOption.Disconnect;
+
+            _callCode = _sapModel.PointObj.GetDiaphragm(name, ref csiDiaphragmOption, ref diaphragmName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            diaphragmOption = CSiEnumConverter.FromCSi(csiDiaphragmOption);
+        }
+
+        /// <summary>
+        /// Assigns a diaphragm to an object .
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="diaphragmOption">The diaphragm option.</param>
+        /// <param name="diaphragmName">The name of an existing diaphragm.</param>
+        public void SetDiaphragm(string name,
+            eDiaphragmOption diaphragmOption,
+            string diaphragmName = "")
+        {
+            CSiProgram.eDiaphragmOption csiDiaphragmOption = CSiEnumConverter.ToCSi(diaphragmOption);
+
+            _callCode = _sapModel.PointObj.SetDiaphragm(name, csiDiaphragmOption, diaphragmName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#else
         /// <summary>
         /// This function returns a list of constraint assignments made to one or more specified point elements.
         /// </summary>
@@ -1089,9 +1213,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.PointObj.DeleteConstraint(name, CSiEnumConverter.ToCSi(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
-
+#endif
 
         /// <summary>
         /// This function returns a list of constraint assignments made to one or more specified point objects.
@@ -1229,6 +1351,36 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+        // ===
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves the named spring property assignment for an object.</summary>
+        /// <param name="name">The name of an existing object .</param>
+        /// <param name="nameSpring">The name of an existing point spring property.</param>
+        public void GetSpringAssignment(string name,
+            ref string nameSpring)
+        {
+            _callCode = _sapModel.PointObj.GetSpringAssignment(name, ref nameSpring);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Assigns an existing named spring property to objects.</summary>
+        /// <param name="name">The name of an existing object or group, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="nameSpring">The name of an existing point spring property.</param>
+        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are made for the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.Group"/>, the assignments are made for the objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are made for all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        public void SetSpringAssignment(string name,
+            string nameSpring,
+            eItemType itemType = eItemType.Object)
+        {
+            _callCode = _sapModel.PointObj.SetSpringAssignment(name, nameSpring);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
+
+        // ===
 
         /// <summary>
         /// This function deletes all spring assignments for the specified objects.
@@ -1353,8 +1505,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
-
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         // LoadForceWithGUID
         /// <summary>
         /// This function retrieves the joint force load assignments to point objects.
@@ -1429,6 +1580,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.PointObj.DeleteLoadForceWithGUID(name, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 
 
 

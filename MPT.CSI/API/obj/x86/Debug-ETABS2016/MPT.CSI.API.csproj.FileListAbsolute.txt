@@ -2,7 +2,6 @@ C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.CSI.API.dll
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.CSI.API.pdb
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\ETABS2013.dll
-C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\ETABS2014.dll
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\ETABS2015.dll
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\ETABS2016.dll
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.Enums.dll
@@ -14,3 +13,17 @@ C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\obj\x86\Debug-ETABS2016\MPT.CSI.API.csprojResolveAssemblyReference.cache
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\obj\x86\Debug-ETABS2016\MPT.CSI.API.dll
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\obj\x86\Debug-ETABS2016\MPT.CSI.API.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\CSiBridge18.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\CSiBridge19.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.Files.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.FileSystem.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.Reflections.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.Reporting.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.Files.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.Files.xml
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.FileSystem.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.FileSystem.xml
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.Reflections.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.Reflections.xml
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.Reporting.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-ETABS2016\MPT.Reporting.xml

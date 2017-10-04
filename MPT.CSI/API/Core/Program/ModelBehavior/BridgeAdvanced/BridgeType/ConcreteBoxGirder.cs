@@ -1,9 +1,9 @@
-﻿using MPT.CSI.API.Core.Helpers;
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
 {
-    #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
 
 
     /// <summary>
@@ -13,7 +13,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
     public class ConcreteBoxGirder : CSiApiBase
     {
 
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcreteBoxGirder"/> class.
         /// </summary>
@@ -21,9 +21,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
         public ConcreteBoxGirder(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function returns the number of stress points at the specified web of the specified superstructure section cut.<para/>
         /// If the bridge object is not currently linked to existing objects in the model, an error is returned.
@@ -301,6 +301,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.BridgeAdvanced.BridgeType
 
 #endregion
     }
-
-#endif
 }
+#endif

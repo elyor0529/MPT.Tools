@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Edit
 {
     /// <summary>
     /// Method by which a point object is aligned.
@@ -26,3 +27,5 @@
         NearestLineOrEdge = 4
     }
 }
+
+#endif

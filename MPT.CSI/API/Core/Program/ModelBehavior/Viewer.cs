@@ -1,23 +1,5 @@
 ﻿using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
@@ -39,16 +21,16 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
 
         #region Methods: Public
         /// <summary>
-        /// This function refreshes the view for the specified window(s). 
-        /// A RefreshView takes longer to complete than a RefreshWindow.
-        /// RefreshView rebuilds all object arrays used for display and then updates the display. 
-        /// The RefreshView function should be called after operations that add, delete or move objects.
-        /// For example, after adding a new point object to the model, the  RefreshView function should be called. 
-        /// After modifying a joint restraint, the RefreshWindow function should be called.
+        /// This function refreshes the view for the specified window(s). <para /> 
+        /// <see cref="Viewer.RefreshView(int, bool)"/> takes longer to complete than <see cref="Viewer.RefreshWindow(int)"/>.<para /> 
+        /// <see cref="Viewer.RefreshView(int, bool)"/> rebuilds all object arrays used for display and then updates the display. <para /> 
+        /// This function should be called after operations that add, delete or move objects.<para /> 
+        /// For example, after adding a new point object to the model, this function should be called. <para /> 
+        /// After modifying a joint restraint, <see cref="Viewer.RefreshWindow(int)"/> should be called.
         /// </summary>
-        /// <param name="window">This is 0 meaning all windows or an existing window number. 
+        /// <param name="window">This is 0 meaning all windows or an existing window number. <para /> 
         /// It indicates the window(s) to have its view refreshed.</param>
-        /// <param name="zoom">True: Window zoom is maintained when the view is refreshed. 
+        /// <param name="zoom">True: Window zoom is maintained when the view is refreshed. <para /> 
         /// False: Zoom returns to a default zoom.</param>
         public void RefreshView(int window = 0,
             bool zoom = true)
@@ -58,14 +40,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         }
 
         /// <summary>
-        /// This function refreshes the specified window(s).
-        /// A RefreshWindow takes shorter to complete than a RefreshView.
-        /// RefreshWindow simply updates the display.
-        /// The RefreshWindow function is adequate for other types of changes than operations that add, delete or move objects. 
-        /// For example, after adding a new point object to the model, the  RefreshView function should be called. 
-        /// After modifying a joint restraint, the RefreshWindow function should be called.
+        /// This function refreshes the specified window(s).<para /> 
+        /// <see cref="Viewer.RefreshWindow(int)"/> takes shorter to complete than <see cref="Viewer.RefreshView(int, bool)"/>.<para /> 
+        /// <see cref="Viewer.RefreshWindow(int)"/> simply updates the display.<para /> 
+        /// This function is adequate for other types of changes than operations that add, delete or move objects. <para /> 
+        /// For example, after adding a new point object to the model, <see cref="Viewer.RefreshView(int, bool)"/> function should be called. <para /> 
+        /// After modifying a joint restraint, the this function should be called.
         /// </summary>
-        /// <param name="window">This is 0 meaning all windows or an existing window number. 
+        /// <param name="window">This is 0 meaning all windows or an existing window number. <para /> 
         /// It indicates the window(s) to have its view refreshed.</param>
         public void RefreshWindow(int window = 0)
         {

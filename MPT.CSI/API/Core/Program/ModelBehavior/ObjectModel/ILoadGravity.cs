@@ -1,4 +1,4 @@
-﻿
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
@@ -67,3 +67,4 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             eItemType itemType = eItemType.Object);
     }
 }
+#endif

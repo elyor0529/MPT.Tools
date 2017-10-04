@@ -24,3 +24,6 @@ C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-SAP2000v1
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\obj\x86\Debug-SAP2000v19\MPT.CSI.API.csprojResolveAssemblyReference.cache
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\obj\x86\Debug-SAP2000v19\MPT.CSI.API.dll
 C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\obj\x86\Debug-SAP2000v19\MPT.CSI.API.pdb
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-SAP2000v19\CSiBridge18.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-SAP2000v19\CSiBridge19.dll
+C:\TFS\Regression Tester\Main\DLLs\MPT.Tools\MPT.CSI\API\bin\x86\Debug-SAP2000v19\ETABS2013.dll

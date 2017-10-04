@@ -1,5 +1,4 @@
-﻿
-namespace MPT.CSI.API.Core.Program.ModelBehavior
+﻿namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
     /// Object can return a transformation matrix of direction cosines between the local and global coordinates.

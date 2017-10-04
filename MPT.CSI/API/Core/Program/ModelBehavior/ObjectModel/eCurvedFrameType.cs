@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
     /// Curved frame types available in the application.
@@ -36,3 +37,5 @@
         ParabolaThirdPointCoordinates = 5
     }
 }
+
+#endif

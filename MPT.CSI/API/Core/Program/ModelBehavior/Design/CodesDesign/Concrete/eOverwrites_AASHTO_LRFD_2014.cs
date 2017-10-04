@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-  #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
     /// <summary>
     /// Overwrites available for <see cref="AASHTO_LRFD_2014"/> concrete design in the application.
     /// </summary>
@@ -61,5 +61,5 @@
         /// </summary>
         SwayMomentFactor_Ds_Minor = 11,
     }
-  #endif
 }
+  #endif

@@ -1,8 +1,9 @@
-﻿
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
     /// <summary>
-    /// 
+    /// Depends on the eLayoutCurveType.
+    /// TODO: This is not to be used as an enum, but a reference for later object behavior.
     /// </summary>
     public enum eLayoutCurveValue3
     {
@@ -47,3 +48,4 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         NotUsed7 = 7
     }
 }
+#endif

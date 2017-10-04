@@ -1,42 +1,35 @@
 ﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Seismic;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents an auto seismic load pattern in the application.
     /// </summary>
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.IAutoLoad" />
     public class AutoSeismic : CSiApiBase, IAutoLoad
+#else
+    /// <summary>
+    /// Represents an auto seismic load pattern in the application.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
+    public class AutoSeismic : CSiApiBase
+#endif
     {
         #region Properties
         private readonly CSiApiSeed _seed;
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         private User _User;
         private IBC_2003 _IBC_2003;
-
+#endif
+        private IBC_2006 _IBC_2006;
         #endregion
 
         #region Properties
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Auto seismic load pattern according to user definitions.
         /// </summary>
@@ -46,8 +39,13 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
         /// Auto seismic load pattern according to IBC 2003.
         /// </summary>
         public IBC_2003 IBC_2003 => _IBC_2003 ?? (_IBC_2003 = new IBC_2003(_seed));
+#endif
 
 
+        /// <summary>
+        /// Auto seismic load pattern according to IBC 2006.
+        /// </summary>
+        public IBC_2006 IBC_2006 => _IBC_2006 ?? (_IBC_2006 = new IBC_2006(_seed));
         #endregion
 
         #region Initialization        
@@ -62,7 +60,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
 
 
         #endregion
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: Interface
 
         /// <summary>
@@ -132,5 +130,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion
+#endif
     }
 }

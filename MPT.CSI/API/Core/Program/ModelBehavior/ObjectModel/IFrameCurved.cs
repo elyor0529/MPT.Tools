@@ -1,4 +1,5 @@
-﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
@@ -88,3 +89,4 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             ref eFrameType frameType);
     }
 }
+#endif

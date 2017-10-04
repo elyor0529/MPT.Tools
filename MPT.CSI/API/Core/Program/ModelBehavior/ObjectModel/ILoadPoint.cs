@@ -1,5 +1,4 @@
-﻿
-using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
+﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {

@@ -46,16 +46,19 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         NonlinearDirectIntegrationTimeHistory = 8,
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Moving Load.
         /// </summary>
         MovingLoad = 9,
-
+#endif
+        
         /// <summary>
         /// Buckling.
         /// </summary>
         Buckling = 10,
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// SteadyState.
         /// </summary>
@@ -70,6 +73,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// Linear Static Multistep.
         /// </summary>
         LinearStaticMultistep = 13,
+#endif
 
         /// <summary>
         /// Hyperstatic.

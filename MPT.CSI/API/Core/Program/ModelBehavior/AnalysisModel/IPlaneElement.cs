@@ -1,6 +1,7 @@
 ﻿
 namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents the Plane Element in the application.
     /// </summary>
@@ -17,4 +18,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
         IObservableLoadUniform
     {
     }
+#endif
 }

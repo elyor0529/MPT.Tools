@@ -1,32 +1,21 @@
 ﻿using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Represents the coordinate systems in the application.
     /// </summary>
-    public class CoordinateSystems : CSiApiBase, 
+    public class CoordinateSystems : CSiApiBase,
         IChangeableName, ICountable, IDeletable, IListableNames, IObservableTransformationMatrix
     {
-
+#else
+    /// <summary>
+    /// Represents the coordinate systems in the application.
+    /// </summary>
+    public class CoordinateSystems : CSiApiBase
+    {
+#endif
         #region Fields
 
         public const string Global = "GLOBAL";
@@ -40,7 +29,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 
 
         #endregion
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: Interface
 
         /// <summary>
@@ -58,7 +47,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             }
             if (Global.CompareTo(newName) == 0)
             {
-                throw new CSiReservedNameException("Cannot change coordinate system name " + newName  + "to global coordinate system name " + Global);
+                throw new CSiReservedNameException("Cannot change coordinate system name " + newName + "to global coordinate system name " + Global);
             }
 
             _callCode = _sapModel.CoordSys.ChangeName(name, newName);
@@ -147,7 +136,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// (3) Rotate the coordinate system about the positive global X-axis as defined by the RX item.  
         /// Note that the order in which these rotations are performed is important.  
         /// RX, RY and RZ are angles in degrees [deg].</param>
-        public void GetCoordSys(string nameCoordinateSystem,
+        public void GetCoordinateSystem(string nameCoordinateSystem,
             ref double xCoordinateOrigin,
             ref double yCoordinateOrigin,
             ref double zCoordinateOrigin,
@@ -185,7 +174,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// (3) Rotate the coordinate system about the positive global X-axis as defined by the RX item.  
         /// Note that the order in which these rotations are performed is important.  
         /// RX, RY and RZ are angles in degrees [deg].</param>
-        public void SetCoordSys(string nameCoordinateSystem,
+        public void SetCoordinateSystem(string nameCoordinateSystem,
             double xCoordinateOrigin,
             double yCoordinateOrigin,
             double zCoordinateOrigin,
@@ -202,5 +191,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         }
 
         #endregion
+#endif
     }
 }

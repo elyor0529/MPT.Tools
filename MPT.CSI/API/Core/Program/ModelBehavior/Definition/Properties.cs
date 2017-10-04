@@ -13,12 +13,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         private readonly CSiApiSeed _seed;
 
         private AreaSection _areaSection;
-        private CableSection _cableSection;
         private FrameSection _frameSection;
         private TendonSection _tendonSection;
         private LinkProperties _linkProperties;
-        private SolidProperties _solidProperties;
         private MaterialProperties _materialProperties;
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        private CableSection _cableSection;
+        private SolidProperties _solidProperties;
+#endif
         #endregion
 
         #region Properties                        
@@ -27,12 +29,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         /// <value>The area section.</value>
         public AreaSection AreaSection => _areaSection ?? (_areaSection = new AreaSection(_seed));
-
-        /// <summary>
-        /// Gets the cable section.
-        /// </summary>
-        /// <value>The cable section.</value>
-        public CableSection CableSection => _cableSection ?? (_cableSection = new CableSection(_seed));
 
         /// <summary>
         /// Gets the frame section.
@@ -51,19 +47,26 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         /// <value>The link properties.</value>
         public LinkProperties LinkProperties => _linkProperties ?? (_linkProperties = new LinkProperties(_seed));
-
-        /// <summary>
-        /// Gets the solid properties.
-        /// </summary>
-        /// <value>The solid properties.</value>
-        public SolidProperties SolidProperties => _solidProperties ?? (_solidProperties = new SolidProperties(_seed));
-
+        
         /// <summary>
         /// Gets the material properties.
         /// </summary>
         /// <value>The material properties.</value>
         public MaterialProperties MaterialProperties => _materialProperties ?? (_materialProperties = new MaterialProperties(_seed));
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// Gets the cable section.
+        /// </summary>
+        /// <value>The cable section.</value>
+        public CableSection CableSection => _cableSection ?? (_cableSection = new CableSection(_seed));
+
+        /// <summary>
+        /// Gets the solid properties.
+        /// </summary>
+        /// <value>The solid properties.</value>
+        public SolidProperties SolidProperties => _solidProperties ?? (_solidProperties = new SolidProperties(_seed));
+#endif
         #endregion
 
         #region Initialization

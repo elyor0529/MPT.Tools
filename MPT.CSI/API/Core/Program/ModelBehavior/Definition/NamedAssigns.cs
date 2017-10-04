@@ -1,4 +1,5 @@
-﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedAssign;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedAssign;
 using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
@@ -9,16 +10,16 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class NamedAssigns : CSiApiBase
     {
-        #region Fields
+#region Fields
         private readonly CSiApiSeed _seed;
 
         private AreaModifiers _areaModifiers;
         private CableModifiers _cableModifiers;
         private FrameModifiers _frameModifiers;
         private FrameReleases _frameReleases;
-        #endregion
+#endregion
 
-        #region Properties                        
+#region Properties                        
         /// <summary>
         /// Gets the area modifiers.
         /// </summary>
@@ -43,9 +44,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <value>The frame releases.</value>
         public FrameReleases FrameReleases => _frameReleases ?? (_frameReleases = new FrameReleases(_seed));
 
-        #endregion
+#endregion
 
-        #region Initialization
+#region Initialization
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NamedAssigns"/> class.
@@ -57,6 +58,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         }
 
 
-        #endregion
+#endregion
     }
 }
+#endif

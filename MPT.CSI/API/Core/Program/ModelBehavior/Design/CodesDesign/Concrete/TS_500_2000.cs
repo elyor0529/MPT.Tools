@@ -1,8 +1,8 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Concrete design code <see cref="TS_500_2000"/>.
     /// </summary>
@@ -10,11 +10,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
     public class TS_500_2000 : CSiApiBase
     {
 #region Initialization        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TS_500_2000"/> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
-        public TS_500_2000(CSiApiSeed seed) : base(seed) { }
+        public TS_500_2000(CSiApiSeed seed) : base(seed)
+        {
+        }
 
 
 #endregion
@@ -34,8 +37,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
             ref double value,
             ref bool programDetermined)
         {
-             _callCode = _sapModel.DesignConcrete.TS_500_2000.GetOverwrite(name, (int)item, ref value, ref programDetermined);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            _callCode = _sapModel.DesignConcrete.TS_500_2000.GetOverwrite(name, (int) item, ref value,
+                ref programDetermined);
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
 
         /// <summary>
@@ -53,8 +60,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
             double value,
             eItemType itemType = eItemType.Object)
         {
-            _callCode = _sapModel.DesignConcrete.TS_500_2000.SetOverwrite(name, (int)item, value, CSiEnumConverter.ToCSi(itemType));
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            _callCode = _sapModel.DesignConcrete.TS_500_2000.SetOverwrite(name, (int) item, value,
+                CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
 
 
@@ -68,9 +79,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
         /// <exception cref="CSiException"></exception>
         public void GetPreference(ePreferences_TS_500_2000 item,
             ref double value)
-        {           
-            _callCode = _sapModel.DesignConcrete.TS_500_2000.GetPreference((int)item, ref value);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }            
+        {
+            _callCode = _sapModel.DesignConcrete.TS_500_2000.GetPreference((int) item, ref value);
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
 
         /// <summary>
@@ -82,10 +96,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
         public void SetPreference(ePreferences_TS_500_2000 item,
             double value)
         {
-            _callCode = _sapModel.DesignConcrete.TS_500_2000.SetPreference((int)item, value);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            _callCode = _sapModel.DesignConcrete.TS_500_2000.SetPreference((int) item, value);
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
+
 #endregion
     }
-#endif
 }
+#endif

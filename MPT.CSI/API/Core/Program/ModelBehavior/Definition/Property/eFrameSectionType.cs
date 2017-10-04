@@ -128,6 +128,83 @@
         /// <summary>
         /// Pre-Cast concrete girder U-section.
         /// </summary>
-        PreCastConcreteGirderU = 25
+        PreCastConcreteGirderU = 25,
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Built-up hybrid I-section.
+        /// </summary>
+        BuiltUpIHybrid = 26,
+
+        /// <summary>
+        /// Built-up hybrid U-section.
+        /// </summary>
+        BuiltUpUHybrid = 27,
+
+        /// <summary>
+        /// Concrete L-section.
+        /// </summary>
+        ConcreteL = 28,
+
+        /// <summary>
+        /// Filled tube section.
+        /// </summary>
+        FilledTube = 29,
+
+        /// <summary>
+        /// Filled pipe section.
+        /// </summary>
+        FilledPipe = 30,
+
+        /// <summary>
+        /// Encased rectangle section.
+        /// </summary>
+        EncasedRectangle = 31,
+
+        /// <summary>
+        /// Encased circle section.
+        /// </summary>
+        EncasedCircle = 32,
+
+        /// <summary>
+        /// Buckling restrained brace section.
+        /// </summary>
+        BucklingRestrainedBrace = 33,
+
+        /// <summary>
+        /// Buckling restrained core brace section.
+        /// </summary>
+        CoreBraceBRB = 34,
+
+        /// <summary>
+        /// Concrete tee section.
+        /// </summary>
+        ConcreteTee = 35,
+
+        /// <summary>
+        /// Concrete box section.
+        /// </summary>
+        ConcreteBox = 36,
+
+        /// <summary>
+        /// Concrete pipe section.
+        /// </summary>
+        ConcretePipe = 37,
+
+        /// <summary>
+        /// Concrete cross section.
+        /// </summary>
+        ConcreteCross = 38,
+
+        /// <summary>
+        /// Steel plate section.
+        /// </summary>
+        SteelPlate = 39,
+
+        /// <summary>
+        /// Steel rod section.
+        /// </summary>
+        SteelRod = 40,
+#endif
     }
 }

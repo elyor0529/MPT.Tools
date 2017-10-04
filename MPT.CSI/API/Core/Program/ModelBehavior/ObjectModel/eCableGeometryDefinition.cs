@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
     /// Cable definition used in the program for defining cable geometry.
@@ -53,3 +54,5 @@
         RelativeUndeformedLength = 9
     }
 }
+
+#endif

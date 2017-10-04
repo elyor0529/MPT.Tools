@@ -10,37 +10,43 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// <summary>
         /// Point Object.
         /// </summary>
-        [Description("Point Object")] PointObject = 1,
+        [Description("Point Object")]
+        PointObject = 1,
 
         /// <summary>
         /// Frame Object.
         /// </summary>
-        [Description("Frame Object")]FrameObject = 2,
-
+        [Description("Frame Object")]
+        FrameObject = 2,
 
         /// <summary>
         /// Cable Object.
         /// </summary>
-        [Description("Cable Object")]CableObject = 3,
+        [Description("Cable Object")]
+        CableObject = 3,
 
         /// <summary>
         /// Tendon Object.
         /// </summary>
-        [Description("Tendon Object")]TendonObject = 4,
+        [Description("Tendon Object")]
+        TendonObject = 4,
 
         /// <summary>
         /// Area Object.
         /// </summary>
-        [Description("Area Object")]AreaObject = 5,
+        [Description("Area Object")]
+        AreaObject = 5,
 
         /// <summary>
         /// Solid bject.
         /// </summary>
-        [Description("Solid Object")]SolidObject = 6,
+        [Description("Solid Object")]
+        SolidObject = 6,
 
         /// <summary>
         /// Link Object.
         /// </summary>
-        [Description("Link Object")]LinkObject = 7
+        [Description("Link Object")]
+        LinkObject = 7
     }
 }

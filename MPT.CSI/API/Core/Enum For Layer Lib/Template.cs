@@ -20,6 +20,26 @@ using ETABS2015;
 using ETABS2016;
 #endif
 
+#if BUILD_SAP2000v16
+using CSiProgram = SAP2000v16;
+#elif BUILD_SAP2000v17
+using CSiProgram = SAP2000v17;
+#elif BUILD_SAP2000v18
+using CSiProgram = SAP2000v18;
+#elif BUILD_SAP2000v19
+using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev18
+using CSiProgram = CSiBridge18;
+#elif BUILD_CSiBridgev19
+using CSiProgram = CSiBridge19;
+#elif BUILD_ETABS2013
+using CSiProgram = ETABS2013;
+#elif BUILD_ETABS2015
+using CSiProgram = ETABS2015;
+#elif BUILD_ETABS2016
+using CSiProgram = ETABS2016;
+#endif
+
 namespace MPT.CSI.API.Core
 {
     /// <summary>

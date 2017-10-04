@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
+﻿#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-    #if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Preferences available for <see cref="KCI_1999"/> concrete design in the application.
     /// </summary>
@@ -20,7 +20,7 @@
         /// Consider minimum eccentricity.
         /// </summary>
         ConsiderMinimumEccentricity = 3,
-        
+
         /// <summary>
         /// Phi bending, with tension.
         /// </summary>
@@ -40,7 +40,7 @@
         /// Phi shearn.
         /// </summary>
         PhiShear = 7,
-                
+
         /// <summary>
         /// The pattern live load factor.
         /// </summary>
@@ -56,5 +56,5 @@
         /// </summary>
         MultiResponseCaseDesign = 10
     }
-#endif
 }
+#endif

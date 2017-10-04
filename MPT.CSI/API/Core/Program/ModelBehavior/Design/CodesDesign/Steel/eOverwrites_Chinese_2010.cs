@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
-    #if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Overwrites available for <see cref="Chinese_2010" /> steel design in the application.
     /// </summary>
@@ -10,17 +10,17 @@
         /// The framing type.
         /// </summary>
         FramingType = 1,
-        
+
         /// <summary>
         /// The element type.
         /// </summary>
         ElementType = 2,
-        
+
         /// <summary>
         /// Is the frame a transfer column?
         /// </summary>
         IsTransferColumn = 3,
-        
+
         /// <summary>
         /// Seismic magnification factor.
         /// </summary>
@@ -54,8 +54,8 @@
         /// <summary>
         /// Is the beam top loaded?
         /// </summary>
-        IsBeamTopLoaded = 10,    
-        
+        IsBeamTopLoaded = 10,
+
         /// <summary>
         /// Consider deflection?
         /// </summary>
@@ -275,5 +275,5 @@
         /// </summary>
         LOverRLimitInTension = 51,
     }
-#endif
 }
+#endif

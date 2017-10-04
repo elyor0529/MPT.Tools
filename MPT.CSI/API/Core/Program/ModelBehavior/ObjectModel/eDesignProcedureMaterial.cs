@@ -15,6 +15,7 @@
         /// </summary>
         Concrete = 2,
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Aluminum design.
         /// </summary>
@@ -24,6 +25,7 @@
         /// Cold formed steel design.
         /// </summary>
         ColdFormed = 8,
+#endif
 
         /// <summary>
         /// No design.

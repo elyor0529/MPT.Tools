@@ -1,5 +1,6 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Site class for Italian 3274 response spectrum function.
     /// </summary>
@@ -25,4 +26,5 @@
         /// </summary>
         D = 4,
     }
+#endif
 }

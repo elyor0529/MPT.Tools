@@ -1,24 +1,8 @@
 ﻿using System.Linq;
+using MPT.Enums;
 using MPT.CSI.API.Core.Helpers;
+using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
-
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
 {
@@ -127,66 +111,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
         }
 
         /// <summary>
-        /// This function reports the area joint forces for the point elements at each corner of the specified plane elements that have plane-type or asolid-type properties (not shell).
-        /// </summary>
-        /// <param name="name">The name of an existing object, element, or group of objects, depending on the value of the <paramref name="itemType"/> item.</param>
-        /// <param name="itemType">If this item is <see cref="eItemTypeElement.ObjectElement"/>, the result request is for the elements corresponding to the object specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemTypeElement.Element"/>, the result request is for the element specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemTypeElement.GroupElement"/>, the result request is for the elements corresponding to all objects included in the group specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemTypeElement.SelectionElement"/>, the result request is for elements corresponding to all selected objects, and the <paramref name="name"/> item is ignored.</param>
-        /// <param name="numberOfResults">The total number of results returned by the program.</param>
-        /// <param name="objectNames">The object name associated with each result, if any.</param>
-        /// <param name="elementNames">The element name associated with each result, if any.</param>
-        /// <param name="pointNames">The point element name associated with each result, if any.</param>
-        /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
-        /// <param name="stepTypes">The step type, if any, for each result.</param>
-        /// <param name="stepNumbers">The step number, if any, for each result.</param>
-        /// <param name="jointForces">The joint force components along/about the point element local axes directions.</param>
-        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
-        public void AreaJointForcePlane(string name,
-            eItemTypeElement itemType,
-            ref int numberOfResults,
-            ref string[] objectNames,
-            ref string[] elementNames,
-            ref string[] pointNames,
-            ref string[] loadCases,
-            ref string[] stepTypes,
-            ref double[] stepNumbers,
-            ref Loads[] jointForces)
-        {
-            double[] F1 = new double[0];
-            double[] F2 = new double[0];
-            double[] F3 = new double[0];
-            double[] M1 = new double[0];
-            double[] M2 = new double[0];
-            double[] M3 = new double[0];
-
-            _callCode = _sapModel.Results.AreaJointForcePlane(name, 
-                CSiEnumConverter.ToCSi(itemType), 
-                ref numberOfResults, 
-                ref objectNames, 
-                ref elementNames, 
-                ref pointNames, 
-                ref loadCases, 
-                ref stepTypes, 
-                ref stepNumbers, 
-                ref F1, ref F2, ref F3, 
-                ref M1, ref M2, ref M3);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            jointForces = new Loads[numberOfResults - 1];
-            for (int i = 0; i < numberOfResults; i++)
-            {
-                jointForces[i].F1 = F1[i];
-                jointForces[i].F2 = F2[i];
-                jointForces[i].F3 = F3[i];
-                jointForces[i].M1 = M1[i];
-                jointForces[i].M2 = M2[i];
-                jointForces[i].M3 = M3[i];
-            }
-        }
-
-        /// <summary>
         /// This function reports the area joint forces for the point elements at each corner of the specified area elements that have shell-type properties (not plane or asolid)..
         /// </summary>
         /// <param name="name">The name of an existing object, element, or group of objects, depending on the value of the <paramref name="itemType"/> item.</param>
@@ -243,76 +167,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
                 jointForces[i].M1 = M1[i];
                 jointForces[i].M2 = M2[i];
                 jointForces[i].M3 = M3[i];
-            }
-        }
-
-        /// <summary>
-        /// This function reports the stresses for the specified plane elements that are assigned plane or asolid section properties (not shell properties).
-        /// </summary>
-        /// <param name="name">The name of an existing object, element, or group of objects, depending on the value of the <paramref name="itemType"/> item.</param>
-        /// <param name="itemType">If this item is <see cref="eItemTypeElement.ObjectElement"/>, the result request is for the elements corresponding to the object specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemTypeElement.Element"/>, the result request is for the element specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemTypeElement.GroupElement"/>, the result request is for the elements corresponding to all objects included in the group specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemTypeElement.SelectionElement"/>, the result request is for elements corresponding to all selected objects, and the <paramref name="name"/> item is ignored.</param>
-        /// <param name="numberOfResults">The total number of results returned by the program.</param>
-        /// <param name="objectNames">The object name associated with each result, if any.</param>
-        /// <param name="elementNames">The element name associated with each result, if any.</param>
-        /// <param name="pointNames">The point element name associated with each result, if any.</param>
-        /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
-        /// <param name="stepTypes">The step type, if any, for each result.</param>
-        /// <param name="stepNumbers">The step number, if any, for each result.</param>
-        /// <param name="stresses">The area element internal stresses at the specified point element location. [F/L^2].</param>
-        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
-        public void AreaStressPlane(string name,
-            eItemTypeElement itemType,
-            ref int numberOfResults,
-            ref string[] objectNames,
-            ref string[] elementNames,
-            ref string[] pointNames,
-            ref string[] loadCases,
-            ref string[] stepTypes,
-            ref double[] stepNumbers,
-            ref Stress[] stresses)
-        {
-            double[] S11 = new double[0];
-            double[] S22 = new double[0];
-            double[] S33 = new double[0];
-            double[] S12 = new double[0];
-            double[] SMax = new double[0];
-            double[] SMin = new double[0];
-            double[] SVM = new double[0];
-            double[] SAngle = new double[0];
-
-            _callCode = _sapModel.Results.AreaStressPlane(name, 
-                CSiEnumConverter.ToCSi(itemType), 
-                ref numberOfResults, 
-                ref objectNames, 
-                ref elementNames, 
-                ref pointNames, 
-                ref loadCases, 
-                ref stepTypes, 
-                ref stepNumbers, 
-                ref S11, 
-                ref S22, 
-                ref S33, 
-                ref S12, 
-                ref SMax, 
-                ref SMin, 
-                ref SAngle, 
-                ref SVM);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            stresses = new Stress[numberOfResults - 1];
-            for (int i = 0; i < numberOfResults; i++)
-            {
-                stresses[i].S11 = S11[i];
-                stresses[i].S22 = S22[i];
-                stresses[i].S33 = S33[i];
-                stresses[i].S12 = S12[i];
-                stresses[i].SMax = SMax[i];
-                stresses[i].SMin = SMin[i];
-                stresses[i].SVM = SVM[i];
-                stresses[i].Angle = SAngle[i];
             }
         }
 
@@ -513,9 +367,144 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
                 stresses[i].Angle = SAngle[i];
             }
         }
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// This function reports the area joint forces for the point elements at each corner of the specified plane elements that have plane-type or asolid-type properties (not shell).
+        /// </summary>
+        /// <param name="name">The name of an existing object, element, or group of objects, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="itemType">If this item is <see cref="eItemTypeElement.ObjectElement"/>, the result request is for the elements corresponding to the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.Element"/>, the result request is for the element specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.GroupElement"/>, the result request is for the elements corresponding to all objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.SelectionElement"/>, the result request is for elements corresponding to all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        /// <param name="numberOfResults">The total number of results returned by the program.</param>
+        /// <param name="objectNames">The object name associated with each result, if any.</param>
+        /// <param name="elementNames">The element name associated with each result, if any.</param>
+        /// <param name="pointNames">The point element name associated with each result, if any.</param>
+        /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
+        /// <param name="stepTypes">The step type, if any, for each result.</param>
+        /// <param name="stepNumbers">The step number, if any, for each result.</param>
+        /// <param name="jointForces">The joint force components along/about the point element local axes directions.</param>
+        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
+        public void AreaJointForcePlane(string name,
+            eItemTypeElement itemType,
+            ref int numberOfResults,
+            ref string[] objectNames,
+            ref string[] elementNames,
+            ref string[] pointNames,
+            ref string[] loadCases,
+            ref string[] stepTypes,
+            ref double[] stepNumbers,
+            ref Loads[] jointForces)
+        {
+            double[] F1 = new double[0];
+            double[] F2 = new double[0];
+            double[] F3 = new double[0];
+            double[] M1 = new double[0];
+            double[] M2 = new double[0];
+            double[] M3 = new double[0];
+
+            _callCode = _sapModel.Results.AreaJointForcePlane(name, 
+                CSiEnumConverter.ToCSi(itemType), 
+                ref numberOfResults, 
+                ref objectNames, 
+                ref elementNames, 
+                ref pointNames, 
+                ref loadCases, 
+                ref stepTypes, 
+                ref stepNumbers, 
+                ref F1, ref F2, ref F3, 
+                ref M1, ref M2, ref M3);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            jointForces = new Loads[numberOfResults - 1];
+            for (int i = 0; i < numberOfResults; i++)
+            {
+                jointForces[i].F1 = F1[i];
+                jointForces[i].F2 = F2[i];
+                jointForces[i].F3 = F3[i];
+                jointForces[i].M1 = M1[i];
+                jointForces[i].M2 = M2[i];
+                jointForces[i].M3 = M3[i];
+            }
+        }
+
+        /// <summary>
+        /// This function reports the stresses for the specified plane elements that are assigned plane or asolid section properties (not shell properties).
+        /// </summary>
+        /// <param name="name">The name of an existing object, element, or group of objects, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="itemType">If this item is <see cref="eItemTypeElement.ObjectElement"/>, the result request is for the elements corresponding to the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.Element"/>, the result request is for the element specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.GroupElement"/>, the result request is for the elements corresponding to all objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.SelectionElement"/>, the result request is for elements corresponding to all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        /// <param name="numberOfResults">The total number of results returned by the program.</param>
+        /// <param name="objectNames">The object name associated with each result, if any.</param>
+        /// <param name="elementNames">The element name associated with each result, if any.</param>
+        /// <param name="pointNames">The point element name associated with each result, if any.</param>
+        /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
+        /// <param name="stepTypes">The step type, if any, for each result.</param>
+        /// <param name="stepNumbers">The step number, if any, for each result.</param>
+        /// <param name="stresses">The area element internal stresses at the specified point element location. [F/L^2].</param>
+        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
+        public void AreaStressPlane(string name,
+            eItemTypeElement itemType,
+            ref int numberOfResults,
+            ref string[] objectNames,
+            ref string[] elementNames,
+            ref string[] pointNames,
+            ref string[] loadCases,
+            ref string[] stepTypes,
+            ref double[] stepNumbers,
+            ref Stress[] stresses)
+        {
+            double[] S11 = new double[0];
+            double[] S22 = new double[0];
+            double[] S33 = new double[0];
+            double[] S12 = new double[0];
+            double[] SMax = new double[0];
+            double[] SMin = new double[0];
+            double[] SVM = new double[0];
+            double[] SAngle = new double[0];
+
+            _callCode = _sapModel.Results.AreaStressPlane(name, 
+                CSiEnumConverter.ToCSi(itemType), 
+                ref numberOfResults, 
+                ref objectNames, 
+                ref elementNames, 
+                ref pointNames, 
+                ref loadCases, 
+                ref stepTypes, 
+                ref stepNumbers, 
+                ref S11, 
+                ref S22, 
+                ref S33, 
+                ref S12, 
+                ref SMax, 
+                ref SMin, 
+                ref SAngle, 
+                ref SVM);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            stresses = new Stress[numberOfResults - 1];
+            for (int i = 0; i < numberOfResults; i++)
+            {
+                stresses[i].S11 = S11[i];
+                stresses[i].S22 = S22[i];
+                stresses[i].S33 = S33[i];
+                stresses[i].S12 = S12[i];
+                stresses[i].SMax = SMax[i];
+                stresses[i].SMin = SMin[i];
+                stresses[i].SVM = SVM[i];
+                stresses[i].Angle = SAngle[i];
+            }
+        }
+#endif
+
         #endregion
 
-        #region Methods: Mass        
+
+        #region Methods: Mass    
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function reports the assembled joint masses for the specified point elements.
         /// </summary>
@@ -538,6 +527,25 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             ref string[] pointElementNames,
             ref string[] massSourceNames,
             ref Mass[] masses)
+#else
+        /// <summary>
+        /// This function reports the assembled joint masses for the specified point elements.
+        /// </summary>
+        /// <param name="name">The name of an existing object, element, or group of objects, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="itemType">If this item is <see cref="eItemTypeElement.ObjectElement"/>, the result request is for the elements corresponding to the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.Element"/>, the result request is for the element specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.GroupElement"/>, the result request is for the elements corresponding to all objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.SelectionElement"/>, the result request is for elements corresponding to all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        /// <param name="numberOfResults">The total number of results returned by the program.</param>
+        /// <param name="pointElementNames">The point element name associated with each result.</param>
+        /// <param name="masses">The mass along/about the point element local 1, 2 and 3 axes directions, for each result.</param>
+        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
+        public void AssembledJointMass(string name,
+            eItemTypeElement itemType,
+            ref int numberOfResults,
+            ref string[] pointElementNames,
+            ref Mass[] masses)
+#endif
         {
             double[] U1 = new double[0];
             double[] U2 = new double[0];
@@ -545,7 +553,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             double[] R1 = new double[0];
             double[] R2 = new double[0];
             double[] R3 = new double[0];
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
             _callCode = _sapModel.Results.AssembledJointMass_1(massSourceName,
                                     name,
                                     CSiEnumConverter.ToCSi(itemType),
@@ -558,6 +566,19 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
                                     ref R1,
                                     ref R2,
                                     ref R3);
+#else
+            _callCode = _sapModel.Results.AssembledJointMass(
+                             name,
+                             CSiEnumConverter.ToCSi(itemType),
+                             ref numberOfResults,
+                             ref pointElementNames,
+                             ref U1,
+                             ref U2,
+                             ref U3,
+                             ref R1,
+                             ref R2,
+                             ref R3);
+#endif
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
 
             masses = new Mass[numberOfResults - 1];
@@ -571,9 +592,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
                 masses[i].R3 = R3[i];
             }
         }
-        #endregion
+#endregion
 
-        #region Methods: Base Reaction        
+#region Methods: Base Reaction        
         /// <summary>
         /// This function reports the structure total base reactions.
         /// </summary>
@@ -715,9 +736,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             baseReactionCoordinate.Y = gy;
             baseReactionCoordinate.Z = gz;
         }
-        #endregion
+#endregion
 
-        #region Methods: Frame        
+#region Methods: Frame        
         /// <summary>
         /// This function reports the frame forces for the specified line elements.
         /// </summary>
@@ -848,6 +869,106 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
         #endregion
 
         #region Methods: Joint        
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// This function reports the joint response spectra values, due to a time history analysis, for the specified point elements.
+        /// </summary>
+        /// <param name="name">The name of an existing object, element, or group of objects, depending on the value of the <paramref name="itemType"/> item.</param>
+        /// <param name="itemType">If this item is <see cref="eItemTypeElement.ObjectElement"/>, the result request is for the elements corresponding to the object specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.Element"/>, the result request is for the element specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.GroupElement"/>, the result request is for the elements corresponding to all objects included in the group specified by the <paramref name="name"/> item.
+        /// If this item is <see cref="eItemTypeElement.SelectionElement"/>, the result request is for elements corresponding to all selected objects, and the <paramref name="name"/> item is ignored.</param>
+        /// <param name="namedSet">The name of an existing joint response spectrum named set. 
+        /// See <see cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedSets.SetJointRespSpec"/>.</param>
+        /// <param name="numberOfResults">The total number of results returned by the program.</param>
+        /// <param name="objectNames">The object name associated with each result, if any.</param>
+        /// <param name="elementNames">The element name associated with each result, if any.</param>
+        /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
+        /// <param name="coordinateSystems">The coordinate systems in which the results are reported.</param>
+        /// <param name="directions">The directions for which the results are reported.</param>
+        /// <param name="damping">The critical damping ratio, for each result.</param>
+        /// <param name="percentSpectrumWidening">The percent spectrum widening, for each result.</param>
+        /// <param name="abscissaValues">The period or frequency, as defined in each named set, for each result. [s or 1/s].</param>
+        /// <param name="ordinateValues">The response quantity, as defined in each named set, for each result. 
+        /// The possible response quantities are spectral displacement [L], spectral velocity [L/s], pseudo spectral velocity [L/s], spectral acceleration [L/s2], or pseudo spectral acceleration [L/s2].</param>
+        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
+        public void JointResponseSpectrum(string name,
+            eItemTypeElement itemType,
+            string namedSet,
+            ref int numberOfResults,
+            ref string[] objectNames,
+            ref string[] elementNames,
+            ref string[] loadCases,
+            ref string[] coordinateSystems,
+            ref eDirection[] directions,
+            ref double[] damping,
+            ref double[] percentSpectrumWidening,
+            ref double[] abscissaValues,
+            ref double[] ordinateValues)
+        {
+            int[] csiDirections = new int[0];
+
+            _callCode = _sapModel.Results.JointRespSpec(name,
+                CSiEnumConverter.ToCSi(itemType),
+                namedSet,
+                ref numberOfResults,
+                ref objectNames,
+                ref elementNames,
+                ref loadCases,
+                ref coordinateSystems,
+                ref csiDirections,
+                ref damping,
+                ref percentSpectrumWidening,
+                ref abscissaValues,
+                ref ordinateValues);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            directions = csiDirections.Cast<eDirection>().ToArray();
+        }
+#endif
+#if BUILD_ETABS2015 || BUILD_ETABS2016        
+        /// <summary>
+        /// Reports the joint drifts.
+        /// </summary>
+        /// <param name="numberOfResults">The total number of results returned by the program.</param>
+        /// <param name="storyNames">Story names associated with each result.</param>
+        /// <param name="labels">The point labels for each result.</param>
+        /// <param name="names">The unique point names for each result.</param>
+        /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
+        /// <param name="stepTypes">The step types, if any, for each result.</param>
+        /// <param name="stepNumbers">The step numbers, if any, for each result.</param>
+        /// <param name="displacementsX">The displacements in the x-direction [L].</param>
+        /// <param name="displacementsY">The displacements in the y-direction [L].</param>
+        /// <param name="driftsX">The drifts x in the x-direction.</param>
+        /// <param name="driftsY">The drifts y in the x-direction.</param>
+        /// <exception cref="CSiException"></exception>
+        public void JointDrifts(ref int numberOfResults,
+            ref string[] storyNames,
+            ref string[] labels,
+            ref string[] names,
+            ref string[] loadCases,
+            ref string[] stepTypes,
+            ref double[] stepNumbers,
+            ref double[] displacementsX,
+            ref double[] displacementsY,
+            ref double[] driftsX,
+            ref double[] driftsY)
+        {
+            _callCode = _sapModel.Results.JointDrifts(
+                ref numberOfResults,
+                ref storyNames,
+                ref labels,
+                ref names,
+                ref loadCases,
+                ref stepTypes,
+                ref stepNumbers,
+                ref displacementsX,
+                ref displacementsY,
+                ref driftsX,
+                ref driftsY);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
         /// <summary>
         /// This function reports the joint accelerations for the specified point elements. 
         /// The accelerations reported by this function are relative accelerations.
@@ -1158,62 +1279,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             }
         }
 
-        /// <summary>
-        /// This function reports the joint response spectra values, due to a time history analysis, for the specified point elements.
-        /// </summary>
-        /// <param name="name">The name of an existing object, element, or group of objects, depending on the value of the <paramref name="itemType"/> item.</param>
-        /// <param name="itemType">If this item is <see cref="eItemTypeElement.ObjectElement"/>, the result request is for the elements corresponding to the object specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemTypeElement.Element"/>, the result request is for the element specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemTypeElement.GroupElement"/>, the result request is for the elements corresponding to all objects included in the group specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemTypeElement.SelectionElement"/>, the result request is for elements corresponding to all selected objects, and the <paramref name="name"/> item is ignored.</param>
-        /// <param name="namedSet">The name of an existing joint response spectrum named set. 
-        /// See <see cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.NamedSets.SetJointRespSpec"/>.</param>
-        /// <param name="numberOfResults">The total number of results returned by the program.</param>
-        /// <param name="objectNames">The object name associated with each result, if any.</param>
-        /// <param name="elementNames">The element name associated with each result, if any.</param>
-        /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
-        /// <param name="coordinateSystems">The coordinate systems in which the results are reported.</param>
-        /// <param name="directions">The directions for which the results are reported.</param>
-        /// <param name="damping">The critical damping ratio, for each result.</param>
-        /// <param name="percentSpectrumWidening">The percent spectrum widening, for each result.</param>
-        /// <param name="abscissaValues">The period or frequency, as defined in each named set, for each result. [s or 1/s].</param>
-        /// <param name="ordinateValues">The response quantity, as defined in each named set, for each result. 
-        /// The possible response quantities are spectral displacement [L], spectral velocity [L/s], pseudo spectral velocity [L/s], spectral acceleration [L/s2], or pseudo spectral acceleration [L/s2].</param>
-        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
-        public void JointResponseSpectrum(string name,
-            eItemTypeElement itemType,
-            string namedSet,
-            ref int numberOfResults,
-            ref string[] objectNames,
-            ref string[] elementNames,
-            ref string[] loadCases,
-            ref string[] coordinateSystems,
-            ref eDirection[] directions,
-            ref double[] damping,
-            ref double[] percentSpectrumWidening,
-            ref double[] abscissaValues,
-            ref double[] ordinateValues)
-        {
-            int[] csiDirections = new int[0];
-
-            _callCode = _sapModel.Results.JointRespSpec(name,
-                CSiEnumConverter.ToCSi(itemType),
-                namedSet,
-                ref numberOfResults,
-                ref objectNames,
-                ref elementNames,
-                ref loadCases, 
-                ref coordinateSystems,
-                ref csiDirections,
-                ref damping,
-                ref percentSpectrumWidening,
-                ref abscissaValues,
-                ref ordinateValues);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            directions = csiDirections.Cast<eDirection>().ToArray();
-        }
-
 
         /// <summary>
         /// This function reports the joint velocities for the specified point elements. 
@@ -1339,9 +1404,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
                 velocities[i].R3 = R3[i];
             }
         }
-        #endregion
+#endregion
 
-        #region Methods: Link
+#region Methods: Link
         /// <summary>
         /// This function reports the link internal deformations.
         /// </summary>
@@ -1529,9 +1594,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
                 jointForces[i].M3 = M3[i];
             }
         }
-        #endregion
+#endregion
 
-        #region Methods: Modal        
+#region Methods: Modal        
         /// <summary>
         /// This function reports the modal load participation ratios for each selected modal analysis case.
         /// </summary>
@@ -1778,9 +1843,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
                 displacements[i].R3 = R3[i];
             }
         }
-        #endregion
+#endregion
 
-        #region Methods: Panel Zone
+#region Methods: Panel Zone
         /// <summary>
         /// This function reports the panel zone (link) internal deformations.
         /// </summary>
@@ -1900,9 +1965,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
                 forces[i].M3 = M3[i];
             }
         }
-        #endregion
+#endregion
 
-        #region Methods: Section Cut
+#region Methods: Section Cut
         /// <summary>
         /// This function reports the section cut force for sections cuts that are specified to have an Analysis (F1, F2, F3, M1, M2, M3) result type.
         /// </summary>
@@ -1996,6 +2061,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
         }
         #endregion
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: Solid        
         /// <summary>
         /// This function reports the joint forces for the point elements at each corner of the specified solid elements.
@@ -2162,6 +2228,127 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             }
         }
         #endregion
+#endif
+
+
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        #region Methods: Shear Walls
+        /// <summary>
+        /// Retrieves pier forces for any defined pier objects in the model.
+        /// </summary>
+        /// <param name="numberOfResults">The total number of results returned by the program.</param>
+        /// <param name="storyNames">Story names associated with each result.</param>
+        /// <param name="pierNames">The name of the pier object for each result.</param>
+        /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
+        /// <param name="locations">The location on the pier of the result being reported.</param>
+        /// <param name="forces">The internal forces for each result.</param>
+        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
+        public void PierForce(ref int numberOfResults,
+            ref string[] storyNames,
+            ref string[] pierNames,
+            ref string[] loadCases,
+            ref eLocationVertical[] locations,
+            ref Forces[] forces)
+        {
+            string[] csiLocations = new string[0];
+            double[] P = new double[0];
+            double[] V2 = new double[0];
+            double[] V3 = new double[0];
+            double[] T = new double[0];
+            double[] M2 = new double[0];
+            double[] M3 = new double[0];
+
+            _callCode = _sapModel.Results.PierForce(
+                                    ref numberOfResults,
+                                    ref storyNames,
+                                    ref pierNames,
+                                    ref loadCases,
+                                    ref csiLocations,
+                                    ref P,
+                                    ref V2,
+                                    ref V3,
+                                    ref T,
+                                    ref M2,
+                                    ref M3);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            forces = new Forces[numberOfResults - 1];
+            for (int i = 0; i < numberOfResults; i++)
+            {
+                forces[i].P = P[i];
+                forces[i].V2 = V2[i];
+                forces[i].V3 = V3[i];
+                forces[i].T = T[i];
+                forces[i].M2 = M2[i];
+                forces[i].M3 = M3[i];
+            }
+
+            locations = new eLocationVertical[numberOfResults - 1];
+            for (int i = 0; i < numberOfResults; i++)
+            {
+                locations[i] = EnumLibrary.ConvertStringToEnumByDescription<eLocationVertical>(csiLocations[i]);
+            }
+
+        }
+
+        /// <summary>
+        /// Retrieves spandrel forces for any defined pier objects in the model.
+        /// </summary>
+        /// <param name="numberOfResults">The total number of results returned by the program.</param>
+        /// <param name="storyNames">Story names associated with each result.</param>
+        /// <param name="spandrelNames">The name of the spandrel object for each result.</param>
+        /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
+        /// <param name="locations">The location on the pier of the result being reported.</param>
+        /// <param name="forces">The internal forces for each result.</param>
+        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
+        public void SpandrelForce(ref int numberOfResults,
+            ref string[] storyNames,
+            ref string[] spandrelNames,
+            ref string[] loadCases,
+            ref eLocationVertical[] locations,
+            ref Forces[] forces)
+        {
+            string[] csiLocations = new string[0];
+            double[] P = new double[0];
+            double[] V2 = new double[0];
+            double[] V3 = new double[0];
+            double[] T = new double[0];
+            double[] M2 = new double[0];
+            double[] M3 = new double[0];
+
+            _callCode = _sapModel.Results.SpandrelForce(
+                                    ref numberOfResults,
+                                    ref storyNames,
+                                    ref spandrelNames,
+                                    ref loadCases,
+                                    ref csiLocations,
+                                    ref P,
+                                    ref V2,
+                                    ref V3,
+                                    ref T,
+                                    ref M2,
+                                    ref M3);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            forces = new Forces[numberOfResults - 1];
+            for (int i = 0; i < numberOfResults; i++)
+            {
+                forces[i].P = P[i];
+                forces[i].V2 = V2[i];
+                forces[i].V3 = V3[i];
+                forces[i].T = T[i];
+                forces[i].M2 = M2[i];
+                forces[i].M3 = M3[i];
+            }
+
+            locations = new eLocationVertical[numberOfResults - 1];
+            for (int i = 0; i < numberOfResults; i++)
+            {
+                locations[i] = EnumLibrary.ConvertStringToEnumByDescription<eLocationVertical>(csiLocations[i]);
+            }
+        }
+        #endregion
+#endif
 
         #region Methods: Misc        
 #if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
@@ -2193,6 +2380,68 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 #endif
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// This function generates the step label for analyzed staged-construction load cases. 
+        /// For load case types other then the staged construction, the label will be blank.
+        /// </summary>
+        /// <param name="loadCase">The name of an existing staged-construction load case.</param>
+        /// <param name="stepNumber">This is an overall step number from the specified staged-construction load case. 
+        /// The range of values of <paramref name="stepNumber"/> for a given load case can be obtained from most analysis results calls.</param>
+        /// <param name="label">The is the step label, including the name or number of the stage, the step number within the stage, and the age of the structure for time-dependent load cases.</param>
+        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
+        public void StepLabel(string loadCase,
+            double stepNumber,
+            ref string label)
+        {
+            _callCode = _sapModel.Results.StepLabel(loadCase, stepNumber, ref label);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// This function reports the joint response spectra values, due to a time history analysis, for the specified point elements.
+        /// </summary>
+        /// <param name="numberOfResults">The total number of results returned by the program.</param>
+        /// <param name="stories">Story levels associated with each result.</param>
+        /// <param name="labels">The point labels for each result.</param>
+        /// <param name="loadCases">The name of the analysis case or load combination associated with each result.</param>
+        /// <param name="stepTypes">The step types, if any, for each result.</param>
+        /// <param name="stepNumbers">The step numbers, if any, for each result.</param>
+        /// <param name="directions">The directions for which the results are reported.</param>
+        /// <param name="drifts">The maximum drift values.</param>
+        /// <param name="displacementsX">The displacements in the x-direction [L].</param>
+        /// <param name="displacementsY">The displacements in the y-direction [L].</param>
+        /// <param name="displacementsZ">The displacements in the z-direction [L].</param>
+        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
+        public void StoryDrifts(ref int numberOfResults,
+            ref string[] stories,
+            ref string[] labels,
+            ref string[] loadCases,
+            ref string[] stepTypes,
+            ref double[] stepNumbers,
+            ref string[] directions,
+            ref double[] drifts,
+            ref double[] displacementsX,
+            ref double[] displacementsY,
+            ref double[] displacementsZ)
+        {
+            _callCode = _sapModel.Results.StoryDrifts(
+                ref numberOfResults,
+                ref stories,
+                ref loadCases,
+                ref stepTypes,
+                ref stepNumbers,
+                ref directions,
+                ref drifts,
+                ref labels,
+                ref displacementsX,
+                ref displacementsY,
+                ref displacementsZ);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#endif
+
 
         /// <summary>
         /// This function reports buckling factors obtained from buckling load cases.
@@ -2239,24 +2488,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             ref double[] generalizedDisplacements)
         {
             _callCode = _sapModel.Results.GeneralizedDispl(name, ref numberOfResults, ref names, ref loadCases, ref stepTypes, ref stepNumbers, ref types, ref generalizedDisplacements);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-
-        /// <summary>
-        /// This function generates the step label for analyzed staged-construction load cases. 
-        /// For load case types other then the staged construction, the label will be blank.
-        /// </summary>
-        /// <param name="loadCase">The name of an existing staged-construction load case.</param>
-        /// <param name="stepNumber">This is an overall step number from the specified staged-construction load case. 
-        /// The range of values of <paramref name="stepNumber"/> for a given load case can be obtained from most analysis results calls.</param>
-        /// <param name="label">The is the step label, including the name or number of the stage, the step number within the stage, and the age of the structure for time-dependent load cases.</param>
-        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
-        public void StepLabel(string loadCase,
-            double stepNumber,
-            ref string label)
-        {
-            _callCode = _sapModel.Results.StepLabel(loadCase, stepNumber, ref label);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 #endregion

@@ -31,6 +31,9 @@
             ref double dampingPt1,
             ref double dampingPt2);
 
+
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function sets proportional modal damping data for the specified load case.
         /// </summary>
@@ -56,5 +59,6 @@
             double periodOrFrequencyPt2,
             double dampingPt1,
             double dampingPt2);
+#endif
     }
 }

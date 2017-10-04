@@ -1,4 +1,5 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
     /// <summary>
     /// Preferences available for <see cref="AISC_ASD_89"/> steel design in the application.
@@ -65,3 +66,4 @@
         MultiResponseCaseDesign = 11,
     }
 }
+#endif

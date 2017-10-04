@@ -1,5 +1,6 @@
 ﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Seismic intensity for Chinese 2010 response spectrum function.
     /// </summary>
@@ -35,4 +36,5 @@
         /// </summary>
         Intensity9_0_40g = 6,
     }
+#endif
 }

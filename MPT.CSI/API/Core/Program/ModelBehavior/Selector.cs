@@ -1,24 +1,6 @@
 ﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 using MPT.CSI.API.Core.Support;
 
-#if BUILD_SAP2000v16
-using SAP2000v16;
-#elif BUILD_SAP2000v17
-using SAP2000v17;
-#elif BUILD_SAP2000v18
-using SAP2000v18;
-#elif BUILD_SAP2000v19
-using SAP2000v19;
-#elif BUILD_ETABS2013
-using ETABS2013;
-
-
-#elif BUILD_ETABS2015
-using ETABS2015;
-#elif BUILD_ETABS2016
-using ETABS2016;
-#endif
-
 namespace MPT.CSI.API.Core.Program.ModelBehavior
 {
     /// <summary>
@@ -95,18 +77,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         // === Select By Name ===
 
         /// <summary>
-        /// This function selects or deselects all point objects to which the specified constraint has been assigned.
-        /// </summary>
-        /// <param name="name">The name of an existing joint constraint.</param>
-        /// <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
-        public void Constraint(string name,
-            bool deselect = false)
-        {
-            _callCode = _sapModel.SelectObj.Constraint(name, deselect);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
         /// This function selects or deselects all objects in the specified group.
         /// </summary>
         /// <param name="name">The name of an existing group.</param>
@@ -118,6 +88,19 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// This function selects or deselects all point objects to which the specified constraint has been assigned.
+        /// </summary>
+        /// <param name="name">The name of an existing joint constraint.</param>
+        /// <param name="deselect">The item is False if objects are to be selected and True if they are to be deselected.</param>
+        public void Constraint(string name,
+            bool deselect = false)
+        {
+            _callCode = _sapModel.SelectObj.Constraint(name, deselect);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+        
         /// <summary>
         /// This function selects or deselects all area objects to which the specified section has been assigned.
         /// </summary>
@@ -310,6 +293,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
             _callCode = _sapModel.SelectObj.SupportedPoints(ref DOF, coordinateSystem, deselect, selectRestraints, selectJointSprings, selectLineSprings, selectAreaSprings, selectSolidSprings, selectOneJointLinks);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
     }
 }

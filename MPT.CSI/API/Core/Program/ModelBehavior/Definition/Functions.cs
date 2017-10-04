@@ -1,4 +1,5 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function;
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
@@ -7,12 +8,62 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
     /// </summary>
     public class Functions : CSiApiBase, IChangeableName, ICountable, IDeletable, IListableNames
     {
+
+
+        #region Fields
+        private readonly CSiApiSeed _seed;
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        private PowerSpectralDensity _powerSpectralDensity;
+        private SteadyState _steadyState;
+#endif
+        private ResponseSpectrum _responseSpectrum;
+        private TimeHistory _timeHistory;
+        #endregion
+
+        #region Properties                    
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+        /// <summary>
+        /// Gets the power spectral density function.
+        /// </summary>
+        /// <value>The power spectral density function.</value>
+        public PowerSpectralDensity PowerSpectralDensity => _powerSpectralDensity ?? (_powerSpectralDensity = new PowerSpectralDensity(_seed));
+
+        /// <summary>
+        /// Gets the state of the steady function.
+        /// </summary>
+        /// <value>The state of the steady function.</value>
+        public SteadyState SteadyState => _steadyState ?? (_steadyState = new SteadyState(_seed));
+#endif
+        /// <summary>
+        /// Gets the response spectrum function.
+        /// </summary>
+        /// <value>The response spectrum function.</value>
+        public ResponseSpectrum ResponseSpectrum => _responseSpectrum ?? (_responseSpectrum = new ResponseSpectrum(_seed));
+
+        /// <summary>
+        /// Gets the time history function.
+        /// </summary>
+        /// <value>The time history function.</value>
+        public TimeHistory TimeHistoryDirectLinear => _timeHistory ?? (_timeHistory = new TimeHistory(_seed));        
+        #endregion
+
+
         #region Initialization        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Functions"/> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
-        public Functions(CSiApiSeed seed) : base(seed) { }
+        public Functions(CSiApiSeed seed) : base(seed)
+        {
+            _seed = seed;
+        }
+
+
+        #endregion
+
+        #region Methods: Public Inherited   
 
         /// <summary>
         /// This function changes the name of an existing loading function.
@@ -76,7 +127,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 
             _callCode = _sapModel.Func.GetTypeOAPI(name, ref csiFunctionType, ref functionSubType);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
+            
             functionType = (eFunctionType)csiFunctionType;
         }
 

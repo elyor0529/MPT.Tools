@@ -1,6 +1,7 @@
 ﻿
 namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
 {
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
     /// <summary>
     /// Object can return rotational load data.
     /// </summary>
@@ -25,4 +26,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisModel
             ref double[] rotateLoadValues,
             eItemTypeElement itemType = eItemTypeElement.Element);
     }
+#endif
 }

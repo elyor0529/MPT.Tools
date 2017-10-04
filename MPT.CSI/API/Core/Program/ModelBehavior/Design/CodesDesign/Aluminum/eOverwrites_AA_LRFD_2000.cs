@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Aluminum
+﻿#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Aluminum
 {
-    #if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
     /// <summary>
     /// Overwrites available for <see cref="AA_LRFD_2000" /> aluminum design in the application.
     /// </summary>
@@ -144,5 +144,5 @@
         /// </summary>
         MinorShearStress_Fs3 = 23
     }
-#endif
 }
+#endif

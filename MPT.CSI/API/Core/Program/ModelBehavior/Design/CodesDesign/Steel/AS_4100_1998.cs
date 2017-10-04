@@ -1,25 +1,29 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
-#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Steel design code <see cref="AS_4100_1998"/>.
     /// </summary>
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class AS_4100_1998 : CSiApiBase
     {
-#region Initialization
+        #region Initialization
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AS_4100_1998"/> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
-        public AS_4100_1998(CSiApiSeed seed) : base(seed) { }
+        public AS_4100_1998(CSiApiSeed seed) : base(seed)
+        {
+        }
 
 
-#endregion
+        #endregion
 
-#region Methods: Public
+        #region Methods: Public
+
         /// <summary>
         /// This function retrieves the value of a steel design overwrite item.
         /// </summary>
@@ -33,8 +37,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
             ref double value,
             ref bool programDetermined)
         {
-            _callCode = _sapModel.DesignSteel.Australian_AS4100_98.GetOverwrite(name, (int)item, ref value, ref programDetermined);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            _callCode = _sapModel.DesignSteel.Australian_AS4100_98.GetOverwrite(name, (int) item, ref value,
+                ref programDetermined);
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
 
         /// <summary>
@@ -52,8 +60,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
             double value,
             eItemType itemType = eItemType.Object)
         {
-            _callCode = _sapModel.DesignSteel.Australian_AS4100_98.SetOverwrite(name, (int)item, value, CSiEnumConverter.ToCSi(itemType));
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            _callCode = _sapModel.DesignSteel.Australian_AS4100_98.SetOverwrite(name, (int) item, value,
+                CSiEnumConverter.ToCSi(itemType));
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
 
 
@@ -68,8 +80,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
         public void GetPreference(ePreferences_AS_4100_1998 item,
             ref double value)
         {
-            _callCode = _sapModel.DesignSteel.Australian_AS4100_98.GetPreference((int)item, ref value);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            _callCode = _sapModel.DesignSteel.Australian_AS4100_98.GetPreference((int) item, ref value);
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
 
         /// <summary>
@@ -81,10 +96,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
         public void SetPreference(ePreferences_AS_4100_1998 item,
             double value)
         {
-            _callCode = _sapModel.DesignSteel.Australian_AS4100_98.SetPreference((int)item, value);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            _callCode = _sapModel.DesignSteel.Australian_AS4100_98.SetPreference((int) item, value);
+            if (throwCurrentApiException(_callCode))
+            {
+                throw new CSiException();
+            }
         }
-#endregion
+
+        #endregion
     }
-#endif
 }
+#endif

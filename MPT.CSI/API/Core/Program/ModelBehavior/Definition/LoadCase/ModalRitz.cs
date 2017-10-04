@@ -18,7 +18,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 
 
         #endregion
-
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         #region Methods: Interface
         /// <summary>
         /// This function initializes a load case. 
@@ -173,5 +173,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
         #endregion
+#endif
     }
 }

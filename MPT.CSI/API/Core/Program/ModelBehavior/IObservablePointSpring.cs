@@ -39,6 +39,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// </summary>
         /// <param name="name">The name of an existing point element.</param>
         bool IsSpringCoupled(string name);
-
     }
 }

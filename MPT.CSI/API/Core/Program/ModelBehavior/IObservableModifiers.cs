@@ -1,5 +1,4 @@
-﻿
-using MPT.CSI.API.Core.Helpers;
+﻿using MPT.CSI.API.Core.Helpers;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior
 {

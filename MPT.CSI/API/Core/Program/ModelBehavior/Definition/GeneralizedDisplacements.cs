@@ -62,8 +62,21 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 
         #endregion
 
-        #region Methods: Public
-
+        #region Methods: Public        
+        /// <summary>
+        /// Adds a new generalized displacement with the specified name and type.
+        /// The new generalized displacement must have a different name from all other generalized displacements. 
+        /// If the name is not unique, an error will be returned. TODO: Handle this.
+        /// </summary>
+        /// <param name="name">The name of a new generalized displacement.</param>
+        /// <param name="type">The generalized displacement type.</param>
+        /// <exception cref="CSiException"></exception>
+        public void Add(string name, 
+            eGeneralizedDisplacementType type)
+        {
+            _callCode = _sapModel.GDispl.Add(name, (int)type);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
 
         /// <summary>
         /// This function retrieves the total number of point objects included in a specified generalized displacement.
@@ -149,7 +162,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         /// <param name="name">The name of an existing generalized displacement.</param>
         /// <param name="type">The generalized displacement type.</param>
-        public void GetType(string name,
+        public void GetTypeGeneralizedDisplacement(string name,
             ref eGeneralizedDisplacementType type)
         {
             int csiType = 0;
@@ -165,7 +178,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         /// <param name="name">The name of an existing generalized displacement.</param>
         /// <param name="type">The generalized displacement type.</param>
-        public void SetType(string name,
+        public void SetTypeGeneralizedDisplacement(string name,
             eGeneralizedDisplacementType type)
         {
             _callCode = _sapModel.GDispl.SetTypeOAPI(name, (int)type);

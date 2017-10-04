@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
+﻿#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Steel
 {
-#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Overwrites available for <see cref="Indian_IS_800_2007" /> steel design in the application.
     /// </summary>
@@ -10,7 +10,7 @@
         /// The framing type.
         /// </summary>
         FramingType = 1,
-        
+
         /// <summary>
         /// Section class.
         /// </summary>
@@ -164,7 +164,7 @@
         /// Bending coefficient, C1.
         /// </summary>
         BendingCoefficient_C1 = 29,
-        
+
         /// <summary>
         /// The uniform moment factor, Cz.
         /// </summary>
@@ -179,7 +179,7 @@
         /// The uniform moment factor, CmLT.
         /// </summary>
         UniformMomentFactor_CmLT = 32,
-        
+
         /// <summary>
         /// The moment coefficient, kz.
         /// </summary>
@@ -194,7 +194,7 @@
         /// The moment coefficient, kLT.
         /// </summary>
         MomentCoefficient_kLT = 35,
-        
+
         /// <summary>
         /// The yield stress, Fy.
         /// </summary>
@@ -247,5 +247,5 @@
         /// </summary>
         DemandCapacityRatioLimit = 44,
     }
-#endif
 }
+#endif

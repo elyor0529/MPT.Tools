@@ -1,15 +1,15 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Concrete design code <see cref="KCI_1999"/>.
     /// </summary>
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class KCI_1999 : CSiApiBase
     {
-    #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="KCI_1999"/> class.
         /// </summary>
@@ -17,9 +17,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
         public KCI_1999(CSiApiSeed seed) : base(seed) { }
 
 
-    #endregion
+#endregion
 
-    #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function retrieves the value of a concrete design overwrite item.
         /// </summary>
@@ -84,7 +84,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
             _callCode = _sapModel.DesignConcrete.KCI_1999.SetPreference((int)item, value);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-    #endregion
+#endregion
     }
-#endif
 }
+#endif

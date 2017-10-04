@@ -1,5 +1,5 @@
 ﻿
-namespace MPT.CSI.API.Core
+namespace MPT.CSI.API.Core.Program
 {
     /// <summary>
     /// Standardized unit combinations available in the application.

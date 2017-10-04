@@ -1,8 +1,8 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Aluminum
 {
-#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
     /// <summary>
     /// Aluminum design Code <see cref="AA_LRFD_2000"/>.
     /// </summary>
@@ -86,5 +86,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Aluminum
         }
 #endregion
     }
-#endif
 }
+#endif

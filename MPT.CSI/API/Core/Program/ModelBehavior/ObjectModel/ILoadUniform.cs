@@ -1,10 +1,9 @@
-﻿
-using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
+﻿using MPT.CSI.API.Core.Program.ModelBehavior.Definition;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 {
     /// <summary>
-    /// Object has a CRUDable uniform load.
+    /// Object has a Gettable/Settable uniform load.
     /// </summary>
     public interface ILoadUniform
     {
@@ -48,18 +47,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             double uniformLoadValue,
             string coordinateSystem = CoordinateSystems.Global,
             bool replace = true,
-            eItemType itemType = eItemType.Object);
-
-        /// <summary>
-        /// This function deletes the uniform load assignments to the specified objects for the specified load pattern.
-        /// </summary>
-        /// <param name="name">The name of an existing object, element or group of objects, depending on the value of <paramref name="itemType"/>.</param>
-        /// <param name="loadPattern">The name of the load pattern associated with the load.</param>
-        /// <param name="itemType">If this item is <see cref="eItemType.Object"/>, the assignments are deleted for the object specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.Group"/>, the assignments are deleted for the objects included in the group specified by the <paramref name="name"/> item.
-        /// If this item is <see cref="eItemType.SelectedObjects"/>, the assignments are deleted for all selected objects, and the <paramref name="name"/> item is ignored.</param>
-        void DeleteLoadUniform(string name,
-            string loadPattern,
             eItemType itemType = eItemType.Object);
     }
 }

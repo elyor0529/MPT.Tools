@@ -1,4 +1,4 @@
-﻿
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
 {
     /// <summary>
@@ -6,7 +6,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
     /// </summary>
     public interface IAutoLoad
     {
-        #region Methods: Public
+#region Methods: Public
 
         /// <summary>
         /// This function retrieves the code name used for auto parameters in auto load patterns.
@@ -25,6 +25,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
         /// <param name="name">The name of an existing auto load pattern.</param>
         void SetNone(string name);
 
-        #endregion
+#endregion
     }
 }
+#endif

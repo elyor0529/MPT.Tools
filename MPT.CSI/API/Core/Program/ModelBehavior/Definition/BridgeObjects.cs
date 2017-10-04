@@ -1,8 +1,8 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
+using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
-#if BUILD_CSiBridgev18 || BUILD_CSiBridgev19
     /// <summary>
     /// Represents the bridge objects in the application.
     /// </summary>
@@ -19,9 +19,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
 
         // === Get/Set ===
 
@@ -108,5 +108,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 
 #endregion
     }
-#endif
 }
+#endif

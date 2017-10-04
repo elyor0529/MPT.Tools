@@ -1,4 +1,5 @@
-﻿using MPT.CSI.API.Core.Support;
+﻿#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+using MPT.CSI.API.Core.Support;
 using MPT.Enums;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
@@ -9,7 +10,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class PowerSpectralDensity : CSiApiBase, ISteadyState
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="PowerSpectralDensity"/> class.
         /// </summary>
@@ -17,9 +18,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
         public PowerSpectralDensity(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function initializes a load case. 
         /// If this function is called for an existing load case, all items for the case are reset to their default value.
@@ -150,9 +151,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             _callCode = _sapModel.LoadCases.PSD.SetLoads(name, numberOfLoads, ref csiLoadTypes, ref loadNames, ref functions, ref scaleFactor, ref phaseAngle, ref coordinateSystems, ref angles);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Methods: Damping & Frequencies
+#region Methods: Damping & Frequencies
         /// <summary>
         /// This function retrieves the frequency data for the specified load case.
         /// </summary>
@@ -330,6 +331,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 
             dampingType = (eDampingTypeHysteretic)csiDampingType;
         }
-        #endregion
+#endregion
     }
 }
+#endif

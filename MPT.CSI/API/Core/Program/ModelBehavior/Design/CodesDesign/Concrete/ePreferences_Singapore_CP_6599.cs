@@ -1,6 +1,6 @@
-﻿namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
+﻿#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-    #if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Preferences available for <see cref="Singapore_CP_6599"/> concrete design in the application.
     /// </summary>
@@ -51,5 +51,5 @@
         /// </summary>
         MultiResponseCaseDesign = 9
     }
-#endif
 }
+#endif
