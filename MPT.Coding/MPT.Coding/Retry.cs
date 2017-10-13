@@ -1,12 +1,25 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : MPT.Coding
+// Author           : Mark
+// Created          : 12-16-2016
+//
+// Last Modified By : Mark
+// Last Modified On : 12-16-2016
+// ***********************************************************************
+// <copyright file="Retry.cs" company="">
+//     Copyright ©  2016
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace MPT.Coding
 {
+    /// <summary>
+    /// Class Retry.
+    /// </summary>
     public static class Retry
     {
         // See: http://stackoverflow.com/questions/1563191/cleanest-way-to-write-retry-logic
@@ -23,6 +36,12 @@ namespace MPT.Coding
         // Or you could even make an async overload.
 
 
+        /// <summary>
+        /// Does the specified action.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <param name="retryInterval">The retry interval.</param>
+        /// <param name="retryCount">The retry count.</param>
         public static void Do(
            Action action,
            TimeSpan retryInterval,
@@ -35,6 +54,15 @@ namespace MPT.Coding
             }, retryInterval, retryCount);
         }
 
+        /// <summary>
+        /// Does the specified action.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action">The action.</param>
+        /// <param name="retryInterval">The retry interval.</param>
+        /// <param name="retryCount">The retry count.</param>
+        /// <returns>T.</returns>
+        /// <exception cref="System.AggregateException"></exception>
         public static T Do<T>(
             Func<T> action,
             TimeSpan retryInterval,
@@ -62,9 +90,9 @@ namespace MPT.Coding
         /// <summary>
         /// Retries method until method returns 'true'.
         /// </summary>
-        /// <param name="action"></param>
-        /// <param name="retryInterval"></param>
-        /// <param name="retryCount"></param>
+        /// <param name="action">The action.</param>
+        /// <param name="retryInterval">The retry interval.</param>
+        /// <param name="retryCount">The retry count.</param>
         public static void DoTrue(
             Func<bool> action,
             TimeSpan retryInterval,
@@ -74,16 +102,16 @@ namespace MPT.Coding
             {
                 if (retry > 0)
                     Thread.Sleep(retryInterval);
-                if (action()) { return; };
+                if (action()) { return; }
             }
         }
 
         /// <summary>
         /// Retries method until method returns 'false'.
         /// </summary>
-        /// <param name="action"></param>
-        /// <param name="retryInterval"></param>
-        /// <param name="retryCount"></param>
+        /// <param name="action">The action.</param>
+        /// <param name="retryInterval">The retry interval.</param>
+        /// <param name="retryCount">The retry count.</param>
         public static void DoFalse(
             Func<bool> action,
             TimeSpan retryInterval,
@@ -93,10 +121,18 @@ namespace MPT.Coding
             {
                 if (retry > 0)
                     Thread.Sleep(retryInterval);
-                if (!action()) { return; };
+                if (!action()) { return; }
             }
         }
 
+        /// <summary>
+        /// Retries method until method returns a value other than null.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action">The action.</param>
+        /// <param name="retryInterval">The retry interval.</param>
+        /// <param name="retryCount">The limit on the number of retries before the method returns.</param>
+        /// <returns>T.</returns>
         public static T NotNull<T>(
             Func<T> action,
             TimeSpan retryInterval,
