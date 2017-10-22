@@ -59,10 +59,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// The solid object
         /// </summary>
         private SolidObject _solidObject;
+#if !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
         /// <summary>
         /// The external analysis results
         /// </summary>
         private ExternalAnalysisResults _externalAnalysisResults;
+#endif
 #endif
         #endregion
 
@@ -110,13 +112,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// <value>The solid object.</value>
         public SolidObject SolidObject => _solidObject ?? (_solidObject = new SolidObject(_seed));
 
+#if !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
         /// <summary>
         /// Gets the external analysis results.
         /// </summary>
         /// <value>The external analysis results.</value>
         public ExternalAnalysisResults ExternalAnalysisResults => _externalAnalysisResults ?? (_externalAnalysisResults = new ExternalAnalysisResults(_seed));
 #endif
-        #endregion
+#endif
+#endregion
 
 
         #region Initialization

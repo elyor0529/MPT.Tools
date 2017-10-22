@@ -51,7 +51,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// </summary>
         /// <value>The design composite beam.</value>
         DesignCompositeBeam DesignCompositeBeam { get; }
-
+#endif
+#if BUILD_ETABS2016
         /// <summary>
         /// Gets the design detailing.
         /// </summary>

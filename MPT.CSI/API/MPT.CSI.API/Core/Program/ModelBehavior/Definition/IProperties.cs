@@ -63,7 +63,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <value>The solid properties.</value>
         SolidProperties SolidProperties { get; }
 #endif
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
         /// <summary>
         /// Gets the point spring object.
         /// </summary>

@@ -15,7 +15,6 @@
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wind;
 using User = MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wind.User;
-#endif
 using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
@@ -136,7 +135,65 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
         #endregion
 
         #region Methods: Public
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_CSiBridgev16 || BUILD_CSiBridgev17
+        /// <summary>
+        /// This function retrieves exposure parameters for auto wind loads determined from extents of rigid diaphragms.
+        /// This function does not apply for User-type auto wind loads.
+        /// </summary>
+        /// <param name="patternName">The name of an existing Wind-type load pattern that has an auto wind load assigned.</param>
+        /// <param name="diaphragmNames">This is an array that includes the names of the diaphragms that have eccentricity overrides.</param>
+        /// <param name="xCoordinates">This is an array that includes the global X-coordinate of the point where the wind force load is applied to the diaphragm. [L]</param>
+        /// <param name="yCoordinates">This is an array that includes the global Y-coordinate of the point where the wind force load is applied to the diaphragm. [L]</param>
+        /// <param name="diaphragmWidth">This is an array that includes the exposure width for the wind load applied to the specified diaphragm. [L]</param>
+        /// <param name="diaphragmHeight">This is an array that includes the exposure height for the wind load applied to the specified diaphragm. [L]</param>
+        /// <exception cref="CSiException"></exception>
+        public void GetExposure(string patternName,
+            ref string[] diaphragmNames,
+            ref double[] xCoordinates,
+            ref double[] yCoordinates,
+            ref double[] diaphragmWidth,
+            ref double[] diaphragmHeight)
+        {
+            _callCode = _sapModel.LoadPatterns.AutoWind.GetExposure(patternName,
+                            ref _numberOfItems,
+                            ref diaphragmNames,
+                            ref xCoordinates,
+                            ref yCoordinates,
+                            ref diaphragmWidth,
+                            ref diaphragmHeight);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// This function assigns exposure parameters for auto wind loads determined from extents of rigid diaphragms.
+        /// This function does not apply for User-type auto wind loads.
+        /// </summary>
+        /// <param name="patternName">The name of an existing Wind-type load pattern that has an auto wind load assigned.</param>
+        /// <param name="diaphragmName">The name of an existing special rigid diaphragm constraint, that is, a diaphragm constraint with the following features:
+        /// 1. The constraint type is CONSTRAINT_DIAPHRAGM = 2.
+        /// 2. The constraint coordinate system is Global.
+        /// 3. The constraint axis is Z.</param>
+        /// <param name="xCoordinate">The global X-coordinate of the point where the wind force is applied. [L]</param>
+        /// <param name="yCoordinate">The global Y-coordinate of the point where the wind force is applied. [L]</param>
+        /// <param name="diaphragmWidth">The exposure width for the wind load applied to the specified diaphragm. [L]</param>
+        /// <param name="diaphragmHeight">The exposure height for the wind load applied to the specified diaphragm. [L]</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetExposure(string patternName,
+            string diaphragmName,
+            double xCoordinate,
+            double yCoordinate,
+            double diaphragmWidth,
+            double diaphragmHeight)
+        {
+            _callCode = _sapModel.LoadPatterns.AutoWind.SetExposure(patternName,
+                            diaphragmName,
+                            xCoordinate,
+                            yCoordinate,
+                            diaphragmWidth,
+                            diaphragmHeight);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+#else
         /// <summary>
         /// This function retrieves exposure parameters for auto wind loads determined from extents of rigid diaphragms.
         /// This function does not apply for User-type auto wind loads.
@@ -191,3 +248,4 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
         #endregion
     }
 }
+#endif

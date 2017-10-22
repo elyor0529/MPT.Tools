@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadLateralCode.Seismic;
 using MPT.CSI.API.Core.Support;
 
@@ -23,15 +23,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesRespon
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesResponseSpectrum.ResponseSpectrumFunction" />
     public class JTG_B02_2013 : ResponseSpectrumFunction
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="JTG_B02_2013" /> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
         protected JTG_B02_2013(CSiApiSeed seed) : base(seed) { }
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function retrieves the definition of a JTG B02-2013 response spectrum function.
         /// </summary>
@@ -83,7 +83,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesRespon
             _callCode = _sapModel.Func.FuncRS.SetJTGB022013(name, (int)direction, peakAcceleration, Tg, Ci, Cs, dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
 #endif

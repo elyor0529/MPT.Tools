@@ -19,6 +19,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -117,7 +121,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
+#if !BUILD_ETABS2015 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17
         /// <summary>
         /// True: Design results are available.
         /// </summary>
@@ -126,8 +130,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         {
             return _sapModel.DesignConcrete.GetResultsAvailable();
         }
-
-
+#endif
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function retrieves the names of the frame objects that did not pass the design check or have not yet been checked, if any.
@@ -222,7 +225,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         }
 
         // ===
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17
         /// <summary>
         /// Retrieves the value of the automatically generated code-based design load combinations option.
         /// </summary>
@@ -245,7 +248,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
+#endif
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         // ===
 
         /// <summary>

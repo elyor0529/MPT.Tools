@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
 using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAutoLoad.Wind
@@ -23,7 +23,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAut
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class NTC_2008 : AutoWindLoad
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="NTC_2008" /> class.
         /// </summary>
@@ -31,9 +31,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAut
         public NTC_2008(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function retrieves auto wind loading parameters for NTC 2008.
         /// </summary>
@@ -150,7 +150,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAut
                             userSpecifiedExposure);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
 #endif

@@ -57,6 +57,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
 #endif
 
         #region Methods: Get/Set Sections - Steel                
+#if !BUILD_ETABS2015
         /// <summary>
         /// This function retrieves property data for a Tee shape in a section designer section.
         /// </summary>
@@ -182,9 +183,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             centerCoordinate.X = xCenter;
             centerCoordinate.Y = yCenter;
         }
-
-
-
+#endif
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
 
 
@@ -553,7 +552,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
         #endregion
 
         #region Methods: Get/Set Sections - Solid        
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// This function retrieves property data for a solid circle shape in a section designer section.
         /// </summary>
@@ -643,10 +642,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             centerCoordinate.X = xCoordinate;
             centerCoordinate.Y = yCoordinate;
         }
-
-
-
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#endif
+#if BUILD_SAP2000v19 || BUILD_CSiBridgev19
         /// <summary>
         /// This function retrieves property data for a polygon shape in a section designer section.
         /// </summary>
@@ -738,8 +735,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
                 color, isReinforced, nameMaterialRebar);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
-
+#endif
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
 
 
         /// <summary>
@@ -1121,7 +1118,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
 #endif
         #endregion
 
-        #region Methods: Get/Set Sections - Concrete: Reinforcement             
+        #region Methods: Get/Set Sections - Concrete: Reinforcement  
+#if !BUILD_ETABS2015
         /// <summary>
         /// This function retrieves property data for a single bar reinforcing shape in a section designer section.
         /// </summary>
@@ -1293,8 +1291,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             centerCoordinate.X = xCenter;
             centerCoordinate.Y = yCenter;
         }
-
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#endif
+#if BUILD_ETABS2016
         /// <summary>
         /// This function retrieves property data for a Tee shape in a section designer section.
         /// </summary>

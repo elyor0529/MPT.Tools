@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if BUILD_SAP2000v19 || BUILD_CSiBridgev19
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadLateralCode.Seismic;
 using MPT.CSI.API.Core.Support;
 
@@ -23,15 +23,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesRespon
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesResponseSpectrum.ResponseSpectrumFunction" />
     public class NBCC_2010 : ResponseSpectrumFunction
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="NBCC_2010" /> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
         protected NBCC_2010(CSiApiSeed seed) : base(seed) { }
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function defines an NBCC2010 response spectrum function.
         /// </summary>
@@ -99,7 +99,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesRespon
             _callCode = _sapModel.Func.FuncRS.SetNBCC2010(name, PGA, S02, S05, S1, S2, (int)siteClass, Fa, Fv, dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
 #endif

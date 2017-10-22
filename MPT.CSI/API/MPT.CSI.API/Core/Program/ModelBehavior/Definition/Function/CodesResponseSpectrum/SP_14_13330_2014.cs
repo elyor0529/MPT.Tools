@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadLateralCode.Seismic;
 using MPT.CSI.API.Core.Support;
 
@@ -23,15 +23,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesRespon
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesResponseSpectrum.ResponseSpectrumFunction" />
     public class SP_14_13330_2014 : ResponseSpectrumFunction
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="SP_14_13330_2014" /> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
         protected SP_14_13330_2014(CSiApiSeed seed) : base(seed) { }
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function retrieves the definition of a SP 14.13330.2014 response spectrum function.
         /// </summary>
@@ -119,7 +119,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesRespon
             _callCode = _sapModel.Func.FuncRS.SetSP14133302014(name, (int)direction, (int)regionSeismicity, (int)soilCategory, K0Factor, K1Factor, KPsiFactor, isSoilNonlinear, ASoil, dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
 #endif

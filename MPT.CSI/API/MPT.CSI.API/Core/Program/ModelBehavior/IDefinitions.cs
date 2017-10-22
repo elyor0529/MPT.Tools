@@ -112,18 +112,20 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// </summary>
         /// <value>The mass source.</value>
         MassSource MassSource { get; }
-
-        /// <summary>
-        /// Gets the named sets.
-        /// </summary>
-        /// <value>The named sets.</value>
-        NamedSets NamedSets { get; }
-
+        
         /// <summary>
         /// Gets the properties.
         /// </summary>
         /// <value>The properties.</value>
         Properties Properties { get; }
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
+        /// <summary>
+        /// Gets the named sets.
+        /// </summary>
+        /// <value>The named sets.</value>
+        NamedSets NamedSets { get; }
+#endif
         #endregion
     }
 }

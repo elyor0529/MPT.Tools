@@ -84,9 +84,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 #endif
-
-
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// This function retrieves the load data for the specified load case.
         /// </summary>
@@ -127,8 +125,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
                 loadTypes[i] = EnumLibrary.ConvertStringToEnumByDescription<eLoadType>(csiLoadTypes[i]);
             }
         }
-
-
+#endif
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function sets the load data for the specified analysis case.

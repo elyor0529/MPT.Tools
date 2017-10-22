@@ -20,6 +20,14 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -59,7 +67,7 @@ namespace MPT.CSI.API.Core.Program
         /// Filename of the current model file, with or without the full path.
         /// </summary>
         /// <returns>System.String.</returns>
-        public string FileName() =>  _fileName;
+        public string FileName =>  _fileName;
 
         /// <summary>
         /// Path to the current model file.
@@ -115,13 +123,16 @@ namespace MPT.CSI.API.Core.Program
         /// If no file name is specified, the file is saved using its current name.
         /// </summary>
         /// <param name="filePath">The full path to which the model file is saved.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if the file has been saved, <c>false</c> otherwise.</returns>
         /// <exception cref="IO.IOException">The current model has not been previously saved. Please provide a file name.</exception>
+        /// <exception cref="IO.IOException" >The saved path provided is for a read only file.\n Please change the file access or provide a different file name.</exception>
         /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
         public bool Save(string filePath = "")
         {
             if (string.IsNullOrEmpty(_filePath) && 
                 string.IsNullOrEmpty(filePath)) { throw new IO.IOException("The current model has not been previously saved. Please provide a file name.");}
+            IO.FileInfo fileInfo = new IO.FileInfo(filePath);
+            if (fileInfo.IsReadOnly) { throw new IO.IOException("The saved path provided is for a read only file.\n Please change the file access or provide a different file name.");}
 
             _callCode = _sapModel.File.Save(filePath);
             if (apiCallIsSuccessful(_callCode))
@@ -220,7 +231,7 @@ namespace MPT.CSI.API.Core.Program
             resetPaths();
         }
 #endif
-#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
+#if BUILD_SAP2000v19
         /// <summary>
         /// Creates a new template model of a 3D Frame.
         /// Do not use this function to add to an existing model.
@@ -399,7 +410,7 @@ namespace MPT.CSI.API.Core.Program
         #region Methods: Private
         private void setPaths(string filePath)
         {
-            if (!string.IsNullOrEmpty(filePath)) return;
+            if (string.IsNullOrEmpty(filePath)) return;
 
             _filePath = filePath;
             _fileName = IO.Path.GetFileName(filePath);

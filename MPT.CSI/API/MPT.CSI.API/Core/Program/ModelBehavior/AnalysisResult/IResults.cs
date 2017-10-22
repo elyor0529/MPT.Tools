@@ -395,7 +395,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
         #endregion
 
         #region Methods: Joint        
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
         /// <summary>
         /// This function reports the joint response spectra values, due to a time history analysis, for the specified point elements.
         /// </summary>
@@ -430,7 +430,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             ref double[] abscissaValues,
             ref double[] ordinateValues);
 #endif
-#if BUILD_ETABS2015 || BUILD_ETABS2016        
+#if BUILD_ETABS2016        
         /// <summary>
         /// Reports the joint drifts.
         /// </summary>
@@ -1066,7 +1066,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             double stepNumber,
             ref string label);
 #endif
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
         /// <summary>
         /// This function reports the joint response spectra values, due to a time history analysis, for the specified point elements.
         /// </summary>

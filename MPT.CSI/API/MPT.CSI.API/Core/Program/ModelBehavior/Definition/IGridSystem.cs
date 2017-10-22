@@ -25,6 +25,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
     public interface IGridSystem: IChangeableName, ICountable, IDeletable, IListableNames, IObservableTransformationMatrix
     {
 #region Methods: Public
+#if !BUILD_ETABS2015
         //TODO: Consider enum for eGridSystemType        
         /// <summary>
         /// Gets the type of the grid system.
@@ -33,7 +34,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <param name="gridSystemType">Type of the grid system.</param>
         void GetGridSystemType(string name,
             ref string gridSystemType);
-
+#endif
         // === Get/Set ===
 
         /// <summary>
@@ -86,6 +87,21 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             ref bool[] visibleY,
             ref string[] bubbleLocationY);
 
+
+        /// <summary>
+        /// Retrieves the translation and rotation of the specified coordinate system origin and axes in relation to the global coordinate system.
+        /// </summary>
+        /// <param name="nameCoordinateSystem">The name of an existing coordinate system.</param>
+        /// <param name="xCoordinateOrigin">The global X coordinate of the origin of the coordinate system. [L]</param>
+        /// <param name="yCoordinateOrigin">The global Y coordinate of the origin of the coordinate system. [L]</param>
+        /// <param name="rzCoordinateOrigin">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: 
+        /// (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. [deg].</param>
+        void SetGridSystem(string nameCoordinateSystem,
+            ref double xCoordinateOrigin,
+            ref double yCoordinateOrigin,
+            ref double rzCoordinateOrigin);
+
+#if !BUILD_ETABS2015
         /// <summary>
         /// Sets the translation and rotation of the specified coordinate system origin and axes in relation to the global coordinate system.
         /// Modifying the Global coordinate system will fail and return an error.
@@ -146,6 +162,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             ref bool[] visibleGeneral,
             ref string[] bubbleLocationGeneral);
 
+
         /// <summary>
         /// Sets the translation and rotation of the specified coordinate system origin and axes in relation to the global coordinate system.
         /// Modifying the Global coordinate system will fail and return an error.
@@ -191,19 +208,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             ref string[] bubbleLocationTheta);
 
         /// <summary>
-        /// Retrieves the translation and rotation of the specified coordinate system origin and axes in relation to the global coordinate system.
-        /// </summary>
-        /// <param name="nameCoordinateSystem">The name of an existing coordinate system.</param>
-        /// <param name="xCoordinateOrigin">The global X coordinate of the origin of the coordinate system. [L]</param>
-        /// <param name="yCoordinateOrigin">The global Y coordinate of the origin of the coordinate system. [L]</param>
-        /// <param name="rzCoordinateOrigin">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: 
-        /// (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. [deg].</param>
-        void SetGridSystem(string nameCoordinateSystem,
-            ref double xCoordinateOrigin,
-            ref double yCoordinateOrigin,
-            ref double rzCoordinateOrigin);
-
-        /// <summary>
         /// Returns the names and types of all grid systems.
         /// </summary>
         /// <param name="gridSystemNames">Name of each grid system.</param>
@@ -211,8 +215,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         void GetNameTypeList(ref string[] gridSystemNames,
             ref string[] gridSystemTypes
         );
-
-#endregion
+#endif
+        #endregion
     }
 }
 #endif

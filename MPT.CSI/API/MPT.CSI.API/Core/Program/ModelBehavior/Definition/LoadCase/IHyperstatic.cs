@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+#if !BUILD_ETABS2015
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
 {
     /// <summary>
@@ -36,3 +37,4 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             string nameBaseCase);
     }
 }
+#endif

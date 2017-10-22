@@ -99,7 +99,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         void GetFrameType(string name,
             ref eFrameSectionType frameSectionType);
 
-
+#if !BUILD_ETABS2015 
         /// <summary>
         /// This function retrieves the rebar design type for the specified frame section property.
         /// This function applies only to the following section property types: 
@@ -114,6 +114,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
         /// <param name="rebarType">Design type of the rebar.</param>
         void GetRebarType(string name,
             ref eRebarType rebarType);
+#endif
         #endregion
 
         #region Methods: Imported Section
@@ -143,7 +144,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             string notes = "",
             string GUID = "");
 
-
+#if !BUILD_ETABS2015 
         /// <summary>
         /// This function retrieves the names of the section property file from which an imported frame section originated, and it also retrieves the section name used in the property file.
         /// If the specified frame section property was not imported, blank strings are returned for <paramref name="nameInFile"/> and <paramref name="fileName"/>.
@@ -158,7 +159,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             ref string fileName,
             ref string nameMaterial,
             ref eFrameSectionType frameSectionType);
-
+#endif
 
         /// <summary>
         /// This function retrieves the names of all defined frame section properties of a specified type in a specified frame section property file.
@@ -332,7 +333,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 
 
 
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// Gets the section designer section.
         /// </summary>
@@ -352,7 +353,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             ref int color,
             ref string notes,
             ref string GUID);
-
 
         /// <summary>
         /// Sets the section designer section.
@@ -376,6 +376,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             int color = -1,
             string notes = "",
             string GUID = "");
+#endif
         #endregion
 
         #region Methods: Get/Set Sections - Steel: Auto-Select
@@ -490,11 +491,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             string autoStartSection,
             string notes = "",
             string GUID = "");
-        #endregion
+#endregion
 
-        #region Methods: Get/Set Sections - Steel
+#region Methods: Get/Set Sections - Steel
 
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
         /// <summary>
         /// This function retrieves frame section property data for a steel tee-type frame section.
         /// </summary>
@@ -851,9 +852,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             int color = -1,
             string notes = "",
             string GUID = "");
-        #endregion
+#endregion
 
-        #region Methods: Get/Set Sections - Steel: Built-Up
+#region Methods: Get/Set Sections - Steel: Built-Up
 
         /// <summary>
         /// This function retrieves frame section property data for a cover plated I-Section-type frame section.
@@ -1085,10 +1086,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             string notes = "",
             string GUID = "");
 #endif
-        #endregion
+#endregion
 
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
-        #region Methods: Get/Set Sections - Cold-Formed Steel
+#region Methods: Get/Set Sections - Cold-Formed Steel
 
         /// <summary>
         /// This function retrieves frame section property data for a cold formed C-type frame section.
@@ -1266,10 +1267,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             int color = -1,
             string notes = "",
             string GUID = "");
-        #endregion
+#endregion
 #endif
 
-        #region Methods: Get/Set Sections - Steel/Concrete
+#region Methods: Get/Set Sections - Steel/Concrete
 #if BUILD_ETABS2015 || BUILD_ETABS2016
         /// <summary>
         /// This function retrieves frame section property data for a plate-type frame section.
@@ -1642,10 +1643,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             int color = -1,
             string notes = "",
             string GUID = "");
-        #endregion
+#endregion
 
-        #region Methods: Get/Set Sections - Concrete: Reinforced
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#region Methods: Get/Set Sections - Concrete: Reinforced
+#if BUILD_ETABS2016
         /// <summary>
         /// This function retrieves frame section property data for a concrete L-type frame section.
         /// </summary>
@@ -1936,10 +1937,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             int numberOfConfinementBars2Axis,
             int numberOfConfinementBars3Axis,
             bool toBeDesigned);
-        #endregion
+#endregion
 
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
-        #region Methods: Get/Set Sections - Concrete: Precast
+#region Methods: Get/Set Sections - Concrete: Precast
 
 
         /// <summary>
@@ -2125,7 +2126,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             string notes = "",
             string GUID = "");
 
-        #endregion
+#endregion
 #endif
     }
 }

@@ -20,6 +20,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -577,7 +581,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             double[] R1 = new double[0];
             double[] R2 = new double[0];
             double[] R3 = new double[0];
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if BUILD_SAP2000v19 || BUILD_CSiBridgev19
             _callCode = _sapModel.Results.AssembledJointMass_1(massSourceName,
                                     name,
                                     EnumLibrary.Convert<eItemTypeElement, CSiProgram.eItemTypeElm>(itemType),
@@ -889,7 +893,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
         #endregion
 
         #region Methods: Joint        
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
         /// <summary>
         /// This function reports the joint response spectra values, due to a time history analysis, for the specified point elements.
         /// </summary>
@@ -945,7 +949,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             directions = csiDirections.Cast<eDirection>().ToArray();
         }
 #endif
-#if BUILD_ETABS2015 || BUILD_ETABS2016        
+#if BUILD_ETABS2016        
         /// <summary>
         /// Reports the joint drifts.
         /// </summary>
@@ -2389,7 +2393,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.AnalysisResult
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 #endif
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
         /// <summary>
         /// This function reports the joint response spectra values, due to a time history analysis, for the specified point elements.
         /// </summary>

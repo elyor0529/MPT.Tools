@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
 {
     /// <summary>
@@ -18,8 +19,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
     /// </summary>
     public interface INamedSets
     {
-        #region Methods: Public
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#region Methods: Public
         /// <summary>
         /// This function gets a joint response spectrum named set definition.
         /// </summary>
@@ -97,8 +97,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             double spectrumWidening,
             ePlotType ordinatePlotType,
             double ordinateScaleFactor);
-#endif
-
-        #endregion
+#endregion
     }
 }
+#endif

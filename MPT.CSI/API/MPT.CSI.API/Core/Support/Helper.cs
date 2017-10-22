@@ -20,6 +20,14 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -102,6 +110,7 @@ namespace MPT.CSI.API.Core.Support
             return _helper.CreateObject(fullPath);
         }
 
+#if !BUILD_SAP2000v18  && !BUILD_SAP2000v17  && !BUILD_SAP2000v16 && !BUILD_CSiBridgev18  && !BUILD_CSiBridgev17  && !BUILD_CSiBridgev16 && !BUILD_ETABS2015 
         /// <summary>
         /// Creates the base application object to call API methods on based on the program ID, and automatically launches the most recently installed version of the application.
         /// </summary>
@@ -111,6 +120,7 @@ namespace MPT.CSI.API.Core.Support
         {
             return _helper.CreateObjectProgID(progId);
         }
+#endif
 
         /// <summary>
         /// Attaches to a current process, getting an application object that is currently running.

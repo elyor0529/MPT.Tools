@@ -72,7 +72,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
+#if !BUILD_ETABS2015 
         /// <summary>
         /// True: Design results are available.
         /// </summary>
@@ -81,7 +81,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         {
             return _sapModel.DesignCompositeBeam.GetResultsAvailable();
         }
-
+#endif
 
         /// <summary>
         /// This function retrieves the names of the frame objects that did not pass the design check or have not yet been checked, if any.

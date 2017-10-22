@@ -98,7 +98,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 
         ILoadForceWithGUID, 
 #endif
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
         ILabel,
         IDiaphragmPoints,
         ISpringAssignment,

@@ -93,7 +93,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Abstraction
             _callCode = _sapModel.PierLabel.SetPier(name);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// Retrieves the section properties for a specified pier.
         /// </summary>
@@ -149,6 +149,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Abstraction
                                     ref centerOfGravityTopZ);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
 #endregion
     }
 }

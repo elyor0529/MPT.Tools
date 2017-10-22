@@ -49,6 +49,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
 #endif
 #if BUILD_ETABS2015 || BUILD_ETABS2016
         private DesignCompositeBeam _designCompositeBeam;
+#endif
+#if BUILD_ETABS2016
         private DesignDetailing _designDetailing;
 #endif
         #endregion
@@ -85,7 +87,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// </summary>
         /// <value>The design composite beam.</value>
         public DesignCompositeBeam DesignCompositeBeam => _designCompositeBeam ?? (_designCompositeBeam = new DesignCompositeBeam(_seed));
-
+#endif
+#if BUILD_ETABS2016
         /// <summary>
         /// Gets the design detailing.
         /// </summary>

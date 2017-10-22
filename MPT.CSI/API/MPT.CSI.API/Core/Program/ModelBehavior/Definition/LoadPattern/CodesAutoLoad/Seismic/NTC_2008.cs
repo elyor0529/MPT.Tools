@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadLateralCode.Seismic;
 using MPT.CSI.API.Core.Support;
 
@@ -24,7 +24,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAut
     /// <seealso cref="AutoSeismicLoad" />
     public class NTC_2008 : AutoSeismicLoad
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="NTC_2008" /> class.
         /// </summary>
@@ -32,9 +32,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAut
         public NTC_2008(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function retrieves auto seismic loading parameters for the NTC 2008 code.
         /// </summary>
@@ -249,7 +249,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern.CodesAut
                             lambda);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
 #endif

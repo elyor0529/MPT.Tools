@@ -19,6 +19,10 @@ using SAP2000v17;
 using SAP2000v18;
 #elif BUILD_SAP2000v19
 using SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -30,7 +34,7 @@ using ETABS2015;
 #elif BUILD_ETABS2016
 using ETABS2016;
 #endif
- 
+
 namespace MPT.CSI.API.Core.Support
 {
     /// <summary>

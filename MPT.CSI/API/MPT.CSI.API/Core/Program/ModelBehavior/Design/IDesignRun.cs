@@ -23,11 +23,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         /// Starts the frame design.
         /// </summary>
         void StartDesign();
-
+#if !BUILD_ETABS2015 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17
         /// <summary>
         /// True: Design results are available.
         /// </summary>
         /// <returns><c>true</c> if design results are available, <c>false</c> otherwise.</returns>
         bool ResultsAreAvailable();
+#endif
     }
 }

@@ -56,12 +56,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <value>The state of the steady load case.</value>
         SteadyState SteadyState { get; }
 #endif
-        /// <summary>
-        /// Gets the buckling load case.
-        /// </summary>
-        /// <value>The buckling load case.</value>
-        Buckling Buckling { get; }
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// Gets the hyperstatic load case.
         /// </summary>
@@ -73,7 +68,13 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         /// <value>The modal eigen load case.</value>
         ModalEigen ModalEigen { get; }
-
+#endif
+        /// <summary>
+        /// Gets the buckling load case.
+        /// </summary>
+        /// <value>The buckling load case.</value>
+        Buckling Buckling { get; }
+        
         /// <summary>
         /// Gets the modal ritz load case.
         /// </summary>
@@ -128,9 +129,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <value>The time history modal nonlinear load case.</value>
         TimeHistoryModalNonlinear TimeHistoryModalNonlinear { get; }
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
 
         /// <summary>
         /// This function returns the total number of defined load cases in the model of a specified load case type.
@@ -177,6 +178,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             eSpecificationSource designTypeOption,
             eLoadPatternType designType = eLoadPatternType.Dead);
 
-        #endregion
+#endregion
     }
 }

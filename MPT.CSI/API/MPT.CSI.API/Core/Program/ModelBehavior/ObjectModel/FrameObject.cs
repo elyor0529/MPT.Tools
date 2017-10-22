@@ -20,6 +20,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -1749,7 +1753,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         }
 
 
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
         // ===
 
         /// <summary>
@@ -1777,7 +1781,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.FrameObj.SetSpringAssignment(name, nameSpring);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-#else
+#elif !BUILD_ETABS2015
         /// <summary>
         /// This function retrieves the spring assignments to an object face.
         /// </summary>
@@ -1942,26 +1946,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
-#if BUILD_ETABS2015 || BUILD_ETABS2016
-        /// <summary>
-        /// Retrieves the design orientation of a frame object.
-        /// </summary>
-        /// <param name="name">The name of a defined frame object.</param>
-        /// <param name="designOrientation">The design orientation.</param>
-        public void GetDesignOrientation(string name,
-            ref eFrameDesignOrientation designOrientation)
-        {
-            CSiProgram.eFrameDesignOrientation csiDesignOrientation = CSiProgram.eFrameDesignOrientation.Other;
-
-            _callCode = _sapModel.FrameObj.GetDesignOrientation(name, ref csiDesignOrientation);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-
-            designOrientation = EnumLibrary.Convert(csiDesignOrientation, designOrientation);
-        }
-
-        // ===
-
+#if BUILD_ETABS2016
         /// <summary>
         /// Retrieves the frame object column splice overwrite assignment.
         /// </summary>
@@ -1998,6 +1983,24 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
                             (int)spliceOption, height, 
                             EnumLibrary.Convert<eItemType, CSiProgram.eItemType>(itemType));
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+#endif
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves the design orientation of a frame object.
+        /// </summary>
+        /// <param name="name">The name of a defined frame object.</param>
+        /// <param name="designOrientation">The design orientation.</param>
+        public void GetDesignOrientation(string name,
+            ref eFrameDesignOrientation designOrientation)
+        {
+            CSiProgram.eFrameDesignOrientation csiDesignOrientation = CSiProgram.eFrameDesignOrientation.Other;
+
+            _callCode = _sapModel.FrameObj.GetDesignOrientation(name, ref csiDesignOrientation);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+
+            designOrientation = EnumLibrary.Convert(csiDesignOrientation, designOrientation);
         }
 
         // ===

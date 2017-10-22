@@ -122,9 +122,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-#endregion
+        #endregion
 
-#region Methods: Public
+        #region Methods: Public
+#if !BUILD_ETABS2015
         //TODO: Consider enum for eGridSystemType        
         /// <summary>
         /// Gets the type of the grid system.
@@ -138,7 +139,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.GridSys.GetGridSysType(name, ref gridSystemType);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
         // === Get/Set ===
 
         /// <summary>
@@ -207,6 +208,25 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+        /// <summary>
+        /// Retrieves the translation and rotation of the specified coordinate system origin and axes in relation to the global coordinate system.
+        /// </summary>
+        /// <param name="nameCoordinateSystem">The name of an existing coordinate system.</param>
+        /// <param name="xCoordinateOrigin">The global X coordinate of the origin of the coordinate system. [L]</param>
+        /// <param name="yCoordinateOrigin">The global Y coordinate of the origin of the coordinate system. [L]</param>
+        /// <param name="rzCoordinateOrigin">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: 
+        /// (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. [deg].</param>
+        /// <exception cref="CSiException"></exception>
+        public void SetGridSystem(string nameCoordinateSystem,
+            ref double xCoordinateOrigin,
+            ref double yCoordinateOrigin,
+            ref double rzCoordinateOrigin)
+        {
+            _callCode = _sapModel.GridSys.SetGridSys(nameCoordinateSystem, xCoordinateOrigin, yCoordinateOrigin, rzCoordinateOrigin);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+#if !BUILD_ETABS2015
         /// <summary>
         /// Sets the translation and rotation of the specified coordinate system origin and axes in relation to the global coordinate system.
         /// Modifying the Global coordinate system will fail and return an error.
@@ -331,24 +351,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         }
 
         /// <summary>
-        /// Retrieves the translation and rotation of the specified coordinate system origin and axes in relation to the global coordinate system.
-        /// </summary>
-        /// <param name="nameCoordinateSystem">The name of an existing coordinate system.</param>
-        /// <param name="xCoordinateOrigin">The global X coordinate of the origin of the coordinate system. [L]</param>
-        /// <param name="yCoordinateOrigin">The global Y coordinate of the origin of the coordinate system. [L]</param>
-        /// <param name="rzCoordinateOrigin">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: 
-        /// (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. [deg].</param>
-        /// <exception cref="CSiException"></exception>
-        public void SetGridSystem(string nameCoordinateSystem,
-            ref double xCoordinateOrigin,
-            ref double yCoordinateOrigin,
-            ref double rzCoordinateOrigin)
-        {
-            _callCode = _sapModel.GridSys.SetGridSys(nameCoordinateSystem, xCoordinateOrigin, yCoordinateOrigin, rzCoordinateOrigin);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-        
-        /// <summary>
         /// Returns the names and types of all grid systems.
         /// </summary>
         /// <param name="gridSystemNames">Name of each grid system.</param>
@@ -361,7 +363,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             _callCode = _sapModel.GridSys.GetNameTypeList(ref _numberOfItems, ref gridSystemNames, ref gridSystemTypes);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-#endregion
+#endif
+        #endregion
     }
 }
 #endif

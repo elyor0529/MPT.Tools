@@ -37,7 +37,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
 #endif
 
         #region Methods: Get/Set Sections - Steel                
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// This function retrieves property data for a Tee shape in a section designer section.
         /// </summary>
@@ -124,12 +124,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             ref double tw,
             ref double bfBottom,
             ref double tfBottom);
-
-
-
+        
+#endif
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
-
-
         /// <summary>
         /// This function adds a new Tee shape or modifies an existing shape to be a Tee shape in a section designer property.
         /// </summary>
@@ -414,7 +411,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
         #endregion
 
         #region Methods: Get/Set Sections - Solid        
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// This function retrieves property data for a solid circle shape in a section designer section.
         /// </summary>
@@ -479,10 +476,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             ref int color,
             ref bool isReinforced,
             ref string nameMaterialRebar);
-
-
-
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#endif
+#if BUILD_SAP2000v19 || BUILD_CSiBridgev19
         /// <summary>
         /// This function retrieves property data for a polygon shape in a section designer section.
         /// </summary>
@@ -541,7 +536,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             bool isReinforced = false,
             string nameMaterialRebar = "");
 
-
+#endif
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
 
 
         /// <summary>
@@ -821,7 +817,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
         #endregion
 
         #region Methods: Get/Set Sections - Concrete: Reinforcement             
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// This function retrieves property data for a single bar reinforcing shape in a section designer section.
         /// </summary>
@@ -926,8 +922,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             ref double h,
             ref double w,
             ref string nameMaterial);
-
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#endif
+#if BUILD_ETABS2016
         /// <summary>
         /// This function retrieves property data for a Tee shape in a section designer section.
         /// </summary>
@@ -988,7 +984,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             ref bool mirrorAbout2,
             ref bool mirrorAbout3);
 #endif
-
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// This function adds a new single bar reinforcing shape or modifies an existing shape to be a single bar reinforcing shape in a section designer property.
@@ -1167,7 +1162,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property.Frame
             Coordinate2DCartesian endCoordinate);
 
         #endregion
-
 #endif
     }
 }

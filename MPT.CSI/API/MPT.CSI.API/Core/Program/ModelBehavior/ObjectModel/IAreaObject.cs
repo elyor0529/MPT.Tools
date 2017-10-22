@@ -78,10 +78,12 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         IObservableLocalAxes, IChangeableLocalAxes,
         IGUID, IMass, IDeletableMass,  IEdgeConstraints,
         IDeletableSpring,
+#if BUILD_ETABS2016
+        ISpringAssignment,
+#endif  
 #if BUILD_ETABS2015 || BUILD_ETABS2016
         ILabel,
         IDiaphragmAreas,
-        ISpringAssignment,
         IPier, ISpandrel, IRebarDataPierSpandrel,
         IOpening,
 #else
@@ -118,7 +120,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
 
         ILoadWindPressure
     {
-#if BUILD_ETABS2015 || BUILD_ETABS2016        
+#if BUILD_ETABS2015 || BUILD_ETABS2016
         /// <summary>
         /// Retrieves the design orientation of an area object.
         /// </summary>

@@ -20,6 +20,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -233,7 +237,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             frameSectionType = EnumLibrary.Convert(csiFrameType, frameSectionType);
         }
 
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// This function retrieves the rebar design type for the specified frame section property.
         /// This function applies only to the following section property types:
@@ -258,9 +262,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 
             rebarType = (eRebarType)csiRebarType;
         }
-        #endregion
+#endif
+#endregion
 
-        #region Methods: Imported Section
+#region Methods: Imported Section
 
         /// <summary>
         /// This function imports a frame section property from a property file.
@@ -292,7 +297,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
+#if !BUILD_ETABS2015 
         /// <summary>
         /// This function retrieves the names of the section property file from which an imported frame section originated, and it also retrieves the section name used in the property file.
         /// If the specified frame section property was not imported, blank strings are returned for <paramref name="nameInFile" /> and <paramref name="fileName" />.
@@ -316,7 +321,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 
             frameSectionType = EnumLibrary.Convert(csiFrameType, frameSectionType);
         }
-
+#endif
 
         /// <summary>
         /// This function retrieves the names of all defined frame section properties of a specified type in a specified frame section property file.
@@ -343,9 +348,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             int[] frameSectionTypesNumberCode = csiFrameTypes.Cast<int>().ToArray();
             frameSectionTypes = frameSectionTypesNumberCode.Cast<eFrameSectionType>().ToArray();
         }
-        #endregion
+#endregion
 
-        #region Methods: Modifiers
+#region Methods: Modifiers
 
         /// <summary>
         /// This function retrieves the modifier assignment for frame properties.
@@ -382,9 +387,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             _callCode = _sapModel.PropFrame.SetModifiers(name, ref csiModifiers);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Methods: Get/Set Sections - Other
+#region Methods: Get/Set Sections - Other
 
         /// <summary>
         /// This function retrieves frame section property data for a general frame section.
@@ -582,7 +587,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
 
 
 
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// Gets the section designer section.
         /// </summary>
@@ -639,6 +644,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             _callCode = _sapModel.PropFrame.SetSDSection(name, nameMaterial, (int)designType, color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
         #endregion
 
         #region Methods: Get/Set Sections - Steel: Auto-Select
@@ -783,11 +789,11 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             _callCode = _sapModel.PropFrame.SetAutoSelectSteel(name, sectionNames.Length, ref sectionNames, autoStartSection, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Methods: Get/Set Sections - Steel
+#region Methods: Get/Set Sections - Steel
 
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
         /// <summary>
         /// This function retrieves frame section property data for a steel tee-type frame section.
         /// </summary>
@@ -1228,9 +1234,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
                  color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Methods: Get/Set Sections - Steel: Built-Up
+#region Methods: Get/Set Sections - Steel: Built-Up
         /// <summary>
         /// This function retrieves frame section property data for a cover plated I-Section-type frame section.
         /// </summary>
@@ -1519,10 +1525,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 #endif
-        #endregion
+#endregion
 
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
-        #region Methods: Get/Set Sections - Cold-Formed Steel
+#region Methods: Get/Set Sections - Cold-Formed Steel
         /// <summary>
         /// This function retrieves frame section property data for a cold formed C-type frame section.
         /// </summary>
@@ -1741,10 +1747,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
                  color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 #endif
 
-        #region Methods: Get/Set Sections - Steel/Concrete
+#region Methods: Get/Set Sections - Steel/Concrete
 #if BUILD_ETABS2015 || BUILD_ETABS2016
         /// <summary>
         /// This function retrieves frame section property data for a plate-type frame section.
@@ -2228,10 +2234,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
                  color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
-        #region Methods: Get/Set Sections - Concrete: Reinforced
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#region Methods: Get/Set Sections - Concrete: Reinforced
+#if BUILD_ETABS2016
         /// <summary>
         /// This function retrieves frame section property data for a concrete L-type frame section.
         /// </summary>
@@ -2602,10 +2608,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
                             toBeDesigned);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
-        #region Methods: Get/Set Sections - Concrete: Precast
+#region Methods: Get/Set Sections - Concrete: Precast
 
 
         /// <summary>
@@ -2864,7 +2870,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
                 color, notes, GUID);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 #endif
     }
 }

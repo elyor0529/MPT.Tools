@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug-SAP2000v19</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1553F351-AAAA-431F-9E1C-FF7753DE33F1}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -17,22 +17,205 @@
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-ETABS2016|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AnyCPU\Debug-ETABS2016\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_ETABS2016</DefineConstants>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Debug-ETABS2016\MPT.CSI.API.XML</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-ETABS2015|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AnyCPU\Debug-ETABS2015\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_ETABS2015</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Debug-ETABS2015\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-SAP2000v19|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AnyCPU\Debug-SAP2000v19\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_SAP2000v19</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Debug-SAP2000v19\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-SAP2000v18|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AnyCPU\Debug-SAP2000v18\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_SAP2000v18</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Debug-SAP2000v18\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-SAP2000v17|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AnyCPU\Debug-SAP2000v17\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_SAP2000v17</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Debug-SAP2000v17\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-SAP2000v16|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AnyCPU\Debug-SAP2000v16\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_SAP2000v16</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Debug-SAP2000v16\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-CSiBridgev19|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AnyCPU\Debug-CSiBridgev19\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_CSiBridgev19</DefineConstants>
+    <DocumentationFile>bin\AnyCPU\Debug-CSiBridgev19\MPT.CSI.API.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-CSiBridgev18|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AnyCPU\Debug-CSiBridgev18\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_CSiBridgev18</DefineConstants>
+    <DocumentationFile>bin\AnyCPU\Debug-CSiBridgev18\MPT.CSI.API.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-CSiBridgev17|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AnyCPU\Debug-CSiBridgev17\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_CSiBridgev17</DefineConstants>
+    <DocumentationFile>bin\AnyCPU\Debug-CSiBridgev17\MPT.CSI.API.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-CSiBridgev16|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AnyCPU\Debug-CSiBridgev16\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_CSiBridgev16</DefineConstants>
+    <DocumentationFile>bin\AnyCPU\Debug-CSiBridgev16\MPT.CSI.API.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-ETABS2016|AnyCPU'">
+    <OutputPath>bin\AnyCPU\Release-ETABS2016\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_ETABS2016</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Release-ETABS2016\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-ETABS2015|AnyCPU'">
+    <OutputPath>bin\AnyCPU\Release-ETABS2015\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_ETABS2015</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Release-ETABS2015\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-SAP2000v19|AnyCPU'">
+    <OutputPath>bin\AnyCPU\Release-SAP2000v19\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_SAP2000v19</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Release-SAP2000v19\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-SAP2000v18|AnyCPU'">
+    <OutputPath>bin\AnyCPU\Release-SAP2000v18\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_SAP2000v18</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Release-SAP2000v18\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-SAP2000v17|AnyCPU'">
+    <OutputPath>bin\AnyCPU\Release-SAP2000v17\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_SAP2000v17</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Release-SAP2000v17\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-SAP2000v16|AnyCPU'">
+    <OutputPath>bin\AnyCPU\Release-SAP2000v16\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_SAP2000v16</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\AnyCPU\Release-SAP2000v16\MPT.CSI.API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-CSiBridgev19|AnyCPU'">
+    <OutputPath>bin\AnyCPU\Release-CSiBridgev19\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_CSiBridgev19</DefineConstants>
+    <DocumentationFile>bin\AnyCPU\Release-CSiBridgev19\MPT.CSI.API.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-CSiBridgev18|AnyCPU'">
+    <OutputPath>bin\AnyCPU\Release-CSiBridgev18\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_CSiBridgev18</DefineConstants>
+    <DocumentationFile>bin\AnyCPU\Release-CSiBridgev18\MPT.CSI.API.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-CSiBridgev17|AnyCPU'">
+    <OutputPath>bin\AnyCPU\Release-CSiBridgev17\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_CSiBridgev17</DefineConstants>
+    <DocumentationFile>bin\AnyCPU\Release-CSiBridgev17\MPT.CSI.API.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-CSiBridgev16|AnyCPU'">
+    <OutputPath>bin\AnyCPU\Release-CSiBridgev16\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BUILD_CSiBridgev16</DefineConstants>
+    <DocumentationFile>bin\AnyCPU\Release-CSiBridgev16\MPT.CSI.API.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
@@ -54,7 +237,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CSiApplicationTests.cs" />
+    <Compile Include="Core\CSiBaseRunEachTimeTests.cs" />
+    <Compile Include="Core\CSiData.cs" />
+    <Compile Include="Core\Program\CSiApplicationTests.cs" />
+    <Compile Include="Core\CSiBaseRunOnceTests.cs" />
+    <Compile Include="Core\Program\CSiFileTests.cs" />
+    <Compile Include="Core\Program\CSiModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +250,31 @@
       <Project>{6460b748-90a5-4409-88f4-de9f46c6ae86}</Project>
       <Name>MPT.CSI.API</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Helpers\" />
+    <Folder Include="Core\Program\ModelBehavior\AnalysisModel\" />
+    <Folder Include="Core\Program\ModelBehavior\AnalysisResult\" />
+    <Folder Include="Core\Program\ModelBehavior\BridgeAdvanced\BridgeType\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\Abstraction\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\Function\CodesResponseSpectrum\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\LoadCase\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\LoadLateralCode\Seismic\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\LoadLateralCode\Wind\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\LoadPattern\CodesAutoLoad\Seismic\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\LoadPattern\CodesAutoLoad\Wave\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\LoadPattern\CodesAutoLoad\Wind\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\NamedAssign\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\Property\Frame\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\Property\TimeDependent\CodesConcrete\" />
+    <Folder Include="Core\Program\ModelBehavior\Definition\Property\TimeDependent\CodesTendon\" />
+    <Folder Include="Core\Program\ModelBehavior\Design\CodesDesign\Aluminum\" />
+    <Folder Include="Core\Program\ModelBehavior\Design\CodesDesign\ColdFormed\" />
+    <Folder Include="Core\Program\ModelBehavior\Design\CodesDesign\Concrete\" />
+    <Folder Include="Core\Program\ModelBehavior\Design\CodesDesign\Steel\" />
+    <Folder Include="Core\Program\ModelBehavior\Edit\" />
+    <Folder Include="Core\Program\ModelBehavior\ObjectModel\" />
+    <Folder Include="Core\Support\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

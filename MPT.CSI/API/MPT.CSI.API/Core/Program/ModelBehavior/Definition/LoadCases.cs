@@ -19,6 +19,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -76,6 +80,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// The buckling
         /// </summary>
         private Buckling _buckling;
+#if !BUILD_ETABS2015
         /// <summary>
         /// The hyperstatic
         /// </summary>
@@ -84,6 +89,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// The modal eigen
         /// </summary>
         private ModalEigen _modalEigen;
+#endif
         /// <summary>
         /// The modal ritz
         /// </summary>
@@ -120,9 +126,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// The time history modal nonlinear
         /// </summary>
         private TimeHistoryModalNonlinear _timeHistoryModalNonlinear;
-        #endregion
+#endregion
 
-        #region Properties       
+#region Properties       
 #if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Gets the external results load case.
@@ -159,7 +165,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         /// <value>The buckling load case.</value>
         public Buckling Buckling => _buckling ?? (_buckling = new Buckling(_seed));
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// Gets the hyperstatic load case.
         /// </summary>
@@ -171,7 +177,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         /// <value>The modal eigen load case.</value>
         public ModalEigen ModalEigen => _modalEigen ?? (_modalEigen = new ModalEigen(_seed));
-
+#endif
         /// <summary>
         /// Gets the modal ritz load case.
         /// </summary>
@@ -226,10 +232,10 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <value>The time history modal nonlinear load case.</value>
         public TimeHistoryModalNonlinear TimeHistoryModalNonlinear => _timeHistoryModalNonlinear ?? (_timeHistoryModalNonlinear = new TimeHistoryModalNonlinear(_seed));
 
-        #endregion
+#endregion
 
 
-        #region Initialization        
+#region Initialization        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoadCases" /> class.
@@ -241,9 +247,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
 
         /// <summary>
         /// This function changes the name of an existing load case.
@@ -366,6 +372,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
     }
 }

@@ -32,13 +32,13 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <value>The automatic seismic pattern.</value>
         AutoSeismic AutoSeismicPattern { get; }
 
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Represents an auto wind load pattern in the application.
         /// </summary>
         /// <value>The automatic wind pattern.</value>
         AutoWind AutoWindPattern { get; }
 
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Represents an auto wave load pattern in the application.
         /// </summary>

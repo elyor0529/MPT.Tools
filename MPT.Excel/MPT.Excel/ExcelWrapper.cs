@@ -39,7 +39,7 @@ namespace MPT.Excel
         /// This can occur when closing Excel while the API is still being called.<para /> 
         /// See: https://social.technet.microsoft.com/Forums/office/en-US/43041fcd-2f67-43d4-913b-5681c584ab67/keep-getting-error-message-exception-from-hresult-0x800a01a8-when-opening-spreadsheets-on?forum=officeitpro
         /// </summary>
-        public const string OBJECT_REQUIRED = "0x800A01A8";
+        private const string OBJECT_REQUIRED = "0x800A01A8";
         // HRESULT: 0x800A01A8
 
         /// <summary>

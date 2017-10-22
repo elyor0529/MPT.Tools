@@ -19,6 +19,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -53,11 +57,13 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// The automatic seismic pattern
         /// </summary>
         private AutoSeismic _autoSeismicPattern;
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// The automatic wind pattern
         /// </summary>
         private AutoWind _autoWindPattern;
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+
         /// <summary>
         /// The automatic wave pattern
         /// </summary>
@@ -74,13 +80,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <value>The automatic seismic pattern.</value>
         public AutoSeismic AutoSeismicPattern => _autoSeismicPattern ?? (_autoSeismicPattern = new AutoSeismic(_seed));
 
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Represents an auto wind load pattern in the application.
         /// </summary>
         /// <value>The automatic wind pattern.</value>
         public AutoWind AutoWindPattern => _autoWindPattern ?? (_autoWindPattern = new AutoWind(_seed));
 
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
         /// <summary>
         /// Represents an auto wave load pattern in the application.
         /// </summary>

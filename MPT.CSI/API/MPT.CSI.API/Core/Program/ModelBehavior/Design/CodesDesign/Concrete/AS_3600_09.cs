@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if BUILD_SAP2000v16 || BUILD_SAP2000v17 || BUILD_SAP2000v18 || BUILD_SAP2000v19
 #if BUILD_SAP2000v16
 using CSiProgram = SAP2000v16;
 #elif BUILD_SAP2000v17
@@ -20,6 +20,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -36,7 +40,6 @@ using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
 {
-#if !BUILD_CSiBridgev18 && !BUILD_CSiBridgev19
     /// <summary>
     /// Concrete design code <see cref="AS_3600_09" />.
     /// </summary>
@@ -44,7 +47,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
     /// <seealso cref="ConcreteCode" />
     public class AS_3600_09 : ConcreteCode
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="AS_3600_09" /> class.
         /// </summary>
@@ -52,9 +55,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
         public AS_3600_09(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// This function retrieves the value of a concrete design overwrite item.
         /// </summary>
@@ -123,6 +126,5 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete
         }
 #endregion
     }
-#endif
 }
 #endif

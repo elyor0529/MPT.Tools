@@ -22,6 +22,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -45,13 +49,14 @@ namespace MPT.CSI.API.Core.Program
     public class CSiApplication : CSiApiBase, IDisposable
     {
         #region Fields
+
 #if BUILD_ETABS2015 || BUILD_ETABS2016
-        const string TYPE_NAME = "CSI.ETABS.API.ETABSObject";
+        private const string TYPE_NAME = "CSI.ETABS.API.ETABSObject";
 #else
         /// <summary>
         /// The type name
         /// </summary>
-        const string TYPE_NAME = "CSI.SAP2000.API.SapObject";
+        private const string TYPE_NAME = "CSI.SAP2000.API.SapObject";
 #endif
 
         /// <summary>
@@ -63,6 +68,7 @@ namespace MPT.CSI.API.Core.Program
         /// The model
         /// </summary>
         private CSiModel _model;
+
         #endregion
 
         #region Properties               
@@ -79,23 +85,32 @@ namespace MPT.CSI.API.Core.Program
         /// </summary>
         /// <value>The path.</value>
         public string Path { get; private set; }
+
         #endregion
 
         #region Initialization        
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CSiApplication" /> class.
-        /// </summary>
-        public CSiApplication(string modelPath,
-            string applicationPath = "")
-        {
-            InitializeProgram(modelPath, applicationPath);
-        }
+        //public CSiApplication(string applicationPath,
+        //    eUnits units = eUnits.kip_in_F)
+        //{
+        //    InitializeProgram(applicationPath, units);
+        //}
+#if !BUILD_SAP2000v18 && !BUILD_SAP2000v17 && !BUILD_SAP2000v16 && !BUILD_CSiBridgev18 && !BUILD_CSiBridgev17 && !BUILD_CSiBridgev16 && !BUILD_ETABS2015
+///// <summary>
+///// Initializes a new instance of the <see cref="CSiApplication" /> class.
+///// </summary>
+//public CSiApplication(string modelPath,
+//    string applicationPath = "")
+//{
+//    InitializeProgram(modelPath, applicationPath);
+//}
 
-        public CSiApplication(string applicationPath,
-            eUnits units = eUnits.kip_in_F)
+/// <summary>
+/// Initializes a new instance of the <see cref="CSiApplication" /> class.
+/// </summary>
+        public CSiApplication(string applicationPath)
         {
-            InitializeProgram(applicationPath, units);
+            InitializeProgram(applicationPath);
         }
 
         public CSiApplication(bool startNewProcess = true)
@@ -109,21 +124,64 @@ namespace MPT.CSI.API.Core.Program
                 AttachToProcess();
             }
         }
+#else
+        ///// <summary>
+        ///// Initializes a new instance of the <see cref="CSiApplication" /> class.
+        ///// </summary>
+        //public CSiApplication(string modelPath,
+        //    string applicationPath)
+        //{
+        //    InitializeProgram(modelPath, applicationPath);
+        //}
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSiApplication" /> class.
+        /// </summary>
+        public CSiApplication(string applicationPath)
+        {
+            InitializeProgram(applicationPath);
+            //try
+            //{
 
+            //    System.Reflection.Assembly CSiAssembly = System.Reflection.Assembly.LoadFrom(applicationPath);
+                
+            //    _sapObject = (CSiProgram.cOAPI)CSiAssembly.CreateInstance(TYPE_NAME);
+            //    if (_sapObject == null) { throw new Exception("SapModel creation from assembly failed.");}
+
+            //    // start Sap2000 application
+            //    _sapObject.ApplicationStart();
+
+            //    // create SapModel object
+            //    _sapModel = _sapObject.SapModel;
+            //    _seed = new CSiApiSeed(_sapObject, _sapModel);
+
+            //    //Path = path;
+            //    //return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new CSiException("Cannot start a new instance of the program from " + applicationPath, ex);
+            //    // TODO: Replace the exception with a logger.
+            //    //return false;
+            //}
+        }
+
+        public CSiApplication()
+        {
+            //AttachToProcess();
+        }
+#endif
         #endregion
 
         #region Methods: Public
+#if !BUILD_SAP2000v18 && !BUILD_SAP2000v17 && !BUILD_SAP2000v16 && !BUILD_CSiBridgev18 && !BUILD_CSiBridgev17 && !BUILD_CSiBridgev16 && !BUILD_ETABS2015
         /// <summary>
         /// Opens a fresh instance of the CSi program.
         /// </summary>
-        /// <param name="units">The database units for the new model.
-        /// All data is internally stored in the model in these units.</param>
         /// <param name="applicationPath"></param>
         /// <returns><c>true</c> if the program is successfully initialied, <c>false</c> otherwise.</returns>
         /// <exception cref="IO.IOException">The following CSi program path is invalid: " + Path</exception>
-        public bool InitializeProgram(string applicationPath = "",
-            eUnits units = eUnits.kip_in_F)
+        public bool InitializeProgram(string applicationPath = "")
         {
             if (!string.IsNullOrWhiteSpace(applicationPath))
             {
@@ -131,19 +189,18 @@ namespace MPT.CSI.API.Core.Program
                 {
                     throw new IO.IOException("The following CSi program path is invalid: " + applicationPath);
                 }
-                return initializeProgramSpecific(applicationPath) && Model.InitializeNewModel(units);
+                return initializeProgramSpecific(applicationPath); 
             }
-            return initializeProgramFromLatestInstallation() && Model.InitializeNewModel(units);
+            return initializeProgramFromLatestInstallation();  
         }
-
+#else
         /// <summary>
-        /// Opens the specified model in a fresh instance of the CSi program.
+        /// Opens a fresh instance of the CSi program.
         /// </summary>
         /// <param name="applicationPath"></param>
         /// <returns><c>true</c> if the program is successfully initialied, <c>false</c> otherwise.</returns>
         /// <exception cref="IO.IOException">The following CSi program path is invalid: " + Path</exception>
-        public bool InitializeProgram(string modelPath, 
-            string applicationPath = "")
+        public bool InitializeProgram(string applicationPath)
         {
             if (!string.IsNullOrWhiteSpace(applicationPath))
             {
@@ -151,10 +208,53 @@ namespace MPT.CSI.API.Core.Program
                 {
                     throw new IO.IOException("The following CSi program path is invalid: " + applicationPath);
                 }
-                return initializeProgramSpecific(applicationPath) && Model.File.Open(modelPath);
+                return initializeProgramSpecific(applicationPath);
             }
-            return initializeProgramFromLatestInstallation() && Model.File.Open(modelPath);
+            return false;
         }
+
+        ///// <summary>
+        ///// Opens a fresh instance of the CSi program.
+        ///// </summary>
+        ///// <param name="units">The database units for the new model.
+        ///// All data is internally stored in the model in these units.</param>
+        ///// <param name="applicationPath"></param>
+        ///// <returns><c>true</c> if the program is successfully initialied, <c>false</c> otherwise.</returns>
+        ///// <exception cref="IO.IOException">The following CSi program path is invalid: " + Path</exception>
+        //public bool InitializeProgram(string applicationPath,
+        //    eUnits units = eUnits.kip_in_F)
+        //{
+        //    if (!string.IsNullOrWhiteSpace(applicationPath))
+        //    {
+        //        if (!IO.File.Exists(applicationPath))
+        //        {
+        //            throw new IO.IOException("The following CSi program path is invalid: " + applicationPath);
+        //        }
+        //        return initializeProgramSpecific(applicationPath) && Model.InitializeNewModel(units);
+        //    }
+        //    return false;
+        //}
+
+        ///// <summary>
+        ///// Opens the specified model in a fresh instance of the CSi program.
+        ///// </summary>
+        ///// <param name="applicationPath"></param>
+        ///// <returns><c>true</c> if the program is successfully initialied, <c>false</c> otherwise.</returns>
+        ///// <exception cref="IO.IOException">The following CSi program path is invalid: " + Path</exception>
+        //public bool InitializeProgram(string modelPath,
+        //    string applicationPath)
+        //{
+        //    if (!string.IsNullOrWhiteSpace(applicationPath))
+        //    {
+        //        if (!IO.File.Exists(applicationPath))
+        //        {
+        //            throw new IO.IOException("The following CSi program path is invalid: " + applicationPath);
+        //        }
+        //        return initializeProgramSpecific(applicationPath) && Model.File.Open(modelPath);
+        //    }
+        //    return false;
+        //}
+#endif
 
         /// <summary>
         /// Attaches to an existing process.
@@ -219,11 +319,11 @@ namespace MPT.CSI.API.Core.Program
         /// </summary>
         /// <param name="units">The database units used when a new model is created.
         /// Data is internally stored in the program in the database units.</param>
-        /// <param name="visible">True: The application is visible when started.  False: The application is hidden when started.</param>
+        /// <param name="visible">True: The application is visible when started.  
+        /// False: The application is hidden when started.</param>
         /// <param name="filePath">The full path of a model file to be opened when the application is started.
         /// If no file name is specified, the application starts without loading an existing model.</param>
         /// <exception cref="CSiException"></exception>
-        /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
         public void ApplicationStart(eUnits units = eUnits.kip_in_F, 
                                     bool visible = true, 
                                     string filePath = "")
@@ -270,7 +370,9 @@ namespace MPT.CSI.API.Core.Program
         public void Hide()
         {
             _callCode = _sapObject.Hide();
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            // Note: This will normally throw an exception if the application is already hidden.
+            // In the wrapper it is chosen to take no action as the user can harmlessly query the visibility.
+            // if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         /// <summary>
@@ -280,18 +382,20 @@ namespace MPT.CSI.API.Core.Program
         /// </summary>
         /// <exception cref="CSiException"></exception>
         /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
-        public void UnHide()
+        public void Unhide()
         {
             _callCode = _sapObject.Unhide();
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+            // Note: This will normally throw an exception if the application is already visible.
+            // In the wrapper it is chosen to take no action as the user can harmlessly query the visibility.
+            // if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
         /// <summary>
         /// True: The application is visible on the screen.
         /// </summary>
-        public void Visible()
+        public bool Visible()
         {
-            _sapObject.Visible();
+            return _sapObject.Visible();
         }
 
         /// <summary>
@@ -321,10 +425,10 @@ namespace MPT.CSI.API.Core.Program
             _callCode = _sapObject.UnsetAsActiveObject();
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
 
         
-        #region IDisposable        
+#region IDisposable        
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
@@ -332,9 +436,9 @@ namespace MPT.CSI.API.Core.Program
         {
             ApplicationExit(fileSave: false);
         }
-        #endregion
+#endregion
 
-        #region Methods: Private        
+#region Methods: Private        
 
         /// <summary>
         /// Performs the application-specific steps of initializing the program.
@@ -396,17 +500,12 @@ namespace MPT.CSI.API.Core.Program
             }
         }
 
+#if !BUILD_SAP2000v18 && !BUILD_SAP2000v17 && !BUILD_SAP2000v16 && !BUILD_CSiBridgev18 && !BUILD_CSiBridgev17 && !BUILD_CSiBridgev16 && !BUILD_ETABS2015
         private bool initializeProgramFromLatestInstallation()
         {
             try
             {
-#if BUILD_ETABS2013
-                //  Create program object
-                Assembly myAssembly = Assembly.LoadFrom(path);
-
-        //  Create an instance of ETABSObject and get a reference to cOAPI interface 
-                _sapObject = DirectCast(myAssembly.CreateInstance(TYPE_NAME), cOAPI);
-#elif BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
                 // Old Method: 32bit OAPI clients can only call 32bit ETABS 2014 and 64bit OAPI clients can only call
                 //    64bit ETABS 2014. Currently only used in ETABS 2013.
                 // Create an instance of ETABSObject and get a reference to cOAPI interface
@@ -416,12 +515,7 @@ namespace MPT.CSI.API.Core.Program
                 //    Use the new OAPI helper class to get a reference to cOAPI interface
                 Helper helper = Helper.Initialize();
                 _sapObject = helper.CreateObjectProgId(TYPE_NAME);
-#elif BUILD_SAP2000v16
-            // NOTE: No path is needed for SAP2000v16. Instead, the tested program will automatically use the
-            //    version currently installed. To change the version, say for testing, run the desired v16 version as 
-            //    administrator first in order to register.
-            _sapObject = new SAP2000v16.SapObject;
-#elif BUILD_SAP2000v17 || BUILD_SAP2000v19
+#elif BUILD_SAP2000v19
                 // Old Method: 32bit OAPI clients can only call 32bit ETABS 2014 and 64bit OAPI clients can only call 64bit ETABS 2014
                 // Create program object
                 // _SapObject = DirectCast(myAssembly.CreateInstance("CSI.SAP2000.API.SapObject"), cOAPI)
@@ -449,6 +543,7 @@ namespace MPT.CSI.API.Core.Program
                 //return false;
             }
         }
-        #endregion
+#endif
+#endregion
     }
 }

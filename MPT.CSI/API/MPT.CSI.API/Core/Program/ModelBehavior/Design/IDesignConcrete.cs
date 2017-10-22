@@ -16,7 +16,7 @@ using MPT.CSI.API.Core.Program.ModelBehavior.Design.CodesDesign.Concrete;
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
 {
 
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
     /// <summary>
     /// Implements a design interface for all concrete-based frame elements.
     /// </summary>
@@ -25,6 +25,14 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IComboStrength" />
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IComboAuto" />
     public interface IDesignConcrete : IDesignCode, IResettable, IComboStrength, IComboAuto
+#elif !BUILD_ETABS2015 && !BUILD_ETABS2016
+    /// <summary>
+    /// Implements a design interface for all concrete-based frame elements.
+    /// </summary>
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IDesignCode" />
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IResettable" />
+    /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Design.IComboStrength" />
+    public interface IDesignConcrete : IDesignCode, IResettable, IComboStrength
 #else
     /// <summary>
     /// Implements a design interface for all concrete-based frame elements.

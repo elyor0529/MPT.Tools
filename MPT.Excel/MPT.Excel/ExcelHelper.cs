@@ -21,7 +21,7 @@ namespace MPT.Excel
     using Processor;
 
     /// <summary>
-    /// Class ExcelHelper.
+    /// Class with simplified methods for doing common tasks in Excel.
     /// </summary>
     /// <seealso cref="System.IDisposable" />
     public class ExcelHelper : IDisposable

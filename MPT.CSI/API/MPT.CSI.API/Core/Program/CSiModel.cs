@@ -20,6 +20,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -267,12 +271,12 @@ namespace MPT.CSI.API.Core.Program
         /// <summary>
         /// Retrieves the data in the user comments and log.
         /// </summary>
-        /// <param name="commentUser">The comment user.</param>
+        /// <param name="userComment">The user comment.</param>
         /// <exception cref="CSiException"></exception>
         /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
-        public void GetUserComment(ref string commentUser)
+        public void GetUserComment(ref string userComment)
         {
-            _callCode = _sapModel.GetUserComment(ref commentUser);
+            _callCode = _sapModel.GetUserComment(ref userComment);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
@@ -285,7 +289,9 @@ namespace MPT.CSI.API.Core.Program
         /// <param name="replace">True: All existing comments are replaced with the specified comment.</param>
         /// <exception cref="CSiException"></exception>
         /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
-        public void SetUserComment(string commentUser, int numberLinesBlank = 1, bool replace = false)
+        public void SetUserComment(string commentUser, 
+            int numberLinesBlank = 1, 
+            bool replace = false)
         {
             _callCode = _sapModel.SetUserComment(commentUser, numberLinesBlank, replace);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
@@ -455,16 +461,14 @@ namespace MPT.CSI.API.Core.Program
         /// <summary>
         /// Retrieves the project information data.
         /// </summary>
-        /// <param name="numberItems">The number of project info items returned.</param>
         /// <param name="projectInfoItems">This is an array that includes the name of the project information item.</param>
         /// <param name="projectInfoData">This is an array that includes the data for the specified project information item.</param>
         /// <exception cref="CSiException"></exception>
         /// <exception cref="MPT.CSI.API.Core.Support.CSiException"></exception>
-        public void GetProjectInfo(ref int numberItems,
-            ref string[] projectInfoItems,
+        public void GetProjectInfo(ref string[] projectInfoItems,
             ref string[] projectInfoData)
         {
-            _callCode = _sapModel.GetProjectInfo(ref numberItems, ref projectInfoItems, ref projectInfoData);
+            _callCode = _sapModel.GetProjectInfo(ref _numberOfItems, ref projectInfoItems, ref projectInfoData);
             if (throwCurrentApiException(_callCode))
             {
                 throw new CSiException();

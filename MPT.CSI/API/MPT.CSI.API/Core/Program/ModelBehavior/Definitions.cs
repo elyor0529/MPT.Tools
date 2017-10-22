@@ -88,14 +88,18 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// The mass source
         /// </summary>
         private MassSource _massSource;
-        /// <summary>
-        /// The named sets
-        /// </summary>
-        private NamedSets _namedSets;
+       
         /// <summary>
         /// The properties
         /// </summary>
         private Properties _properties;
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
+        /// <summary>
+        /// The named sets
+        /// </summary>
+        private NamedSets _namedSets;
+#endif
         #endregion
 
         #region Properties    
@@ -192,16 +196,18 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         public MassSource MassSource => _massSource ?? (_massSource = new MassSource(_seed));
 
         /// <summary>
-        /// Gets the named sets.
-        /// </summary>
-        /// <value>The named sets.</value>
-        public NamedSets NamedSets => _namedSets ?? (_namedSets = new NamedSets(_seed));
-
-        /// <summary>
         /// Gets the properties.
         /// </summary>
         /// <value>The properties.</value>
         public Properties Properties => _properties ?? (_properties = new Properties(_seed));
+
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
+        /// <summary>
+        /// Gets the named sets.
+        /// </summary>
+        /// <value>The named sets.</value>
+        public NamedSets NamedSets => _namedSets ?? (_namedSets = new NamedSets(_seed));
+#endif
         #endregion
 
 

@@ -32,7 +32,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// This function deselects all objects in the model.
         /// </summary>
         void ClearSelection();
-
+#if !BUILD_ETABS2015
         /// <summary>
         /// This function deselects all selected objects and selects all unselected objects; that is, it inverts the selection
         /// </summary>
@@ -52,7 +52,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         void GetSelected(ref int numberItems,
             ref int[] objectType,
             ref string[] objectName);
-
+#endif
 
         // === Select By Name ===
 
@@ -207,6 +207,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
             bool selectOneJointLinks = true);
 #endif
 
-        #endregion
+#endregion
     }
 }

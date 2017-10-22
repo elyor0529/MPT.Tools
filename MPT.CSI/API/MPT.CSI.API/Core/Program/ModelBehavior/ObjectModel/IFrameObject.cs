@@ -136,11 +136,13 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         IOutputStations, IFrameInsertionPoint, IEndLengthOffset, 
         IObservableHinges, // How is this set?
         IDeletableSpring,
+#if BUILD_ETABS2016
+        ISpringAssignment,
+        IColumnSpliceOverwrite,
+#endif
 #if BUILD_ETABS2015 || BUILD_ETABS2016
         ILabel, 
-        ISpringAssignment,
         IPier, ISpandrel,
-        IColumnSpliceOverwrite,
 #else
         ILocalAxesAdvanced,
         INotionalSize, 

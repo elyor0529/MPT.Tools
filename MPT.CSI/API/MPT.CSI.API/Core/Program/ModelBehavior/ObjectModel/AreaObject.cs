@@ -20,6 +20,10 @@ using CSiProgram = SAP2000v17;
 using CSiProgram = SAP2000v18;
 #elif BUILD_SAP2000v19
 using CSiProgram = SAP2000v19;
+#elif BUILD_CSiBridgev16
+using CSiProgram = CSiBridge16;
+#elif BUILD_CSiBridgev17
+using CSiProgram = CSiBridge17;
 #elif BUILD_CSiBridgev18
 using CSiProgram = CSiBridge18;
 #elif BUILD_CSiBridgev19
@@ -1123,34 +1127,8 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         #endregion
 
         #region Support & Connections
-#if BUILD_ETABS2015 || BUILD_ETABS2016
-        /// <summary>
-        /// Retrieves the diaphragm for a specified object.
-        /// </summary>
-        /// <param name="name">The name of an existing object.</param>
-        /// <param name="diaphragmName">The name of an existing diaphragm.</param>
-        public void GetDiaphragm(string name,
-            ref string diaphragmName)
-        {
-            _callCode = _sapModel.AreaObj.GetDiaphragm(name, ref diaphragmName);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        /// <summary>
-        /// Assigns a diaphragm to an object .
-        /// </summary>
-        /// <param name="name">The name of an existing object.</param>
-        /// <param name="diaphragmName">The name of an existing diaphragm.</param>
-        public void SetDiaphragm(string name,
-            string diaphragmName = "")
-        {
-            _callCode = _sapModel.AreaObj.SetDiaphragm(name, diaphragmName);
-            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
-        }
-
-        // ===
-
-        /// <summary>
+#if BUILD_ETABS2016
+         /// <summary>
         /// Retrieves the named spring property assignment for an object.</summary>
         /// <param name="name">The name of an existing object .</param>
         /// <param name="nameSpring">The name of an existing point spring property.</param>
@@ -1175,6 +1153,32 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             _callCode = _sapModel.AreaObj.SetSpringAssignment(name, nameSpring);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
+#endif
+#if BUILD_ETABS2015 || BUILD_ETABS2016
+        /// <summary>
+        /// Retrieves the diaphragm for a specified object.
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="diaphragmName">The name of an existing diaphragm.</param>
+        public void GetDiaphragm(string name,
+            ref string diaphragmName)
+        {
+            _callCode = _sapModel.AreaObj.GetDiaphragm(name, ref diaphragmName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+
+        /// <summary>
+        /// Assigns a diaphragm to an object .
+        /// </summary>
+        /// <param name="name">The name of an existing object.</param>
+        /// <param name="diaphragmName">The name of an existing diaphragm.</param>
+        public void SetDiaphragm(string name,
+            string diaphragmName = "")
+        {
+            _callCode = _sapModel.AreaObj.SetDiaphragm(name, diaphragmName);
+            if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
+        }
+        
 #else
         /// <summary>
         /// This function retrieves the spring assignments to an object face.

@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
 using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
@@ -23,7 +24,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
     public class NamedSets : CSiApiBase, INamedSets
     {
 
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="NamedSets" /> class.
         /// </summary>
@@ -31,10 +32,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         public NamedSets(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#region Methods: Public
         /// <summary>
         /// This function gets a joint response spectrum named set definition.
         /// </summary>
@@ -158,7 +158,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
                             csiAbscissaType, spectrumWidening, csiOrdinateType, ordinateScaleFactor);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-#endif
-        #endregion
+#endregion
     }
 }
+#endif

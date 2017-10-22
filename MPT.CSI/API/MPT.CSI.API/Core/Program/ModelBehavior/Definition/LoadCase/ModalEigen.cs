@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+#if !BUILD_ETABS2015
 using System;
 using MPT.CSI.API.Core.Support;
 using MPT.Enums;
@@ -25,7 +26,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class ModalEigen : CSiApiBase, IModalEigen
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="ModalEigen" /> class.
         /// </summary>
@@ -33,9 +34,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
         public ModalEigen(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Interface
+#region Methods: Interface
         /// <summary>
         /// This function initializes a load case.
         /// If this function is called for an existing load case, all items for the case are reset to their default value.
@@ -49,7 +50,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2016
 
         /// <summary>
         /// This function retrieves the initial condition assumed for the specified load case.
@@ -229,6 +230,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 #endif
-        #endregion
+#endregion
     }
 }
+#endif

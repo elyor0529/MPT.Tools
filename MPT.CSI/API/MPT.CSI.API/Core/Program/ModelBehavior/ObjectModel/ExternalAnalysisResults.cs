@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
 using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
@@ -25,7 +25,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase.ExternalResults" />
     public class ExternalAnalysisResults : CSiApiBase, IExternalAnalyisResults
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="ExternalAnalysisResults" /> class.
         /// </summary>
@@ -33,9 +33,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
         public ExternalAnalysisResults(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
 
         /// <summary>
         /// This function deletes all the external results previously provided for all frame objects.
@@ -244,7 +244,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.ObjectModel
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
     }
 }
 #endif

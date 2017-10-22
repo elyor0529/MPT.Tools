@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadLateralCode.Seismic;
 using MPT.CSI.API.Core.Support;
 
@@ -23,15 +23,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesRespon
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesResponseSpectrum.ResponseSpectrumFunction" />
     public class CJJ_166_2011 : ResponseSpectrumFunction
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="CJJ_166_2011" /> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
         protected CJJ_166_2011(CSiApiSeed seed) : base(seed) { }
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
 
         /// <summary>
         /// This function retrieves the definition of a CJJ 166-2011 response spectrum function.
@@ -76,7 +76,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesRespon
             _callCode = _sapModel.Func.FuncRS.SetCJJ1662011(name, (int)direction, peakAcceleration, Tg, dampingRatio);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
 #endif

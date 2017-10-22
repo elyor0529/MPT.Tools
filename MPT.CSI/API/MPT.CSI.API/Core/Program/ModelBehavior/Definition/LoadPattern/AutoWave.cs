@@ -62,7 +62,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadPattern
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutoWind" /> class.
+        /// Initializes a new instance of the <see cref="AutoSeismic" /> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
         /// <param name="autoWindLoad">The auto wind load for the class to use.</param>

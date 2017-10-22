@@ -102,7 +102,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-
+#if !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
         /// <summary>
         /// True: Design results are available.
         /// </summary>
@@ -111,7 +111,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
         {
             return _sapModel.DesignColdFormed.GetResultsAvailable();
         }
-
+#endif
 
 
         /// <summary>
@@ -232,8 +232,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        // ===
-
+#if  !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
         /// <summary>
         /// Retrieves the value of the automatically generated code-based design load combinations option.
         /// </summary>
@@ -255,7 +254,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Design
             _callCode = _sapModel.DesignColdFormed.SetComboAutoGenerate(autoGenerate);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
 
         // ===
 

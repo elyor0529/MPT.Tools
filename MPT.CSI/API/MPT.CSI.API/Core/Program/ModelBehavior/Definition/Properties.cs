@@ -59,7 +59,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// </summary>
         private SolidProperties _solidProperties;
 #endif
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
         private PointSpring _pointSpring;
         private LineSpring _lineSpring;
         private AreaSpring _areaSpring;
@@ -110,7 +110,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition
         /// <value>The solid properties.</value>
         public SolidProperties SolidProperties => _solidProperties ?? (_solidProperties = new SolidProperties(_seed));
 #endif
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
         /// <summary>
         /// Gets the point spring object.
         /// </summary>

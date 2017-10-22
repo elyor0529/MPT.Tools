@@ -57,6 +57,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
+#if !BUILD_ETABS2015
         /// <summary>
         /// This function deselects all selected objects and selects all unselected objects; that is, it inverts the selection
         /// </summary>
@@ -91,7 +92,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
             _callCode = _sapModel.SelectObj.GetSelected(ref numberItems, ref objectType, ref objectName);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-
+#endif
 
         // === Select By Name ===
 

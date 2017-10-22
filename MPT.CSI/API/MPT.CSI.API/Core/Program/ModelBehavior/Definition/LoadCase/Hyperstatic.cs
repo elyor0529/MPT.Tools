@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+#if !BUILD_ETABS2015
 using MPT.CSI.API.Core.Support;
 
 namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
@@ -22,7 +23,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class Hyperstatic : CSiApiBase, IHyperstatic
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="Hyperstatic" /> class.
         /// </summary>
@@ -30,9 +31,9 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
         public Hyperstatic(CSiApiSeed seed) : base(seed) { }
 
 
-        #endregion
+#endregion
 
-        #region Methods: Public        
+#region Methods: Public        
         /// <summary>
         /// This function retrieves the base case for the specified hyperstatic load case.
         /// </summary>
@@ -72,6 +73,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadCase
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 
-        #endregion
+#endregion
     }
 }
+#endif

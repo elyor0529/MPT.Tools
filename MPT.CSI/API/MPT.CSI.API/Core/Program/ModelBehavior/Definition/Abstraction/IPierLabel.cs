@@ -35,6 +35,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Abstraction
         /// If this is the name of an existing spandrel label, that spandrel label is modified, otherwise a new spandrel label is added.</param>
         void SetPier(string name);
 
+#if !BUILD_ETABS2015
         /// <summary>
         /// Retrieves the section properties for a specified pier.
         /// </summary>
@@ -70,6 +71,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Abstraction
             ref double[] centerOfGravityTopX,
             ref double[] centerOfGravityTopY,
             ref double[] centerOfGravityTopZ);
+#endif
     }
 }
 #endif

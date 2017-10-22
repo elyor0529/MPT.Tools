@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-#if BUILD_ETABS2015 || BUILD_ETABS2016
+#if BUILD_ETABS2016
 using MPT.CSI.API.Core.Helpers;
 using MPT.CSI.API.Core.Support;
 
@@ -201,8 +201,6 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Property
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
 #endregion
-
-
     }
 }
 #endif

@@ -22,11 +22,6 @@ namespace MPT.CSI.API.Core.Support
     /// <seealso cref="MPT.CSI.API.Core.Support.CSiApiBase" />
     public class CSiException : Exception
     {
-        /// <summary>
-        /// The caught exception that triggered this exception.
-        /// </summary>
-        /// <value>The caught exception.</value>
-        public Exception CaughtException { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CSiException" /> class.
@@ -37,11 +32,14 @@ namespace MPT.CSI.API.Core.Support
         /// Initializes a new instance of the <see cref="CSiException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        /// <param name="caughtException">If this exception is triggered by a caught exception, the prior exception is taken in.</param>
-        public CSiException(string message, 
-            Exception caughtException = null) : base(message)
-        {
-            CaughtException = caughtException;
-        }
+        public CSiException(string message) : base(message) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSiException" /> class.
+        /// </summary>
+        /// <param name="message">The message that describes the error.</param>
+        /// <param name="innerException">If this exception is triggered by a caught exception, the prior exception is taken in.</param>
+        public CSiException(string message,
+            Exception innerException = null) : base(message, innerException) { }
     }
 }

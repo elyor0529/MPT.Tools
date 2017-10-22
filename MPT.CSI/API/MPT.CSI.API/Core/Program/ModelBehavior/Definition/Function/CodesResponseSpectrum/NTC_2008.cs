@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-#if !BUILD_ETABS2015 && !BUILD_ETABS2016
+#if !BUILD_ETABS2015 && !BUILD_ETABS2016 && !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
 using MPT.CSI.API.Core.Program.ModelBehavior.Definition.LoadLateralCode.Seismic;
 using MPT.CSI.API.Core.Support;
 
@@ -23,15 +23,15 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesRespon
     /// <seealso cref="MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesResponseSpectrum.ResponseSpectrumFunction" />
     public class NTC_2008 : ResponseSpectrumFunction
     {
-        #region Initialization        
+#region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="NTC_2008" /> class.
         /// </summary>
         /// <param name="seed">The seed.</param>
         protected NTC_2008(CSiApiSeed seed) : base(seed) { }
-        #endregion
+#endregion
 
-        #region Methods: Public
+#region Methods: Public
         /// <summary>
         /// The name of an NTC2008 response spectrum function.
         /// </summary>
@@ -149,7 +149,7 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior.Definition.Function.CodesRespon
                             F0, Tcs, (int)spectrumType, (int)soilType, (int)topography, hRatio, damping, q);
             if (throwCurrentApiException(_callCode)) { throw new CSiException(); }
         }
-        #endregion
+#endregion
     }
 }
 #endif

@@ -64,11 +64,13 @@ namespace MPT.CSI.API.Core.Program.ModelBehavior
         /// <value>The solid object.</value>
         SolidObject SolidObject { get; }
 
+#if !BUILD_SAP2000v16 && !BUILD_SAP2000v17 && !BUILD_CSiBridgev16 && !BUILD_CSiBridgev17
         /// <summary>
         /// Gets the external analysis results.
         /// </summary>
         /// <value>The external analysis results.</value>
         ExternalAnalysisResults ExternalAnalysisResults { get; }
+#endif
 #endif
         #endregion
     }
